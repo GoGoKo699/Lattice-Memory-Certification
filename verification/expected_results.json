@@ -1,0 +1,98 @@
+{
+  "absolute_tolerance": 2e-10,
+  "check_counts": {
+    "average_pauli_identity": 112,
+    "averaged_sqrt_bound": 112,
+    "barnum_knill_helstrom_optimum": 24,
+    "barnum_knill_sampled": 1000,
+    "barnum_knill_scalar_optimum": 120,
+    "branch_probabilities": 27,
+    "breidbart_bit_success": 4,
+    "comparison_in_admissible_range": 3,
+    "depolarizing_domination": 112,
+    "ensemble_sum": 1000,
+    "full_memory_endpoint": 62,
+    "hamming_witness_vs_list_bound": 55,
+    "hypercontractive_sample": 112,
+    "instrument_success_bound": 27,
+    "instrument_trace_preserving": 27,
+    "list_discrimination": 1000,
+    "list_effect_sum": 1000,
+    "local_navigation_paths": 1,
+    "pgm_schmidt_identity": 1000,
+    "povm_normalization": 1000,
+    "prepare_vs_delayed_measurement": 27,
+    "rank_holder": 112,
+    "sampled_exact_success": 112,
+    "sampled_list_success": 112,
+    "tolerated_missing_qubits": 20,
+    "witness_vs_upper_bound": 20
+  },
+  "examples": {
+    "breidbart_beta": 0.8535533905932737,
+    "finite_comparison": [
+      {
+        "dfw_cor11_dimension_specialization_sufficient_gap": 290,
+        "ideal_error": 9.5367431640625e-07,
+        "n": 1024,
+        "this_sufficient_gap": 120
+      },
+      {
+        "dfw_cor11_dimension_specialization_sufficient_gap": 426,
+        "ideal_error": 9.5367431640625e-07,
+        "n": 10000,
+        "this_sufficient_gap": 120
+      },
+      {
+        "dfw_cor11_dimension_specialization_sufficient_gap": 698,
+        "ideal_error": 9.5367431640625e-07,
+        "n": 1000000,
+        "this_sufficient_gap": 120
+      }
+    ],
+    "necessary_gap_coefficient": 4.3773887469084,
+    "sufficient_gap_coefficient": 6
+  },
+  "instrument_cases": 27,
+  "limits": [
+    "Finite deterministic checks are not a proof of general inequalities.",
+    "No cryptographic implementation, hardness test, or hardware benchmark is run.",
+    "Random POVMs are not a global search for the optimal joint decoder.",
+    "Local link checks do not inspect hosted mathematical rendering."
+  ],
+  "local_link_paths_checked": 50,
+  "maximum_identity_errors": {
+    "average_pauli_identity": 1.6653345369377348e-15,
+    "branch_probabilities": 2.220446049250313e-16,
+    "breidbart_bit_success": 2.220446049250313e-16,
+    "ensemble_sum": 8.8817842190123e-16,
+    "full_memory_endpoint": 1.6653345369377348e-15,
+    "instrument_trace_preserving": 8.881784197001252e-16,
+    "list_effect_sum": 1.2880867347204564e-14,
+    "local_navigation_paths": 0.0,
+    "pgm_schmidt_identity": 2.1094237467877974e-15,
+    "povm_normalization": 4.219620913199624e-15,
+    "prepare_vs_delayed_measurement": 1.1102230246251565e-16,
+    "tolerated_missing_qubits": 0.0
+  },
+  "maximum_positive_inequality_violations": {
+    "averaged_sqrt_bound": 2.220446049250313e-16,
+    "barnum_knill_helstrom_optimum": 4.440892098500626e-16,
+    "barnum_knill_sampled": 0.0,
+    "barnum_knill_scalar_optimum": 0.0,
+    "comparison_in_admissible_range": 0.0,
+    "depolarizing_domination": 6.661338147750939e-16,
+    "hamming_witness_vs_list_bound": 0.0,
+    "hypercontractive_sample": 2.220446049250313e-16,
+    "instrument_success_bound": 0.0,
+    "list_discrimination": 0.0,
+    "rank_holder": 6.661338147750939e-16,
+    "sampled_exact_success": 0.0,
+    "sampled_list_success": 1.3322676295501878e-15,
+    "witness_vs_upper_bound": 0.0
+  },
+  "numpy_version": "2.3.5",
+  "pure_state_cases": 112,
+  "seed": 20261023,
+  "status": "passed"
+}
