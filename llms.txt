@@ -1,0 +1,15 @@
+# Lattice Memory Certification
+
+Question: bound complete-string BB84 recovery when arbitrary collective encoding retains a quantum register of bounded dimension and unlimited classical information; compile the result conditionally through existing LWE-based remote preparation.
+
+Authoritative routes:
+- Story and dependencies: science/README.md
+- Exact models and statements G, C, L: science/model.md
+- Classical refinement, discrimination, PGM identity, normalized hypercontractivity, rank: science/guessing-bound.md
+- Computational simulation, pass weighting, efficiency and LWE boundary: science/cryptographic-certification.md
+- Achieved attack, logarithmic order, complete resource boundary: science/lower-bounds-and-resources.md
+- Lists, tolerated errors, erasure timing and honest-noise limitations: science/errors-and-losses.md
+- Attribution and finite prior-bound comparison: references/RELATED_WORK.md and references/references.bib
+- Reproduction scope and commands: verification/README.md and verification/verify.py
+
+Preserve these distinctions: ideal information-theoretic bound versus computational classical-verifier protocol; rank only in pure conditional branches; quantum versus classical refinement labels; ordinary trace versus normalized Schatten norm; exact-string versus list acceptance; honest logical storage versus total physical workspace; inverse-polynomial versus negligible compiled soundness. Neither test counts nor a single accepted run certify a theorem or deterministic memory size. No external peer review, exhaustive priority search, hardware implementation, or cryptographic hardness test is asserted.

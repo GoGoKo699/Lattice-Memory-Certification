@@ -1,44 +1,56 @@
 # Lattice Memory Certification
 
-## Question
+**How many qubits must a prover retain to recover a hidden string after its measurement bases are revealed?**
 
-Can lattice-based remote-state preparation let a classical verifier certify nearly all of a prover's retained quantum memory?
+For an arbitrary collective encoder, unlimited classical storage and a quantum memory of dimension at most $D$, this project proves a finite BB84 guessing bound:
 
-## Candidate finite-storage theorem
+```math
+P_{\mathrm{guess}}\leq\min\left\{1,\left(\frac{D}{2^n}\right)^{1/6}\right\}.
+```
 
-For independent uniform strings X and Θ in {0,1}^n, let the prover receive the BB84 product state |X⟩_Θ. Before Θ is disclosed, it may apply an arbitrary joint quantum instrument and retain unlimited classical information but at most m qubits of quantum memory, counting every surviving quantum system. After Θ is disclosed, it guesses the complete X.
+For $m$ retained qubits, the exponent depends on the missing-qubit gap $n-m$, not on the total input size separately. Inserting this estimate into the existing LWE-based remote-state-preparation construction of Hhan, Morimae, Okinaka and Yamakawa gives a conditional classical-verification protocol with **logarithmic additive storage overhead**. This is a storage-certification result, not an attack on lattice cryptography.
 
-The exploration's candidate bound is
+## Principal results
 
-`Pr[guess X correctly] ≤ 2^{-(n-m)/6}.`
+| Result | Statement and scope | Authoritative account |
+|---|---|---|
+| Finite storage converse | $P_{\mathrm{guess}}\leq 2^{-(n-m)/6}$, including arbitrary collective processing and unlimited classical records | [Model](science/model.md), [proof](science/guessing-bound.md) |
+| Conditional LWE compilation | $P_{\mathrm{accept}}\leq\varepsilon_{\mathrm{RSP}}+2^{-(n-m)/6}$, for the efficient adversaries covered by the imported simulation theorem | [Certification](science/cryptographic-certification.md) |
+| Optimal order of overhead | A store-and-Breidbart-measure strategy succeeds with $\beta^{n-m}$, where $\beta=(1+1/\sqrt2)/2$ | [Lower bounds and resources](science/lower-bounds-and-resources.md) |
+| List acceptance | Lists of size at most $L$ give $P_{\mathrm{list}}\leq\min\{1,\sqrt L\,2^{-(n-m)/6}\}$ | [Errors and losses](science/errors-and-losses.md) |
+| Error and erasure boundaries | Exact recovery, tolerated errors, and pre- versus post-basis erasures have different storage guarantees | [Errors and losses](science/errors-and-losses.md) |
 
-**Verification status:** this is a research-stage claim, not an independently certified theorem. A self-contained proof with all instrument, conditional-normalization, and hypercontractivity steps is required.
+For total soundness error $\varepsilon$, preparation error at most $\varepsilon/2$ and
 
-## Conditional cryptographic application
+```math
+n=m+\left\lceil6\log_2(2/\varepsilon)\right\rceil
+```
 
-Under the simulation hypotheses of the LWE-based *Proofs of Quantum Memory* protocol, the proposed ideal-storage estimate implies
+suffice. The cited polynomial-hardness LWE construction supports this efficient compilation for **inverse-polynomial** $\varepsilon$; the formula alone does not establish efficient negligible-soundness compilation. Honest storage is $n$ logical qubits during the waiting period. Preparation, readout, classical communication and temporary quantum workspace are separate resources.
 
-`Pr[accept] ≤ ε_RSP + 2^{-(n-m)/6}.`
+## Read the science
 
-If ε_RSP ≤ ε/2, the ideal bound is at most ε for `n ≥ m + ceil(6 log_2(2/ε))`. Cryptographic efficiency and attainable simulation error are separate obligations. This is not an attack on deployed lattice cryptography.
+Start with the [science guide](science/README.md), then follow the [exact model](science/model.md), [complete finite-bound proof](science/guessing-bound.md), and [cryptographic reduction](science/cryptographic-certification.md). The [related-work account](references/RELATED_WORK.md) identifies inherited ingredients and compares a specific finite specialization of the earlier uncertainty bound. The [LLM reading map](llms.txt) points directly to the same authoritative files.
 
-## Lower-bound witness
+The elementary discrimination step is a Barnum–Knill inequality; the tensor-power hypercontractivity theorem is imported with explicit normalization. The contribution developed here is their rank-sensitive combination and its storage-certification consequence. Earlier work already permits storage rates approaching one. The present source comparison is not an exhaustive priority certificate.
 
-Storing m qubits and measuring each remaining BB84 qubit in the Breidbart basis succeeds with probability `((1+1/sqrt(2))/2)^(n-m)`. Thus logarithmic additive overhead is necessary in order for this exact-string guessing model; the constants do not match.
+## Reproduce finite checks
 
-## Scientific boundaries
+With Python 3.13:
 
-The certified quantity is quantum storage retained through the waiting period, not quantum channel capacity. Exact recovery, error-tolerant recovery, losses, and noisy honest memories are distinct settings. Classical transcript storage is unrestricted; all retained quantum registers must be charged.
+```bash
+python3 -m venv .venv
+.venv/bin/python -m pip install -r verification/requirements.txt
+OPENBLAS_NUM_THREADS=1 .venv/bin/python verification/verify.py
+```
 
-## Closest sources and verification plan
+The [verification guide](verification/README.md) distinguishes analytical proof, finite matrix checks and untested cryptographic assumptions. The [stored report](verification/expected_results.json) records the actual cases and numerical errors.
 
-- LWE-based *Proofs of Quantum Memory*: https://arxiv.org/abs/2510.04159
-- Earlier entropic-uncertainty / storage bounds: https://arxiv.org/abs/1305.1316
-- Qubit hypercontractivity ingredient: https://arxiv.org/abs/1208.0161
+## Consequential boundaries
 
-Next: reconstruct the full proof, audit conditional quantum instruments, check the LWE hybrid and its efficiency, compare finite bounds and priority, and establish reproducible examples. Earlier work already approaches storage rate one; novelty concerns the finite additive overhead, subject to literature verification.
+The memory budget counts **every quantum system accessible after the storage cut**, including remote ancillas. Fresh, uncorrelated decoding workspace is allowed. The basis string must be hidden until after that cut. Accepting one run is not a deterministic measurement of memory size; the conclusion is a false-acceptance bound under a specified dimension hypothesis.
 
-**Status:** active scientific research; not yet furnished or release-ready.
+The ideal mathematical converse is unconditional. The classical-verifier realization is computational and inherits its LWE and simulation assumptions. A fixed positive physical error rate is not automatically compatible with exact-string completeness; allowing a fixed fraction of wrong answers also changes the storage requirement.
 
 ## Purpose and contact
 
