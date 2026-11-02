@@ -1,0 +1,60 @@
+{
+  "anchor": "Watrous, The Theory of Quantum Information (2018)",
+  "hosted_rendering": "not_verified",
+  "limits": [
+    "Structural checks do not assess a reader or validate every explanation.",
+    "Balanced delimiters are not a mathematical-rendering test.",
+    "The worked example is not optimization over all collective strategies.",
+    "Live GitHub rendering and remote integration require separate verification."
+  ],
+  "milestone_map": {
+    "background": 14,
+    "dependency_edges": 99,
+    "fields_per_milestone": 7,
+    "milestones": 30,
+    "narrative": 16
+  },
+  "navigation_and_math_source": {
+    "display_math_blocks": 52,
+    "heading_fragments": 52,
+    "inline_math_expressions": 277,
+    "local_links": 137,
+    "markdown_files": 13
+  },
+  "status": "passed",
+  "worked_example": {
+    "assertions": 38,
+    "branch_basis_cases": 8,
+    "check_counts": {
+      "example_barnum_knill": 1,
+      "example_branch_probability": 2,
+      "example_branch_success": 8,
+      "example_converse": 1,
+      "example_pgm_identity": 8,
+      "example_pgm_value": 8,
+      "example_rank": 2,
+      "example_reduced_state": 2,
+      "example_total_success": 1,
+      "example_trace_power": 2,
+      "norm_translation": 3
+    },
+    "converse": 0.8908987181403393,
+    "maximum_identity_errors": {
+      "example_branch_probability": 0.0,
+      "example_branch_success": 8.881784197001252e-16,
+      "example_pgm_identity": 4.440892098500626e-16,
+      "example_pgm_value": 5.551115123125783e-16,
+      "example_rank": 0.0,
+      "example_reduced_state": 1.1102230246251565e-16,
+      "example_total_success": 4.440892098500626e-16,
+      "example_trace_power": 2.220446049250313e-16,
+      "norm_translation": 0.0
+    },
+    "maximum_positive_inequality_violations": {
+      "example_barnum_knill": 0.0,
+      "example_converse": 0.0
+    },
+    "pgm_success": 0.7499999999999996,
+    "success": 0.8535533905932733
+  }
+}

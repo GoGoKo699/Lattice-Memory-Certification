@@ -2,37 +2,47 @@
 
 **How many qubits must a prover retain to recover a hidden string after its measurement bases are revealed?**
 
-For an arbitrary collective encoder, unlimited classical storage and a quantum memory of dimension at most $D$, this project proves a finite BB84 guessing bound:
+For an arbitrary collective encoder, unlimited classical storage and a quantum memory of dimension at most $`D`$, this project proves a finite BB84 guessing bound:
 
 ```math
 P_{\mathrm{guess}}\leq\min\left\{1,\left(\frac{D}{2^n}\right)^{1/6}\right\}.
 ```
 
-For $m$ retained qubits, the exponent depends on the missing-qubit gap $n-m$, not on the total input size separately. Inserting this estimate into the existing LWE-based remote-state-preparation construction of Hhan, Morimae, Okinaka and Yamakawa gives a conditional classical-verification protocol with **logarithmic additive storage overhead**. This is a storage-certification result, not an attack on lattice cryptography.
+For $`m`$ retained qubits, the exponent depends on the missing-qubit gap $`n-m`$, not on the total input size separately. Inserting this estimate into the existing LWE-based remote-state-preparation construction of Hhan, Morimae, Okinaka and Yamakawa gives a conditional classical-verification protocol with **logarithmic additive storage overhead**. This is a storage-certification result, not an attack on lattice cryptography.
+
+## Explanatory report
+
+Read the [complete explanatory report (PDF)](learning/report/Lattice_Memory_Certification_Report.pdf) for a self-contained explanation of the experiment, finite proof, conditional classical verification, and physical limitations.
 
 ## Principal results
 
 | Result | Statement and scope | Authoritative account |
 |---|---|---|
-| Finite storage converse | $P_{\mathrm{guess}}\leq 2^{-(n-m)/6}$, including arbitrary collective processing and unlimited classical records | [Model](science/model.md), [proof](science/guessing-bound.md) |
-| Conditional LWE compilation | $P_{\mathrm{accept}}\leq\varepsilon_{\mathrm{RSP}}+2^{-(n-m)/6}$, for the efficient adversaries covered by the imported simulation theorem | [Certification](science/cryptographic-certification.md) |
-| Optimal order of overhead | A store-and-Breidbart-measure strategy succeeds with $\beta^{n-m}$, where $\beta=(1+1/\sqrt2)/2$ | [Lower bounds and resources](science/lower-bounds-and-resources.md) |
-| List acceptance | Lists of size at most $L$ give $P_{\mathrm{list}}\leq\min\{1,\sqrt L\,2^{-(n-m)/6}\}$ | [Errors and losses](science/errors-and-losses.md) |
+| Finite storage converse | $`P_{\mathrm{guess}}\leq 2^{-(n-m)/6}`$, including arbitrary collective processing and unlimited classical records | [Model](science/model.md), [proof](science/guessing-bound.md) |
+| Conditional LWE compilation | $`P_{\mathrm{accept}}\leq\varepsilon_{\mathrm{RSP}}+2^{-(n-m)/6}`$, for the efficient adversaries covered by the imported simulation theorem | [Certification](science/cryptographic-certification.md) |
+| Optimal order of overhead | A store-and-Breidbart-measure strategy succeeds with $`\beta^{n-m}`$, where $`\beta=(1+1/\sqrt2)/2`$ | [Lower bounds and resources](science/lower-bounds-and-resources.md) |
+| List acceptance | Lists of size at most $`L`$ give $`P_{\mathrm{list}}\leq\min\{1,\sqrt L\,2^{-(n-m)/6}\}`$ | [Errors and losses](science/errors-and-losses.md) |
 | Error and erasure boundaries | Exact recovery, tolerated errors, and pre- versus post-basis erasures have different storage guarantees | [Errors and losses](science/errors-and-losses.md) |
 
-For total soundness error $\varepsilon$, preparation error at most $\varepsilon/2$ and
+For total soundness error $`\varepsilon`$, preparation error at most $`\varepsilon/2`$ and
 
 ```math
 n=m+\left\lceil6\log_2(2/\varepsilon)\right\rceil
 ```
 
-suffice. The cited polynomial-hardness LWE construction supports this efficient compilation for **inverse-polynomial** $\varepsilon$; the formula alone does not establish efficient negligible-soundness compilation. Honest storage is $n$ logical qubits during the waiting period. Preparation, readout, classical communication and temporary quantum workspace are separate resources.
+suffice. The cited polynomial-hardness LWE construction supports this efficient compilation for **inverse-polynomial** $`\varepsilon`$; the formula alone does not establish efficient negligible-soundness compilation. Honest storage is $`n`$ logical qubits during the waiting period. Preparation, readout, classical communication and temporary quantum workspace are separate resources.
 
 ## Read the science
 
 Start with the [science guide](science/README.md), then follow the [exact model](science/model.md), [complete finite-bound proof](science/guessing-bound.md), and [cryptographic reduction](science/cryptographic-certification.md). The [related-work account](references/RELATED_WORK.md) identifies inherited ingredients and compares a specific finite specialization of the earlier uncertainty bound. The [LLM reading map](llms.txt) points directly to the same authoritative files.
 
 The elementary discrimination step is a Barnum–Knill inequality; the tensor-power hypercontractivity theorem is imported with explicit normalization. The contribution developed here is their rank-sensitive combination and its storage-certification consequence. Earlier work already permits storage rates approaching one. The present source comparison is not an exhaustive priority certificate.
+
+## Learning route
+
+The single educational anchor is **John Watrous, *The Theory of Quantum Information* (2018)**. Start with the [learning guide](learning/README.md), use the [Watrous bridge](learning/WATROUS_BRIDGE.md) for selected sections, notation and a complete two-qubit example, and follow the [30-milestone map](learning/MILESTONES.md).
+
+M01–M14 build the foundations and assemble the storage experiment. M15–M30 develop the finite proof, its lower-bound witness, the conditional LWE compilation and its physical limits. The map is reader-independent. Hypercontractivity and remote preparation remain explicitly attributed research ingredients, not additional educational anchors.
 
 ## Reproduce finite checks
 
@@ -42,9 +52,10 @@ With Python 3.13:
 python3 -m venv .venv
 .venv/bin/python -m pip install -r verification/requirements.txt
 OPENBLAS_NUM_THREADS=1 .venv/bin/python verification/verify.py
+OPENBLAS_NUM_THREADS=1 .venv/bin/python verification/check_learning.py
 ```
 
-The [verification guide](verification/README.md) distinguishes analytical proof, finite matrix checks and untested cryptographic assumptions. The [stored report](verification/expected_results.json) records the actual cases and numerical errors.
+The [verification guide](verification/README.md) distinguishes analytical proof, finite matrix checks and untested cryptographic assumptions. The [stored report](verification/expected_results.json) records the actual cases and numerical errors. The [learning checks](verification/check_learning.py) additionally check the 30-milestone dependency structure, local heading links, and the worked example; their [reference output](verification/learning_results.json) states the presentation-review boundary.
 
 ## Consequential boundaries
 
@@ -54,4 +65,4 @@ The ideal mathematical converse is unconditional. The classical-verifier realiza
 
 ## Purpose and contact
 
-This repository serves as a record of the work and a guide for the author’s self-directed learning. For discussion or potential collaboration, please contact Ruge Lin at [gogoko699@gmail.com](mailto:gogoko699@gmail.com).
+The project is currently under collaboration, and the manuscript is being written. For questions, please contact Ruge Lin at [gogoko699@gmail.com](mailto:gogoko699@gmail.com).

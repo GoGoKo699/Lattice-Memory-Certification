@@ -2,7 +2,7 @@
 
 A classical record can retain measurement outcomes but cannot, by itself, preserve all the information needed to answer incompatible quantum measurements selected later. This project quantifies that limitation when a prover can also retain a limited quantum system.
 
-The central question is finite: if $n$ hidden BB84 qubits are compressed to $m$ qubits, how strongly does the deficit $n-m$ suppress the probability of recovering the **entire** hidden string? The bound proved here is $2^{-(n-m)/6}$, valid even for collective compression and arbitrarily much classical information. The derivation also treats a more general premeasurement state, which makes error and loss qualifications precise.
+The central question is finite: if $`n`$ hidden BB84 qubits are compressed to $`m`$ qubits, how strongly does the deficit $`n-m`$ suppress the probability of recovering the **entire** hidden string? The bound proved here is $`2^{-(n-m)/6}`$, valid even for collective compression and arbitrarily much classical information. The derivation also treats a more general premeasurement state, which makes error and loss qualifications precise.
 
 ## Connected reading route
 
@@ -18,4 +18,4 @@ The [related-work comparison](../references/RELATED_WORK.md) separates this fini
 
 Theorem G (finite guessing) uses Lemma D (discrimination), Lemma P (pure-state identity), the imported qubit hypercontractivity theorem HC, and an elementary rank inequality. Theorem C (cryptographic compilation) uses G plus the explicitly stated RSP simulation property. Theorem L (list acceptance) replaces D by its list version and reuses P and HC. The lower-bound witness is an independently specified strategy, not an assumption in these proofs.
 
-The exact constant $1/6$ is sufficient, not asserted optimal. The optimal-order statement means that the required gap is bounded above and below by fixed multiples of $\log(1/\delta)$ in the exact-string ideal model. It does not extend unchanged to a fixed tolerated error fraction or to total hardware footprint.
+The exact constant $`1/6`$ is sufficient, not asserted optimal. The optimal-order statement means that the required gap is bounded above and below by fixed multiples of $`\log(1/\delta)`$ in the exact-string ideal model. It does not extend unchanged to a fixed tolerated error fraction or to total hardware footprint.
