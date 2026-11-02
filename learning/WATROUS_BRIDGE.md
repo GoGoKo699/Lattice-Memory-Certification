@@ -40,7 +40,7 @@ Watrous's Schatten norms are unnormalized. The imported hypercontractivity theor
 ```math
 \|A\|_{p,\mathrm{norm}}
 =d^{-1/p}\|A\|_p
-=\left(d^{-1}\operatorname{Tr}|A|^p\right)^{1/p}.
+=\left(d^{-1}\mathrm{Tr}|A|^p\right)^{1/p}.
 ```
 
 Here $`d`$ is the dimension of the space on which $`A`$ acts. The ordinary trace of a density operator is one, while the normalized trace of the identity is one. Confusing these conventions loses the input-dimension factor that makes the memory-deficit estimate meaningful.
@@ -102,13 +102,13 @@ The [full proof](../science/guessing-bound.md) remains authoritative. Its logica
 
 **Discrimination.** For each basis, Watrous's Theorem 3.10 gives $`P_{\mathrm{opt}}^2\leq P_{\mathrm{pgm}}`$. The project includes the needed Cauchy–Schwarz argument as Lemma D. Substituting a Schmidt decomposition yields $`P_{\mathrm{pgm}}(\theta)=\sum_x\langle x_\theta|\sqrt\rho|x_\theta\rangle^2`$.
 
-**Averaging the hidden bases.** Averaging this expression produces $`\operatorname{Tr}[R\mathcal T^{\otimes n}(R)]`$, with $`\mathcal T=(\Delta_Z+\Delta_X)/2`$. Its Pauli weights are bounded by those of depolarization with parameter $`1/2`$. This is a comparison of quadratic forms; it does not assert that one channel minus the other is completely positive.
+**Averaging the hidden bases.** Averaging this expression produces $`\mathrm{Tr}[R\mathcal T^{\otimes n}(R)]`$, with $`\mathcal T=(\Delta_Z+\Delta_X)/2`$. Its Pauli weights are bounded by those of depolarization with parameter $`1/2`$. This is a comparison of quadratic forms; it does not assert that one channel minus the other is completely positive.
 
 **Imported hypercontractivity.** The required tensor-power inequality is [Montanaro's Theorem 13](../references/RELATED_WORK.md#m12-hypercontractivity), not a theorem supplied by the selected textbook. Its $`p=3/2`$, $`q=2`$ case and a rank estimate give
 
 ```math
 \mathbb E_\Theta P_{\mathrm{pgm}}(\Theta)
-\leq d^{-1/3}\big(\operatorname{Tr}\rho^{3/4}\big)^{4/3}
+\leq d^{-1/3}\big(\mathrm{Tr}\rho^{3/4}\big)^{4/3}
 \leq(r/d)^{1/3}.
 ```
 

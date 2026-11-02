@@ -18,14 +18,14 @@ Give $`j`$ to the decoder as additional **classical** information. This can only
 r\leq\min(D,d),\qquad d=2^n.
 ```
 
-It would not be legitimate to hand the prover a quantum purification of $`\rho^c_{AQ}`$ without charging its dimension. Nor is $`\operatorname{rank}\rho_A\leq D`$ true for an arbitrary mixed $`\rho_{AQ}`$: already $`\rho_A=I/d`$ with a one-dimensional $`Q`$ is a counterexample. The refinement above avoids both mistakes.
+It would not be legitimate to hand the prover a quantum purification of $`\rho^c_{AQ}`$ without charging its dimension. Nor is $`\mathrm{rank}\rho_A\leq D`$ true for an arbitrary mixed $`\rho_{AQ}`$: already $`\rho_A=I/d`$ with a one-dimensional $`Q`$ is a counterexample. The refinement above avoids both mistakes.
 
 ## 2. Lemma D: discrimination through the square-root measurement
 
-Consider subnormalized positive operators $`\{\sigma_x\}`$ with $`S=\sum_x\sigma_x`$ and $`\operatorname{Tr}S=1`$. Write inverses only on the support of $`S`$. Define
+Consider subnormalized positive operators $`\{\sigma_x\}`$ with $`S=\sum_x\sigma_x`$ and $`\mathrm{Tr}S=1`$. Write inverses only on the support of $`S`$. Define
 
 ```math
-P_{\mathrm{pgm}}=\sum_x\operatorname{Tr}
+P_{\mathrm{pgm}}=\sum_x\mathrm{Tr}
  (\sigma_xS^{-1/2}\sigma_xS^{-1/2}).
 ```
 
@@ -39,12 +39,12 @@ A_x=S^{-1/4}\sigma_xS^{-1/4},
 Hilbert–Schmidt Cauchy–Schwarz gives
 
 ```math
-\left(\sum_x\operatorname{Tr}M_x\sigma_x\right)^2
-\leq\left(\sum_x\operatorname{Tr}A_x^2\right)
-     \left(\sum_x\operatorname{Tr}B_x^2\right).
+\left(\sum_x\mathrm{Tr}M_x\sigma_x\right)^2
+\leq\left(\sum_x\mathrm{Tr}A_x^2\right)
+     \left(\sum_x\mathrm{Tr}B_x^2\right).
 ```
 
-The first factor is $`P_{\mathrm{pgm}}`$. Since $`B_x`$ are positive and $`\sum_xB_x=S^{1/2}`$, the second factor is at most $`\operatorname{Tr}S=1`$: every cross term $`\operatorname{Tr}B_xB_y`$ is nonnegative. Taking the supremum over POVMs proves
+The first factor is $`P_{\mathrm{pgm}}`$. Since $`B_x`$ are positive and $`\sum_xB_x=S^{1/2}`$, the second factor is at most $`\mathrm{Tr}S=1`$: every cross term $`\mathrm{Tr}B_xB_y`$ is nonnegative. Taking the supremum over POVMs proves
 
 ```math
 P_{\mathrm{opt}}^2\leq P_{\mathrm{pgm}}.
@@ -59,7 +59,7 @@ For a normalized pure branch, use a Schmidt decomposition
 ```math
 |\psi\rangle_{AQ}=\sum_{j=1}^{r}\sqrt{\lambda_j}
  |a_j\rangle_A|b_j\rangle_Q,
-\qquad \rho=\operatorname{Tr}_Q|\psi\rangle\langle\psi|,
+\qquad \rho=\mathrm{Tr}_Q|\psi\rangle\langle\psi|,
 \qquad R=\sqrt\rho.
 ```
 
@@ -94,17 +94,17 @@ Let $`\Delta_Z`$ and $`\Delta_X`$ denote dephasing in the two single-qubit BB84 
 
 ```math
 \mathbb E_\Theta P_{\mathrm{pgm}}(\Theta)
-=\operatorname{Tr}\big[R\,\mathcal T^{\otimes n}(R)\big].
+=\mathrm{Tr}\big[R\,\mathcal T^{\otimes n}(R)\big].
 ```
 
-On the Pauli basis $`(I,X,Y,Z)`$, the eigenvalues of $`\mathcal T`$ are $`(1,1/2,0,1/2)`$. Let $`\mathcal D_\eta(A)=\eta A+(1-\eta)\operatorname{Tr}(A)I/2`$ be the qubit depolarizing map. Its Pauli eigenvalues are $`(1,\eta,\eta,\eta)`$.
+On the Pauli basis $`(I,X,Y,Z)`$, the eigenvalues of $`\mathcal T`$ are $`(1,1/2,0,1/2)`$. Let $`\mathcal D_\eta(A)=\eta A+(1-\eta)\mathrm{Tr}(A)I/2`$ be the qubit depolarizing map. Its Pauli eigenvalues are $`(1,\eta,\eta,\eta)`$.
 
 Expand the Hermitian $`R`$ in orthogonal Pauli words. In the quadratic form, every real coefficient is squared. Each word's $`\mathcal T`$ weight is at most its $`\mathcal D_{1/2}`$ weight, so
 
 ```math
-\operatorname{Tr}\big[R\,\mathcal T^{\otimes n}(R)\big]
-\leq\operatorname{Tr}\big[R\,\mathcal D_{1/2}^{\otimes n}(R)\big]
-=\operatorname{Tr}\left[\mathcal D_{1/\sqrt2}^{\otimes n}(R)^2\right].
+\mathrm{Tr}\big[R\,\mathcal T^{\otimes n}(R)\big]
+\leq\mathrm{Tr}\big[R\,\mathcal D_{1/2}^{\otimes n}(R)\big]
+=\mathrm{Tr}\left[\mathcal D_{1/\sqrt2}^{\otimes n}(R)^2\right].
 ```
 
 The last equality uses self-adjointness of depolarization and composition of its parameters. This is a quadratic-form comparison, not a claim that the difference of the channels is completely positive.
@@ -115,7 +115,7 @@ For an operator on $`n`$ qubits define the normalized Schatten norm
 
 ```math
 \|A\|_{p,\mathrm{norm}}=
- \left(d^{-1}\operatorname{Tr}|A|^p\right)^{1/p}.
+ \left(d^{-1}\mathrm{Tr}|A|^p\right)^{1/p}.
 ```
 
 Qubit hypercontractivity states that for Hermitian $`A`$, $`1\leq p\leq2\leq q`$, and $`0\leq\eta\leq\sqrt{(p-1)/(q-1)}`$,
@@ -133,7 +133,7 @@ Choose $`p=3/2`$, $`q=2`$, and $`\eta=1/\sqrt2`$. Then
 \begin{aligned}
 \mathbb E_\Theta P_{\mathrm{pgm}}(\Theta)
 &\leq d\,\|R\|_{3/2,\mathrm{norm}}^2\\
-&=d^{-1/3}\big(\operatorname{Tr}\rho^{3/4}\big)^{4/3}\\
+&=d^{-1/3}\big(\mathrm{Tr}\rho^{3/4}\big)^{4/3}\\
 &\leq d^{-1/3}r^{1/3}.
 \end{aligned}
 ```

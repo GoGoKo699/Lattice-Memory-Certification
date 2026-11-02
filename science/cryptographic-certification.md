@@ -51,7 +51,7 @@ n(\lambda)=m(\lambda)
  +\left\lceil6\log_2(2p(\lambda))\right\rceil.
 ```
 
-Under the imported LWE hypothesis, this yields a polynomial-round classical-verifier protocol with false-acceptance probability at most $`1/p(\lambda)`$ against the specified efficient $`m(\lambda)`$-qubit provers. Honest completeness is $`1-\operatorname{negl}(\lambda)`$ in the ideal honest-storage model. Unlike the asymptotic estimate in HMOY25 Theorem 4.3, this finite calculation does not require $`m(\lambda)=\omega(\log\lambda)`$.
+Under the imported LWE hypothesis, this yields a polynomial-round classical-verifier protocol with false-acceptance probability at most $`1/p(\lambda)`$ against the specified efficient $`m(\lambda)`$-qubit provers. Honest completeness is $`1-\mathrm{negl}(\lambda)`$ in the ideal honest-storage model. Unlike the asymptotic estimate in HMOY25 Theorem 4.3, this finite calculation does not require $`m(\lambda)=\omega(\log\lambda)`$.
 
 More generally, given an RSP with error at most $`\varepsilon/2`$, the algebraic choice $`n=m+\lceil6\log_2(2/\varepsilon)\rceil`$ makes total soundness at most $`\varepsilon`$. **Efficiently obtaining that RSP is a separate requirement.** The cited lemma directly supplies the inverse-polynomial regime, not arbitrary negligible error with polynomial overhead.
 

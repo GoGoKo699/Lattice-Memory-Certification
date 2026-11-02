@@ -15,9 +15,9 @@ F_x=\sum_{y:x\in\mathcal L_y}M_y.
 Then $`0\leq F_x\leq I`$ and $`\sum_xF_x\leq L I`$. With $`A_x=S^{-1/4}\sigma_xS^{-1/4}`$ as before, set $`B_x=S^{1/4}F_xS^{1/4}`$. Now $`0\leq B_x\leq S^{1/2}`$, so
 
 ```math
-\sum_x\operatorname{Tr}B_x^2
-\leq\sum_x\operatorname{Tr}(B_xS^{1/2})
-=\operatorname{Tr}\left(S\sum_xF_x\right)\leq L.
+\sum_x\mathrm{Tr}B_x^2
+\leq\sum_x\mathrm{Tr}(B_xS^{1/2})
+=\mathrm{Tr}\left(S\sum_xF_x\right)\leq L.
 ```
 
 Cauchy–Schwarz therefore yields
