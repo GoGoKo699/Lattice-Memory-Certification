@@ -16,7 +16,7 @@ Dependencies name earlier understanding targets, not extra assignments. Primary 
 
 **Central question:** What changes when the same bit is encoded in a different basis?
 
-**Understanding target:** Explain the four BB84 states and distinguish a bit value from the basis used to encode it.
+**Understanding target:** Explain the four BB84 states $`\mathsf H^\theta|x\rangle`$, with $`x,\theta\in\{0,1\}`$ and Hadamard operator $`\mathsf H`$, and distinguish a bit value from the basis used to encode it.
 
 **Dependencies:** None.
 
@@ -46,7 +46,7 @@ Dependencies name earlier understanding targets, not extra assignments. Primary 
 
 **Phase:** Background/preliminaries.
 
-**Central question:** What does retaining m qubits constrain?
+**Central question:** What does retaining $`m`$ qubits constrain?
 
 **Understanding target:** Translate qubit counts to dimensions and count the joint dimension of every later-accessible quantum system, rather than a named local register alone.
 
@@ -54,7 +54,7 @@ Dependencies name earlier understanding targets, not extra assignments. Primary 
 
 **Story role:** Extend individual states to compound systems.
 
-**Conceptual connection:** A physical storage restriction becomes the mathematical parameter D, while classical record size is separate.
+**Conceptual connection:** A physical storage restriction becomes the dimension parameter $`D`$, while classical record size is separate.
 
 **Source pointers:** Watrous §§1.1.1 and 2.1.1–2.1.2; [normalization and notation](WATROUS_BRIDGE.md#notation-and-normalization); [resource accounting](../science/lower-bounds-and-resources.md#4-charged-resources).
 
@@ -112,7 +112,7 @@ Dependencies name earlier understanding targets, not extra assignments. Primary 
 
 **Central question:** When does a small memory force a low-rank marginal?
 
-**Understanding target:** Use the Schmidt decomposition for a pure bipartite state and explain why its marginal rank is at most D; give the mixed-state limitation.
+**Understanding target:** Use the Schmidt decomposition for a pure bipartite state and explain why its marginal rank is the Schmidt rank $`r\leq D`$; give the mixed-state limitation.
 
 **Dependencies:** M03, M06.
 
@@ -176,13 +176,13 @@ Dependencies name earlier understanding targets, not extra assignments. Primary 
 
 **Central question:** Why can a missing dimension factor change the conclusion?
 
-**Understanding target:** Translate ordinary Schatten norms to normalized norms and interpret fractional powers and support inverses through eigenvalues.
+**Understanding target:** Translate ordinary Schatten norms to $`\|A\|_{p,\mathrm{n}}=d^{-1/p}\|A\|_p`$ and interpret fractional powers and support inverses through eigenvalues.
 
 **Dependencies:** M07, M10.
 
 **Story role:** Prepare the normalization and rank calculations.
 
-**Conceptual connection:** The factor d raised to minus one third comes from normalized trace, not a physical noise parameter.
+**Conceptual connection:** The factor $`d^{-1/3}`$ comes from normalized trace, not a physical noise parameter.
 
 **Source pointers:** Watrous §1.1.3; [notation and normalization](WATROUS_BRIDGE.md#notation-and-normalization); [HC convention](../science/guessing-bound.md#5-imported-theorem-hc-and-the-rank-estimate).
 
@@ -192,7 +192,7 @@ Dependencies name earlier understanding targets, not extra assignments. Primary 
 
 **Central question:** How does randomly selecting a basis become a channel acting on operators?
 
-**Understanding target:** Explain dephasing, its average over the two bases, and the Pauli weights that let a tensor-product quadratic form be compared term by term.
+**Understanding target:** Explain dephasing, its average over the two bases, and the $`\mathsf X,\mathsf Y,\mathsf Z`$ Pauli weights that let a tensor-product quadratic form be compared term by term.
 
 **Dependencies:** M01, M05, M11.
 
@@ -322,13 +322,13 @@ Dependencies name earlier understanding targets, not extra assignments. Primary 
 
 **Central question:** How does the finite memory dimension enter the exponent?
 
-**Understanding target:** State the imported normalized-norm inequality at p=3/2 and q=2, carry through its dimension factor, and bound the eigenvalue sum using rank.
+**Understanding target:** State the imported inequality for $`\|\cdot\|_{p,\mathrm{n}}`$ at $`p=3/2`$, $`q=2`$, and $`\eta=1/\sqrt2`$, carry through its dimension factor, and bound the eigenvalue sum using Schmidt rank $`r`$.
 
 **Dependencies:** M07, M11, M15, M19.
 
 **Story role:** Obtain the central deficit-sensitive estimate on averaged square-root-measurement success.
 
-**Conceptual connection:** Hypercontractivity and the pure-branch rank bound yield (r/d) raised to one third before the final square root.
+**Conceptual connection:** Hypercontractivity and the pure-branch rank bound yield $`(r/d)^{1/3}`$ before the final square root.
 
 **Source pointers:** Watrous §1.1.3 for norms; [imported HC and rank estimate](../science/guessing-bound.md#5-imported-theorem-hc-and-the-rank-estimate); [primary attribution](../references/RELATED_WORK.md#m12-hypercontractivity).
 
@@ -336,7 +336,7 @@ Dependencies name earlier understanding targets, not extra assignments. Primary 
 
 **Phase:** Narrative/innovation.
 
-**Central question:** Why does the final result depend on n minus m?
+**Central question:** Why does the final result depend on $`n-m`$?
 
 **Understanding target:** Combine discrimination, averaging and rank, recover the bound for mixed classical branches, and identify the trivial full-memory endpoint.
 
@@ -344,7 +344,7 @@ Dependencies name earlier understanding targets, not extra assignments. Primary 
 
 **Story role:** Synthesize the complete ideal converse.
 
-**Conceptual connection:** The ratio D/d becomes the memory deficit in the exponent without an asymptotic remainder.
+**Conceptual connection:** The ratio $`D/d`$ becomes the memory deficit in the exponent without an asymptotic remainder.
 
 **Source pointers:** Watrous §§1.2.1–1.2.2 and 3.1.2; [finish Theorem G](../science/guessing-bound.md#6-finish-theorem-g); [statement](../science/model.md#theorem-g-finite-dimensional-guessing).
 
@@ -354,13 +354,13 @@ Dependencies name earlier understanding targets, not extra assignments. Primary 
 
 **Central question:** What prevents the additive overhead from having a better asymptotic order?
 
-**Understanding target:** Explain storing m qubits and Breidbart-measuring the rest, derive the achieved complete-string probability, and distinguish optimal order from an optimal constant.
+**Understanding target:** Explain storing $`m`$ qubits and Breidbart-measuring the rest, derive the achieved complete-string probability $`\beta^{n-m}`$, and distinguish optimal order from an optimal constant.
 
 **Dependencies:** M01, M09, M14, M21.
 
 **Story role:** Test the consequence of the converse against an explicit physical strategy.
 
-**Conceptual connection:** The witness and converse bound the necessary missing-qubit gap by different fixed multiples of log inverse error.
+**Conceptual connection:** For ideal guessing target $`\delta`$, the witness and converse bracket the required missing-qubit gap by fixed multiples of $`\log_2(1/\delta)`$.
 
 **Source pointers:** Watrous §§2.3 and 3.1; [lower witness and overhead](../science/lower-bounds-and-resources.md); [worked example](WATROUS_BRIDGE.md#a-complete-two-qubit-example).
 
@@ -418,7 +418,7 @@ Dependencies name earlier understanding targets, not extra assignments. Primary 
 
 **Central question:** Which parameter choices give an efficient classical-verifier protocol?
 
-**Understanding target:** Allocate error between preparation and guessing, explain the additive logarithmic gap, and retain the inverse-polynomial versus negligible distinction.
+**Understanding target:** Allocate total false-acceptance budget $`\varepsilon`$ between preparation error $`\varepsilon_{\mathrm{RSP}}\leq\varepsilon/2`$ and ideal guessing target $`\delta=\varepsilon/2`$, derive $`n=m+\lceil6\log_2(2/\varepsilon)\rceil`$, and retain the inverse-polynomial versus negligible distinction.
 
 **Dependencies:** M22, M25.
 
@@ -450,7 +450,7 @@ Dependencies name earlier understanding targets, not extra assignments. Primary 
 
 **Central question:** Which departures from exact recovery preserve the claimed memory guarantee?
 
-**Understanding target:** Relate Hamming tolerance to a list size, explain the certain-success counterexample, distinguish pre-basis from post-basis erasures, and track honest noise separately.
+**Understanding target:** Relate Hamming tolerance $`h`$ to the list size $`V(n,h)=\sum_{j=0}^h\binom nj`$, explain the certain-success counterexample, distinguish pre-basis from post-basis erasures, and track honest noise separately.
 
 **Dependencies:** M08, M22, M26, M27.
 
@@ -482,7 +482,7 @@ Dependencies name earlier understanding targets, not extra assignments. Primary 
 
 **Central question:** What is the full claim, and under exactly which assumptions does each part hold?
 
-**Understanding target:** Explain the ideal theorem, conditional LWE compilation, logarithmic-order lower witness and acceptance-rule limitations as one connected account without upgrading any of them.
+**Understanding target:** Explain the ideal theorem, conditional LWE compilation, logarithmic-order lower witness and acceptance-rule limitations as one connected account with their exact assumptions and scope.
 
 **Dependencies:** M21, M22, M23, M24, M25, M26, M27, M28, M29.
 

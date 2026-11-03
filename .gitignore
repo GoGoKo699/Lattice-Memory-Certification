@@ -1,3 +1,5 @@
 .venv/
 __pycache__/
 *.pyc
+.venv-plots/
+verification/Graph/memory_deficit_data.json

@@ -12,7 +12,7 @@ The distinction is between keeping a measurement record and keeping a quantum st
 
 The single anchor is John Watrous, *The Theory of Quantum Information*, Cambridge University Press, 2018, DOI [10.1017/9781316848142](https://doi.org/10.1017/9781316848142). The author's [book page](https://jhwatrous.github.io/books-and-courses.html) links a [standard-layout prepublication copy](https://jhwatrous.github.io/TQI.pdf) and [errata](https://jhwatrous.github.io/TQI.errata.pdf).
 
-The section and printed-page references below were checked against that January 2018 author copy on 2026-10-23. Printed page numbers are not PDF viewer indices; for example, printed page 138 is PDF page 146. The public copy is for personal use and is not redistributed in this repository. These learning pages contain project-specific explanations, not copied textbook passages. Consult the errata when using the book; this route does not rely on the channel-distance theorem corrected there as Theorem 3.56.
+The section and printed-page references below use that January 2018 author copy. Printed page numbers are not PDF viewer indices; for example, printed page 138 is PDF page 146. The public copy is for personal use and is not redistributed in this repository. Consult the errata when using the book; this route does not rely on the channel-distance theorem corrected there as Theorem 3.56.
 
 ## Anchor sections
 
@@ -33,12 +33,14 @@ These are selected locations, not a requirement to read every page in each inter
 
 Watrous generally writes vectors as $`u`$ and adjoints as $`u^*`$. Here the same vector is written $`|u\rangle`$, its adjoint is $`\langle u|`$, and $`uu^*`$ becomes $`|u\rangle\langle u|`$. The book's measurement function $`\mu(x)`$ is our POVM effect $`M_x`$. An ensemble element $`\eta(x)`$ corresponds to our subnormalized positive operator $`\sigma_x`$; its trace includes the probability of label $`x`$.
 
-Our symbols $`n`$ and $`m`$ count input and retained qubits. The dimensions are $`d=2^n`$ and $`D\leq2^m`$. The symbol $`r`$ in the proof counts nonzero Schmidt coefficients of a **pure conditional state**. It need not equal $`D`$. The verifier's hidden bit string is $`X`$, the later-revealed basis string is $`\Theta`$, the unrestricted classical record is $`C`$, and the quantum memory is $`Q`$.
+Our symbols $`n`$ and $`m`$ count input and retained qubits, with $`0\leq m\leq n`$. The dimensions are $`d=2^n`$ and $`D\leq2^m`$. The symbol $`r`$ in the proof counts nonzero Schmidt coefficients of a **pure conditional state**, while $`h`$ counts tolerated Hamming errors. The rank satisfies $`r\leq\min(D,d)`$. The verifier's hidden bit string is $`X`$, the later-revealed basis string is $`\Theta`$, the unrestricted classical record is $`C`$, and the quantum memory is $`Q`$.
+
+The Pauli operators are $`\mathsf X,\mathsf Y,\mathsf Z`$, and the Hadamard operator is $`\mathsf H`$, so $`|x\rangle_\theta=\mathsf H^\theta|x\rangle`$ for one input qubit. These operator symbols are distinct from the hidden string $`X`$. We use $`\delta`$ for an ideal guessing-probability target, $`\varepsilon`$ for total false acceptance in the compiled protocol, and $`\varepsilon_{\mathrm{RSP}}`$ for the preparation simulation error.
 
 Watrous's Schatten norms are unnormalized. The imported hypercontractivity theorem instead uses
 
 ```math
-\|A\|_{p,\mathrm{norm}}
+\|A\|_{p,\mathrm{n}}
 =d^{-1/p}\|A\|_p
 =\left(d^{-1}\mathrm{Tr}|A|^p\right)^{1/p}.
 ```
@@ -51,7 +53,7 @@ For classical $`X`$, the project uses $`H_{\min}(X\mid C Q\Theta)=-\log_2P_{\mat
 
 ## A complete two-qubit example
 
-Take $`n=2`$ and permit one retained qubit, so $`m=1`$, $`d=4`$, and $`D=2`$. The source supplies $`|x_1\rangle_{\theta_1}|x_2\rangle_{\theta_2}`$ with all four label bits independent and uniform. The device stores the first qubit unchanged. Before learning either basis, it measures the second in the Breidbart basis, the eigenbasis of $`(X+Z)/\sqrt2`$, and records the outcome $`c\in\{0,1\}`$ classically.
+Take $`n=2`$ and permit one retained qubit, so $`m=1`$, $`d=4`$, and $`D=2`$. The source supplies $`|x_1\rangle_{\theta_1}|x_2\rangle_{\theta_2}`$ with all four label bits independent and uniform. The device stores the first qubit unchanged. Before learning either basis, it measures the second in the Breidbart basis, the eigenbasis of $`(\mathsf X+\mathsf Z)/\sqrt2`$, and records the outcome $`c\in\{0,1\}`$ classically.
 
 The positive-eigenvalue vector is
 
@@ -77,7 +79,7 @@ R=\sqrt{\rho_A}
 =\frac{I_2}{\sqrt2}\otimes|b_c\rangle\langle b_c|.
 ```
 
-The marginal has rank two. In either basis, the second bit has conditional probabilities $`\beta`$ and $`1-\beta`$; the stored first bit is perfectly distinguishable. The square-root measurement therefore has success
+The pure branch has Schmidt rank $`r=2`$, equal to the rank of this marginal. In either basis, the second bit has conditional probabilities $`\beta`$ and $`1-\beta`$; the stored first bit is perfectly distinguishable. The square-root measurement therefore has success
 
 ```math
 P_{\mathrm{pgm}}=\beta^2+(1-\beta)^2=\frac34.
@@ -102,9 +104,9 @@ The [full proof](../science/guessing-bound.md) remains authoritative. Its logica
 
 **Discrimination.** For each basis, Watrous's Theorem 3.10 gives $`P_{\mathrm{opt}}^2\leq P_{\mathrm{pgm}}`$. The project includes the needed Cauchy–Schwarz argument as Lemma D. Substituting a Schmidt decomposition yields $`P_{\mathrm{pgm}}(\theta)=\sum_x\langle x_\theta|\sqrt\rho|x_\theta\rangle^2`$.
 
-**Averaging the hidden bases.** Averaging this expression produces $`\mathrm{Tr}[R\mathcal T^{\otimes n}(R)]`$, with $`\mathcal T=(\Delta_Z+\Delta_X)/2`$. Its Pauli weights are bounded by those of depolarization with parameter $`1/2`$. This is a comparison of quadratic forms; it does not assert that one channel minus the other is completely positive.
+**Averaging the hidden bases.** Averaging this expression produces $`\mathrm{Tr}[R\mathcal T^{\otimes n}(R)]`$, with $`\mathcal T=(\Delta_Z+\Delta_X)/2`$. Here $`\Delta_Z`$ and $`\Delta_X`$ dephase in the computational and Hadamard bases. On $`(I,\mathsf X,\mathsf Y,\mathsf Z)`$, the map has weights $`(1,1/2,0,1/2)`$, bounded by those of depolarization with parameter $`1/2`$. The comparison is between quadratic forms.
 
-**Imported hypercontractivity.** The required tensor-power inequality is [Montanaro's Theorem 13](../references/RELATED_WORK.md#m12-hypercontractivity), not a theorem supplied by the selected textbook. Its $`p=3/2`$, $`q=2`$ case and a rank estimate give
+**Imported hypercontractivity.** The required tensor-power inequality is [Montanaro's Theorem 13](../references/RELATED_WORK.md#m12-hypercontractivity), with the Montanaro–Osborne attribution recorded there. For normalized Schatten norms, its $`p=3/2`$, $`q=2`$, $`\eta=1/\sqrt2`$ case and a rank estimate give
 
 ```math
 \mathbb E_\Theta P_{\mathrm{pgm}}(\Theta)
@@ -114,7 +116,7 @@ The [full proof](../science/guessing-bound.md) remains authoritative. Its logica
 
 The rank estimate follows from $`\sum_{j=1}^r\lambda_j^{3/4}\leq r^{1/4}`$ for eigenvalues that sum to one. This is where limited quantum storage constrains the averaged experiment.
 
-**Finish and interpret.** Averaging the discrimination inequality and using $`\mathbb E\sqrt Z\leq\sqrt{\mathbb E Z}`$ gives $`(D/2^n)^{1/6}`$. With $`D\leq2^m`$, this becomes $`2^{-(n-m)/6}`$. Averaging over the extra classical labels then returns the original experiment. The result applies to joint encoders and decoders, not just the product strategy in the example.
+**Finish and interpret.** Averaging the discrimination inequality and using $`\mathbb E\sqrt Z\leq\sqrt{\mathbb E Z}`$ gives $`P_{\mathrm{guess}}\leq\min\{1,(D/2^n)^{1/6}\}`$. With $`D\leq2^m`$, this gives $`2^{-(n-m)/6}`$. Averaging over the extra classical labels then returns the original experiment, including joint encoders and decoders. For target ideal guessing probability $`0<\delta<1`$, a deficit $`n-m\geq\lceil6\log_2(1/\delta)\rceil`$ suffices whenever the input length permits that gap.
 
 ## From ideal inputs to a classical verifier
 
@@ -122,18 +124,18 @@ The ideal experiment assumes that the verifier can supply hidden BB84 states. A 
 
 For orientation, learning with errors concerns noisy modular linear equations: samples have the form $`(a,b)`$ with $`b=\langle a,s\rangle+e\pmod q`$, a hidden vector $`s`$, and a specified error distribution. Hardness depends on the parameter family and adversary model. This project does not establish hardness of those equations or choose deployment parameters. It uses the particular quantum-hardness assumption of the cited preparation theorem.
 
-The preparation guarantee compares the probability of **preparation passing and the continuation accepting** against a simulator supplied with ideal quantum BB84 inputs, not with their classical hidden labels. Composing that simulator with the prover's actual compression at the storage cut gives an encoder covered by the finite theorem. Consequently,
+The imported interface covers nonuniform quantum-polynomial-time provers and continuations, with polynomially bounded preparation length; its cryptographic guarantees hold for sufficiently large security parameter. It compares the probability of **preparation passing and the continuation accepting** against a simulator supplied with ideal quantum BB84 inputs alone. The verifier retains the classical hidden labels. Composing that simulator with the prover's actual compression at the storage cut gives an encoder covered by the finite theorem. Consequently,
 
 ```math
 P_{\mathrm{accept}}
-\leq\varepsilon_{\mathrm{RSP}}+2^{-(n-m)/6}.
+\leq\min\{1,\varepsilon_{\mathrm{RSP}}+2^{-(n-m)/6}\}.
 ```
 
 There is no conditioning on a rare pass and no division by its probability. Preparation may require more workspace before the cut; all quantum information accessible across the cut is charged. This distinction is essential to preserving the physical meaning of the claim.
 
-For target total error $`\varepsilon`$, allocating $`\varepsilon/2`$ to each contribution gives $`n=m+\lceil6\log_2(2/\varepsilon)\rceil`$. The cited efficient compilation supplies inverse-polynomial error, not an automatic efficient negligible-error result. The ideal converse remains unconditional even though its classical-verifier implementation is computational.
+For target total false-acceptance probability $`0<\varepsilon<1`$, choose $`\varepsilon_{\mathrm{RSP}}\leq\varepsilon/2`$ and ideal guessing target $`\delta=\varepsilon/2`$. This allocation gives $`n=m+\lceil6\log_2(2/\varepsilon)\rceil`$. The imported construction supplies polynomially many rounds and inverse-polynomial soundness. Efficient negligible-soundness compilation requires a corresponding preparation guarantee. The ideal converse remains unconditional even though its classical-verifier implementation is computational.
 
-## What the complete result does not say
+## Scope and resources
 
 An explicit Breidbart strategy gives the [matching logarithmic order](../science/lower-bounds-and-resources.md) of the ideal overhead, but not a matching constant. A successful run gives a false-acceptance guarantee under a memory hypothesis, not a deterministic measurement of stored qubits. The [list, error and erasure results](../science/errors-and-losses.md) change the acceptance rule explicitly; fixed noise cannot be inserted into exact recovery without changing completeness. Logical retained qubits, physical error-correction overhead, preparation work, and channel capacity are different quantities.
 

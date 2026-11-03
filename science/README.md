@@ -2,7 +2,7 @@
 
 A classical record can retain measurement outcomes but cannot, by itself, preserve all the information needed to answer incompatible quantum measurements selected later. This project quantifies that limitation when a prover can also retain a limited quantum system.
 
-The central question is finite: if $`n`$ hidden BB84 qubits are compressed to $`m`$ qubits, how strongly does the deficit $`n-m`$ suppress the probability of recovering the **entire** hidden string? The bound proved here is $`2^{-(n-m)/6}`$, valid even for collective compression and arbitrarily much classical information. The derivation also treats a more general premeasurement state, which makes error and loss qualifications precise.
+The central question is finite: when $`n`$ hidden BB84 inputs leave at most $`m`$ retained qubits, how strongly does the deficit $`t=n-m`$ suppress recovery of the **entire** hidden string? For $`0\leq m\leq n`$, the upper bound is $`2^{-t/6}`$, allowing collective encoding and decoding and unrestricted classical records. The stronger premeasurement formulation applies to arbitrary states, so it also supports conditioning on a pre-basis erasure declaration.
 
 ## Connected reading route
 
@@ -12,10 +12,16 @@ The central question is finite: if $`n`$ hidden BB84 qubits are compressed to $`
 4. [Lower bounds and resources](lower-bounds-and-resources.md): an explicit attack, optimal-order overhead, and what is actually charged.
 5. [Errors and losses](errors-and-losses.md): scored decoding, tolerated errors, erasure timing, and honest-memory noise.
 
-The [related-work comparison](../references/RELATED_WORK.md) separates this finite statement from existing rate-one uncertainty results. The [verification suite](../verification/README.md) checks the matrix identities and finite examples used by the argument, not the cryptographic hardness assumption.
+The [related-work comparison](../references/RELATED_WORK.md) identifies inherited tools and the fixed finite comparison with earlier rate-one uncertainty results. The [analytic figure](../verification/Graph/README.md) displays the achieved and universal bounds. The [verification guide](../verification/README.md) distinguishes finite checks from the analytical and computational premises.
+
+## Notation and error targets
+
+The input dimension is $`d=2^n`$ and the retained quantum dimension satisfies $`D\leq2^m`$. The pure-branch Schmidt rank is $`r\leq\min(D,d)`$; the Hamming error allowance is $`h`$. The operators $`\mathsf X,\mathsf Y,\mathsf Z`$ are the Paulis and $`\mathsf H`$ is the Hadamard. Normalized Schatten norms carry $`\mathrm{n}`$ in their subscript; all other matrix traces are ordinary unnormalized traces.
+
+An ideal exact-string target is $`\delta`$. The compiled protocol has total soundness target $`\varepsilon`$ and preparation simulation error $`\varepsilon_{\mathrm{RSP}}`$. Allocating at most $`\varepsilon/2`$ to each contribution gives the additive storage choice in the certification account. Its efficient guarantee uses the imported nonuniform quantum-polynomial-time convention, sufficiently large security parameter, polynomial output length and inverse-polynomial soundness.
 
 ## Dependency map
 
 Theorem G (finite guessing) uses Lemma D (discrimination), Lemma P (pure-state identity), the imported qubit hypercontractivity theorem HC, and an elementary rank inequality. Theorem C (cryptographic compilation) uses G plus the explicitly stated RSP simulation property. Theorem L (list acceptance) replaces D by its list version and reuses P and HC. The lower-bound witness is an independently specified strategy, not an assumption in these proofs.
 
-The exact constant $`1/6`$ is sufficient, not asserted optimal. The optimal-order statement means that the required gap is bounded above and below by fixed multiples of $`\log(1/\delta)`$ in the exact-string ideal model. It does not extend unchanged to a fixed tolerated error fraction or to total hardware footprint.
+The achieved Breidbart strategy and universal bound fix the ideal exact-string gap at order $`\log_2(1/\delta)`$, uniformly in the retained block size, with unmatched constants. Tolerated errors and erasure timing change the acceptance rule; physical protection and total implementation cost require their own accounting.
