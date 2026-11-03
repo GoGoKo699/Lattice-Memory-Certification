@@ -208,13 +208,13 @@ def elementary_checks(audit: Audit) -> dict:
             attack = beta**gap
             upper = 2**(-gap/6)
             audit.leq('witness_vs_upper_bound', attack, upper)
-            for r in range(gap+1):
+            for h in range(gap+1):
                 p = sum(math.comb(gap,j)*(1-beta)**j*beta**(gap-j)
-                        for j in range(r+1))
-                volume = sum(math.comb(n,j) for j in range(r+1))
+                        for j in range(h+1))
+                volume = sum(math.comb(n,j) for j in range(h+1))
                 audit.leq('hamming_witness_vs_list_bound',p,
                           min(1.0,math.sqrt(volume)*upper))
-                if r == gap:
+                if h == gap:
                     audit.equal('tolerated_missing_qubits',p,1.0)
     def h2(x: float) -> float:
         if not 0 <= x <= 1:

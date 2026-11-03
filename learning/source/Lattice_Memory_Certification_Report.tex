@@ -13,7 +13,7 @@
 \definecolor{pale}{HTML}{EEF5F7}
 \definecolor{warm}{HTML}{AA642C}
 \setlength{\parindent}{0pt}
-\setlength{\parskip}{6pt plus 1pt}
+\setlength{\parskip}{4pt plus 1pt}
 \setlength{\emergencystretch}{1.8em}
 \linespread{1.035}
 \setlist{nosep,leftmargin=1.5em}
@@ -35,8 +35,12 @@
 \newcommand{\popt}{P_{\mathrm{opt}}}
 \newcommand{\pguess}{P_{\mathrm{guess}}}
 \newcommand{\Dmap}{\mathcal D}
-\newcommand{\normn}[2]{\lVert #1\rVert_{#2,\mathrm{norm}}}
-\newcommand{\newsection}[1]{\clearpage\section{#1}}
+\newcommand{\HH}{\mathsf H}
+\newcommand{\XX}{\mathsf X}
+\newcommand{\YY}{\mathsf Y}
+\newcommand{\ZZ}{\mathsf Z}
+\newcommand{\normn}[2]{\lVert #1\rVert_{#2,\mathrm n}}
+\newcommand{\newsection}[1]{\section{#1}}
 \begin{document}
 \thispagestyle{plain}
 {\sffamily\color{accent}\small EXPLANATORY REPORT\par}
@@ -51,12 +55,12 @@ A device receives a string of qubits. Each qubit encodes a classical bit in one 
 
 Keeping the original quantum states would allow perfect readout once the bases arrive. A premature measurement generally loses the option of choosing the right measurement later. The question is how much this loss matters when the device retains almost, but not quite, enough quantum memory for the whole input.
 
-Let $n\geq1$ count the input qubits and let $D\geq1$ be the dimension of all quantum information that survives the cut and is later accessible. For a fixed encoder, $\pguess$ is the best probability of exact whole-string recovery over all allowed decoders. Every encoder obeys the finite bound
+Let the integer $n\geq1$ count the input qubits and let $D\geq1$ be the dimension of all quantum information that survives the cut and is later accessible. For a fixed encoder, $\pguess$ is the best probability of exact whole-string recovery over all allowed decoders, averaged over the random bits, bases, and processing outcomes. Every encoder obeys the finite, unsmoothed bound
 \begin{keybox}
 \begin{equation}\label{eq:main}
 \pguess\leq\min\left\{1,\left(\frac{D}{2^n}\right)^{1/6}\right\}.
 \end{equation}
-For at most $m$ retained qubits, $D\leq2^m$, so the missing-qubit gap $t=n-m\geq0$ gives
+For at most $m$ retained qubits, with $D\leq2^m$ and $0\leq m\leq n$, the missing-qubit gap $t=n-m$ gives
 \begin{equation}\label{eq:gap}
 \pguess\leq2^{-t/6}.
 \end{equation}
@@ -67,9 +71,9 @@ The dependence on $t$ is the central feature. To force ideal cheating probabilit
 
 A second layer uses a computationally secure preparation protocol to let a verifier conduct the test using classical interaction. Under its precise assumptions, the false-acceptance bound becomes
 \begin{equation}\label{eq:compiled-front}
-P_{\mathrm{accept}}\leq\varepsilon_{\mathrm{prep}}+2^{-t/6},
+P_{\mathrm{accept}}\leq\min\{1,\varepsilon_{\mathrm{RSP}}+2^{-t/6}\},
 \end{equation}
-where $\varepsilon_{\mathrm{prep}}$ is the preparation simulation error. The ideal bound is unconditional; the classical realization inherits a quantum-hardness assumption and applies to polynomial-time adversaries.
+where $\varepsilon_{\mathrm{RSP}}$ is the remote-state-preparation simulation error. Write $\varepsilon\in(0,1)$ for a target total false-acceptance probability, while $\delta$ denotes a target ideal guessing probability. The ideal bound is unconditional; the classical realization inherits a quantum-hardness assumption and applies to the efficient adversaries in its preparation guarantee.
 
 The report develops the experiment first, then proves the finite bound, explains the conditional realization, and tests its boundaries. Exact recovery, error-tolerant acceptance, and erasures are treated separately because they certify different storage restrictions.
 
@@ -80,10 +84,10 @@ The computational basis is $\{\ket0,\ket1\}$, where these two unit vectors are o
 \ket+=\frac{\ket0+\ket1}{\sqrt2},\qquad
 \ket-=\frac{\ket0-\ket1}{\sqrt2}.
 \]
-The Hadamard matrix $H=2^{-1/2}\left(\begin{smallmatrix}1&1\\1&-1\end{smallmatrix}\right)$ maps the first basis to the second. Independently uniform strings $X,\Theta\in\{0,1\}^n$ specify bit values and bases. The supplied state is
+The Hadamard matrix $\HH=2^{-1/2}\left(\begin{smallmatrix}1&1\\1&-1\end{smallmatrix}\right)$ maps the first basis to the second. Independently uniform strings $X,\Theta\in\{0,1\}^n$ specify bit values and bases. The supplied state is
 \[
 \ket{x}_\theta=U_\theta\ket{x},\qquad
-U_\theta=\bigotimes_{i=1}^n H^{\theta_i}.
+U_\theta=\bigotimes_{i=1}^n \HH^{\theta_i}.
 \]
 This four-state encoding is called BB84. A state is described by a density operator: a positive matrix $\rho$ with $\Tr\rho=1$, where $\Tr$ sums diagonal entries. Write $I_k$ for the identity in dimension $k$. For either basis, averaging over the uniformly random bit gives $I_2/2$, so the input alone does not reveal the selected basis.
 
@@ -112,15 +116,19 @@ $t=n-m$ & Missing-qubit gap, used when $0\leq m\leq n$.\\
 $X,\Theta,\widehat X$ & Hidden bits, later-revealed bases, and returned guess.\\
 $C,Q$ & Classical record and all charged persistent quantum information.\\
 \bottomrule\end{tabularx}\end{center}
-All logarithms are base two. The waiting duration is a separate experimental parameter.
+All logarithms are base two. The waiting duration is a separate experimental parameter. For a classical hidden variable, conditional min-entropy is the operational quantity
+\[
+H_{\min}(X\mid CQ\Theta)=-\log_2\pguess(X\mid CQ\Theta).
+\]
+Thus \eqref{eq:gap} also states $H_{\min}(X\mid CQ\Theta)\geq t/6$, without a smoothing parameter or asymptotic remainder.
 
 \newsection{A strategy that makes the gap tangible}
 \subsection{One stored qubit and one premature measurement}
 For $n=2$ and $m=1$, store the first qubit untouched. Once its basis is revealed, measure it correctly. For the second qubit, use the intermediate measurement axis
 \[
-B=\frac{\sigma_x+\sigma_z}{\sqrt2},\qquad
-\sigma_x=\begin{pmatrix}0&1\\1&0\end{pmatrix},\quad
-\sigma_z=\begin{pmatrix}1&0\\0&-1\end{pmatrix}.
+B=\frac{\XX+\ZZ}{\sqrt2},\qquad
+\XX=\begin{pmatrix}0&1\\1&0\end{pmatrix},\quad
+\ZZ=\begin{pmatrix}1&0\\0&-1\end{pmatrix}.
 \]
 The two eigenvectors can be chosen as
 \[
@@ -140,13 +148,13 @@ The stored bit is recovered perfectly, so this one-qubit-memory strategy achieve
 \subsection{Store a block and measure the remainder}
 For integer $0\leq m\leq n$, store any $m$ positions and apply the intermediate measurement to each of the remaining $t=n-m$ positions. The product source and this product strategy yield
 \begin{equation}\label{eq:witness}
-P_{\mathrm{witness}}=\beta^t.
+P_{\mathrm{ach}}=\beta^t.
 \end{equation}
 This supplies a lower bound on the optimal cheating probability; the theorem supplies the upper bound:
 \begin{equation}\label{eq:bracket}
-\beta^t\leq\pguess^{\star}(n,m)\leq2^{-t/6}.
+\beta^t\leq P^*_{n,m}\leq2^{-t/6}.
 \end{equation}
-The star also optimizes over encoders. A measurement record helps, but it does not preserve the ability to choose an arbitrary measurement after disclosure.
+Here $P^*_{n,m}$ is the optimum over both encoders and decoders. A measurement record helps, but it does not preserve the ability to choose an arbitrary measurement after disclosure.
 
 At full memory, $m=n$, storing every input gives success one. At zero quantum memory, the bound is $2^{-n/6}$ and the displayed strategy achieves $\beta^n$. The constants are examined in Section~\ref{sec:overhead}.
 
@@ -159,7 +167,18 @@ The theorem will hold in this arbitrary-state model. It includes the original pr
 \[
 \ket\Phi_{AB}=\frac{\ket{00}+\ket{11}}{\sqrt2}.
 \]
-Measuring $A$ in a real BB84 basis with outcome $x$ prepares the corresponding $\ket{x}_\theta$ on $B$. The device's encoder acts on $B$, so it commutes with a measurement on $A$. The analysis may therefore place the verifier's measurement after encoding and the storage cut. This is a representation of the same joint probabilities; it adds no physical quantum capability to a classical verifier.
+For the full block write $\ket{\Phi_d}=d^{-1/2}\sum_z\ket z_A\ket z_B$. The identity
+\[
+(\bra xU_\theta^\dagger\otimes I)\ket{\Phi_d}
+=d^{-1/2}U_\theta^*\ket x
+=d^{-1/2}\ket x_\theta
+\]
+uses the reality of the BB84 matrices. It shows that each outcome $x$ has probability $1/d$ and prepares the corresponding state on $B$. If $\mathcal E$ is the device's encoding instrument, its action on $B$ commutes with the measurement on $A$. Uniformly choosing $\theta$ therefore gives the joint output
+\[
+\frac1{d^2}\sum_{x,\theta}\ket{x,\theta}\bra{x,\theta}
+\otimes\mathcal E(\ket x_\theta\bra x_\theta).
+\]
+This is exactly the original source and encoder, including their probability weights. The verifier's measurement can be placed after the storage cut in the analysis. The physical classical verifier is implemented separately by the preparation protocol below.
 
 In the original preparation task, $(X,\Theta)$ is uniform by construction. In the arbitrary-state model, $X$ need not be uniform, even conditioned on a classical branch. The proof must retain its actual probability weights.
 
@@ -172,10 +191,10 @@ For an upper bound on guessing, give the hypothetical decomposition label $j$ to
 
 It remains to prove the same bound for each pure branch $\ket\psi_{AQ}$. Its Schmidt decomposition has the form
 \begin{equation}\label{eq:schmidt}
-\ket\psi=\sum_{j=1}^{s}\sqrt{\lambda_j}\ket{a_j}_A\ket{b_j}_Q,
+\ket\psi=\sum_{j=1}^{r}\sqrt{\lambda_j}\ket{a_j}_A\ket{b_j}_Q,
 \qquad\lambda_j>0,\quad\sum_j\lambda_j=1.
 \end{equation}
-Here both vector families are orthonormal, and the Schmidt rank obeys $s\leq\min(D,d)$. The reduced state $\rho=\Tr_Q\ket\psi\bra\psi$ has exactly these $s$ nonzero eigenvalues. The partial trace $\Tr_Q$ discards $Q$ while preserving every measurement probability on $A$.
+Here both vector families are orthonormal, and the Schmidt rank obeys $r\leq\min(D,d)$. The reduced state $\rho=\Tr_Q\ket\psi\bra\psi$ has exactly these $r$ nonzero eigenvalues. The partial trace $\Tr_Q$ discards $Q$ while preserving every measurement probability on $A$.
 
 \begin{keybox}
 The rank restriction applies to a pure conditional branch. An arbitrary mixed $\rho_{AQ}$ can have $\rho_A=I_d/d$ even when $Q$ is one-dimensional. Giving away a quantum purification would change the charged memory; revealing a classical decomposition label does not.
@@ -188,7 +207,7 @@ Let $\{\sigma_x\}$ be positive, subnormalized operators on $Q$, with
 \[
 S=\sum_x\sigma_x,\qquad\Tr S=1.
 \]
-The operator $\sigma_x=p_x\rho_x$ combines a label's probability $p_x$ and its normalized conditional state $\rho_x$, so $\Tr\sigma_x=p_x$. For a POVM $\{M_x\}$, success is $\sum_x\Tr(M_x\sigma_x)$. The square-root, or pretty-good, measurement has effects $S^{-1/2}\sigma_xS^{-1/2}$ on the support of $S$: the span of its eigenvectors with nonzero eigenvalues. Outside that support it can be completed arbitrarily, because the ensemble never occupies it. Its success is
+The operator $\sigma_x=p_x\rho_x$ combines a label's probability $p_x$ and its normalized conditional state $\rho_x$, so $\Tr\sigma_x=p_x$. For a POVM $\{M_x\}$, success is $\sum_x\Tr(M_x\sigma_x)$; write $\popt$ for its supremum over all POVMs. The square-root, or pretty-good, measurement has effects $S^{-1/2}\sigma_xS^{-1/2}$ on the support of $S$: the span of its eigenvectors with nonzero eigenvalues. Outside that support it can be completed arbitrarily, because the ensemble never occupies it. Its success is
 \begin{equation}\label{eq:pgm-def}
 \pgm=\sum_x\Tr(\sigma_xS^{-1/2}\sigma_xS^{-1/2}).
 \end{equation}
@@ -221,17 +240,17 @@ This established inequality controls every decoder through the tractable quantit
 \newsection{Why the square root of a marginal appears}
 Return to the Schmidt decomposition \eqref{eq:schmidt}. Set $R=\sqrt\rho$, where powers are taken spectrally: an eigenvalue $\lambda$ of $\rho$ becomes $\sqrt\lambda$ in $R$. For a fixed basis string $\theta$, measuring $A$ gives the subnormalized vector
 \[
-\ket{v_x}=\sum_{j=1}^s\sqrt{\lambda_j}\ip{x_\theta}{a_j}\ket{b_j},
+\ket{v_x}=\sum_{j=1}^r\sqrt{\lambda_j}\ip{x_\theta}{a_j}\ket{b_j},
 \qquad\sigma_x=\ket{v_x}\bra{v_x}.
 \]
 Its squared norm is the actual probability of $x$. Summing over all basis vectors gives
 \[
-S=\sum_x\sigma_x=\sum_{j=1}^s\lambda_j\ket{b_j}\bra{b_j},
+S=\sum_x\sigma_x=\sum_{j=1}^r\lambda_j\ket{b_j}\bra{b_j},
 \]
 which is independent of $\theta$. Hence
 \begin{align*}
 \bra{v_x}S^{-1/2}\ket{v_x}
-&=\sum_{j=1}^s\sqrt{\lambda_j}|\ip{x_\theta}{a_j}|^2\\
+&=\sum_{j=1}^r\sqrt{\lambda_j}|\ip{x_\theta}{a_j}|^2\\
 &=\bra{x_\theta}R\ket{x_\theta}.
 \end{align*}
 For a rank-one $\sigma_x$, its contribution to \eqref{eq:pgm-def} is the square of this overlap. Therefore the exact identity is
@@ -259,9 +278,9 @@ The example makes the slack introduced by the inequalities visible.
 
 \newsection{Average the bases using Pauli coordinates}
 \subsection{Measurement averaging as dephasing}
-Dephasing in a basis deletes off-diagonal matrix entries in that basis. Write these maps as $\Delta_z$ and $\Delta_x$ for the computational and Hadamard bases, and define
+Dephasing in a basis deletes off-diagonal matrix entries in that basis. Write these maps as $\Delta_Z$ and $\Delta_X$ for the computational and Hadamard bases, and define
 \[
-\mathcal T=\frac{\Delta_z+\Delta_x}{2}.
+\mathcal T=\frac{\Delta_Z+\Delta_X}{2}.
 \]
 For one basis, the squared diagonal sum in \eqref{eq:pgm-id} equals $\Tr[R\Delta(R)]$. Independent choices of the $n$ bases therefore give
 \begin{equation}\label{eq:average}
@@ -269,11 +288,11 @@ For one basis, the squared diagonal sum in \eqref{eq:pgm-id} equals $\Tr[R\Delta
 \end{equation}
 This product of averaging maps comes from the random basis choices. It imposes no product structure on $R$, the encoder, or the decoder.
 
-The Pauli matrices $I_2,\sigma_x,\sigma_y,\sigma_z$, with
-$\sigma_y=\left(\begin{smallmatrix}0&-i\\i&0\end{smallmatrix}\right)$, form an orthogonal operator basis under $\Tr(A^\dagger B)$. The identity component survives either dephasing, each of the $x,z$ components survives half the time, and the $y$ component is removed:
+The Pauli matrices $I_2,\XX,\YY,\ZZ$, with
+$\YY=\left(\begin{smallmatrix}0&-i\\i&0\end{smallmatrix}\right)$, form an orthogonal operator basis under $\Tr(A^\dagger B)$. The identity component survives either dephasing, each of the $x,z$ components survives half the time, and the $y$ component is removed:
 \begin{center}\small
 \begin{tabular}{@{}lrrrr@{}}\toprule
-Map eigenvalue on & $I_2$ & $\sigma_x$ & $\sigma_y$ & $\sigma_z$\\\midrule
+Map eigenvalue on & $I_2$ & $\XX$ & $\YY$ & $\ZZ$\\\midrule
 $\mathcal T$ & $1$ & $1/2$ & $0$ & $1/2$\\
 $\Dmap_{1/2}$ & $1$ & $1/2$ & $1/2$ & $1/2$\\\bottomrule
 \end{tabular}\end{center}
@@ -283,15 +302,15 @@ Here the depolarizing map on a single qubit, for $0\leq\eta\leq1$, is
 \]
 
 \subsection{A comparison of quadratic forms}
-Expand $R=\sum_P a_PP$ in $n$-qubit Pauli words. A word is a tensor product of the four Pauli matrices; its weight $w(P)$ counts nonidentity factors. Hermiticity makes $a_P$ real, and $\Tr(PP')=d$ when $P=P'$ and zero otherwise. Each term of the quadratic form is therefore $d a_P^2$ times the map's eigenvalue.
+Expand $R=\sum_P a_PP$ in $n$-qubit Pauli words, with $a_P=d^{-1}\Tr(PR)$. A word is a tensor product of the four Pauli matrices; its weight $w(P)$ counts nonidentity factors. Hermiticity makes $a_P$ real, and $\Tr(PP')=d$ when $P=P'$ and zero otherwise. Each term of the quadratic form is therefore $d a_P^2$ times the map's eigenvalue.
 
-A word containing $\sigma_y$ has $\mathcal T$ eigenvalue zero. Any other word has eigenvalue $2^{-w(P)}$, equal to its depolarizing eigenvalue. Term by term,
+A word containing $\YY$ has $\mathcal T$ eigenvalue zero. Any other word has eigenvalue $2^{-w(P)}$, equal to its depolarizing eigenvalue. Term by term,
 \begin{align}
 \Tr[R\mathcal T^{\otimes n}(R)]
 &\leq\Tr[R\Dmap_{1/2}^{\otimes n}(R)]\notag\\
 &=\Tr\left[\Dmap_{1/\sqrt2}^{\otimes n}(R)^2\right].\label{eq:depolarize}
 \end{align}
-The equality uses self-adjointness and $\Dmap_\eta\Dmap_\zeta=\Dmap_{\eta\zeta}$. The comparison concerns quadratic forms; it is not a claim that the difference of the two channels is completely positive. Depolarization here is a mathematical tool for the basis average, rather than an assumed physical noise process.
+The equality uses self-adjointness and $\Dmap_\eta\Dmap_\zeta=\Dmap_{\eta\zeta}$. The comparison is between quadratic forms, rather than an ordering by completely positive maps. Depolarization is used to analyse the basis average; its parameter is a proof parameter, separate from physical noise in a device.
 
 \newsection{The dimension-sensitive step and the finite theorem}
 \subsection{A standard tensor-power norm inequality}
@@ -307,7 +326,7 @@ $0\leq\eta\leq\sqrt{(p-1)/(q-1)}$, it states
 \begin{equation}\label{eq:hc}
 \normn{\Dmap_\eta^{\otimes n}(A)}{q}\leq\normn{A}{p}.
 \end{equation}
-This tensor-power theorem is used as an imported mathematical input, not re-proved here. Its meaning is that damping the Pauli components sufficiently controls a stronger norm by a weaker one, with a constant independent of the number of qubits. The tensor-power scope is crucial: a one-qubit check alone would not justify its use on an entangled operator.
+This established tensor-power theorem is the substantial mathematical input to the proof. It says that sufficient damping of the Pauli components controls a stronger norm by a weaker one, with a constant independent of the number of qubits. Its tensor-power scope makes it applicable to entangled operators across the entire block.
 
 \subsection{Keep the normalization factor}
 Choose $p=3/2$, $q=2$, and $\eta=1/\sqrt2$. Equations \eqref{eq:average}--\eqref{eq:depolarize} imply
@@ -319,18 +338,18 @@ Choose $p=3/2$, $q=2$, and $\eta=1/\sqrt2$. Equations \eqref{eq:average}--\eqref
 \end{align}
 The factor $d^{-1/3}$ follows from $d(d^{-1})^{4/3}$. Dropping this factor would destroy the storage-gap dependence.
 
-The $s$ nonzero eigenvalues of $\rho$ sum to one. Concavity gives
+The $r$ nonzero eigenvalues of $\rho$ sum to one. Concavity gives
 \[
-\frac1s\sum_{j=1}^s\lambda_j^{3/4}
-\leq\left(\frac1s\sum_{j=1}^s\lambda_j\right)^{3/4},
-\quad\text{hence}\quad\Tr\rho^{3/4}\leq s^{1/4}.
+\frac1r\sum_{j=1}^r\lambda_j^{3/4}
+\leq\left(\frac1r\sum_{j=1}^r\lambda_j\right)^{3/4},
+\quad\text{hence}\quad\Tr\rho^{3/4}\leq r^{1/4}.
 \]
-Thus $\E\pgm\leq(s/d)^{1/3}$. Finally, use \eqref{eq:discrimination} and Cauchy--Schwarz for the classical basis average:
+Thus $\E\pgm\leq(r/d)^{1/3}$. Finally, use \eqref{eq:discrimination} and Cauchy--Schwarz for the classical basis average:
 \begin{equation}\label{eq:finish}
 \E_\Theta\popt(\Theta)
 \leq\E_\Theta\sqrt{\pgm(\Theta)}
 \leq\sqrt{\E_\Theta\pgm(\Theta)}
-\leq(s/d)^{1/6}\leq(D/d)^{1/6}.
+\leq(r/d)^{1/6}\leq(D/d)^{1/6}.
 \end{equation}
 This holds on every refined pure branch. Averaging those branch bounds and removing the extra label returns the original mixed-state experiment. General classical records use the same conditional-state average; there is no alphabet-size penalty. Adding the trivial probability bound one proves \eqref{eq:main}, including non-power-of-two $D$.
 
@@ -364,10 +383,16 @@ legend cell align=left]
 \end{tikzpicture}
 \end{center}
 \smallskip
-The optimal value $-\log_2\pguess^\star$ lies between the two lines; larger values mean smaller success probability.
+The optimal value $-\log_2 P^*_{n,m}$ lies between the two lines; larger values mean smaller success probability.
 
 \subsection{A finite comparison, with a precise scope}
-An earlier uncertainty relation permits storage rates approaching one. A particular dimension-only specialization gives
+An earlier uncertainty relation permits storage rates approaching one. To specialize it using only the memory dimension, one needs conditional min-entropy with a quantum first register. Its operator definition is
+\[
+2^{-H_{\min}(A\mid E)_\rho}
+=\inf_{\omega_E\geq0}\{\Tr\omega_E:
+\rho_{AE}\leq I_A\otimes\omega_E\}.
+\]
+Here $E$ denotes the available side information, and $\omega_E$ ranges over positive operators whose trace is unrestricted. When $A$ is classical this definition agrees with the guessing-probability definition above. The dimension bound gives $H_{\min}(A\mid CQ)\geq-\log_2D\geq-m$. Indeed, Cauchy--Schwarz on a pure Schmidt decomposition gives $\rho_{AQ}\leq D I_A\otimes\rho_Q$; averaging pure branches and classical records preserves this inequality. Thus $\omega_{CQ}=D\rho_{CQ}$ is a feasible choice of trace $D$. Substituting the resulting entropy bound into the earlier relation gives the particular sufficient bound
 \[
 H_{\min}(X\mid CQ\Theta)\geq\frac{n\gamma(-m/n)-1}{2},
 \]
@@ -384,17 +409,22 @@ $1{,}024$ & $120$ & $290$\\
 $10{,}000$ & $120$ & $426$\\
 $1{,}000{,}000$ & $120$ & $698$\\\bottomrule
 \end{tabular}\end{center}
-This compares two specified sufficient bounds, without asserting exhaustive priority or superiority over every use of earlier uncertainty methods.
+At a fixed target $\delta$, this earlier specialization retains a logarithmic block-size dependence. To see it, put $s=1+2\log_2(1/\delta)$, so $a_*=s/n$. For large $n$,
+\[
+nh_2(s/n)
+=s\log_2(n/s)+s\log_2 e+O(s^2/n).
+\]
+Here $e$ is the base of the natural logarithm. Thus its sufficient gap grows as $s\log_2n+O_\delta(1)$, whereas \eqref{eq:gap} supplies a gap independent of $n$. The comparison fixes the two displayed unsmoothed guessing bounds and the dimension-only substitution. Additional state information or smoothing would define a different comparison.
 
 \newsection{How classical interaction can supply the test}
 \subsection{The extra preparation problem}
-The ideal experiment supplies actual BB84 states. A verifier restricted to classical computation and communication uses a remote-state-preparation protocol instead: the verifier ends with hidden labels and a pass flag, and an honest quantum device ends with the corresponding qubits. Here efficient means polynomial resource use in the security parameter.
+The ideal experiment supplies actual BB84 states. A verifier restricted to classical computation and communication uses a remote-state-preparation protocol instead: the verifier ends with hidden labels and a pass flag, and an honest quantum device ends with the corresponding qubits. Efficiency is measured in the security parameter $\lambda$. The preparation guarantee uses nonuniform quantum polynomial-time adversaries, simulators, and continuations: they may use advice depending on $\lambda$, but must remain within the specified polynomial resource bound. Its security inequalities hold for all sufficiently large $\lambda$ and polynomially bounded output length.
 
 The imported construction relies on quantum hardness of learning with errors (LWE). At the level of notation, LWE involves noisy modular linear equations
 \[
 b=\langle a,s\rangle+e\pmod q,
 \]
-where $q$ is an integer modulus, $a,s$ are vectors over integers modulo $q$, and $e$ follows a specified error distribution. The construction imports a hardness assumption for its parameter family and quantum adversary class; the memory theorem neither proves that assumption nor selects deployment parameters.
+where $q$ is an integer modulus, $a,s$ are vectors over integers modulo $q$, and $e$ follows a specified error distribution. The construction imports a hardness assumption for its parameter family and quantum adversary class. That computational assumption supplies preparation security; the finite guessing theorem is an independent information-theoretic statement.
 
 \subsection{The exact simulation interface}
 For every efficient malicious preparation prover, the imported guarantee supplies an efficient simulator whose input is the ideal quantum BB84 state alone. It produces a simulated pass flag and the prover's output system. The simulator does not receive the classical hidden labels $x,\theta$.
@@ -403,13 +433,13 @@ For every efficient continuation and its acceptance test, the real and simulated
 \[
 \{\text{preparation passes and continuation accepts}\}
 \]
-differ by at most $\varepsilon_{\mathrm{prep}}$. The continuation may use the verifier's hidden labels to evaluate its test. The simulator's quantum input and the verifier's classical knowledge play different roles.
+differ by at most $\varepsilon_{\mathrm{RSP}}$. The continuation may use the verifier's hidden labels to evaluate its test. The simulator's quantum input and the verifier's classical knowledge play different roles.
 
 \begin{keybox}
-The comparison is pass-weighted: it bounds the joint event of preparation passing and the continuation accepting. It gives neither universal trace-distance closeness for malicious states nor a bound conditioned on a pass.
+The comparison is pass weighted: it directly bounds the joint event of preparation passing and the continuation accepting, without conditioning on a pass. The same simulator, chosen for the malicious preparation prover, must satisfy this comparison for every efficient continuation.
 \end{keybox}
 
-Honest preparation has a separate property: its joint state, including the verifier labels, is negligibly close in trace distance to the ideal BB84 source with a passing flag. Here trace distance is $\tfrac12\lVert\rho-\sigma\rVert_1$ for normalized states. It bounds the difference in any acceptance probability.
+Honest preparation has a separate property: its joint state, including the verifier labels, is negligibly close in trace distance to the ideal BB84 source with a passing flag. Here trace distance is $\tfrac12\lVert\rho-\sigma\rVert_1$ for normalized states, with the ordinary trace norm $\lVert A\rVert_1=\Tr|A|$. It bounds the difference in any acceptance probability. This honest-state trace-distance property is separate from the computational comparison for malicious provers.
 
 Under its polynomial quantum-hardness assumption, the construction supports polynomial-length output and inverse-polynomial simulation error using polynomially many rounds. The ideal inequality \eqref{eq:main} remains unconditional.
 
@@ -420,30 +450,34 @@ Run the preparation protocol for $n$ output qubits. The verifier keeps its hidde
 Fix an efficient adversary whose total retained quantum dimension at the cut is at most $2^m$. Let $E$ be its actual preprocessing and compression up to that cut. Use the imported simulation guarantee with the continuation that runs $E$, discloses the verifier's bases, runs the decoder, and checks the guessed string. It gives
 \begin{align*}
 P_{\mathrm{real\ accept}}
-&\leq\varepsilon_{\mathrm{prep}}
+&\leq\varepsilon_{\mathrm{RSP}}
 +P_{\mathrm{sim\ pass\ and\ correct}}\\
-&\leq\varepsilon_{\mathrm{prep}}+P_{\mathrm{sim\ correct}}.
+&\leq\varepsilon_{\mathrm{RSP}}+P_{\mathrm{sim\ correct}}.
 \end{align*}
 The simulator composed with $E$ is an encoder on ideal quantum BB84 inputs. As a map, $E$ has a charged quantum output register $Q$ of dimension at most $2^m$; applying it to the simulated state does not enlarge that register. Temporary workspace before the cut may be larger, but all quantum information accessible across the cut is charged. Classical transcripts and flags can be added to $C$. A discarded simulator environment is not later returned.
 
 Giving arbitrary guesses to failed simulated branches makes a complete strategy covered by the ideal theorem. Thus
 \[
-P_{\mathrm{real\ accept}}\leq\min\{1,\varepsilon_{\mathrm{prep}}+2^{-(n-m)/6}\}.
+P_{\mathrm{real\ accept}}\leq\min\{1,\varepsilon_{\mathrm{RSP}}+2^{-(n-m)/6}\}.
 \]
-The joint-event comparison is what prevents error amplification on rare passing branches.
+The joint-event comparison keeps rare passing branches weighted by their actual probabilities throughout the argument.
 
 \subsection{Allocate the error budget and state the efficient regime}
-For target total false-acceptance error $\varepsilon\in(0,1)$, it is sufficient to obtain $\varepsilon_{\mathrm{prep}}\leq\varepsilon/2$ and choose
+For target total false-acceptance probability $\varepsilon\in(0,1)$, it is sufficient to obtain $\varepsilon_{\mathrm{RSP}}\leq\varepsilon/2$ and choose
 \begin{equation}\label{eq:n-choice}
 n=m+\left\lceil6\log_2(2/\varepsilon)\right\rceil.
 \end{equation}
-For example, an ideal storage term at most $2^{-20}$ requires gap $120$. Total error at most $2^{-20}$ with equal allocation requires gap $126$ and preparation error at most $2^{-21}$. These are algebraic examples, not concrete cryptographic or hardware estimates.
+For example, an ideal storage term at most $2^{-20}$ requires gap $120$. Total false acceptance at most $2^{-20}$ with equal allocation requires gap $126$ and preparation error at most $2^{-21}$. These numbers illustrate the algebraic allocation of the two error terms.
 
-More precisely, let the security parameter $\lambda$ be an integer, let $m(\lambda)$ be efficiently computable and polynomially bounded, and let $p(\lambda)\geq1$ be a polynomial target. The imported construction supplies error $1/[2p(\lambda)]$ efficiently. Equation \eqref{eq:n-choice} then yields a polynomial-round protocol with soundness at most $1/p(\lambda)$. Honest completeness is $1-\operatorname{negl}(\lambda)$ for ideal honest storage, where negligible means eventually smaller than every inverse polynomial. Efficient negligible soundness does not follow merely by inserting a negligible $\varepsilon$ into the storage formula.
+More precisely, let $m(\lambda)\geq0$ be integer valued, efficiently computable, and polynomially bounded, and let $p(\lambda)\geq1$ be a polynomial target. The imported construction supplies error $1/[2p(\lambda)]$ efficiently. Choosing
+\[
+n(\lambda)=m(\lambda)+\left\lceil6\log_2(2p(\lambda))\right\rceil
+\]
+yields a polynomial-round protocol with soundness at most $1/p(\lambda)$. Honest completeness is $1-\operatorname{negl}(\lambda)$ for ideal honest storage, where negligible means eventually smaller than every inverse polynomial. This finite storage estimate applies without a condition $m(\lambda)=\omega(\log\lambda)$. Efficient negligible-soundness compilation would require a preparation guarantee at the corresponding error scale; the imported efficient guarantee supplies the inverse-polynomial regime.
 
 \newsection{Lists and tolerated wrong answers}
 \subsection{Prove the list cost before changing the test}
-Suppose a decoder output $y$ specifies a set $\mathcal L_y$ of at most $L\geq1$ candidate strings. Success means $X\in\mathcal L_y$. The list can depend on the basis and available records, but the unknown $X$ enters only through the decoder's actual information. For its POVM $\{M_y\}$, define
+In the ideal storage model, suppose a decoder output $y$ specifies a set $\mathcal L_y$ of at most $L\geq1$ candidate strings. Success means $X\in\mathcal L_y$. The list can depend on the basis and available records, but the unknown $X$ enters only through the decoder's actual information. For its POVM $\{M_y\}$, define
 \[
 F_x=\sum_{y:x\in\mathcal L_y}M_y.
 \]
@@ -453,10 +487,12 @@ Then $0\leq F_x\leq I$ and $\sum_xF_x\leq LI$. Reuse $A_x=S^{-1/4}\sigma_xS^{-1/
 &\leq\sum_x\Tr(B_xS^{1/2})
 =\Tr\left(S\sum_xF_x\right)\leq L.
 \end{align*}
-The same matrix Cauchy--Schwarz argument gives $P_{\mathrm{list}}^2\leq L\pgm$. The basis average and rank estimate are unchanged. Consequently,
-\begin{equation}\label{eq:list}
-P_{\mathrm{list}}\leq\min\{1,\sqrt L\,2^{-(n-m)/6}\}.
-\end{equation}
+The first inequality uses $\Tr[B_x(S^{1/2}-B_x)]\geq0$; positivity suffices even when the two operators do not commute. The same matrix Cauchy--Schwarz argument gives $P_{\mathrm{list}}^2\leq L\pgm$. On each pure branch, average its square root over the bases and use the rank estimate from Section~8. This gives $P_{\mathrm{list}}\leq\sqrt L(r/d)^{1/6}$. Averaging the branches yields
+\begin{align}\label{eq:list}
+P_{\mathrm{list}}&\leq\min\{1,\sqrt L(D/2^n)^{1/6}\}\notag\\
+&\leq\min\{1,\sqrt L\,2^{-(n-m)/6}\}\qquad(D\leq2^m).
+\end{align}
+This proof applies separately to every basis, so the list can depend on the basis. Randomized list selection is included in the measurement outcome $y$. The list inequality is a direct scored-discrimination extension of the same square-root-measurement argument.
 
 \subsection{Hamming tolerance changes the claim}
 Allow at most $h$ wrong bits, where $h$ is an integer between zero and $n$. A returned string accepts all strings differing from it in at most $h$ positions: a Hamming ball of size
@@ -480,35 +516,53 @@ The obstruction concerns this acceptance rule and leaves other noise-tolerant ce
 
 \newsection{Erasures, honest noise, and preparation perturbations}
 \subsection{The time of an erasure declaration matters}
-Suppose the device declares up to $\ell$ discarded positions before learning the bases. Condition on that classical declaration in the delayed-measurement model and discard the untested $A$ registers. The surviving state may be arbitrary, but its bases remain independent and uniform. Apply the stronger theorem to the at least $n-\ell$ surviving positions:
+Let $0\leq\ell\leq n$ be an integer. Write $P_{\mathrm{pre}}$ and $P_{\mathrm{post}}$ for ideal acceptance probabilities when erased positions are declared before or after basis disclosure. For a pre-basis declaration, condition on the erased set $S$ and earlier classical records in the delayed-measurement model. Discard the untested $A$ registers and put $k=n-|S|$. The surviving state may be arbitrary and mixed, but its remaining bases are independent and uniform. For $k\geq1$, the stronger theorem gives
+\[
+P_{\mathrm{pre}\mid S}\leq\min\{1,2^{-(k-m)/6}\}.
+\]
+For $k=0$ the upper bound is one. Since $k\geq n-\ell$, averaging over the declaration gives
 \begin{equation}\label{eq:preloss}
-P_{\mathrm{pre\text{-}basis\ erase}}^{\mathrm{ideal}}
+P_{\mathrm{pre}}
 \leq\min\{1,2^{-(n-\ell-m)/6}\}.
 \end{equation}
 Earlier measurement records may determine the declaration; the conditional bits need not be uniform.
 
+If up to $h$ errors are also allowed, condition on the actual surviving length before applying the list bound. The conditional upper bound is
+\[
+\min\{1,\sqrt{V(k,\min\{h,k\})}\,2^{-(k-m)/6}\}.
+\]
+The radius is capped at $k$ because accepting $k$ or more errors accepts every surviving string. At $k=0$, $V(0,0)=1$ and the displayed minimum gives the trivial bound one. For a variable number of erasures, take the maximum over the permitted $k$: both the Hamming volume and the deficit depend on that length.
+
 If instead the erased positions can be chosen after basis disclosure, a particular output with $\ell$ erasures accepts $2^\ell$ full strings. Applying the basis-dependent list bound gives
 \begin{equation}\label{eq:postloss}
-P_{\mathrm{post\text{-}basis\ erase}}^{\mathrm{ideal}}
+P_{\mathrm{post}}
 \leq\min\{1,2^{\ell/2}2^{-(n-m)/6}\}.
 \end{equation}
-The stronger pre-basis formula cannot be transferred to adaptive post-basis selection. These are sufficient guarantees, without a claim of sharpness. For exactly $\ell$ erasures and at most $h$ wrong surviving bits, where $0\leq h\leq n-\ell$, use list size $2^\ell V(n-\ell,h)$. With variable erasure count, take the largest permitted actual list size.
+The output itself specifies the erased set, so its list size already accounts for that selection; there is no extra factor for the number of possible erased sets. With exactly $\ell$ erasures and at most $h$ wrong surviving bits, the list size is
+\[
+L=2^\ell V(n-\ell,\min\{h,n-\ell\}).
+\]
+With variable erasure count, take the largest permitted actual list size. These two guarantees distinguish a pre-basis commitment from an adaptive post-basis declaration. They are sufficient bounds for those acceptance rules, with their optimum constants left open.
 
 \subsection{Completeness is a separate physical requirement}
 If an honest device's recovered bits have independent error probability $e$, exact-string completeness is
 \[
 P_{\mathrm{honest\ correct}}=(1-e)^n.
 \]
-A fixed positive independent error rate therefore destroys completeness as $n$ grows. Without independence, the union bound still gives failure at most $\sum_i e_i$, where $e_i$ is the marginal probability of an error in bit $i$. To keep this failure contribution below $\zeta$, it suffices that $\sum_i e_i\leq\zeta$; uniform $e_i\leq\zeta/n$ is one sufficient option.
+A fixed positive independent error rate therefore destroys completeness as $n$ grows. Without independence, the union bound still gives failure at most $\sum_i e_i$, where $e_i$ is the marginal probability of an error in bit $i$. To keep this failure contribution below $\eta$, it suffices that $\sum_i e_i\leq\eta$; uniform $e_i\leq\eta/n$ is one sufficient option.
 
 An error-correction implementation would require its own physical resource accounting. The present ideal logical-qubit test supplies neither such an architecture nor a fixed-noise-rate threshold.
 
 \subsection{A trace-distance perturbation is a different guarantee}
-If an actual joint source state, including the verifier labels, is within trace distance $\xi$ of an ideal one, every fixed acceptance probability changes by at most $\xi$. This can support a specifically justified physical source-error model. It cannot replace the malicious-prover preparation interface, whose guarantee is computational and pass-weighted rather than universal state closeness.
+Let actual and ideal joint source states, including the verifier labels, be $\omega$ and $\omega_{\mathrm{id}}$, with $\xi=\tfrac12\lVert\omega-\omega_{\mathrm{id}}\rVert_1$. Any fixed acceptance test has an effect $0\leq M\leq I$, and
+\[
+\left|\Tr(M\omega)-\Tr(M\omega_{\mathrm{id}})\right|\leq\xi.
+\]
+Thus a specified physical source perturbation changes acceptance by at most $\xi$. The malicious-prover preparation guarantee instead compares computationally accessible joint pass-and-accept probabilities. Each guarantee must be used with its own premise.
 
 \newsection{Resources, evidence, and the complete conclusion}
 \subsection{Which resource improves}
-The conditional construction replaces the multiplicative persistent-storage overhead of the previously used storage estimate by the additive gap \eqref{eq:n-choice}. The inherited protocol wrapper and preparation construction supply the classical-verifier realization. Their independent constant-round variants with stronger assumptions address other tradeoffs; no improvement of those dimensions is claimed here.
+The earlier polynomial-hardness construction used $\lceil9.1m\rceil$ honest stored qubits in its stated asymptotic regime. In the same preparation framework, the finite bound replaces that multiplicative persistent-storage overhead by the additive gap \eqref{eq:n-choice}. The protocol wrapper and preparation construction supply the classical-verifier realization. Their separate constant-round variants use stronger assumptions and address a different resource tradeoff.
 
 \begin{center}\small
 \renewcommand{\arraystretch}{1.13}
@@ -527,7 +581,7 @@ Physical protection & Any additional physical qubits used for error correction r
 No free state-loading oracle or quantum random-access memory is assumed. The ideal source is an explicit quantum input resource; its classical realization pays for the imported preparation protocol.
 
 \subsection{What supports the claims}
-The ideal result follows from the analytical chain in Sections~4--8, using the standard tensor-power norm theorem as its substantial mathematical input. Section~11 supplies the separate computational reduction. Finite matrix checks help detect normalization and implementation mistakes; they do not prove a universal inequality or cryptographic hardness.
+The ideal result follows from the analytical chain in Sections~4--8, using the standard tensor-power norm theorem as its substantial mathematical input. Section~11 supplies the separate computational reduction under its cryptographic assumption. Finite matrix checks test the intermediate identities and normalization conventions against those analytical expressions.
 
 An accepted run is not a deterministic measurement of a device's qubit count. Soundness bounds every dimension-limited strategy in the ideal model; the compiled protocol covers the efficient adversaries in its imported assumptions. A low-memory device can occasionally pass. Claims based on repeated runs must account for their joint strategy and information across cuts rather than assuming independent trials without justification.
 

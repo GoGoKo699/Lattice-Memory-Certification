@@ -20,4 +20,4 @@ The tensor-power hypercontractivity theorem and the LWE-based remote-preparation
 
 ## Destination
 
-The route ends with the ability to connect a bounded retained quantum dimension to an exact-string guessing bound, explain why the ideal result has no cryptographic assumption, and identify the extra conditions needed for a classical verifier. It also distinguishes logarithmic overhead in the ideal exact-recovery model from an optimal constant, a noisy-hardware guarantee, or efficient negligible-soundness compilation.
+The route ends with the ability to connect a bounded retained quantum dimension to an exact-string guessing bound, explain why the ideal result has no cryptographic assumption, and identify the extra conditions needed for a classical verifier. It connects the ideal guessing target $`\delta`$ to the total false-acceptance target $`\varepsilon`$ and separates logarithmic storage overhead, the unresolved exponent constant, physical-noise effects, and the supported cryptographic error regime.
