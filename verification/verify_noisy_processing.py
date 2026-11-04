@@ -57,6 +57,87 @@ def random_unitary(rng: np.random.Generator, dim: int) -> np.ndarray:
     return q
 
 
+def replacement_branch(mask: int) -> list[np.ndarray]:
+    """Two-slot identity/replacement branch, with no flag in its output."""
+    reset = []
+    for out, inp in itertools.product(range(2), repeat=2):
+        op = np.zeros((2, 2), dtype=complex)
+        op[out, inp] = 1 / math.sqrt(2)
+        reset.append(op)
+    choices = [reset if mask & (1 << slot) else [verify.I] for slot in range(2)]
+    return [verify.tensor(words) for words in itertools.product(*choices)]
+
+
+def pauli_noise(rho: np.ndarray, gamma: float) -> np.ndarray:
+    """Independent implementation of product depolarization by Pauli errors."""
+    single = [math.sqrt(1 - 3 * gamma / 4) * verify.I]
+    single += [math.sqrt(gamma / 4) * pauli for pauli in verify.PAULIS[1:]]
+    return apply([verify.tensor(words) for words in itertools.product(single, repeat=2)], rho)
+
+
+def check_cut_averaging(audit: verify.Audit, prefix: list[np.ndarray],
+                        basis_matrices: list[np.ndarray]) -> dict:
+    """Compare actual Pauli noise with independent replacement choices at cuts.
+
+    Earlier rounds are averaged into the same prefix for all future choices.
+    The actual endpoint decoder is identical on every branch. This checks a
+    finite fixture, rather than certifying independence in an external device.
+    """
+    gamma = 0.23
+    hadamard = np.array([[1, 1], [1, -1]], dtype=complex) / math.sqrt(2)
+    cnot = np.array([[1, 0, 0, 0], [0, 1, 0, 0],
+                     [0, 0, 0, 1], [0, 0, 1, 0]], dtype=complex)
+    t_gate = np.diag([1, np.exp(1j * math.pi / 4)])
+    # None denotes a full product-noise round. Every other item is a single
+    # fixed Clifford or charged T primitive; there is no adaptive controller.
+    operations = [None, np.kron(hadamard, verify.I), cnot,
+                  np.kron(verify.I, t_gate), None]
+    branches = [replacement_branch(mask) for mask in range(4)]
+    weights = [gamma**mask.bit_count() * (1 - gamma)**(2 - mask.bit_count())
+               for mask in range(4)]
+    audit.equal('future_branch_weights_normalized', sum(weights), 1)
+    cut_scores = [0.0] * (len(operations) + 1)
+    actual_score = 0.0
+    for basis in basis_matrices:
+        for x in range(4):
+            vector = basis[:, x]
+            effect = np.outer(vector, vector.conj())
+            states = [apply(prefix, effect)]
+            for op in operations:
+                states.append(pauli_noise(states[-1], gamma) if op is None
+                              else op @ states[-1] @ op.conj().T)
+            actual_probability = float(np.trace(effect @ states[-1]).real)
+            actual_score += actual_probability / 16
+            for cut in range(len(states)):
+                suffix = operations[cut:]
+                noisy_rounds = sum(op is None for op in suffix)
+                average_state = np.zeros((4, 4), dtype=complex)
+                average_probability = 0.0
+                for choices in itertools.product(range(4), repeat=noisy_rounds):
+                    rho = states[cut].copy()
+                    branch_weight = 1.0
+                    index = 0
+                    for op in suffix:
+                        if op is None:
+                            choice = choices[index]
+                            rho = apply(branches[choice], rho)
+                            branch_weight *= weights[choice]
+                            index += 1
+                        else:
+                            rho = op @ rho @ op.conj().T
+                    average_state += branch_weight * rho
+                    average_probability += branch_weight * float(np.trace(effect @ rho).real)
+                audit.equal('cut_averaged_channel_output', average_state, states[-1])
+                audit.equal('cut_averaged_actual_decoder', average_probability,
+                            actual_probability)
+                cut_scores[cut] += average_probability / 16
+    return {'noise_rounds': 2, 'primitive_cuts': len(cut_scores),
+            'basis_input_cases': 16, 'depolarizing_strength': gamma,
+            'actual_unconditional_score': actual_score,
+            'averaged_actual_branch_scores': cut_scores,
+            'noise_implementations': ['Pauli-error channel', 'independent replacement choices']}
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--write', type=Path)
@@ -74,6 +155,13 @@ def main() -> None:
             f_ops, j_ops = replacement_factorization(s, c)
             audit.equal('F_trace_preserving', sum(f.conj().T @ f for f in f_ops), np.eye(4))
             audit.equal('J_trace_preserving', sum(j.conj().T @ j for j in j_ops), np.eye(2**(s+c)))
+            # The 16 matrix units span all operators, including imaginary
+            # coherences outside the span of the BB84 projectors below.
+            for row, column in itertools.product(range(4), repeat=2):
+                unit = np.zeros((4, 4), dtype=complex)
+                unit[row, column] = 1
+                audit.equal('full_channel_matrix_units', apply(j_ops, apply(f_ops, unit)),
+                            independent_pauli_twirl(s, c, unit))
             total_success = 0.0
             basis_input_cases = 0
             for basis in basis_matrices:
@@ -116,12 +204,22 @@ def main() -> None:
     mixtures = []
     for weight in (Fraction(0), Fraction(1, 5), Fraction(2, 5), Fraction(1)):
         p = weight + (1 - weight) / 4
-        probability_sum = Fraction(0)
-        for _theta, _x in itertools.product(range(4), repeat=2):
-            probability_sum += (weight + (1 - weight) / 4) / 16
-        assert probability_sum == p
+        mixed_channel = [math.sqrt(float(weight)) * np.eye(4)]
+        mixed_channel += [math.sqrt(float(1 - weight)) * op
+                          for op in replacement_branch(3)]
+        probability_sum = 0.0
+        for basis in basis_matrices:
+            for x in range(4):
+                vector = basis[:, x]
+                effect = np.outer(vector, vector.conj())
+                # Compute the density matrix and fixed basis readout directly,
+                # without adding a flag or optimizing a branch decoder.
+                probability_sum += float(np.trace(effect @ apply(mixed_channel, effect)).real) / 16
+        audit.equal('dense_unconditional_mixture_score', probability_sum, float(p))
         mixtures.append({'identity_weight': str(weight), 'unconditional_score': str(p),
                          'expected_rank': str(4 * weight)})
+
+    cut_averaging = check_cut_averaging(audit, prefix, basis_matrices)
 
     a = 24 * (Fraction(2, 5) - Fraction(1, 4096)) / (1 - Fraction(1, 4096))
     audit.equal('shared_twelve_qubit_rank_floor', float(a), 9.596483516483518)
@@ -129,6 +227,7 @@ def main() -> None:
         'status': 'passed', 'seed': 20261104,
         'canonical_algebras': len(cases), 'channel_cases': cases,
         'unconditional_channel_mixtures': mixtures,
+        'primitive_cut_averaging': cut_averaging,
         'shared_example': {'challenge_qubits': 12, 'score': '2/5',
                            'random_guess_baseline': '1/4096', 'rank_floor': str(a)},
         'assertions': sum(audit.counts.values()), 'check_counts': audit.counts,

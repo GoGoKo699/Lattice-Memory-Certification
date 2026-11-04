@@ -37,8 +37,13 @@ Unconditional average whole-string success is used. One common full-output
 envelope starts at M=2n before basis-dependent readout. Independent noise flags
 are proof aids, not supplied records. Every persistent controller record is
 noisy and counted, and its processing must obey the permitted gate model.
-Existing recovery inequalities already give the same large-block low-score
-floor; low-score applicability alone is not a new asymptotic result. The score
+The normalized DFW spectral bound already gives the same straight-chord
+floor for every k>=8, including low scores. Its 54 exact finite certificates
+cover k=8,9,10; the remaining k>=11 argument is analytical. Another 49 exact
+certificates show that the same route implies the displayed polygon floor
+for k=1,...,7. Neither displayed floor supplies an additional gate or interval
+consequence. Do not generalize this comparison to every refined bound or an
+optimality claim. The score
 does not verify noise/controller premises and does not automatically compose
 with the conditional LWE wrapper.
 

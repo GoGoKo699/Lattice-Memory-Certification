@@ -472,7 +472,7 @@ Dependencies name earlier understanding targets, not extra assignments. Primary 
 
 **Story role:** Connect the finite guessing theorem to a dynamical application before final synthesis.
 
-**Conceptual connection:** Existing recovery reductions already give the same large-block low-score consequence. The transfer assumes independent noise and an honestly charged fixed controller model; a score does not test those premises or automatically compose with the LWE wrapper.
+**Conceptual connection:** Existing recovery reductions already imply both displayed score floors and their gate/interval consequences for every challenge length. The transfer assumes independent noise and an honestly charged fixed controller model; a score does not test those premises or automatically compose with the LWE wrapper.
 
 **Source pointers:** Watrous §§2.2–2.3, 3.1.2 and 3.2; [noisy-processing application](../science/noisy-processing.md); [complete companion proof](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/main/science/guessing_processing.md); [resources](../science/lower-bounds-and-resources.md#4-charged-resources).
 

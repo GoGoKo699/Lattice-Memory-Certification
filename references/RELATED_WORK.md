@@ -57,15 +57,20 @@ At fixed $`\delta`$, this particular sufficient gap grows logarithmically with $
 
 ## Recovery comparison for the noisy-processing application
 
-The [noisy-device application](../science/noisy-processing.md) uses a different premise from an ideal dimension bound: a fixed storage circuit with independent depolarization, noisy counted persistent controllers, charged interior primitives and arbitrary free endpoint decoding. Its dynamical envelope proof and gate ledger have their authoritative home in [Measurement-Free-Memory-Cost, *Delayed-basis guessing and continuing processing*](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/87296f795359b0b66e0c49d20555634fd0d3d3ae/science/guessing_processing.md). Lattice contributes its finite BB84 guessing theorem. Their CPTP compatibility and composition are a shared corollary, with independent source ownership retained.
+The [noisy-device application](../science/noisy-processing.md) uses a different premise from an ideal dimension bound: a fixed storage circuit with independent depolarization, noisy counted persistent controllers, charged interior primitives and arbitrary free endpoint decoding. Its dynamical envelope proof and gate ledger have their authoritative home in [Measurement-Free-Memory-Cost, *Delayed-basis guessing and continuing processing*](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/a7d29a5c6e18e0dc363b62227591274dd43296f3/science/guessing_processing.md). Lattice contributes its finite BB84 guessing theorem. Their CPTP compatibility and composition are a shared corollary, with independent source ownership retained.
 
-The strongest checked recovery comparison includes DFW15's finite threshold estimate, Eq. (27), and its Appendix C operational interpretation, rather than using only the dimension substitution from the preceding section. In the noisy application's notation, let $`d=2^k`$, let $`u`$ be basis-averaged pretty-good guessing success, and let $`F_{\mathrm{pg}}`$ be squared pretty-good Bell recovery fidelity. With $`S_\ell=\sum_{j=0}^{\ell}\binom kj`$, the estimate reads
+The recovery comparison uses DFW15's spectral constraints, Eqs. (13)–(15), and Appendix C's operational interpretation. In the noisy application's notation, let $`d=2^k`$, let $`u`$ be basis-averaged pretty-good guessing success, and let $`F_{\mathrm{pg}}`$ be squared pretty-good Bell recovery fidelity. Keeping the normalized spectral weights gives
 
 ```math
-u\leq S_\ell F_{\mathrm{pg}}
-+2^{-\ell-1}\mathbf1_{\ell\lt k},
+\begin{aligned}
+u&\leq\tau_\ell+A_\ell F_{\mathrm{pg}},\\
+\tau_\ell&=2^{-\ell-1}\mathbf1_{\ell\lt k},\\
+A_\ell&=\sum_{j=0}^{\ell}\binom kj(1-2^j\tau_\ell),
 \qquad0\leq\ell\leq k.
+\end{aligned}
 ```
+
+This follows by subtracting $`\tau_\ell`$ from the spectral average and bounding only positive residual coefficients; the [application](../science/noisy-processing.md#existing-recovery-reductions-already-cover-low-scores) explains the step. Since $`A_\ell\leq\sum_{j=0}^{\ell}\binom kj`$, it strengthens the coarser threshold estimate printed as DFW15 Eq. (27). The refinement uses the cited spectral constraints and does not posit an additional uncertainty relation.
 
 Joseph M. Renes, *Better bounds on optimal measurement and entanglement recovery, with applications to uncertainty and monogamy relations*, Physical Review A **96**, 042328 (2017), [DOI](https://doi.org/10.1103/PhysRevA.96.042328), [arXiv:1707.01114](https://arxiv.org/abs/1707.01114), Eq. (12), gives $`p^2+(1-p)^2/(d-1)\leq u`$ for optimal guessing success $`p`$. Together these imply useful recovery-fidelity bounds at and below score one half. The elementary measure-and-prepare decoder additionally gives $`F_{\mathrm{rec}}\geq p/d`$, exceeding replacement fidelity for every above-random score.
 
@@ -73,7 +78,7 @@ Mario Berta, Patrick J. Coles and Stephanie Wehner, *Entanglement-assisted guess
 
 Joseph M. Renes, *Uncertainty relations and approximate quantum error correction*, Physical Review A **94**, 032314 (2016), [DOI](https://doi.org/10.1103/PhysRevA.94.032314), [arXiv:1605.01420v2](https://arxiv.org/abs/1605.01420v2), Eq. (3), gives another constructive complementary-observable recovery route. Using only an averaged pair score loses information and creates a high-score threshold; that threshold is not a limit of the stronger DFW-based comparison.
 
-Apply the prior recovery inequalities to each CPTP future-noise branch before averaging. The companion superoperator-rank cap $`F_{\mathrm{rec},b}\leq\min\{1,2^{r-2k}\}`$ then yields the same straight-chord expected-rank floor as the direct quantum-plus-classical dimension argument for every $`k\geq9`$. The companion proof treats $`k\geq11`$ analytically and $`k=9,10`$ by exact rational finite certificates. Thus no additional asymptotic gate or contiguous-interval law is established by the operational transfer. Smaller-block differences concern the explicitly compared reduction family and do not establish optimality or an independent new contribution.
+Apply the prior recovery inequalities to each CPTP future-noise branch before averaging. The companion superoperator-rank cap $`F_{\mathrm{rec},b}\leq\min\{1,2^{r-2k}\}`$ then yields the same straight-chord expected-rank floor as the direct quantum-plus-classical dimension argument for every $`k\geq8`$. The companion proof treats $`k\geq11`$ analytically and all 54 remaining integer ranks at $`k=8,9,10`$ by exact rational certificates. For $`1\leq k\leq7`$, 49 additional exact rational certificates show that the same normalized spectral bounds imply the displayed polygon floor. Thus the recovery route already supplies the gate and contiguous-interval consequences of both convenient floors for every challenge length. This comparison does not assert dominance over all possible refined score bounds or establish optimality.
 
 The comparison concerns unconditional exact whole-string success when the device receives only the quantum challenge and learns the basis after charged storage. It does not verify noise or controller assumptions and imports no remote-preparation or LWE wrapper.
 

@@ -1,8 +1,8 @@
 # Delayed-basis guessing and continuing noisy-memory processing
 
-[Science guide](README.md) · [Finite guessing theorem](guessing-bound.md) · [Authoritative dynamical proof](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/06cde1943b8872daca6c714eae069e13923b39c1/science/guessing_processing.md)
+[Science guide](README.md) · [Finite guessing theorem](guessing-bound.md) · [Authoritative dynamical proof](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/a7d29a5c6e18e0dc363b62227591274dd43296f3/science/guessing_processing.md)
 
-Unconditional whole-string BB84 guessing success implies a continuing processing budget in a specified noisy-memory model. The finite guessing theorem supplies an information bottleneck; the Pauli-envelope contraction and processing ledger belong to [Measurement-Free-Memory-Cost](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost). This chapter states their composition and its operational limits. The strongest checked prior recovery reduction already gives the same large-block rank floor, so the composition establishes a useful corollary rather than an additional asymptotic processing law.
+Unconditional whole-string BB84 guessing success implies a continuing processing budget in a specified noisy-memory model. The finite guessing theorem supplies an information bottleneck; the Pauli-envelope contraction and processing ledger belong to [Measurement-Free-Memory-Cost](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost). This chapter states their composition and its operational limits. The prior recovery route already implies both score-dependent rank floors stated below. The composition provides an operational proof of the processing implication, with no additional gate or interval consequence from those floors.
 
 ## Experiment and charged device model
 
@@ -105,7 +105,7 @@ t_0+(2k-t_0)(p-H)/(1-H),&H\leq p\leq1.
 \qquad\text{(N3)}
 ```
 
-These floors are positive for every score above random guessing, including scores at or below one half. The averaging concerns expected rank; it does not require every noise branch to retain that rank. The curves are necessary upper bounds, not claims of optimal attainable guessing. The [companion proof](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/06cde1943b8872daca6c714eae069e13923b39c1/science/guessing_processing.md) supplies the envelope coupling, chord argument and finite checks.
+These floors are positive for every score above random guessing, including scores at or below one half. The averaging concerns expected rank; it does not require every noise branch to retain that rank. The curves are necessary upper bounds, not claims of optimal attainable guessing. The [companion proof](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/a7d29a5c6e18e0dc363b62227591274dd43296f3/science/guessing_processing.md) supplies the envelope coupling, chord argument and finite checks.
 
 ## Gate budget and every contiguous interval
 
@@ -149,35 +149,41 @@ B_I\geq a[D_I\kappa-\ln(M_I/a)]_+.
 \qquad\text{(N7)}
 ```
 
-Assign boundary gates consistently. The later suffix may determine the interval's entering random envelope, but its noise is independent of the interval's noise. Gates outside the interval cannot supply its continuing charge after the finite width reserve is exhausted. Any interval containing a noise layer also requires $`a\leq2nq`$ for feasibility.
+For individual T/T-dagger counts, (N5) also holds with $`m_T,D,2n`$ replaced by $`m_{T,I},D_I,M_I`$. Assign boundary gates consistently. The later suffix may determine the interval's entering random envelope, but its noise is independent of the interval's noise. Gates outside the interval cannot supply its continuing charge after the finite width reserve is exhausted. Any interval containing a noise layer also requires $`a\leq2nq`$ for feasibility.
 
-For example, $`k=12`$, $`p=0.4`$, $`n=120`$, $`\gamma=0.01`$, and $`D=2000`$ give $`a\simeq9.59648`$. Equation (N5) requires at least **171** interior T/T-dagger gates. A 700-round contiguous interval has $`B_I\geq36.8048`$ by (N7), hence needs at least 37 such gates. These are necessary conditions in the model; feasibility is a separate question.
+For example, $`k=12`$, $`p=0.4`$, $`n=120`$, $`\gamma=0.01`$, and $`D=2000`$ give $`a\simeq9.59648`$. Equation (N5) requires at least **171** interior T/T-dagger gates. A 700-round contiguous interval requires at least **39** such gates by the interval form of (N5). The scalar injection bound in (N7) alone gives $`B_I\geq36.8048`$, or 37 gates after rounding. These are necessary conditions in the model; feasibility is a separate question.
 
 ## Existing recovery reductions already cover low scores
 
-The comparison must include the finite BB84 recovery reduction of [Dupuis, Fawzi and Wehner](../references/RELATED_WORK.md#recovery-comparison-for-the-noisy-processing-application), rather than only a high-score complementary-observable estimate. Let $`F_{\mathrm{rec}}`$ be optimum squared Bell recovery fidelity, $`F_{\mathrm{pg}}`$ its pretty-good value, and $`u`$ average pretty-good guessing success. Renes's discrimination bound and DFW's finite threshold estimate give
+The comparison must include the finite BB84 recovery reduction of [Dupuis, Fawzi and Wehner](../references/RELATED_WORK.md#recovery-comparison-for-the-noisy-processing-application). For one channel, let $`F_{\mathrm{rec}}`$ be optimum squared Bell recovery fidelity, $`F_{\mathrm{pg}}`$ its pretty-good value, and $`u`$ average pretty-good guessing success. Write $`p_*\geq\max\{p,1/d\}`$ for optimal average guessing success. Renes's finite-alphabet discrimination bound, applied to each basis and averaged by convexity, gives
 
 ```math
-g_d(p):=p^2+\frac{(1-p)^2}{d-1}\leq u,
-\qquad
-u\leq S_\ell F_{\mathrm{pg}}
-+2^{-\ell-1}\mathbf1_{\ell\lt k},
-\qquad
-S_\ell=\sum_{j=0}^{\ell}\binom kj,
-\quad0\leq\ell\leq k.
+g_d(p_*):=p_*^2+\frac{(1-p_*)^2}{d-1}\leq u.
 ```
 
-Use an optimal guessing score, or a certified lower bound at least $`1/d`$; $`g_d`$ is increasing on that range. Since $`F_{\mathrm{rec}}\geq F_{\mathrm{pg}}`$, these inequalities imply
+DFW's threshold estimate is $`u\leq S_\ell F_{\mathrm{pg}}+\tau_\ell`$, where $`S_\ell=\sum_{j=0}^{\ell}\binom kj`$ and $`\tau_\ell=2^{-\ell-1}\mathbf1_{\ell\lt k}`$. Retaining the normalization of the spectral weights in the same argument strengthens it to
+
+```math
+\begin{aligned}
+u&\leq\tau_\ell+A_\ell F_{\mathrm{pg}},\\
+A_\ell&=\sum_{j=0}^{\ell}\binom kj(1-2^j\tau_\ell),
+\qquad 0\leq\ell\leq k.
+\end{aligned}
+```
+
+Indeed, DFW's normalized spectral weights satisfy $`w_v\geq0`$, $`\sum_vw_v=1`$ and $`w_v\leq F_{\mathrm{pg}}`$. The BB84 spectrum has coefficient $`2^{-j}`$ on $`2^j\binom kj`$ Pauli labels of weight $`j`$, and zero on labels containing $`Y`$. Subtracting $`\tau_\ell\sum_vw_v`$, discarding nonpositive terms and bounding the remaining weights by $`F_{\mathrm{pg}}`$ yields the displayed coefficient $`A_\ell\leq S_\ell`$. The [companion comparison](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/a7d29a5c6e18e0dc363b62227591274dd43296f3/science/guessing_processing.md) gives the source equations and complete derivation.
+
+Since $`F_{\mathrm{rec}}\geq F_{\mathrm{pg}}`$, this implies
 
 ```math
 F_{\mathrm{rec}}\geq
 \max_{0\leq\ell\leq k}
-\frac{[g_d(p)-2^{-\ell-1}\mathbf1_{\ell\lt k}]_+}{S_\ell}.
+\frac{[g_d(p_*)-\tau_\ell]_+}{A_\ell}.
 ```
 
-This remains useful at scores at or below one half. A simple measure-and-prepare decoder also gives $`F_{\mathrm{rec}}\geq p/d`$, above replacement fidelity $`1/d^2`$ for every $`p\gt1/d`$. The Berta–Coles–Wehner complementary-pair inequality supplies an additional finite bound. Each complementary product stabilizer-basis pair extends to a complete stabilizer MUB set; subtracting the omitted bases' pretty-good scores, each at least $`F_{\mathrm{pg}}`$, yields the pair bound. Its complete-MUB identity is applied pair by pair; the entire product-BB84 collection is not itself a complete MUB set.
+One may substitute any certified score $`p\geq1/d`$ because $`g_d`$ is increasing on that range. The bound remains useful at or below one half. A measure-and-prepare decoder also gives $`F_{\mathrm{rec}}\geq p_*/d`$, above replacement fidelity $`1/d^2`$ for every above-random score. The case $`\ell=0`$ gives the complementary-pair bound $`u\leq(1+F_{\mathrm{pg}})/2`$. It also follows from the Berta–Coles–Wehner complete-MUB identity applied separately to each complementary product stabilizer-basis pair. The entire product-BB84 collection is not itself a complete MUB set or a 2-design.
 
-For each noise branch, every recovered logical CPTP channel factors through $`\mathcal E_V`$, so the companion channel-rank bound gives $`F_{\mathrm{rec},b}\leq\min\{1,2^{r-2k}\}`$. Applying the prior recovery reductions **branchwise before averaging** already yields (N2) for every $`k\geq9`$. The companion account gives the analytic proof for $`k\geq11`$ and exact rational certificates for $`k=9,10`$. Thus the direct quantum-plus-classical factorization offers a short operational proof, with no additional asymptotic gate or interval consequence established in this regime. Finite differences at smaller blocks do not prove optimality or a new independent contribution.
+For each noise branch, every recovered logical CPTP channel factors through $`\mathcal E_V`$, so the companion channel-rank bound gives $`F_{\mathrm{rec},b}\leq\min\{1,2^{r-2k}\}`$. Applying the prior recovery reductions **branchwise before averaging** already yields (N2) for every $`k\geq8`$. The companion proves this analytically for $`k\geq11`$ and checks the remaining 54 integer ranks at $`k=8,9,10`$ with exact rational certificates. For $`1\leq k\leq7`$, the same spectral bounds imply the polygon floor (N3): 49 exact rational certificates cover the interior integer ranks, with the zero-rank and full-rank endpoints handled directly. The direct quantum-plus-classical factorization therefore adds no gate or interval consequence from either displayed floor, for any $`k\geq1`$. This comparison concerns (N2) and (N3); it does not assert that the recovery bounds dominate every possible refinement or determine optimal guessing.
 
 ## Boundaries and ownership
 
@@ -191,4 +197,4 @@ A complete replacement of all $`n`$ registers in any round destroys all input de
 
 The guessing score does not verify the noise strength or independence, counted-controller restrictions, fixed primitive schedule or absence of side channels. Those remain model premises. It supplies no automatic LWE or remote-preparation compilation: such a reduction would have to preserve the joint state, chronology, controller model and charged resources separately. Statistical estimation of the unconditional score is also separate from the inference made here.
 
-Lattice owns the [finite guessing theorem](guessing-bound.md). Measurement-Free owns the envelope contraction, gate ledger and [full dynamical composition proof](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/06cde1943b8872daca6c714eae069e13923b39c1/science/guessing_processing.md). The CPTP compatibility and score-based composition form their shared corollary; the recovery reductions remain attributed to the prior sources. The sister relationship does not merge the projects or alter their distinct ideal and noisy models.
+Lattice owns the [finite guessing theorem](guessing-bound.md). Measurement-Free owns the envelope contraction, gate ledger and [full dynamical composition proof](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/a7d29a5c6e18e0dc363b62227591274dd43296f3/science/guessing_processing.md). The CPTP compatibility and score-based composition form their shared corollary; the recovery reductions remain attributed to the prior sources. The sister relationship does not merge the projects or alter their distinct ideal and noisy models.

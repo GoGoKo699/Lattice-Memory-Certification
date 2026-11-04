@@ -16,7 +16,7 @@ With $`0\leq m\leq n`$ retained qubits, the exponent depends only on the missing
 
 Read the [self-contained application and boundaries](science/noisy-processing.md); the companion owns the [complete transfer proof and recovery comparison](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/main/science/guessing_processing.md). Its notation is $`k`$ challenge qubits, $`n`$ total noisy persistent qubits and $`D`$ noise rounds. The device receives only the quantum challenge; $`X`$ stays secret and only the basis string is revealed after all charged storage. The full-output terminal envelope has $`M=2n`$, and mathematical noise flags are not supplied to the device.
 
-This is a conditional processing witness under the specified noise, controller and gate assumptions. Existing recovery reductions already give the same large-block low-score consequence. It neither verifies those physical assumptions nor automatically extends this repository's LWE wrapper.
+This is a conditional processing witness under the specified noise, controller and gate assumptions. Existing recovery reductions already imply the stated rank floors for every challenge length, including low scores; those floors give no additional gate or interval consequence. It neither verifies those physical assumptions nor automatically extends this repository's LWE wrapper.
 
 ## Explanatory report
 
@@ -68,9 +68,10 @@ python3 -m venv .venv
 .venv/bin/python -m pip install -r verification/requirements.txt
 OPENBLAS_NUM_THREADS=1 .venv/bin/python verification/verify.py
 OPENBLAS_NUM_THREADS=1 .venv/bin/python verification/check_learning.py
+OPENBLAS_NUM_THREADS=1 .venv/bin/python verification/verify_noisy_processing.py
 ```
 
-The [verification guide](verification/README.md) documents the finite matrix checks and their [reference output](verification/expected_results.json). The [learning checks](verification/check_learning.py) cover milestone dependencies, local heading links and the worked example, with [reference output](verification/learning_results.json). The [analytic figure](verification/Graph/README.md) has its own generator and pinned dependencies.
+The [verification guide](verification/README.md) documents the finite matrix checks and their [reference output](verification/expected_results.json). The [learning checks](verification/check_learning.py) cover milestone dependencies, local heading links and the worked example, with [reference output](verification/learning_results.json). The [noisy-processing checks](verification/verify_noisy_processing.py) test the quantum-plus-classical channel factorization and unconditional averaging, with [reference output](verification/noisy_processing_results.json). These finite checks complement the analytical proofs; they do not test a physical device's noise or controller assumptions. The [analytic figure](verification/Graph/README.md) has its own generator and pinned dependencies.
 
 ## Consequential boundaries
 
