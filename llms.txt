@@ -16,7 +16,7 @@ Authoritative routes:
 - Analytic gap figure and reproducible generator: verification/Graph/README.md, verification/Graph/generate_plots.py and verification/Graph/requirements.txt
 - Lists, tolerated errors, erasure timing and honest-noise limitations: science/errors-and-losses.md
 - Noisy-storage application, independent model premises, score-to-rank transfer,
-  and the companion's authoritative proof route: science/noisy-processing.md
+  exponential-moment strengthening, and companion proof routes: science/noisy-processing.md
 - Attribution and finite prior-bound comparison: references/RELATED_WORK.md and references/references.bib
 - Reproduction scope and commands: verification/README.md, verification/verify.py and verification/check_learning.py
 
@@ -42,8 +42,11 @@ floor for every k>=8, including low scores. Its 54 exact finite certificates
 cover k=8,9,10; the remaining k>=11 argument is analytical. Another 49 exact
 certificates show that the same route implies the displayed polygon floor
 for k=1,...,7. Neither displayed floor supplies an additional gate or interval
-consequence. Do not generalize this comparison to every refined bound or an
-optimality claim. The score
-does not verify noise/controller premises and does not automatically compose
-with the conditional LWE wrapper.
+consequence from those floors alone. The exponential-moment extension retains
+actual product-noise probabilities and strengthens the dynamical ledger using
+direct score and fixed-recovery floors. Its interval reserve bounds
+log_z E[z^r], not merely E[r]; use 2n unless a smaller moment bound is proved.
+Do not generalize either result to optimal physical gate cost. The score does
+not verify noise/controller premises and does not automatically compose with
+the conditional LWE wrapper.
 
