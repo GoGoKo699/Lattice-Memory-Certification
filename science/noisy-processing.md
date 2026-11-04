@@ -1,6 +1,6 @@
 # Delayed-basis guessing and continuing noisy-memory processing
 
-[Science guide](README.md) · [Finite guessing theorem](guessing-bound.md) · [Authoritative dynamical proof](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/a7d29a5c6e18e0dc363b62227591274dd43296f3/science/guessing_processing.md)
+[Science guide](README.md) · [Finite guessing theorem](guessing-bound.md) · [Authoritative dynamical proof](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/60cc2fc6aebeee92e4880b7cc7a5fd687ae16ec7/science/guessing_processing.md)
 
 Unconditional whole-string BB84 guessing success implies a continuing processing budget in a specified noisy-memory model. The finite guessing theorem supplies an information bottleneck; the Pauli-envelope contraction and processing ledger belong to [Measurement-Free-Memory-Cost](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost). This chapter states their composition and its operational limits. The prior recovery route already implies both score-dependent rank floors stated below. The composition provides an operational proof of the processing implication, with no additional gate or interval consequence from those floors.
 
@@ -105,7 +105,7 @@ t_0+(2k-t_0)(p-H)/(1-H),&H\leq p\leq1.
 \qquad\text{(N3)}
 ```
 
-These floors are positive for every score above random guessing, including scores at or below one half. The averaging concerns expected rank; it does not require every noise branch to retain that rank. The curves are necessary upper bounds, not claims of optimal attainable guessing. The [companion proof](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/a7d29a5c6e18e0dc363b62227591274dd43296f3/science/guessing_processing.md) supplies the envelope coupling, chord argument and finite checks.
+These floors are positive for every score above random guessing, including scores at or below one half. The averaging concerns expected rank; it does not require every noise branch to retain that rank. The curves are necessary upper bounds, not claims of optimal attainable guessing. The [companion proof](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/60cc2fc6aebeee92e4880b7cc7a5fd687ae16ec7/science/guessing_processing.md) supplies the envelope coupling, chord argument and finite checks.
 
 ## Gate budget and every contiguous interval
 
@@ -171,7 +171,7 @@ A_\ell&=\sum_{j=0}^{\ell}\binom kj(1-2^j\tau_\ell),
 \end{aligned}
 ```
 
-Indeed, DFW's normalized spectral weights satisfy $`w_v\geq0`$, $`\sum_vw_v=1`$ and $`w_v\leq F_{\mathrm{pg}}`$. The BB84 spectrum has coefficient $`2^{-j}`$ on $`2^j\binom kj`$ Pauli labels of weight $`j`$, and zero on labels containing $`Y`$. Subtracting $`\tau_\ell\sum_vw_v`$, discarding nonpositive terms and bounding the remaining weights by $`F_{\mathrm{pg}}`$ yields the displayed coefficient $`A_\ell\leq S_\ell`$. The [companion comparison](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/a7d29a5c6e18e0dc363b62227591274dd43296f3/science/guessing_processing.md) gives the source equations and complete derivation.
+Indeed, DFW's normalized spectral weights satisfy $`w_v\geq0`$, $`\sum_vw_v=1`$ and $`w_v\leq F_{\mathrm{pg}}`$. The BB84 spectrum has coefficient $`2^{-j}`$ on $`2^j\binom kj`$ Pauli labels of weight $`j`$, and zero on labels containing $`Y`$. Subtracting $`\tau_\ell\sum_vw_v`$, discarding nonpositive terms and bounding the remaining weights by $`F_{\mathrm{pg}}`$ yields the displayed coefficient $`A_\ell\leq S_\ell`$. The [companion comparison](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/60cc2fc6aebeee92e4880b7cc7a5fd687ae16ec7/science/guessing_processing.md) gives the source equations and complete derivation.
 
 Since $`F_{\mathrm{rec}}\geq F_{\mathrm{pg}}`$, this implies
 
@@ -197,4 +197,4 @@ A complete replacement of all $`n`$ registers in any round destroys all input de
 
 The guessing score does not verify the noise strength or independence, counted-controller restrictions, fixed primitive schedule or absence of side channels. Those remain model premises. It supplies no automatic LWE or remote-preparation compilation: such a reduction would have to preserve the joint state, chronology, controller model and charged resources separately. Statistical estimation of the unconditional score is also separate from the inference made here.
 
-Lattice owns the [finite guessing theorem](guessing-bound.md). Measurement-Free owns the envelope contraction, gate ledger and [full dynamical composition proof](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/a7d29a5c6e18e0dc363b62227591274dd43296f3/science/guessing_processing.md). The CPTP compatibility and score-based composition form their shared corollary; the recovery reductions remain attributed to the prior sources. The sister relationship does not merge the projects or alter their distinct ideal and noisy models.
+Lattice owns the [finite guessing theorem](guessing-bound.md). Measurement-Free owns the envelope contraction, gate ledger and [full dynamical composition proof](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/60cc2fc6aebeee92e4880b7cc7a5fd687ae16ec7/science/guessing_processing.md). The CPTP compatibility and score-based composition form their shared corollary; the recovery reductions remain attributed to the prior sources. The sister relationship does not merge the projects or alter their distinct ideal and noisy models.
