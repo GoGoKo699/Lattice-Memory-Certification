@@ -9,17 +9,17 @@
   ],
   "milestone_map": {
     "background": 14,
-    "dependency_edges": 99,
+    "dependency_edges": 103,
     "fields_per_milestone": 7,
     "milestones": 30,
     "narrative": 16
   },
   "navigation_and_math_source": {
-    "display_math_blocks": 60,
-    "heading_fragments": 55,
-    "inline_math_expressions": 404,
-    "local_links": 151,
-    "markdown_files": 14
+    "display_math_blocks": 80,
+    "heading_fragments": 56,
+    "inline_math_expressions": 554,
+    "local_links": 171,
+    "markdown_files": 15
   },
   "status": "passed",
   "worked_example": {

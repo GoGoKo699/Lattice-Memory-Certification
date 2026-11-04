@@ -4,7 +4,7 @@
 
 This is the project's common understanding map, independent of any reader's background or assessment history. The single educational anchor is **Watrous, The Theory of Quantum Information (2018)**; the [bridge](WATROUS_BRIDGE.md#anchor-sections) identifies the exact sections and the research ingredients supplied outside the book.
 
-The allocation is **14 background/preliminary milestones and 16 narrative/innovation milestones**. The background needs both quantum-information objects and the computational-preparation interface before the complete experiment can be understood. The narrative then builds the proof locally, connects it to a physical strategy and existing work, and assembles the conditional certification result with its resource boundaries. Each phase ends in a synthesis. “Narrative/innovation” describes the project story; it does not label inherited lemmas as new discoveries.
+The allocation is **14 background/preliminary milestones and 16 narrative/innovation milestones**. The background needs both quantum-information objects and the computational-preparation interface before the complete experiment can be understood. The narrative then builds the proof locally, connects it to a physical strategy and existing work, and assembles the conditional certification result and its noisy-processing application with their resource boundaries. Each phase ends in a synthesis. “Narrative/innovation” describes the project story; it does not label inherited lemmas or derived corollaries as new discoveries.
 
 Dependencies name earlier understanding targets, not extra assignments. Primary scientific pages remain authoritative for exact assumptions and proofs. This map provides global understanding of the bounded contribution, not every technical detail of quantum information or lattice cryptography.
 
@@ -460,21 +460,21 @@ Dependencies name earlier understanding targets, not extra assignments. Primary 
 
 **Source pointers:** Watrous §§1.2.2 and 2.3 for probabilities and measurements; [errors and losses](../science/errors-and-losses.md).
 
-### M29: Account for resources and evidence
+### M29: A guessing score as a processing premise
 
 **Phase:** Narrative/innovation.
 
-**Central question:** What would an implementation or verification report need to count?
+**Central question:** What additional device assumptions let a guessing score constrain continuing processing?
 
-**Understanding target:** Separate retained logical storage, physical protection, preparation work and classical interaction; distinguish analytical proof, finite tests, cryptographic assumptions and priority uncertainty.
+**Understanding target:** Translate the ideal theorem into the quantum-plus-classical factor of a sampled Pauli algebra, preserve the full-output terminal reserve, and average branchwise bounds to obtain an expected-rank floor at every cut. Separate challenge length, total noisy persistent width, noise rounds, endpoint decoding and charged controller processing.
 
-**Dependencies:** M23, M26, M28.
+**Dependencies:** M05, M06, M14, M21, M23, M26, M28.
 
-**Story role:** Combine the mathematical and operational boundaries before final synthesis.
+**Story role:** Connect the finite guessing theorem to a dynamical application before final synthesis.
 
-**Conceptual connection:** Neither a test count nor one accepted run is a deterministic certificate of a device’s full capability.
+**Conceptual connection:** Existing recovery reductions already give the same large-block low-score consequence. The transfer assumes independent noise and an honestly charged fixed controller model; a score does not test those premises or automatically compose with the LWE wrapper.
 
-**Source pointers:** Watrous §§2.2 and 3.1 for operational interpretation; [resources](../science/lower-bounds-and-resources.md#4-charged-resources); [verification scope](../verification/README.md); [operational meaning](../science/model.md#operational-meaning).
+**Source pointers:** Watrous §§2.2–2.3, 3.1.2 and 3.2; [noisy-processing application](../science/noisy-processing.md); [complete companion proof](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/main/science/guessing_processing.md); [resources](../science/lower-bounds-and-resources.md#4-charged-resources).
 
 ### M30: Synthesize the complete contribution
 
@@ -482,12 +482,13 @@ Dependencies name earlier understanding targets, not extra assignments. Primary 
 
 **Central question:** What is the full claim, and under exactly which assumptions does each part hold?
 
-**Understanding target:** Explain the ideal theorem, conditional LWE compilation, logarithmic-order lower witness and acceptance-rule limitations as one connected account with their exact assumptions and scope.
+**Understanding target:** Explain the ideal theorem, conditional LWE compilation, logarithmic-order lower witness, acceptance-rule limitations and noisy-processing application as one connected account with their distinct assumptions. Distinguish analytical proof, finite tests, cryptographic hardness and unverified device premises.
 
 **Dependencies:** M21, M22, M23, M24, M25, M26, M27, M28, M29.
 
 **Story role:** End the narrative with a global understanding of the established contribution.
 
-**Conceptual connection:** A rank-sensitive uncertainty bound becomes a conditional memory-certification protocol only through an explicitly charged preparation interface.
+**Conceptual connection:** A rank-sensitive uncertainty bound gives different operational consequences through different interfaces: retained-dimension certification, conditional classical preparation and a model-dependent continuing-processing witness. Neither an accepted run nor a finite test is a deterministic count or complete capability certificate.
 
-**Source pointers:** Watrous foundations via the [bridge](WATROUS_BRIDGE.md); [science synthesis](../science/README.md); [principal statements](../science/model.md).
+**Source pointers:** Watrous foundations via the [bridge](WATROUS_BRIDGE.md); [science synthesis](../science/README.md); [principal statements](../science/model.md); [noisy processing](../science/noisy-processing.md); [verification scope](../verification/README.md).
+

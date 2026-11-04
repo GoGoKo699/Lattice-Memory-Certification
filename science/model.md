@@ -14,6 +14,8 @@ Let $`n\geq1`$, $`d=2^n`$, and $`D\geq1`$. The verifier chooses independent unif
 
 Before receiving $`\Theta`$, the prover applies any quantum instrument to the full input. Its retained information at the storage cut is a classical register $`C`$ and a quantum register $`Q`$ with $`\dim Q\leq D`$. The classical alphabet has no imposed size limit. After the cut, the verifier reveals $`\Theta`$; the prover chooses a POVM depending on $`(C,\Theta)`$ and outputs a string $`\widehat X`$. Exact success means $`\widehat X=X`$.
 
+The prover receives only the quantum challenge. The verifier keeps $`X`$ secret and discloses only the basis string. Success is averaged unconditionally; a run is not selected by its processing outcome or by successful decoding.
+
 The encoder and decoder may act jointly across all positions, with unrestricted computational power in the ideal theorem. All quantum systems that persist across the cut and are later accessible to the prover are part of $`Q`$, including remote systems and initially shared references. Fresh uncorrelated decoding ancillas are allowed and are absorbed into the POVM. An environment returned during decoding must be counted in $`Q`$.
 
 For a fixed encoder, $`P_{\mathrm{guess}}(X\mid CQ\Theta)`$ denotes the supremum of averaged success over its allowed decoders. The average includes the random bits, bases, and processing outcomes. The bound holds separately for every encoder, and therefore also after optimizing over encoders. All logarithms are base two.
@@ -69,3 +71,28 @@ An acceptance rule with tolerated errors is a list rule, not exact decoding. Its
 A single observed pass does not determine a qubit count. The soundness bound limits the acceptance probability of every prover satisfying the dimension restriction. In the compiled protocol, the prover must also belong to the efficient class covered by the imported LWE assumption.
 
 The cut can be placed within a waiting interval, provided all persistent quantum information at that cut is counted and all subsequent actions are included in the decoder. The certified resource is persistent storage at that cut; hardware location, quantum-channel capacity, and fault-tolerant workloads require separate models.
+
+## Noisy-device application: a separate processing model
+
+[Delayed-basis guessing and continuing noisy-memory processing](noisy-processing.md) uses $`k`$ challenge qubits, $`n`$ total noisy physical qubits and $`D`$ independent depolarizing rounds. In that application every persistent controller and syndrome record is noisy and counted. The interior schedule consists of fixed charged primitives, with free Clifford operations and input-independent replacement resets; arbitrary endpoint encoding and final basis-dependent decoding remain free. Counting controller bits does not make arbitrary nonlinear feedback free.
+
+For unconditional exact-string success $`p\gt2^{-k}`$, a single full-output Pauli envelope initialized at $`M=2n`$ gives an expected-rank floor at every cut. For $`k\geq8`$ it is
+
+```math
+a=\frac{2k(p-2^{-k})}{1-2^{-k}}.
+```
+
+In a Clifford+T implementation, the actual interior T/T-dagger count necessarily obeys
+
+```math
+m_T\geq
+\left\lceil
+\frac{[D(-\ln(1-\gamma))-\ln(2n/a)]_+}
+{\ln(1+1/a)}
+\right\rceil.
+```
+
+The [application](noisy-processing.md) gives the all-$`k`$ floor, exact finite-depth bound and budget for every contiguous storage interval. Its logarithms are explicitly natural logarithms where written $`\ln`$. The [companion proof](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/87296f795359b0b66e0c49d20555634fd0d3d3ae/science/guessing_processing.md) establishes the dynamical composition. Strong existing recovery reductions already imply the same large-block floor for $`k\geq9`$, including low-score regimes; no additional asymptotic processing law is claimed.
+
+The inference is conditional on this noisy-device model. It neither verifies its noise/controller premises nor automatically composes with Theorem C's LWE-based preparation interface.
+

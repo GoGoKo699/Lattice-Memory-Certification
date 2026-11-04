@@ -10,6 +10,14 @@ P_{\mathrm{guess}}\leq\min\left\{1,\left(\frac{D}{2^n}\right)^{1/6}\right\}.
 
 With $`0\leq m\leq n`$ retained qubits, the exponent depends only on the missing-qubit gap $`t=n-m`$. The theorem is unconditional. Substitution into the existing LWE-based remote-state-preparation reduction of Hhan, Morimae, Okinaka and Yamakawa gives conditional classical verification with **logarithmic additive persistent-storage overhead**.
 
+## From a guessing score to processing
+
+[Measurement-Free Memory Cost](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost) supplies a dynamical application of the finite guessing theorem. A sampled noisy-storage tail factors through a Pauli algebra containing a bounded quantum system and classical information. Unconditional delayed-basis guessing success therefore enforces an expected-rank floor at every cut and gives necessary non-Clifford gate and contiguous-interval budgets in that device model.
+
+Read the [self-contained application and boundaries](science/noisy-processing.md); the companion owns the [complete transfer proof and recovery comparison](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/main/science/guessing_processing.md). Its notation is $`k`$ challenge qubits, $`n`$ total noisy persistent qubits and $`D`$ noise rounds. The device receives only the quantum challenge; $`X`$ stays secret and only the basis string is revealed after all charged storage. The full-output terminal envelope has $`M=2n`$, and mathematical noise flags are not supplied to the device.
+
+This is a conditional processing witness under the specified noise, controller and gate assumptions. Existing recovery reductions already give the same large-block low-score consequence. It neither verifies those physical assumptions nor automatically extends this repository's LWE wrapper.
+
 ## Explanatory report
 
 Read the [complete explanatory report (PDF)](learning/report/Lattice_Memory_Certification_Report.pdf) for a self-contained explanation of the experiment, finite proof, conditional classical verification, and physical limitations.
@@ -23,6 +31,7 @@ Read the [complete explanatory report (PDF)](learning/report/Lattice_Memory_Cert
 | Logarithmic ideal gap | A store-and-Breidbart-measure strategy achieves $`\beta^{n-m}`$, where $`\beta=(1+1/\sqrt2)/2`$, fixing the overhead order with unmatched constants | [Lower bounds and resources](science/lower-bounds-and-resources.md) |
 | List acceptance | Lists of size at most $`L`$ give $`P_{\mathrm{list}}\leq\min\{1,\sqrt L\,2^{-(n-m)/6}\}`$ | [Errors and losses](science/errors-and-losses.md) |
 | Error and erasure boundaries | Exact recovery, tolerated errors, and pre- versus post-basis erasures have different storage guarantees | [Errors and losses](science/errors-and-losses.md) |
+| Noisy-storage application | Whole-string guessing supplies a rank floor for conditional gate and interval budgets | [Noisy processing](science/noisy-processing.md) |
 
 Given preparation simulation error at most $`\varepsilon/2`$, a total false-acceptance target $`0<\varepsilon<1`$ is met by
 
@@ -48,7 +57,7 @@ The proof combines the established Barnum–Knill discrimination inequality and 
 
 The single educational anchor is **John Watrous, *The Theory of Quantum Information* (2018)**. Start with the [learning guide](learning/README.md), use the [Watrous bridge](learning/WATROUS_BRIDGE.md) for selected sections, notation and a complete two-qubit example, and follow the [30-milestone map](learning/MILESTONES.md).
 
-M01–M14 assemble the foundations and storage experiment. M15–M30 develop the finite proof, achieved strategy, conditional LWE compilation and physical limits. Hypercontractivity and remote preparation are separately attributed research inputs; Watrous remains the single educational anchor.
+M01–M14 assemble the foundations and storage experiment. M15–M30 develop the finite proof, achieved strategy, conditional LWE compilation, acceptance-rule limits and the noisy-storage application. Hypercontractivity, preparation and recovery inequalities are separately attributed research inputs; Watrous remains the single educational anchor shared by both repositories.
 
 ## Reproduce finite checks
 
@@ -72,3 +81,4 @@ The ideal mathematical converse is unconditional. The classical-verifier realiza
 ## Purpose and contact
 
 The project is currently under collaboration, and the manuscript is being written. For questions, please contact Ruge Lin at [gogoko699@gmail.com](mailto:gogoko699@gmail.com).
+

@@ -1,0 +1,115 @@
+{
+  "assertions": 659,
+  "authoritative_dynamical_checks": "Measurement-Free-Memory-Cost/verification/verify_guessing_processing.py",
+  "canonical_algebras": 6,
+  "channel_cases": [
+    {
+      "average_score": 0.24999999999999986,
+      "basis_input_cases": 16,
+      "binary_rank": 0,
+      "branch_upper_bound": 0.25,
+      "c_classical_bits": 0,
+      "s_quantum_qubits": 0
+    },
+    {
+      "average_score": 0.25758490699744074,
+      "basis_input_cases": 16,
+      "binary_rank": 1,
+      "branch_upper_bound": 0.5,
+      "c_classical_bits": 1,
+      "s_quantum_qubits": 0
+    },
+    {
+      "average_score": 0.287596134340949,
+      "basis_input_cases": 16,
+      "binary_rank": 2,
+      "branch_upper_bound": 0.7937005259840998,
+      "c_classical_bits": 2,
+      "s_quantum_qubits": 0
+    },
+    {
+      "average_score": 0.2772693613142418,
+      "basis_input_cases": 16,
+      "binary_rank": 2,
+      "branch_upper_bound": 0.5,
+      "c_classical_bits": 0,
+      "s_quantum_qubits": 1
+    },
+    {
+      "average_score": 0.2910944037385839,
+      "basis_input_cases": 16,
+      "binary_rank": 3,
+      "branch_upper_bound": 0.8908987181403393,
+      "c_classical_bits": 1,
+      "s_quantum_qubits": 1
+    },
+    {
+      "average_score": 0.2618921282103775,
+      "basis_input_cases": 16,
+      "binary_rank": 4,
+      "branch_upper_bound": 1.0,
+      "c_classical_bits": 0,
+      "s_quantum_qubits": 2
+    }
+  ],
+  "check_counts": {
+    "F_trace_preserving": 6,
+    "J_trace_preserving": 6,
+    "Q_plus_C_CPTP_factorization": 96,
+    "basis_endpoint_probability": 96,
+    "branch_score_bound": 6,
+    "classical_blocks": 256,
+    "normalized_Q_plus_C_output": 96,
+    "positive_Q_plus_C_output": 96,
+    "shared_twelve_qubit_rank_floor": 1
+  },
+  "limits": [
+    "Finite channel identities do not replace the all-cut proof.",
+    "No hardware noise or controller premise is verified.",
+    "The LWE preparation wrapper is not imported.",
+    "No network access or other checkout is needed at runtime."
+  ],
+  "maximum_identity_errors": {
+    "F_trace_preserving": 0.0,
+    "J_trace_preserving": 2.220446049250313e-16,
+    "Q_plus_C_CPTP_factorization": 1.1102230246251565e-16,
+    "basis_endpoint_probability": 1.6653345369377348e-16,
+    "classical_blocks": 0.0,
+    "normalized_Q_plus_C_output": 6.661388969533906e-16,
+    "shared_twelve_qubit_rank_floor": 1.7763568394002505e-15
+  },
+  "maximum_positive_inequality_violations": {
+    "branch_score_bound": 0.0,
+    "positive_Q_plus_C_output": 1.5876676286813018e-16
+  },
+  "seed": 20261104,
+  "shared_example": {
+    "challenge_qubits": 12,
+    "random_guess_baseline": "1/4096",
+    "rank_floor": "21832/2275",
+    "score": "2/5"
+  },
+  "status": "passed",
+  "unconditional_channel_mixtures": [
+    {
+      "expected_rank": "0",
+      "identity_weight": "0",
+      "unconditional_score": "1/4"
+    },
+    {
+      "expected_rank": "4/5",
+      "identity_weight": "1/5",
+      "unconditional_score": "2/5"
+    },
+    {
+      "expected_rank": "8/5",
+      "identity_weight": "2/5",
+      "unconditional_score": "11/20"
+    },
+    {
+      "expected_rank": "4",
+      "identity_weight": "1",
+      "unconditional_score": "1"
+    }
+  ]
+}
