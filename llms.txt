@@ -15,9 +15,30 @@ Authoritative routes:
 - Achieved strategy, logarithmic ideal-gap order, finite prior-bound comparison and resource accounting: science/lower-bounds-and-resources.md
 - Analytic gap figure and reproducible generator: verification/Graph/README.md, verification/Graph/generate_plots.py and verification/Graph/requirements.txt
 - Lists, tolerated errors, erasure timing and honest-noise limitations: science/errors-and-losses.md
+- Noisy-storage application, independent model premises, score-to-rank transfer,
+  and the companion's authoritative proof route: science/noisy-processing.md
 - Attribution and finite prior-bound comparison: references/RELATED_WORK.md and references/references.bib
 - Reproduction scope and commands: verification/README.md, verification/verify.py and verification/check_learning.py
 
-Notation: n input qubits, d=2^n, m retained qubits, D the retained quantum dimension, t=n-m, r the pure-branch Schmidt rank, h the Hamming error allowance, and ell the erasure allowance. Ideal guessing targets use delta; total compiled soundness uses epsilon, with preparation simulation error epsilon_RSP. The Pauli operators and Hadamard are written \mathsf{X}, \mathsf{Y}, \mathsf{Z}, \mathsf{H}. Normalized Schatten norms use subscript p,\mathrm{n}; ordinary matrix traces remain unnormalized.
+Notation in the ideal theorem: n input qubits, d=2^n, m retained qubits, D the retained quantum dimension, t=n-m, r the pure-branch Schmidt rank, h the Hamming error allowance, and ell the erasure allowance. The noisy-processing application restates its own notation: k challenge qubits, n total noisy persistent qubits, D independent noise rounds and r binary Pauli-envelope dimension. Do not identify those distinct uses of n, D or r. Ideal guessing targets use delta; total compiled soundness uses epsilon, with preparation simulation error epsilon_RSP. The Pauli operators and Hadamard are written \mathsf{X}, \mathsf{Y}, \mathsf{Z}, \mathsf{H}. Normalized Schatten norms use subscript p,\mathrm{n}; ordinary matrix traces remain unnormalized.
 
 Keep the ideal theorem unrestricted computationally. The compiled guarantee uses the imported pass-weighted simulation interface, nonuniform quantum-polynomial-time convention, sufficiently large security parameter, polynomial output length and inverse-polynomial soundness. At the storage cut, the union of every later-accessible quantum system is charged. Give refinement labels classically; apply the rank bound only on pure conditional branches. Distinguish exact-string, list, Hamming and pre/post-basis-erasure acceptance. Preparation work, physical protection and decoder workspace are separate resource dimensions. A pass supplies a false-acceptance guarantee under the model, not a deterministic count of qubits.
+
+The sister relationship has distinct ownership. This repository owns the finite
+guessing theorem and its self-contained operational application. The full
+Pauli-factorization, all-cut floor and gate/interval ledger are in
+https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/main/science/guessing_processing.md.
+Both learning routes use one common anchor: Watrous (2018), with different
+project-specific bridges and exactly 30 milestones each.
+
+For that application the device receives only the quantum BB84 challenge. X
+stays secret and only the basis string is disclosed after charged storage.
+Unconditional average whole-string success is used. One common full-output
+envelope starts at M=2n before basis-dependent readout. Independent noise flags
+are proof aids, not supplied records. Every persistent controller record is
+noisy and counted, and its processing must obey the permitted gate model.
+Existing recovery inequalities already give the same large-block low-score
+floor; low-score applicability alone is not a new asymptotic result. The score
+does not verify noise/controller premises and does not automatically compose
+with the conditional LWE wrapper.
+

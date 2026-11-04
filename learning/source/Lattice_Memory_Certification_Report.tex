@@ -75,7 +75,7 @@ P_{\mathrm{accept}}\leq\min\{1,\varepsilon_{\mathrm{RSP}}+2^{-t/6}\},
 \end{equation}
 where $\varepsilon_{\mathrm{RSP}}$ is the remote-state-preparation simulation error. Write $\varepsilon\in(0,1)$ for a target total false-acceptance probability, while $\delta$ denotes a target ideal guessing probability. The ideal bound is unconditional; the classical realization inherits a quantum-hardness assumption and applies to the efficient adversaries in its preparation guarantee.
 
-The report develops the experiment first, then proves the finite bound, explains the conditional realization, and tests its boundaries. Exact recovery, error-tolerant acceptance, and erasures are treated separately because they certify different storage restrictions.
+The report develops the experiment first, then proves the finite bound, explains the conditional realization, and tests its boundaries. Exact recovery, error-tolerant acceptance, and erasures are treated separately because they certify different storage restrictions. A final application shows how the same guessing task can imply a processing budget under a specified fully noisy device model.
 
 \newsection{The experiment and its information budget}
 \subsection{Two bases, one hidden string}
@@ -560,6 +560,77 @@ Let actual and ideal joint source states, including the verifier labels, be $\om
 \]
 Thus a specified physical source perturbation changes acceptance by at most $\xi$. The malicious-prover preparation guarantee instead compares computationally accessible joint pass-and-accept probabilities. Each guarantee must be used with its own premise.
 
+\newsection{A conditional processing consequence in a noisy device}
+\label{sec:noisy-processing}
+\subsection{A different resource question, with an explicit chronology}
+For this noisy-device application, use $k$ challenge qubits, total noisy physical width $n$, and $D$ noise rounds. These local meanings replace the earlier input-length $n$ and retained-dimension $D$. Width counts every persistent data, controller, syndrome and resource register.
+
+Supply only $\ket X_\Theta$ for independent uniform $X,\Theta\in\{0,1\}^k$. Keep $X$ secret; disclose only $\Theta$ after all charged storage. The final decoder may depend arbitrarily on $\Theta$. Unconditional whole-string success is $p=\Pr[\widehat X=X]$, with aborts counted as failures.
+
+Each round applies independent depolarization to every persistent register:
+\[
+\mathcal N_\gamma(A)=qA+(1-q)\frac I2\Tr A,
+\qquad q=1-\gamma\in(0,1).
+\]
+The fixed circuit has free ideal Clifford operations and input-independent replacement resets. Every internal T/T-dagger is counted; other operations need a proved support-growth charge. Controllers obey these same rules: noisy counted bits do not make arbitrary feedback or data-dependent resets free. Arbitrary endpoints have no protected side channel across storage.
+
+\subsection{Why a temporal cut is a quantum-plus-classical encoder}
+Start one backward Pauli envelope at the full physical output before basis-dependent readout, with rank $M=2n$. At each cut, average earlier noise into a CPTP prefix. Every independent future-noise branch has tail-adjoint range in
+\[
+\mathcal A_V\simeq M_{2^s}\otimes\operatorname{Diag}_{2^c}\otimes I_G,
+\qquad r:=\dim V=2s+c.
+\]
+The CPTP conditional expectation onto this algebra changes coordinates, dephases the $c$-bit factor and discards $G$; a second CPTP map reinserts its maximally mixed state. The tail is unchanged by this expectation. Composing with the prefix therefore gives a genuine $s$-qubit, $c$-bit encoder and basis-dependent decoder.
+
+The finite guessing theorem and a separate finite-output count imply, on every mathematical noise branch,
+\begin{equation}
+p_{b,t}\le\min\{1,2^{(s-k)/6},2^{s+c-k}\}.
+\label{eq:noisy-branch}
+\end{equation}
+For the last bound, fix a basis. The $2^k$ equiprobable inputs give output density matrices $\rho_x\le I$ on a space of dimension $2^{s+c}$, so any POVM has success at most $2^{s+c-k}$. Apply this count to the original normalized encoder, before the mathematical classical refinement used in the proof of the ideal theorem.
+
+Noise flags select independent CPTP channels; they are proof aids, not postselection outcomes or device information. Branch-specific decoder optimization only raises the upper bound. Linearity gives $p=\E_b p_{b,t}$ at every primitive cut, on both sides of each gate and noise layer.
+
+For $k\ge8$, the branch inequalities yield the useful uniform floor
+\begin{keybox}
+\begin{equation}
+R_t:=\E_b\dim V_{b,t}\ge
+a_p:=2k\frac{[p-2^{-k}]_+}{1-2^{-k}}.
+\label{eq:noisy-floor}
+\end{equation}
+It is positive for every score above random guessing, including scores below one half.
+\end{keybox}
+Maximizing \eqref{eq:noisy-branch} at fixed $r$ gives $2^{r-k}$ up to $5k/6$, then $2^{(r-2k)/7}$ up to $2k$, and one thereafter. For $k\ge8$, both convex pieces lie below the chord from $(0,2^{-k})$ to $(2k,1)$; averaging proves \eqref{eq:noisy-floor}. For all $k\ge1$, finite-output counting gives the weaker floor $k[p-2^{-k}]_+/(1-2^{-k})$.
+
+\subsection{The same floor controls gates in every interval}
+For the backward envelope, a noise layer contracts expected rank by at most $q$, each T or T-dagger adds at most one binary generator, and free primitives add none. Put $\kappa=-\ln q$. Summing logarithmic changes at cuts with $R_t\ge a_p>0$ gives
+\begin{equation}
+m_T\ge
+\frac{[D\kappa-\ln(2n/a_p)]_+}{\ln(1+1/a_p)}.
+\label{eq:noisy-budget}
+\end{equation}
+Round the right side upward for the integer gate count. The weaker structural-charge form is $B\ge a_p[D\kappa-\ln(2n/a_p)]_+$ when a gate of charge $b_g$ can add at most $b_g$ generators and $B=\sum_gb_g$.
+
+Every contiguous interval inherits the same floor. In \eqref{eq:noisy-budget}, use its own noise-layer and T counts and an entering expected-rank bound $M_I\le2n$. Interval noise is independent of the later suffix; boundary gates are assigned once. Gates outside a long interval supply only this finite reserve.
+
+For example, $k=12,p=0.4,n=120,\gamma=0.01,D=2000$ gives $a_p\simeq9.59648$ and requires at least $171$ internal T/T-dagger gates. This necessary budget does not supply a code construction or certify the device model.
+
+\subsection{What the recovery comparison and boundaries imply}
+The low-score consequence should not be compared only with a high-fidelity recovery criterion. For one complete branch channel, let $F_{\rm rec}$ be its optimum squared Bell-overlap recovery fidelity, $u$ its average pretty-good guessing success, and $z\ge1/d$ its optimized guessing score. With $d=2^k$, known discrimination and recovery estimates give
+\begin{align*}
+z^2+\frac{(1-z)^2}{d-1}&\le u,\qquad F_{\rm rec}\ge z/d,\\
+u&\le\frac{1+F_{\rm pg}}2,\\
+u&\le\left(\sum_{j=0}^{\ell}\binom kj\right)F_{\rm pg}
++2^{-\ell-1}\mathbf1_{\ell<k},\quad 0\le\ell\le k,
+\end{align*}
+where $F_{\rm pg}\le F_{\rm rec}$ is the squared pretty-good recovery fidelity. The actual branch score is at most $z$. Each branch also satisfies $F_{\rm rec}\le\min\{1,2^{r-2k}\}$. Applying these estimates branchwise \emph{before} averaging reproduces \eqref{eq:noisy-floor} for every $k\ge9$. The direct encoder factorization is a short operational explanation, but low-score applicability alone gives no additional large-block processing law over that recovery route.
+
+At chance, discarding the challenge and guessing needs zero processing. Full-register replacement gives
+\[
+p\le2^{-k}+(1-2^{-k})(1-\gamma^n)^D
+\]
+regardless of gates. Fixed width cannot sustain a fixed above-chance score indefinitely. Success does not verify noise, controller or side-channel premises. The remote-preparation reduction of Section~11 needs a separate model- and resource-preserving argument to compile this witness.
+
 \newsection{Resources, evidence, and the complete conclusion}
 \subsection{Which resource improves}
 The earlier polynomial-hardness construction used $\lceil9.1m\rceil$ honest stored qubits in its stated asymptotic regime. In the same preparation framework, the finite bound replaces that multiplicative persistent-storage overhead by the additive gap \eqref{eq:n-choice}. The protocol wrapper and preparation construction supply the classical-verifier realization. Their separate constant-round variants use stronger assumptions and address a different resource tradeoff.
@@ -586,6 +657,7 @@ The ideal result follows from the analytical chain in Sections~4--8, using the s
 An accepted run is not a deterministic measurement of a device's qubit count. Soundness bounds every dimension-limited strategy in the ideal model; the compiled protocol covers the efficient adversaries in its imported assumptions. A low-memory device can occasionally pass. Claims based on repeated runs must account for their joint strategy and information across cuts rather than assuming independent trials without justification.
 
 \begin{keybox}
-The complete result connects a hidden-basis recovery task to a finite dimension ratio: a deficit of $t$ qubits forces exact-string success to at most $2^{-t/6}$. An explicit physical strategy shows that logarithmic ideal overhead has optimal order. A precisely specified preparation interface turns this into conditional classical verification in the inverse-polynomial regime. Error tolerance, erasure timing, physical noise, and preparation work retain their separate costs and assumptions.
+The complete result connects a hidden-basis recovery task to a finite dimension ratio: a deficit of $t$ qubits forces exact-string success to at most $2^{-t/6}$. An explicit physical strategy shows that logarithmic ideal overhead has optimal order. A precisely specified preparation interface turns this into conditional classical verification in the inverse-polynomial regime. Under a separate fully noisy fixed-circuit model, the same score implies an all-cut rank floor and a continuing processing budget. Error tolerance, erasure timing, physical noise, controller processing, and preparation work retain their separate costs and assumptions.
 \end{keybox}
 \end{document}
+

@@ -11,6 +11,7 @@ python3 -m venv .venv
 .venv/bin/python -m pip install -r verification/requirements.txt
 OPENBLAS_NUM_THREADS=1 .venv/bin/python verification/verify.py
 OPENBLAS_NUM_THREADS=1 .venv/bin/python verification/check_learning.py
+OPENBLAS_NUM_THREADS=1 .venv/bin/python verification/verify_noisy_processing.py
 ```
 
 To save a new report without replacing the committed reference:
@@ -37,6 +38,12 @@ The finite theorem is supported by the complete analytical chain: classical pure
 
 The suite checks finite quantum-information identities. Cryptographic security, optimal encoding and decoding, and physical implementation require their separate analytical or experimental evidence. Hosted mathematical rendering is checked separately from these numerical and local-link tests.
 
+## Noisy-processing interface
+
+[verify_noisy_processing.py](verify_noisy_processing.py) independently compares the Pauli commutant twirl with explicit CPTP maps to and from a quantum system plus a dephased classical register. It checks all six canonical two-qubit algebra classes, normalized output states and post-disclosure basis-dependent endpoint probabilities. The encoder is fixed independently of every secret label and proof branch. Exact mixtures check unconditional averaging without supplying mathematical noise flags as physical records. [noisy_processing_results.json](noisy_processing_results.json) is the recorded finite output.
+
+The self-contained application is [Noisy processing](../science/noisy-processing.md). Its authoritative all-cut rank propagation, gate/interval proofs and scalar/recovery comparison checks belong to [Measurement-Free Memory Cost](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/main/science/guessing_processing.md). No second checkout or network access is required to run this repository's tests. These checks import neither a hardware certification claim nor the LWE preparation wrapper. To retain fresh interface results, pass `--write /tmp/lattice-noisy-processing.json`.
+
 ## Learning and repository structure checks
 
 [check_learning.py](check_learning.py) verifies the exact M01–M30 sequence, the 14/16 phase allocation, the required understanding-target fields and backward-only dependencies. It checks relative Markdown destinations including heading fragments and the presence of the selected Watrous (2018) anchor. Anchor uniqueness, the local-to-global story, and independence from personal coaching require manual review. The script also evaluates the bridge's two-input-qubit, one-stored-qubit strategy directly, including both classical branches and all four basis strings. These checks do not assess a reader or replace scientific proof review.
@@ -54,3 +61,4 @@ The [report build guide](REPORT_BUILD.md) gives the source path, a clean build c
 ## Mathematical display review boundary
 
 Balanced math delimiters, local heading checks and finite calculations do not establish correct display on GitHub. Actual-host review compares commit-pinned equations with their source and inspects wide and narrow layouts, including tables. It is a separate presentation check from the analytical proof, local link tests, and PDF build. The `hosted_rendering` field in the learning script reports only what that script itself checks.
+

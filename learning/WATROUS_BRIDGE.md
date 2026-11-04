@@ -26,8 +26,10 @@ The section and printed-page references below use that January 2018 author copy.
 | §§2.3.1–2.3.2, pp. 100–112 | Measurements and their probabilities | Decoder POVMs and subnormalized conditional ensembles |
 | §3.1.1, pp. 125–131 | Binary state discrimination | Operational probability tests and small examples |
 | §3.1.2, pp. 132–139; Theorem 3.10 on pp. 138–139 | Ensemble discrimination and the pretty-good measurement | Lemma D and the reduction from optimal guessing to a quadratic expression |
+| §§3.2–3.3, pp. 139–198 | Fidelity and channel distances | Compare guessing-based conclusions with recoverable Bell fidelity |
+| §§4.1.1 and 4.2.2 | Mixed-unitary channels, fixed points and spectra | Pauli conditional expectations and the companion's channel-rank bottleneck |
 
-These are selected locations, not a requirement to read every page in each interval. Chapter 6 can provide further entanglement context, but the Schmidt-rank step already has its needed foundation in §1.1.3. The project-specific cryptographic model is supplied below and in the canonical scientific account, not attributed to the textbook.
+These are selected locations, not a requirement to read every page in each interval. Chapter 6 can provide further entanglement context, but the Schmidt-rank step already has its needed foundation in §1.1.3. Watrous is also the single educational anchor of [Measurement-Free Memory Cost](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost); its [bridge](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/main/learning/WATROUS_BRIDGE.md) develops the channel and Pauli-envelope side. The project-specific cryptographic and noisy-processing models are supplied by their scientific accounts rather than attributed to the textbook.
 
 ## Notation and normalization
 
@@ -50,6 +52,8 @@ Here $`d`$ is the dimension of the space on which $`A`$ acts. The ordinary trace
 When a positive operator has a zero eigenvalue, its negative powers in the proof act only on its support. This is the same support convention underlying the textbook's Moore–Penrose-inverse definition of the pretty-good measurement. Missing POVM support may be completed arbitrarily because it has zero ensemble probability.
 
 For classical $`X`$, the project uses $`H_{\min}(X\mid C Q\Theta)=-\log_2P_{\mathrm{guess}}`$. This is an operational guessing definition, not the von Neumann entropy of a register. No general smooth-entropy formalism is needed for the finite proof.
+
+The [noisy-processing application](../science/noisy-processing.md) uses $`k`$ for challenge length, $`n`$ for total noisy physical width, $`D`$ for noise rounds and $`r`$ for binary Pauli-envelope dimension. Those meanings differ from the ideal theorem's input count $`n`$, retained dimension $`D`$ and pure-branch Schmidt rank $`r`$. The application restates its convention before using the theorem; neither $`2n`$ physical label directions nor $`2^r`$ algebra dimension is automatically a count of surviving quantum qubits.
 
 ## A complete two-qubit example
 
@@ -140,3 +144,25 @@ For target total false-acceptance probability $`0<\varepsilon<1`$, choose $`\var
 An explicit Breidbart strategy gives the [matching logarithmic order](../science/lower-bounds-and-resources.md) of the ideal overhead, but not a matching constant. A successful run gives a false-acceptance guarantee under a memory hypothesis, not a deterministic measurement of stored qubits. The [list, error and erasure results](../science/errors-and-losses.md) change the acceptance rule explicitly; fixed noise cannot be inserted into exact recovery without changing completeness. Logical retained qubits, physical error-correction overhead, preparation work, and channel capacity are different quantities.
 
 The [milestone map](MILESTONES.md) integrates these distinctions into the scientific story. Primary research citations support the imported ingredients and comparisons; Watrous remains the one educational anchor.
+
+## From a storage cut to a processing witness
+
+The finite theorem also applies to the quantum-plus-classical output of a Pauli algebra. The [application](../science/noisy-processing.md) is self-contained about the new physical premises; the companion owns the [complete transfer and recovery comparison](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/main/science/guessing_processing.md).
+
+Use $`k`$ independent uniform BB84 challenge qubits. The device receives the quantum states alone. The hidden string $`X`$ is never revealed, and only the basis string $`\Theta`$ is disclosed after all charged storage has ended. Let $`n`$ count every noisy persistent data, syndrome, controller and resource qubit, and let $`D`$ count independent depolarizing rounds. The score $`p`$ is unconditional whole-string success.
+
+At each temporal cut, average the earlier noise into a CPTP prefix. Fixing future mathematical replacement choices gives a CPTP tail to the full physical output before the basis-dependent final readout. Its Pauli envelope starts with the conservative terminal reserve $`M=2n`$. If its rank is $`r=2s+c`$, a trace-preserving conditional expectation factors the tail through $`s`$ quantum qubits and $`c`$ classical bits. This is an actual CPTP quantum-plus-classical encoder, so Theorem G gives a branch score at most $`\min\{1,2^{(s-k)/6}\}`$.
+
+Finite classical-alphabet dimension counting separately gives $`\min\{1,2^{s+c-k}\}`$. This second bound is applied to the genuine encoder before the optional pure-state refinement inside the guessing proof: the extra mathematical refinement labels do not belong to the physical $`c`$-bit register. Combining the two bounds and averaging over future noise forces an expected-rank floor at every cut. For $`k\ge8`$, one convenient floor is
+
+```math
+\mathbb E r_t\ge
+2k\left[\frac{p-2^{-k}}{1-2^{-k}}\right]_+.
+```
+
+The same floor can then be inserted into the companion's gate and contiguous-interval ledger. The proof uses independent channel choices without postselection; it never supplies a noise flag to the device. Arbitrary endpoint readout is allowed after the charged interval.
+
+For example, $`k=12`$ and $`p=0.4`$ yield an expected-rank floor about $`9.5965`$, even though the score is below one half. Existing recovery inequalities also yield the same large-block floor when applied branchwise before averaging. The comparison therefore supports the processing implication but does not establish a new asymptotic low-score consequence.
+
+This application assumes a fixed circuit of the permitted primitives, input-independent replacement resets, and noisy counted persistent controller records. Their processing must still be charged correctly; counting record bits does not make arbitrary feedback free. A guessing score does not verify the model's noise or controller assumptions. At random-guessing success $`p=2^{-k}`$, discarding the challenge is a zero-processing strategy. The LWE compilation above is a separate result: no processing guarantee is automatically attached to it.
+

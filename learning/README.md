@@ -8,7 +8,7 @@ The single educational anchor is **John Watrous, *The Theory of Quantum Informat
 
 For a continuous explanation, read the [explanatory report (PDF)](report/Lattice_Memory_Certification_Report.pdf). For structured study, use the bridge and milestone map below.
 
-Read the [bridge's opening experiment](WATROUS_BRIDGE.md#the-experiment), then use the [30-milestone map](MILESTONES.md). M01–M14 build the objects and assumptions, ending with the complete storage experiment. M15–M30 assemble the finite bound, its conditional cryptographic use, and its limitations. Each milestone gives an understanding target, dependencies, a conceptual connection and authoritative source pointers. The map depends on the science, not a particular reader's background or progress.
+Read the [bridge's opening experiment](WATROUS_BRIDGE.md#the-experiment), then use the [30-milestone map](MILESTONES.md). M01–M14 build the objects and assumptions, ending with the complete storage experiment. M15–M30 assemble the finite bound, its conditional cryptographic use, acceptance-rule limits and noisy-processing application. Each milestone gives an understanding target, dependencies, a conceptual connection and authoritative source pointers. The map depends on the science, not a particular reader's background or progress.
 
 For a direct specialist route, start with the [model](../science/model.md) and [proof](../science/guessing-bound.md). The [science guide](../science/README.md) connects those pages to the LWE reduction, lower-bound strategy, error and loss variants, and resource accounting. The learning pages explain the same contribution; they do not replace its exact statements.
 
@@ -18,6 +18,9 @@ The relevant foundations are finite-dimensional operators and norms, quantum sta
 
 The tensor-power hypercontractivity theorem and the LWE-based remote-preparation guarantee are separate research dependencies. The bridge states their roles and links their primary sources. Neither is presented as a theorem in Watrous, and neither creates a second educational anchor.
 
+For the [connection to Measurement-Free Memory Cost](../science/noisy-processing.md), use the [bridge's temporal-cut explanation](WATROUS_BRIDGE.md#from-a-storage-cut-to-a-processing-witness). Both projects use Watrous (2018) as their single educational anchor, with different source-to-project routes. The companion owns the full Pauli-factorization and processing-ledger derivation; this repository supplies the finite guessing theorem and the operational interpretation.
+
 ## Destination
 
-The route ends with the ability to connect a bounded retained quantum dimension to an exact-string guessing bound, explain why the ideal result has no cryptographic assumption, and identify the extra conditions needed for a classical verifier. It connects the ideal guessing target $`\delta`$ to the total false-acceptance target $`\varepsilon`$ and separates logarithmic storage overhead, the unresolved exponent constant, physical-noise effects, and the supported cryptographic error regime.
+The route ends with the ability to connect a bounded retained quantum dimension to an exact-string guessing bound, explain why the ideal result has no cryptographic assumption, and identify the extra conditions needed for a classical verifier. It also identifies when a score can supply an all-cut rank premise for a noisy-processing budget, and why that consequence neither verifies the device assumptions nor creates a new LWE processing test. The ideal guessing target $`\delta`$, total compiled false-acceptance target $`\varepsilon`$, physical-noise model and charged resources retain their separate meanings.
+
