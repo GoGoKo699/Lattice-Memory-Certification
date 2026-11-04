@@ -162,7 +162,7 @@ Finite classical-alphabet dimension counting separately gives $`\min\{1,2^{s+c-k
 
 The same floor can then be inserted into the companion's gate and contiguous-interval ledger. The proof uses independent channel choices without postselection; it never supplies a noise flag to the device. Arbitrary endpoint readout is allowed after the charged interval.
 
-For example, $`k=12`$ and $`p=0.4`$ yield an expected-rank floor about $`9.5965`$, even though the score is below one half. Existing recovery inequalities also yield the same large-block floor when applied branchwise before averaging. The comparison therefore supports the processing implication but does not establish a new asymptotic low-score consequence.
+For example, $`k=12`$ and $`p=0.4`$ yield an expected-rank floor about $`9.5965`$, even though the score is below one half. Applied branchwise before averaging, existing recovery inequalities imply both the straight-chord floor and the small-block polygon floor stated in the application. Those convenient floors therefore give no additional gate or interval consequence; the factorization explains the operational connection.
 
 This application assumes a fixed circuit of the permitted primitives, input-independent replacement resets, and noisy counted persistent controller records. Their processing must still be charged correctly; counting record bits does not make arbitrary feedback free. A guessing score does not verify the model's noise or controller assumptions. At random-guessing success $`p=2^{-k}`$, discarding the challenge is a zero-processing strategy. The LWE compilation above is a separate result: no processing guarantee is automatically attached to it.
 

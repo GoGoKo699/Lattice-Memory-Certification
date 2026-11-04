@@ -92,7 +92,7 @@ m_T\geq
 \right\rceil.
 ```
 
-The [application](noisy-processing.md) gives the all-$`k`$ floor, exact finite-depth bound and budget for every contiguous storage interval. Its logarithms are explicitly natural logarithms where written $`\ln`$. The [companion proof](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/87296f795359b0b66e0c49d20555634fd0d3d3ae/science/guessing_processing.md) establishes the dynamical composition. Strong existing recovery reductions already imply the same large-block floor for $`k\geq9`$, including low-score regimes; no additional asymptotic processing law is claimed.
+The [application](noisy-processing.md) gives the all-$`k`$ floor, exact finite-depth bound and budget for every contiguous storage interval. Its logarithms are explicitly natural logarithms where written $`\ln`$. The [companion proof](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/60cc2fc6aebeee92e4880b7cc7a5fd687ae16ec7/science/guessing_processing.md) establishes the dynamical composition. Existing recovery reductions already imply the stated all-$`k`$ rank floors, including low-score regimes, so these floors supply no additional gate or interval consequence beyond that route.
 
 The inference is conditional on this noisy-device model. It neither verifies its noise/controller premises nor automatically composes with Theorem C's LWE-based preparation interface.
 

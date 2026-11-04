@@ -1,5 +1,5 @@
 {
-  "assertions": 659,
+  "assertions": 952,
   "authoritative_dynamical_checks": "Measurement-Free-Memory-Cost/verification/verify_guessing_processing.py",
   "canonical_algebras": 6,
   "channel_cases": [
@@ -59,6 +59,11 @@
     "basis_endpoint_probability": 96,
     "branch_score_bound": 6,
     "classical_blocks": 256,
+    "cut_averaged_actual_decoder": 96,
+    "cut_averaged_channel_output": 96,
+    "dense_unconditional_mixture_score": 4,
+    "full_channel_matrix_units": 96,
+    "future_branch_weights_normalized": 1,
     "normalized_Q_plus_C_output": 96,
     "positive_Q_plus_C_output": 96,
     "shared_twelve_qubit_rank_floor": 1
@@ -75,12 +80,36 @@
     "Q_plus_C_CPTP_factorization": 1.1102230246251565e-16,
     "basis_endpoint_probability": 1.6653345369377348e-16,
     "classical_blocks": 0.0,
+    "cut_averaged_actual_decoder": 2.220446049250313e-16,
+    "cut_averaged_channel_output": 4.996038059103694e-16,
+    "dense_unconditional_mixture_score": 3.885780586188048e-16,
+    "full_channel_matrix_units": 1.1102230246251565e-16,
+    "future_branch_weights_normalized": 0.0,
     "normalized_Q_plus_C_output": 6.661388969533906e-16,
     "shared_twelve_qubit_rank_floor": 1.7763568394002505e-15
   },
   "maximum_positive_inequality_violations": {
     "branch_score_bound": 0.0,
     "positive_Q_plus_C_output": 1.5876676286813018e-16
+  },
+  "primitive_cut_averaging": {
+    "actual_unconditional_score": 0.2558901295258501,
+    "averaged_actual_branch_scores": [
+      0.25589012952585005,
+      0.2558901295258501,
+      0.2558901295258501,
+      0.2558901295258501,
+      0.2558901295258501,
+      0.2558901295258501
+    ],
+    "basis_input_cases": 16,
+    "depolarizing_strength": 0.23,
+    "noise_implementations": [
+      "Pauli-error channel",
+      "independent replacement choices"
+    ],
+    "noise_rounds": 2,
+    "primitive_cuts": 6
   },
   "seed": 20261104,
   "shared_example": {

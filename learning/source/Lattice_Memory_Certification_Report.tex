@@ -116,7 +116,7 @@ $t=n-m$ & Missing-qubit gap, used when $0\leq m\leq n$.\\
 $X,\Theta,\widehat X$ & Hidden bits, later-revealed bases, and returned guess.\\
 $C,Q$ & Classical record and all charged persistent quantum information.\\
 \bottomrule\end{tabularx}\end{center}
-All logarithms are base two. The waiting duration is a separate experimental parameter. For a classical hidden variable, conditional min-entropy is the operational quantity
+Logarithms written as $\log_2$ have base two; $\ln$ denotes the natural logarithm. The waiting duration is a separate experimental parameter. For a classical hidden variable, conditional min-entropy is the operational quantity
 \[
 H_{\min}(X\mid CQ\Theta)=-\log_2\pguess(X\mid CQ\Theta).
 \]
@@ -326,7 +326,7 @@ $0\leq\eta\leq\sqrt{(p-1)/(q-1)}$, it states
 \begin{equation}\label{eq:hc}
 \normn{\Dmap_\eta^{\otimes n}(A)}{q}\leq\normn{A}{p}.
 \end{equation}
-This established tensor-power theorem is the substantial mathematical input to the proof. It says that sufficient damping of the Pauli components controls a stronger norm by a weaker one, with a constant independent of the number of qubits. Its tensor-power scope makes it applicable to entangled operators across the entire block.
+It says that sufficient damping of the Pauli components controls a stronger norm by a weaker one, with a constant independent of the number of qubits. Its tensor-power scope makes it applicable to entangled operators across the entire block.
 
 \subsection{Keep the normalization factor}
 Choose $p=3/2$, $q=2$, and $\eta=1/\sqrt2$. Equations \eqref{eq:average}--\eqref{eq:depolarize} imply
@@ -580,9 +580,9 @@ Start one backward Pauli envelope at the full physical output before basis-depen
 \mathcal A_V\simeq M_{2^s}\otimes\operatorname{Diag}_{2^c}\otimes I_G,
 \qquad r:=\dim V=2s+c.
 \]
-The CPTP conditional expectation onto this algebra changes coordinates, dephases the $c$-bit factor and discards $G$; a second CPTP map reinserts its maximally mixed state. The tail is unchanged by this expectation. Composing with the prefix therefore gives a genuine $s$-qubit, $c$-bit encoder and basis-dependent decoder.
+The trace-preserving conditional expectation $\mathcal E_V$ is a CPTP map on the full physical memory. It factors as $\mathcal E_V=\mathcal J_V\mathcal F_V$: $\mathcal F_V$ changes to canonical coordinates, dephases the $c$-bit factor and traces out $G$, while $\mathcal J_V$ reinserts $I_G/\dim G$ and reverses the coordinate change. The tail satisfies $\mathcal S=\mathcal S\mathcal E_V$. Thus $\mathcal F_V$ composed with the prefix is a genuine $s$-qubit, $c$-bit encoder; composing $\mathcal J_V$ with the tail and readout reproduces the original outcome distribution.
 
-The finite guessing theorem and a separate finite-output count imply, on every mathematical noise branch,
+Let $p_{b,t}$ be the actual endpoint decoder's success probability on the sampled channel. The finite guessing theorem and a separate finite-output count imply
 \begin{equation}
 p_{b,t}\le\min\{1,2^{(s-k)/6},2^{s+c-k}\}.
 \label{eq:noisy-branch}
@@ -603,7 +603,7 @@ It is positive for every score above random guessing, including scores below one
 Maximizing \eqref{eq:noisy-branch} at fixed $r$ gives $2^{r-k}$ up to $5k/6$, then $2^{(r-2k)/7}$ up to $2k$, and one thereafter. For $k\ge8$, both convex pieces lie below the chord from $(0,2^{-k})$ to $(2k,1)$; averaging proves \eqref{eq:noisy-floor}. For all $k\ge1$, finite-output counting gives the weaker floor $k[p-2^{-k}]_+/(1-2^{-k})$.
 
 \subsection{The same floor controls gates in every interval}
-For the backward envelope, a noise layer contracts expected rank by at most $q$, each T or T-dagger adds at most one binary generator, and free primitives add none. Put $\kappa=-\ln q$. Summing logarithmic changes at cuts with $R_t\ge a_p>0$ gives
+For the backward envelope, a noise layer obeys $R'\le qR$, each T or T-dagger adds at most one binary generator, and free primitives add none. Put $\kappa=-\ln q$. Summing logarithmic changes at cuts with $R_t\ge a_p>0$ gives
 \begin{equation}
 m_T\ge
 \frac{[D\kappa-\ln(2n/a_p)]_+}{\ln(1+1/a_p)}.
@@ -613,17 +613,18 @@ Round the right side upward for the integer gate count. The weaker structural-ch
 
 Every contiguous interval inherits the same floor. In \eqref{eq:noisy-budget}, use its own noise-layer and T counts and an entering expected-rank bound $M_I\le2n$. Interval noise is independent of the later suffix; boundary gates are assigned once. Gates outside a long interval supply only this finite reserve.
 
-For example, $k=12,p=0.4,n=120,\gamma=0.01,D=2000$ gives $a_p\simeq9.59648$ and requires at least $171$ internal T/T-dagger gates. This necessary budget does not supply a code construction or certify the device model.
+For example, $k=12,p=0.4,n=120,\gamma=0.01,D=2000$ gives $a_p\simeq9.59648$ and requires at least $171$ internal T/T-dagger gates. With the same score and width, every 700-round contiguous interval requires at least $39$ such gates by \eqref{eq:noisy-budget}. The scalar injection bound alone gives $37$. These are necessary processing budgets; their attainability and the device assumptions require separate evidence.
 
 \subsection{What the recovery comparison and boundaries imply}
-The low-score consequence should not be compared only with a high-fidelity recovery criterion. For one complete branch channel, let $F_{\rm rec}$ be its optimum squared Bell-overlap recovery fidelity, $u$ its average pretty-good guessing success, and $z\ge1/d$ its optimized guessing score. With $d=2^k$, known discrimination and recovery estimates give
+The recovery comparison remains informative even at scores at or below one half. For one complete branch channel, let $F_{\rm rec}$ be its optimum squared Bell-overlap recovery fidelity, $F_{\rm pg}\le F_{\rm rec}$ its pretty-good value, $u$ its average pretty-good guessing success, and $z\ge1/d$ its optimized guessing score. With $d=2^k$, established discrimination and recovery estimates give
 \begin{align*}
 z^2+\frac{(1-z)^2}{d-1}&\le u,\qquad F_{\rm rec}\ge z/d,\\
-u&\le\frac{1+F_{\rm pg}}2,\\
-u&\le\left(\sum_{j=0}^{\ell}\binom kj\right)F_{\rm pg}
-+2^{-\ell-1}\mathbf1_{\ell<k},\quad 0\le\ell\le k,
+u&\le\tau_\ell+A_\ell F_{\rm pg},\qquad 0\le\ell\le k,\\
+A_\ell&=\sum_{j=0}^{\ell}\binom kj(1-2^j\tau_\ell),
 \end{align*}
-where $F_{\rm pg}\le F_{\rm rec}$ is the squared pretty-good recovery fidelity. The actual branch score is at most $z$. Each branch also satisfies $F_{\rm rec}\le\min\{1,2^{r-2k}\}$. Applying these estimates branchwise \emph{before} averaging reproduces \eqref{eq:noisy-floor} for every $k\ge9$. The direct encoder factorization is a short operational explanation, but low-score applicability alone gives no additional large-block processing law over that recovery route.
+where $\tau_\ell=2^{-\ell-1}$ for $\ell<k$ and $\tau_k=0$. The underlying spectral reduction writes $u=\sum_v\lambda_vw_v$, where $w_v\ge0$, $\sum_vw_v=1$, and $w_v\le F_{\rm pg}$. Its nonzero eigenvalues are $2^{-j}$ with multiplicities $2^j\binom kj$. Bounding all terms at or below $\tau_\ell$ by that threshold, then applying the cap to the excess, gives $u\le\tau_\ell+F_{\rm pg}\sum_{\lambda_v>\tau_\ell}(\lambda_v-\tau_\ell)$, which is the displayed estimate. At $\ell=0$ it gives $u\le(1+F_{\rm pg})/2$.
+
+The actual branch score is at most $z$, and every branch satisfies $F_{\rm rec}\le\min\{1,2^{r-2k}\}$. These estimates reproduce \eqref{eq:noisy-floor} for every $k\ge8$ when applied branchwise \emph{before} averaging. Exact finite-rank checks also imply the weaker floor stated above for $1\le k\le7$. Thus every displayed score floor and its gate or interval consequence already follows from the recovery route. The direct encoder factorization gives a short operational explanation; this comparison does not identify the optimal attainable score or exclude stronger bounds.
 
 At chance, discarding the challenge and guessing needs zero processing. Full-register replacement gives
 \[
@@ -631,7 +632,7 @@ p\le2^{-k}+(1-2^{-k})(1-\gamma^n)^D
 \]
 regardless of gates. Fixed width cannot sustain a fixed above-chance score indefinitely. Success does not verify noise, controller or side-channel premises. The remote-preparation reduction of Section~11 needs a separate model- and resource-preserving argument to compile this witness.
 
-\newsection{Resources, evidence, and the complete conclusion}
+\newsection{Resources and interpretation}
 \subsection{Which resource improves}
 The earlier polynomial-hardness construction used $\lceil9.1m\rceil$ honest stored qubits in its stated asymptotic regime. In the same preparation framework, the finite bound replaces that multiplicative persistent-storage overhead by the additive gap \eqref{eq:n-choice}. The protocol wrapper and preparation construction supply the classical-verifier realization. Their separate constant-round variants use stronger assumptions and address a different resource tradeoff.
 
@@ -652,12 +653,9 @@ Physical protection & Any additional physical qubits used for error correction r
 No free state-loading oracle or quantum random-access memory is assumed. The ideal source is an explicit quantum input resource; its classical realization pays for the imported preparation protocol.
 
 \subsection{What supports the claims}
-The ideal result follows from the analytical chain in Sections~4--8, using the standard tensor-power norm theorem as its substantial mathematical input. Section~11 supplies the separate computational reduction under its cryptographic assumption. Finite matrix checks test the intermediate identities and normalization conventions against those analytical expressions.
+The ideal result follows from the analytical chain in Sections~4--8, using the standard tensor-power norm theorem as its substantial mathematical input. Section~11 supplies the separate computational reduction under its cryptographic assumption. Finite matrix checks test the intermediate identities and normalization conventions against those analytical expressions. The noisy-processing checks also compare the explicit quantum-plus-classical factorization with the Pauli-algebra projection and verify the resulting endpoint probabilities. They do not test a physical device's noise or controller assumptions.
 
 An accepted run is not a deterministic measurement of a device's qubit count. Soundness bounds every dimension-limited strategy in the ideal model; the compiled protocol covers the efficient adversaries in its imported assumptions. A low-memory device can occasionally pass. Claims based on repeated runs must account for their joint strategy and information across cuts rather than assuming independent trials without justification.
 
-\begin{keybox}
-The complete result connects a hidden-basis recovery task to a finite dimension ratio: a deficit of $t$ qubits forces exact-string success to at most $2^{-t/6}$. An explicit physical strategy shows that logarithmic ideal overhead has optimal order. A precisely specified preparation interface turns this into conditional classical verification in the inverse-polynomial regime. Under a separate fully noisy fixed-circuit model, the same score implies an all-cut rank floor and a continuing processing budget. Error tolerance, erasure timing, physical noise, controller processing, and preparation work retain their separate costs and assumptions.
-\end{keybox}
 \end{document}
 
