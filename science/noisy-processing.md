@@ -1,6 +1,6 @@
 # Delayed-basis guessing and continuing noisy-memory processing
 
-[Science guide](README.md) · [Finite guessing theorem](guessing-bound.md) · [Authoritative dynamical proof](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/87296f795359b0b66e0c49d20555634fd0d3d3ae/science/guessing_processing.md)
+[Science guide](README.md) · [Finite guessing theorem](guessing-bound.md) · [Authoritative dynamical proof](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/06cde1943b8872daca6c714eae069e13923b39c1/science/guessing_processing.md)
 
 Unconditional whole-string BB84 guessing success implies a continuing processing budget in a specified noisy-memory model. The finite guessing theorem supplies an information bottleneck; the Pauli-envelope contraction and processing ledger belong to [Measurement-Free-Memory-Cost](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost). This chapter states their composition and its operational limits. The strongest checked prior recovery reduction already gives the same large-block rank floor, so the composition establishes a useful corollary rather than an additional asymptotic processing law.
 
@@ -35,7 +35,7 @@ Initialize a single backward Pauli envelope at the full physical output, **befor
 At a primitive cut $`t`$, average the earlier noise into a CPTP prefix $`\Pi_t`$. A realization $`b`$ of the future replacement-noise choices selects a CPTP full-output tail $`\mathcal S_{b,t}`$. Independent noise makes $`\Pi_t`$ independent of $`b`$. The simultaneous envelope $`V_{b,t}\leq\mathbb F_2^{2n}`$ satisfies
 
 ```math
-\operatorname{range}\mathcal S_{b,t}^\dagger
+\mathrm{range}\mathcal S_{b,t}^\dagger
 \subseteq\mathcal A_{V_{b,t}},
 \qquad r=\dim V_{b,t}.
 ```
@@ -44,7 +44,7 @@ If the symplectic form restricted to $`V_{b,t}`$ has rank $`2s`$, put $`c=r-2s`$
 
 ```math
 \mathcal A_V\simeq
-M_{2^s}\otimes\operatorname{Diag}_{2^c}\otimes I_G.
+M_{2^s}\otimes\mathrm{Diag}_{2^c}\otimes I_G.
 ```
 
 The trace-preserving conditional expectation onto this algebra is CPTP and self-adjoint. Thus $`\mathcal S_{b,t}=\mathcal S_{b,t}\circ\mathcal E_V`$. Moreover, $`\mathcal E_V=\mathcal J_V\circ\mathcal F_V`$: the CPTP map $`\mathcal F_V`$ changes coordinates, dephases the $`c`$-bit factor and traces out the gauge factor $`G`$; the CPTP map $`\mathcal J_V`$ reinserts $`I_G/\dim G`$ and reverses the coordinate change.
@@ -63,7 +63,7 @@ p_{b,t}\leq
 \qquad\text{(N1)}
 ```
 
-The first nontrivial term is [Theorem G](guessing-bound.md), allowing arbitrary classical information. For the second, fix a basis. Its $`d`$ equiprobable inputs give density matrices $`\rho_x\leq I_{QC}`$, so any POVM obeys $`d^{-1}\sum_x\operatorname{Tr}M_x\rho_x\leq\dim(QC)/d`$. Apply this finite-alphabet count before the optional classical pure-state refinement inside Theorem G's proof; its extra proof labels are not part of the physical $`c`$-bit register.
+The first nontrivial term is [Theorem G](guessing-bound.md), allowing arbitrary classical information. For the second, fix a basis. Its $`d`$ equiprobable inputs give density matrices $`\rho_x\leq I_{QC}`$, so any POVM obeys $`d^{-1}\sum_x\mathrm{Tr}M_x\rho_x\leq\dim(QC)/d`$. Apply this finite-alphabet count before the optional classical pure-state refinement inside Theorem G's proof; its extra proof labels are not part of the physical $`c`$-bit register.
 
 The immediate quantum-dimension term gives $`R_t\geq a_G`$ at every cut, where
 
@@ -105,7 +105,7 @@ t_0+(2k-t_0)(p-H)/(1-H),&H\leq p\leq1.
 \qquad\text{(N3)}
 ```
 
-These floors are positive for every score above random guessing, including scores at or below one half. The averaging concerns expected rank; it does not require every noise branch to retain that rank. The curves are necessary upper bounds, not claims of optimal attainable guessing. The [companion proof](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/87296f795359b0b66e0c49d20555634fd0d3d3ae/science/guessing_processing.md) supplies the envelope coupling, chord argument and finite checks.
+These floors are positive for every score above random guessing, including scores at or below one half. The averaging concerns expected rank; it does not require every noise branch to retain that rank. The curves are necessary upper bounds, not claims of optimal attainable guessing. The [companion proof](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/06cde1943b8872daca6c714eae069e13923b39c1/science/guessing_processing.md) supplies the envelope coupling, chord argument and finite checks.
 
 ## Gate budget and every contiguous interval
 
@@ -129,12 +129,13 @@ m_T\geq
 The exact continuous scalar injection relaxation gives another necessary bound,
 
 ```math
-B\geq\mathcal L(D,2n,a,q),
-\qquad
-\mathcal L(D,M,a,q)=
-\max\!\left\{0,\max_{1\leq\ell\leq D}
+\begin{aligned}
+B&\geq\mathcal L(D,2n,a,q),\\
+\mathcal L(D,M,a,q)
+&=\max\!\left\{0,\max_{1\leq\ell\leq D}
 \left[\frac aq+(D-\ell)\frac{(1-q)a}{q}
 -Mq^{\ell-1}\right]\right\}.
+\end{aligned}
 \qquad\text{(N6)}
 ```
 
@@ -190,4 +191,4 @@ A complete replacement of all $`n`$ registers in any round destroys all input de
 
 The guessing score does not verify the noise strength or independence, counted-controller restrictions, fixed primitive schedule or absence of side channels. Those remain model premises. It supplies no automatic LWE or remote-preparation compilation: such a reduction would have to preserve the joint state, chronology, controller model and charged resources separately. Statistical estimation of the unconditional score is also separate from the inference made here.
 
-Lattice owns the [finite guessing theorem](guessing-bound.md). Measurement-Free owns the envelope contraction, gate ledger and [full dynamical composition proof](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/87296f795359b0b66e0c49d20555634fd0d3d3ae/science/guessing_processing.md). The CPTP compatibility and score-based composition form their shared corollary; the recovery reductions remain attributed to the prior sources. The sister relationship does not merge the projects or alter their distinct ideal and noisy models.
+Lattice owns the [finite guessing theorem](guessing-bound.md). Measurement-Free owns the envelope contraction, gate ledger and [full dynamical composition proof](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/06cde1943b8872daca6c714eae069e13923b39c1/science/guessing_processing.md). The CPTP compatibility and score-based composition form their shared corollary; the recovery reductions remain attributed to the prior sources. The sister relationship does not merge the projects or alter their distinct ideal and noisy models.
