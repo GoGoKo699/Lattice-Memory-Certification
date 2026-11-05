@@ -40,7 +40,7 @@ For the arguments used here, $`\gamma(u)`$ is the inverse of $`g(a)=h_2(a)+a-1`$
 h_2\big(\gamma(-1+t/n)\big)+\gamma(-1+t/n)=t/n.
 ```
 
-To make the displayed entropy bound at least $`\log_2(1/\delta)`$ for an ideal exact-string target $`0<\delta<1`$, set
+To make the displayed entropy bound at least $`\log_2(1/\delta)`$ for an ideal exact-string target $`0\lt \delta\lt 1`$, set
 
 ```math
 a_*=\frac{1+2\log_2(1/\delta)}{n}.
@@ -78,7 +78,7 @@ Mario Berta, Patrick J. Coles and Stephanie Wehner, *Entanglement-assisted guess
 
 Joseph M. Renes, *Uncertainty relations and approximate quantum error correction*, Physical Review A **94**, 032314 (2016), [DOI](https://doi.org/10.1103/PhysRevA.94.032314), [arXiv:1605.01420v2](https://arxiv.org/abs/1605.01420v2), Eq. (3), gives another constructive complementary-observable recovery route. Using only an averaged pair score loses information and creates a high-score threshold; that threshold is not a limit of the stronger DFW-based comparison.
 
-Apply the prior recovery inequalities to each CPTP future-noise branch before averaging. The companion superoperator-rank cap $`F_{\mathrm{rec},b}\leq\min\{1,2^{r-2k}\}`$ then yields the same straight-chord expected-rank floor as the direct quantum-plus-classical dimension argument for every $`k\geq8`$. The companion proof treats $`k\geq11`$ analytically and all 54 remaining integer ranks at $`k=8,9,10`$ by exact rational certificates. For $`1\leq k\leq7`$, 49 additional exact rational certificates show that the same normalized spectral bounds imply the displayed polygon floor. Thus the recovery route already supplies the gate and contiguous-interval consequences of both convenient floors for every challenge length. This comparison does not assert dominance over all possible refined score bounds or establish optimality.
+Apply the prior recovery inequalities to each CPTP future-noise branch before averaging. The companion superoperator-rank cap $`F_{\mathrm{rec},b}\leq\min\{1,2^{r-2k}\}`$ then yields the same straight-chord expected-rank floor as the direct quantum-plus-classical dimension argument for every $`k\geq8`$. The companion proof treats $`k\geq11`$ analytically and all 54 remaining integer ranks at $`k=8,9,10`$ by exact rational certificates. For $`1\leq k\leq7`$, 49 additional exact rational certificates show that the same normalized spectral bounds imply the displayed polygon floor. Thus the recovery route already supplies the gate and contiguous-interval consequences of both convenient floors for every challenge length. This comparison concerns those mean-rank floors. The companion's [moment theorem](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/4a2ee369e2c8765d1749d4f3d25103109b8289d3/science/moment_processing.md) combines the same inherited recovery tools with the actual product-noise law: a pivot injection bounds exponential rank moments and Jensen yields a contracting logarithmic potential. Fixing one recovery of the averaged channel then provides its all-cut floor. This stronger dynamical consequence improves the fixed-score processing coefficient in long growing-block families, rather than claiming a new pointwise guessing inequality or optimal physical gate cost. The comparison does not assert dominance over all possible refined score bounds.
 
 The comparison concerns unconditional exact whole-string success when the device receives only the quantum challenge and learns the basis after charged storage. It does not verify noise or controller assumptions and imports no remote-preparation or LWE wrapper.
 
@@ -88,7 +88,7 @@ M. Hhan, T. Morimae, Y. Okinaka and T. Yamakawa, *Proofs of Quantum Memory*, [ar
 
 J. Zhang, *Formulations and Constructions of Remote State Preparation with Verifiability, with Applications*, ITCS 2025, LIPIcs **325**, 96:1–96:19, [primary proceedings source](https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.ITCS.2025.96). This supplies background and underlying verifiable-preparation results. The exact compilation interface used here is the one formulated in HMOY25.
 
-The finite ideal bound replaces the storage estimate inside their existing simulation reduction. For total soundness target $`0<\varepsilon<1`$ and preparation simulation error at most $`\varepsilon/2`$, the sufficient storage is
+The finite ideal bound replaces the storage estimate inside their existing simulation reduction. For total soundness target $`0\lt \varepsilon\lt 1`$ and preparation simulation error at most $`\varepsilon/2`$, the sufficient storage is
 
 ```math
 n=m+\left\lceil6\log_2(2/\varepsilon)\right\rceil.

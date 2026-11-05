@@ -138,6 +138,98 @@ def check_cut_averaging(audit: verify.Audit, prefix: list[np.ndarray],
             'noise_implementations': ['Pauli-error channel', 'independent replacement choices']}
 
 
+def check_moment_interface(audit: verify.Audit) -> dict:
+    """Check channel-rank moments and the shared finite budget interface.
+
+    The four dense replacement channels determine their superoperator ranks
+    independently of the companion's binary-envelope implementation. The
+    finite soft-polygon and gate values below are numerical interface checks;
+    the companion verifier supplies their exact inequality certificates.
+    """
+    q, z = Fraction(99, 100), Fraction(27, 25)
+    gamma = 1 - q
+    paulies = [verify.tensor(words)
+               for words in itertools.product(verify.PAULIS, repeat=2)]
+    ranks, weights = [], []
+    for mask in range(4):
+        kraus = replacement_branch(mask)
+        # Columns are the actual images of an operator-space basis, so their
+        # matrix rank is the complex-linear channel rank rather than a state
+        # rank or an assumed count of quantum qubits.
+        superoperator = np.column_stack([apply(kraus, p).reshape(-1)
+                                        for p in paulies])
+        channel_rank = int(np.linalg.matrix_rank(superoperator, tol=1e-10))
+        binary_rank = int(round(math.log2(channel_rank)))
+        audit.equal('replacement_superoperator_rank', channel_rank,
+                    4 ** (2 - mask.bit_count()))
+        audit.equal('replacement_binary_rank_from_channel', binary_rank,
+                    2 * (2 - mask.bit_count()))
+        ranks.append(binary_rank)
+        weights.append(gamma ** mask.bit_count() * q ** (2 - mask.bit_count()))
+    audit.equal('moment_replacement_weights_normalized', float(sum(weights)), 1)
+    moment = sum(weight * z ** rank for weight, rank in zip(weights, ranks))
+    factored_moment = (gamma + q * z**2) ** 2
+    audit.equal('full_output_rank_moment_from_channels', float(moment),
+                float(factored_moment))
+    log_z = math.log(float(z))
+    alpha = math.log(float(gamma + q * z**2)) / (2 * log_z)
+    log_moment = math.log(float(moment)) / log_z
+    audit.equal('full_output_log_moment_noise', log_moment, 4 * alpha)
+    audit.leq('moment_retention_at_least_rank_retention', float(q), alpha)
+    audit.leq('moment_retention_at_most_one', alpha, 1)
+
+    # This rational inverse comes from the independently certified polygon
+    # (1,1/4096), (z^11,1/4), (z^24,1). Its branch inequalities are not proved
+    # by this numerical fixture or by merely repeating the inverse formula.
+    moment_floor = (4 * z**11 + z**24) / 5
+    score_from_polygon = (Fraction(1, 4) + Fraction(3, 4)
+                          * (moment_floor - z**11) / (z**24 - z**11))
+    audit.equal('shared_moment_polygon_inverse_score', float(score_from_polygon), 2 / 5)
+    a_z = math.log(float(moment_floor)) / log_z
+    audit.equal('shared_twelve_qubit_moment_floor', a_z, 14.84082963327)
+    audit.equal('shared_moment_noise_retention', alpha, 0.990724980097)
+    gate_cases = []
+    for rounds, expected in [(2000, 244), (700, 58)]:
+        raw = max(0.0, rounds * -math.log(alpha) - math.log(240 / a_z))
+        raw /= math.log1p(1 / a_z)
+        count = math.ceil(raw)
+        audit.equal('shared_moment_individual_T_count', count, expected)
+        gate_cases.append({'noise_rounds': rounds, 'entering_moment_reserve': 240,
+                           'unrounded_individual_T_bound': raw,
+                           'rounded_individual_T_bound': count})
+
+    # A reserve controlling only mean rank is unsafe for the new potential.
+    # The distribution is a mathematical counterexample, not a supplied flag
+    # or a claim that this distribution is realized by a storage circuit.
+    mean_rank = Fraction(0, 2) + Fraction(2, 2)
+    second_moment = (Fraction(1) + Fraction(4)) / 2
+    counterexample_log_moment = math.log2(float(second_moment))
+    audit.equal('mean_rank_reserve_counterexample',
+                int(counterexample_log_moment > float(mean_rank)), 1)
+    return {
+        'two_qubit_replacement_fixture': {
+            'retention': str(q), 'moment_base': str(z),
+            'channel_binary_ranks': ranks,
+            'branch_probabilities': [str(weight) for weight in weights],
+            'rank_moment': str(moment),
+            'factored_rank_moment': '(1-q+q*z^2)^2',
+            'logarithmic_moment': log_moment,
+            'moment_retention_alpha': alpha},
+        'shared_soft_polygon': {
+            'challenge_qubits': 12, 'score': '2/5',
+            'physical_qubits': 120, 'moment_base': str(z),
+            'knots': ['(1,1/4096)', '(z^11,1/4)', '(z^24,1)'],
+            'inverse_moment': '(4*z^11+z^24)/5',
+            'logarithmic_moment_floor': a_z,
+            'individual_T_cases': gate_cases},
+        'unsafe_mean_reserve_counterexample': {
+            'ranks': [0, 2], 'probabilities': ['1/2', '1/2'],
+            'mean_rank': str(mean_rank), 'base': 2,
+            'rank_moment': str(second_moment),
+            'logarithmic_moment': counterexample_log_moment},
+        'scope': 'Numerical interface checks; exact branch and logarithm certificates live in the companion verifier.'}
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--write', type=Path)
@@ -220,6 +312,7 @@ def main() -> None:
                          'expected_rank': str(4 * weight)})
 
     cut_averaging = check_cut_averaging(audit, prefix, basis_matrices)
+    moment_interface = check_moment_interface(audit)
 
     a = 24 * (Fraction(2, 5) - Fraction(1, 4096)) / (1 - Fraction(1, 4096))
     audit.equal('shared_twelve_qubit_rank_floor', float(a), 9.596483516483518)
@@ -228,14 +321,17 @@ def main() -> None:
         'canonical_algebras': len(cases), 'channel_cases': cases,
         'unconditional_channel_mixtures': mixtures,
         'primitive_cut_averaging': cut_averaging,
+        'exponential_moment_interface': moment_interface,
         'shared_example': {'challenge_qubits': 12, 'score': '2/5',
                            'random_guess_baseline': '1/4096', 'rank_floor': str(a)},
         'assertions': sum(audit.counts.values()), 'check_counts': audit.counts,
         'maximum_identity_errors': audit.max_errors,
         'maximum_positive_inequality_violations': audit.max_violation,
-        'authoritative_dynamical_checks':
+        'authoritative_dynamical_checks': [
             'Measurement-Free-Memory-Cost/verification/verify_guessing_processing.py',
+            'Measurement-Free-Memory-Cost/verification/verify_moment_processing.py'],
         'limits': ['Finite channel identities do not replace the all-cut proof.',
+                   'Moment-interface arithmetic is numerical; exact certificates are in the companion verifier.',
                    'No hardware noise or controller premise is verified.',
                    'The LWE preparation wrapper is not imported.',
                    'No network access or other checkout is needed at runtime.'],

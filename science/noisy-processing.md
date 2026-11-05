@@ -2,7 +2,7 @@
 
 [Science guide](README.md) · [Finite guessing theorem](guessing-bound.md) · [Authoritative dynamical proof](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/60cc2fc6aebeee92e4880b7cc7a5fd687ae16ec7/science/guessing_processing.md)
 
-Unconditional whole-string BB84 guessing success implies a continuing processing budget in a specified noisy-memory model. The finite guessing theorem supplies an information bottleneck; the Pauli-envelope contraction and processing ledger belong to [Measurement-Free-Memory-Cost](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost). This chapter states their composition and its operational limits. The prior recovery route already implies both score-dependent rank floors stated below. The composition provides an operational proof of the processing implication, with no additional gate or interval consequence from those floors.
+Unconditional whole-string BB84 guessing success implies a continuing processing budget in a specified noisy-memory model. The finite guessing theorem supplies an information bottleneck; the Pauli-envelope contraction and processing ledger belong to [Measurement-Free-Memory-Cost](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost). This chapter states their composition and its operational limits. The prior recovery route implies both convenient mean-rank floors stated below. A further exponential-moment estimate retains the actual noise probabilities and strengthens the dynamical inference in the same model.
 
 ## Experiment and charged device model
 
@@ -184,6 +184,90 @@ F_{\mathrm{rec}}\geq
 One may substitute any certified score $`p\geq1/d`$ because $`g_d`$ is increasing on that range. The bound remains useful at or below one half. A measure-and-prepare decoder also gives $`F_{\mathrm{rec}}\geq p_*/d`$, above replacement fidelity $`1/d^2`$ for every above-random score. The case $`\ell=0`$ gives the complementary-pair bound $`u\leq(1+F_{\mathrm{pg}})/2`$. It also follows from the Berta–Coles–Wehner complete-MUB identity applied separately to each complementary product stabilizer-basis pair. The entire product-BB84 collection is not itself a complete MUB set or a 2-design.
 
 For each noise branch, every recovered logical CPTP channel factors through $`\mathcal E_V`$, so the companion channel-rank bound gives $`F_{\mathrm{rec},b}\leq\min\{1,2^{r-2k}\}`$. Applying the prior recovery reductions **branchwise before averaging** already yields (N2) for every $`k\geq8`$. The companion proves this analytically for $`k\geq11`$ and checks the remaining 54 integer ranks at $`k=8,9,10`$ with exact rational certificates. For $`1\leq k\leq7`$, the same spectral bounds imply the polygon floor (N3): 49 exact rational certificates cover the interior integer ranks, with the zero-rank and full-rank endpoints handled directly. The direct quantum-plus-classical factorization therefore adds no gate or interval consequence from either displayed floor, for any $`k\geq1`$. This comparison concerns (N2) and (N3); it does not assert that the recovery bounds dominate every possible refinement or determine optimal guessing.
+
+## Exponential moments strengthen the dynamical inference
+
+The mean-rank floors above replace the sampled ranks by an arbitrary mixture with the same expectation. The actual product-noise process contains more information. The [companion theorem](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/4a2ee369e2c8765d1749d4f3d25103109b8289d3/science/moment_processing.md) retains, for a fixed $`z\gt 1`$,
+
+```math
+X_{z,t}=\log_z\mathbb E_b[z^{r_{b,t}}],
+\qquad
+\alpha_z=\frac{\ln(1-q+qz^2)}{2\ln z}.
+```
+
+At a noise layer, choose independent binary coordinate pivots for the incoming envelope. The surviving subspace can use only pivots on retained qubits. Each site has at most two pivots, and pairing the one-pivot factors gives
+
+```math
+\mathbb E[z^{r'}\mid V]\le(1-q+qz^2)^{r/2}.
+```
+
+Independent noise and Jensen's inequality imply $`X_z'\le\alpha_zX_z`$. A T/T-dagger gate gives $`X_z'\le X_z+1`$; Clifford operations and input-independent resets do not increase it. These are updates of the same full-output envelope, without supplying any branch flag to the device.
+
+### Direct score floor
+
+For $`1\lt z\le2^{1/7}`$, the two exponential pieces of $`h_k(r)`$ above are convex functions of $`Y=z^r`$. Put $`b=2^{-k}`$, $`H=2^{-k/6}`$, and let $`P_z`$ be the least concave polygon above the three knots
+
+```math
+(1,b),\qquad (z^{5k/6},H),\qquad(z^{2k},1),
+```
+
+continued constantly after $`z^{2k}`$. Keep the middle knot if it lies above the endpoint chord; otherwise use that chord. Convexity of each piece proves $`h_k(r)\le P_z(z^r)`$. Averaging the actual branch scores and applying Jensen gives
+
+```math
+p\le P_z(\mathbb E[z^r]),\qquad
+X_{z,t}\ge a_{z,\mathrm{dir}}:=\log_z[P_z^{-1}(p)]
+```
+
+at every primitive cut. The inverse is the increasing piecewise-linear inverse on $`b\le p\le1`$; set the floor to zero for $`p\le b`$. Thus every above-chance score supplies a positive floor. This direct route combines Lattice's finite guessing theorem with the actual noise distribution. In the limit $`z\downarrow1`$, it recovers the preceding convenient mean-rank floors.
+
+### Complementary recovery floor
+
+For $`1\lt z\le2`$, let $`F_0\ge4^{-k}`$ be a certified lower bound on optimum squared Bell recovery fidelity of the averaged full channel. For $`p\ge2^{-k}`$, the preceding recovery inequalities supply such a value, for example
+
+```math
+F_0=\max\left\{4^{-k},\frac{p}{2^k},
+\max_{0\le\ell\le k}\frac{[g_{2^k}(p)-\tau_\ell]_+}{A_\ell}\right\}.
+```
+
+Choose one CPTP recovery attaining at least this bound and keep it fixed across future-noise branches. The branchwise superoperator-rank cap and linearity of Bell fidelity then give, at every primitive cut,
+
+```math
+X_{z,t}\ge a_{z,\mathrm{rec}},\qquad
+a_{z,\mathrm{rec}}=\log_z\left[1+w(z^{2k}-1)\right],\qquad
+w=\frac{F_0-4^{-k}}{1-4^{-k}}.
+```
+
+The secant of the convex power $`(z^r)^{\ln2/\ln z}`$ proves this floor from $`F_{\mathrm e,b}\le\min\{1,2^{r-2k}\}`$. The recovery tools remain inherited inputs. These two moment floors concern a stronger dynamical statistic than the convenient mean-rank floors compared above; no claim of an optimum pointwise guessing curve is needed.
+
+### Gate and interval consequences
+
+Use either valid positive floor $`a_z`$, and put $`\kappa_z=-\ln\alpha_z`$. The full-output terminal potential is $`X_z=2n`$, so the same scalar ledger yields
+
+```math
+m_T\ge\left\lceil
+\frac{[D\kappa_z-\ln(2n/a_z)]_+}{\ln(1+1/a_z)}
+\right\rceil,\qquad
+m_T\ge\left\lceil\mathcal L(D,2n,a_z,\alpha_z)\right\rceil.
+```
+
+Optimize over the valid $`z`$ ranges and retain the strongest applicable bound, including the preceding mean-rank laws. For a contiguous interval, replace $`2n`$ by a proved upper bound on its entering $`X_z`$, or retain $`2n`$. A bound only on entering $`\mathbb E[r]`$ cannot be substituted, since a logarithmic moment can exceed the mean.
+
+A certified finite illustration uses $`k=12`$, $`p=2/5`$, $`n=120`$, $`q=99/100`$ and $`z=27/25`$. Combining the direct quantum-dimension, output-dimension and established classical-memory caps gives a concave moment polygon with knots $`(1,1/4096)`$, $`(z^{11},1/4)`$ and $`(z^{24},1)`$. Exact certificates check all 169 integer quantum-plus-classical pairs with $`0\le2s+c\le24`$; higher ranks use the constant cap one. Its inverse gives
+
+```math
+\mathbb E[z^r]\ge\frac{4z^{11}+z^{24}}5,
+\qquad a_z\simeq14.84083.
+```
+
+For $`D=2000`$, the individual-T bound requires at least **244** gates, compared with 171 from the convenient mean-rank ledger. A 700-round interval with entering potential bounded by $`2n=240`$ requires at least **58**, compared with 39. These are verified necessary counts, without a claim that the parameter choices are physically attainable or that the chosen moment polygon is globally optimal. The companion proof and its [canonical verifier](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/4a2ee369e2c8765d1749d4f3d25103109b8289d3/verification/verify_moment_processing.py) give the exact rational certificates and logarithmic enclosures.
+
+For fixed $`p\ge p_0\gt 0`$ and fixed $`q\in(0,1)`$, the direct profile gives $`a_z=2k-o(k)`$ for a suitable sequence $`z\downarrow1`$, while $`\alpha_z=q+o(1)`$. The complementary recovery route gives the same leading conclusion. Along $`n\ge k`$, $`k\to\infty`$, $`D\to\infty`$ and $`\ln(n/k)=o(D)`$, the discrete ledger implies
+
+```math
+m_T\ge(2-o(1))\,kD\,\frac{1-q}{q}.
+```
+
+The convenient score-only mean-rank floor has leading coefficient $`2p`$ in the same comparison. Thus the moment estimate strengthens the fixed-score coefficient, while preserving the weak-noise order $`k\gamma D`$. If the normalized processing count stays strictly below the displayed limiting coefficient, unconditional whole-string success must tend to zero. This is a necessary converse, not a matching physical circuit or verification of the device premises.
 
 ## Boundaries and ownership
 

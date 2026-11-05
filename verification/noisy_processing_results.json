@@ -1,6 +1,9 @@
 {
-  "assertions": 952,
-  "authoritative_dynamical_checks": "Measurement-Free-Memory-Cost/verification/verify_guessing_processing.py",
+  "assertions": 971,
+  "authoritative_dynamical_checks": [
+    "Measurement-Free-Memory-Cost/verification/verify_guessing_processing.py",
+    "Measurement-Free-Memory-Cost/verification/verify_moment_processing.py"
+  ],
   "canonical_algebras": 6,
   "channel_cases": [
     {
@@ -63,13 +66,90 @@
     "cut_averaged_channel_output": 96,
     "dense_unconditional_mixture_score": 4,
     "full_channel_matrix_units": 96,
+    "full_output_log_moment_noise": 1,
+    "full_output_rank_moment_from_channels": 1,
     "future_branch_weights_normalized": 1,
+    "mean_rank_reserve_counterexample": 1,
+    "moment_replacement_weights_normalized": 1,
+    "moment_retention_at_least_rank_retention": 1,
+    "moment_retention_at_most_one": 1,
     "normalized_Q_plus_C_output": 96,
     "positive_Q_plus_C_output": 96,
+    "replacement_binary_rank_from_channel": 4,
+    "replacement_superoperator_rank": 4,
+    "shared_moment_individual_T_count": 2,
+    "shared_moment_noise_retention": 1,
+    "shared_moment_polygon_inverse_score": 1,
+    "shared_twelve_qubit_moment_floor": 1,
     "shared_twelve_qubit_rank_floor": 1
+  },
+  "exponential_moment_interface": {
+    "scope": "Numerical interface checks; exact branch and logarithm certificates live in the companion verifier.",
+    "shared_soft_polygon": {
+      "challenge_qubits": 12,
+      "individual_T_cases": [
+        {
+          "entering_moment_reserve": 240,
+          "noise_rounds": 2000,
+          "rounded_individual_T_bound": 244,
+          "unrounded_individual_T_bound": 243.11731795618755
+        },
+        {
+          "entering_moment_reserve": 240,
+          "noise_rounds": 700,
+          "rounded_individual_T_bound": 58,
+          "unrounded_individual_T_bound": 57.34753714621582
+        }
+      ],
+      "inverse_moment": "(4*z^11+z^24)/5",
+      "knots": [
+        "(1,1/4096)",
+        "(z^11,1/4)",
+        "(z^24,1)"
+      ],
+      "logarithmic_moment_floor": 14.840829633270603,
+      "moment_base": "27/25",
+      "physical_qubits": 120,
+      "score": "2/5"
+    },
+    "two_qubit_replacement_fixture": {
+      "branch_probabilities": [
+        "9801/10000",
+        "99/10000",
+        "99/10000",
+        "1/10000"
+      ],
+      "channel_binary_ranks": [
+        4,
+        2,
+        2,
+        0
+      ],
+      "factored_rank_moment": "(1-q+q*z^2)^2",
+      "logarithmic_moment": 3.962899920391487,
+      "moment_base": "27/25",
+      "moment_retention_alpha": 0.9907249800978717,
+      "rank_moment": "331203601/244140625",
+      "retention": "99/100"
+    },
+    "unsafe_mean_reserve_counterexample": {
+      "base": 2,
+      "logarithmic_moment": 1.3219280948873624,
+      "mean_rank": "1",
+      "probabilities": [
+        "1/2",
+        "1/2"
+      ],
+      "rank_moment": "5/2",
+      "ranks": [
+        0,
+        2
+      ]
+    }
   },
   "limits": [
     "Finite channel identities do not replace the all-cut proof.",
+    "Moment-interface arithmetic is numerical; exact certificates are in the companion verifier.",
     "No hardware noise or controller premise is verified.",
     "The LWE preparation wrapper is not imported.",
     "No network access or other checkout is needed at runtime."
@@ -84,12 +164,24 @@
     "cut_averaged_channel_output": 4.996038059103694e-16,
     "dense_unconditional_mixture_score": 3.885780586188048e-16,
     "full_channel_matrix_units": 1.1102230246251565e-16,
+    "full_output_log_moment_noise": 4.440892098500626e-16,
+    "full_output_rank_moment_from_channels": 0.0,
     "future_branch_weights_normalized": 0.0,
+    "mean_rank_reserve_counterexample": 0.0,
+    "moment_replacement_weights_normalized": 0.0,
     "normalized_Q_plus_C_output": 6.661388969533906e-16,
+    "replacement_binary_rank_from_channel": 0.0,
+    "replacement_superoperator_rank": 0.0,
+    "shared_moment_individual_T_count": 0.0,
+    "shared_moment_noise_retention": 8.716360966332104e-13,
+    "shared_moment_polygon_inverse_score": 0.0,
+    "shared_twelve_qubit_moment_floor": 6.039613253960852e-13,
     "shared_twelve_qubit_rank_floor": 1.7763568394002505e-15
   },
   "maximum_positive_inequality_violations": {
     "branch_score_bound": 0.0,
+    "moment_retention_at_least_rank_retention": 0.0,
+    "moment_retention_at_most_one": 0.0,
     "positive_Q_plus_C_output": 1.5876676286813018e-16
   },
   "primitive_cut_averaging": {

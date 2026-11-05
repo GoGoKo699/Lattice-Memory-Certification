@@ -16,7 +16,7 @@ With $`0\leq m\leq n`$ retained qubits, the exponent depends only on the missing
 
 Read the [self-contained application and boundaries](science/noisy-processing.md); the companion owns the [complete transfer proof and recovery comparison](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/main/science/guessing_processing.md). Its notation is $`k`$ challenge qubits, $`n`$ total noisy persistent qubits and $`D`$ noise rounds. The device receives only the quantum challenge; $`X`$ stays secret and only the basis string is revealed after all charged storage. The full-output terminal envelope has $`M=2n`$, and mathematical noise flags are not supplied to the device.
 
-This is a conditional processing witness under the specified noise, controller and gate assumptions. Existing recovery reductions already imply the stated rank floors for every challenge length, including low scores; those floors give no additional gate or interval consequence. It neither verifies those physical assumptions nor automatically extends this repository's LWE wrapper.
+This is a conditional processing witness under the specified noise, controller and gate assumptions. Existing recovery reductions imply the convenient mean-rank floors for every challenge length, including low scores. The companion's [exponential-moment theorem](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/4a2ee369e2c8765d1749d4f3d25103109b8289d3/science/moment_processing.md) retains actual product-noise probabilities and gives a stronger gate and interval ledger in the same model. For a fixed positive score, its long-storage coefficient approaches that of a full logical payload as the challenge grows. The inference neither verifies those physical assumptions nor automatically extends this repository's LWE wrapper.
 
 ## Explanatory report
 
@@ -31,9 +31,9 @@ Read the [complete explanatory report (PDF)](learning/report/Lattice_Memory_Cert
 | Logarithmic ideal gap | A store-and-Breidbart-measure strategy achieves $`\beta^{n-m}`$, where $`\beta=(1+1/\sqrt2)/2`$, fixing the overhead order with unmatched constants | [Lower bounds and resources](science/lower-bounds-and-resources.md) |
 | List acceptance | Lists of size at most $`L`$ give $`P_{\mathrm{list}}\leq\min\{1,\sqrt L\,2^{-(n-m)/6}\}`$ | [Errors and losses](science/errors-and-losses.md) |
 | Error and erasure boundaries | Exact recovery, tolerated errors, and pre- versus post-basis erasures have different storage guarantees | [Errors and losses](science/errors-and-losses.md) |
-| Noisy-storage application | Whole-string guessing supplies a rank floor for conditional gate and interval budgets | [Noisy processing](science/noisy-processing.md) |
+| Noisy-storage application | Whole-string guessing supplies rank and exponential-moment floors for conditional gate and interval budgets | [Noisy processing](science/noisy-processing.md) |
 
-Given preparation simulation error at most $`\varepsilon/2`$, a total false-acceptance target $`0<\varepsilon<1`$ is met by
+Given preparation simulation error at most $`\varepsilon/2`$, a total false-acceptance target $`0\lt \varepsilon\lt 1`$ is met by
 
 ```math
 n=m+\left\lceil6\log_2(2/\varepsilon)\right\rceil

@@ -120,7 +120,7 @@ The [full proof](../science/guessing-bound.md) remains authoritative. Its logica
 
 The rank estimate follows from $`\sum_{j=1}^r\lambda_j^{3/4}\leq r^{1/4}`$ for eigenvalues that sum to one. This is where limited quantum storage constrains the averaged experiment.
 
-**Finish and interpret.** Averaging the discrimination inequality and using $`\mathbb E\sqrt Z\leq\sqrt{\mathbb E Z}`$ gives $`P_{\mathrm{guess}}\leq\min\{1,(D/2^n)^{1/6}\}`$. With $`D\leq2^m`$, this gives $`2^{-(n-m)/6}`$. Averaging over the extra classical labels then returns the original experiment, including joint encoders and decoders. For target ideal guessing probability $`0<\delta<1`$, a deficit $`n-m\geq\lceil6\log_2(1/\delta)\rceil`$ suffices whenever the input length permits that gap.
+**Finish and interpret.** Averaging the discrimination inequality and using $`\mathbb E\sqrt Z\leq\sqrt{\mathbb E Z}`$ gives $`P_{\mathrm{guess}}\leq\min\{1,(D/2^n)^{1/6}\}`$. With $`D\leq2^m`$, this gives $`2^{-(n-m)/6}`$. Averaging over the extra classical labels then returns the original experiment, including joint encoders and decoders. For target ideal guessing probability $`0\lt \delta\lt 1`$, a deficit $`n-m\geq\lceil6\log_2(1/\delta)\rceil`$ suffices whenever the input length permits that gap.
 
 ## From ideal inputs to a classical verifier
 
@@ -137,7 +137,7 @@ P_{\mathrm{accept}}
 
 There is no conditioning on a rare pass and no division by its probability. Preparation may require more workspace before the cut; all quantum information accessible across the cut is charged. This distinction is essential to preserving the physical meaning of the claim.
 
-For target total false-acceptance probability $`0<\varepsilon<1`$, choose $`\varepsilon_{\mathrm{RSP}}\leq\varepsilon/2`$ and ideal guessing target $`\delta=\varepsilon/2`$. This allocation gives $`n=m+\lceil6\log_2(2/\varepsilon)\rceil`$. The imported construction supplies polynomially many rounds and inverse-polynomial soundness. Efficient negligible-soundness compilation requires a corresponding preparation guarantee. The ideal converse remains unconditional even though its classical-verifier implementation is computational.
+For target total false-acceptance probability $`0\lt \varepsilon\lt 1`$, choose $`\varepsilon_{\mathrm{RSP}}\leq\varepsilon/2`$ and ideal guessing target $`\delta=\varepsilon/2`$. This allocation gives $`n=m+\lceil6\log_2(2/\varepsilon)\rceil`$. The imported construction supplies polynomially many rounds and inverse-polynomial soundness. Efficient negligible-soundness compilation requires a corresponding preparation guarantee. The ideal converse remains unconditional even though its classical-verifier implementation is computational.
 
 ## Scope and resources
 
@@ -163,6 +163,10 @@ Finite classical-alphabet dimension counting separately gives $`\min\{1,2^{s+c-k
 The same floor can then be inserted into the companion's gate and contiguous-interval ledger. The proof uses independent channel choices without postselection; it never supplies a noise flag to the device. Arbitrary endpoint readout is allowed after the charged interval.
 
 For example, $`k=12`$ and $`p=0.4`$ yield an expected-rank floor about $`9.5965`$, even though the score is below one half. Applied branchwise before averaging, existing recovery inequalities imply both the straight-chord floor and the small-block polygon floor stated in the application. Those convenient floors therefore give no additional gate or interval consequence; the factorization explains the operational connection.
+
+The [moment extension](../science/noisy-processing.md#exponential-moments-strengthen-the-dynamical-inference) retains actual product-noise probabilities in $`X_z=\log_z\mathbb E[z^r]`$. A coordinate-pivot injection and Jensen's inequality contract it by $`\alpha_z=\ln(1-q+qz^2)/(2\ln z)`$, while each T-type gate adds at most one. The direct quantum-plus-classical branch curve supplies a floor in this moment variable; fixing a recovery of the averaged channel supplies a complementary floor $`a_z`$ at every cut. The scalar optimization applies again, with its floor and noise factor replaced. In a growing challenge at fixed positive score, this improves the long-storage coefficient; the weak-noise order remains $`k\gamma D`$.
+
+The interval reserve now bounds $`X_z`$, not only the mean rank. The full-output bound $`2n`$ is always safe. Neither this refinement nor the previous rank floor supplies physical flags or changes the storage model.
 
 This application assumes a fixed circuit of the permitted primitives, input-independent replacement resets, and noisy counted persistent controller records. Their processing must still be charged correctly; counting record bits does not make arbitrary feedback free. A guessing score does not verify the model's noise or controller assumptions. At random-guessing success $`p=2^{-k}`$, discarding the challenge is a zero-processing strategy. The LWE compilation above is a separate result: no processing guarantee is automatically attached to it.
 

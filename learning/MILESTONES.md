@@ -466,15 +466,15 @@ Dependencies name earlier understanding targets, not extra assignments. Primary 
 
 **Central question:** What additional device assumptions let a guessing score constrain continuing processing?
 
-**Understanding target:** Translate the ideal theorem into the quantum-plus-classical factor of a sampled Pauli algebra, preserve the full-output terminal reserve, and average branchwise bounds to obtain an expected-rank floor at every cut. Separate challenge length, total noisy persistent width, noise rounds, endpoint decoding and charged controller processing.
+**Understanding target:** Translate the ideal theorem into the quantum-plus-classical factor of a sampled Pauli algebra, preserve the full-output terminal reserve, and average branchwise bounds to obtain an expected-rank floor at every cut. Then explain how the actual noise probabilities contract an exponential rank moment and how a fixed recovery supplies its all-cut floor. Separate challenge length, total noisy persistent width, noise rounds, endpoint decoding and charged controller processing.
 
 **Dependencies:** M05, M06, M14, M21, M23, M26, M28.
 
 **Story role:** Connect the finite guessing theorem to a dynamical application before final synthesis.
 
-**Conceptual connection:** Existing recovery reductions already imply both displayed score floors and their gate/interval consequences for every challenge length. The transfer assumes independent noise and an honestly charged fixed controller model; a score does not test those premises or automatically compose with the LWE wrapper.
+**Conceptual connection:** Existing recovery reductions imply both convenient mean-rank floors. Retaining the actual noise probabilities in a logarithmic moment then strengthens the dynamical ledger; its interval reserve must control that moment rather than only the mean. The transfer assumes independent noise and an honestly charged fixed controller model; a score does not test those premises or automatically compose with the LWE wrapper.
 
-**Source pointers:** Watrous §§2.2–2.3, 3.1.2 and 3.2; [noisy-processing application](../science/noisy-processing.md); [complete companion proof](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/main/science/guessing_processing.md); [resources](../science/lower-bounds-and-resources.md#4-charged-resources).
+**Source pointers:** Watrous §§2.2–2.3, 3.1.2 and 3.2; [noisy-processing application](../science/noisy-processing.md); [complete companion proof](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/main/science/guessing_processing.md); [moment theorem](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/4a2ee369e2c8765d1749d4f3d25103109b8289d3/science/moment_processing.md); [resources](../science/lower-bounds-and-resources.md#4-charged-resources).
 
 ### M30: Synthesize the complete contribution
 

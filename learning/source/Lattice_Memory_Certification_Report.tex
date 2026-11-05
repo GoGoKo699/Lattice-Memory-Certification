@@ -616,15 +616,79 @@ Every contiguous interval inherits the same floor. In \eqref{eq:noisy-budget}, u
 For example, $k=12,p=0.4,n=120,\gamma=0.01,D=2000$ gives $a_p\simeq9.59648$ and requires at least $171$ internal T/T-dagger gates. With the same score and width, every 700-round contiguous interval requires at least $39$ such gates by \eqref{eq:noisy-budget}. The scalar injection bound alone gives $37$. These are necessary processing budgets; their attainability and the device assumptions require separate evidence.
 
 \subsection{What the recovery comparison and boundaries imply}
-The recovery comparison remains informative even at scores at or below one half. For one complete branch channel, let $F_{\rm rec}$ be its optimum squared Bell-overlap recovery fidelity, $F_{\rm pg}\le F_{\rm rec}$ its pretty-good value, $u$ its average pretty-good guessing success, and $z\ge1/d$ its optimized guessing score. With $d=2^k$, established discrimination and recovery estimates give
+The recovery comparison remains informative even at scores at or below one half. For one complete branch channel, let $F_{\rm rec}$ be its optimum squared Bell-overlap recovery fidelity, $F_{\rm pg}\le F_{\rm rec}$ its pretty-good value, $u$ its average pretty-good guessing success, and $p_*\ge1/d$ its optimized guessing score. With $d=2^k$, established discrimination and recovery estimates give
 \begin{align*}
-z^2+\frac{(1-z)^2}{d-1}&\le u,\qquad F_{\rm rec}\ge z/d,\\
+p_*^2+\frac{(1-p_*)^2}{d-1}&\le u,\qquad F_{\rm rec}\ge p_*/d,\\
 u&\le\tau_\ell+A_\ell F_{\rm pg},\qquad 0\le\ell\le k,\\
 A_\ell&=\sum_{j=0}^{\ell}\binom kj(1-2^j\tau_\ell),
 \end{align*}
 where $\tau_\ell=2^{-\ell-1}$ for $\ell<k$ and $\tau_k=0$. The underlying spectral reduction writes $u=\sum_v\lambda_vw_v$, where $w_v\ge0$, $\sum_vw_v=1$, and $w_v\le F_{\rm pg}$. Its nonzero eigenvalues are $2^{-j}$ with multiplicities $2^j\binom kj$. Bounding all terms at or below $\tau_\ell$ by that threshold, then applying the cap to the excess, gives $u\le\tau_\ell+F_{\rm pg}\sum_{\lambda_v>\tau_\ell}(\lambda_v-\tau_\ell)$, which is the displayed estimate. At $\ell=0$ it gives $u\le(1+F_{\rm pg})/2$.
 
-The actual branch score is at most $z$, and every branch satisfies $F_{\rm rec}\le\min\{1,2^{r-2k}\}$. These estimates reproduce \eqref{eq:noisy-floor} for every $k\ge8$ when applied branchwise \emph{before} averaging. Exact finite-rank checks also imply the weaker floor stated above for $1\le k\le7$. Thus every displayed score floor and its gate or interval consequence already follows from the recovery route. The direct encoder factorization gives a short operational explanation; this comparison does not identify the optimal attainable score or exclude stronger bounds.
+The actual branch score is at most $p_*$, and every branch satisfies $F_{\rm rec}\le\min\{1,2^{r-2k}\}$. These estimates reproduce \eqref{eq:noisy-floor} for every $k\ge8$ when applied branchwise \emph{before} averaging. Exact finite-rank checks also imply the weaker floor stated above for $1\le k\le7$. Thus these mean-rank floors and their gate or interval consequences already follow from the recovery route. The direct encoder factorization gives a short operational explanation; this comparison does not identify the optimal attainable score or exclude stronger bounds.
+
+\subsection{Keeping the actual noise distribution gives a stronger budget}
+The mean-rank comparison does not exhaust the specified noisy dynamics. For a fixed real $1<z\le2$, retain the exponential moment of the common full-output envelope:
+\begin{equation}
+X_z(t):=\log_z\E_b z^{r_{b,t}},\qquad
+\alpha_z:=\frac{\ln(1-q+qz^2)}{2\ln z}\in(0,1).
+\label{eq:noisy-moment}
+\end{equation}
+This potential has terminal value $2n$. It uses the same counted registers, fixed primitives and mathematical noise flags as the preceding argument.
+
+To see the contraction, choose $r$ binary pivot coordinates that identify a rank-$r$ envelope. Let $d_j\in\{0,1,2\}$ be the number of pivots on qubit $j$, so $\sum_jd_j=r$. If noise retains the site set $S$, then $\dim(V\cap W_S)\le\sum_{j\in S}d_j$. Independence and the inequality $(1-q+qz)^2\le1-q+qz^2$ imply
+\[
+\E[z^{r'}\mid V]\le\prod_j(1-q+qz^{d_j})
+\le(1-q+qz^2)^{r/2}.
+\]
+Concavity of $x^{\alpha_z}$ gives $X_z'\le\alpha_zX_z$ at a noise layer. A T/T-dagger adds at most one to $X_z$; Clifford gates and input-independent resets cannot increase it. This retains information about the noise law that the mean-rank chord discarded, without assuming rank concentration.
+
+Use the preceding discrimination and recovery estimates on the averaged channel to the full physical output. For $p\ge1/d$, define
+\begin{equation}
+F_0(p):=\max\left\{d^{-2},\frac pd,
+\max_{0\le\ell\le k}
+\frac{[g_d(p)-\tau_\ell]_+}{A_\ell}\right\},
+\quad g_d(p)=p^2+\frac{(1-p)^2}{d-1}.
+\label{eq:noisy-moment-recovery}
+\end{equation}
+For $p<1/d$, use $F_0=d^{-2}$ and a zero floor. Fix one CPTP recovery with squared Bell fidelity at least $F_0(p)$. At each cut, averaging its recovered future-noise branches gives the same fidelity. Every branch has fidelity at most $\min\{1,2^{r-2k}\}$. For $b=4^{-k}$ and $w=(F_0-b)/(1-b)$, the secant in the variable $z^r$ gives
+\[
+\min\{1,2^{r-2k}\}
+\le b+(1-b)\frac{z^r-1}{z^{2k}-1}.
+\]
+Thus every primitive cut has the positive moment floor
+\begin{equation}
+X_z(t)\ge a_z^{\mathrm{rec}}:=\log_z\!\left[1+w(z^{2k}-1)\right]
+\label{eq:noisy-moment-floor}
+\end{equation}
+whenever $p>2^{-k}$. At chance, $a_z^{\mathrm{rec}}=0$. The recovery is fixed across the proof branches and requires no knowledge of their flags.
+
+The direct profile in \eqref{eq:noisy-branch} supplies another floor. Write $b_0=2^{-k}$, $H_k=2^{-k/6}$, $Y_t=z^{5k/6}$ and $Y_e=z^{2k}$. For $1<z\le2^{1/7}$, its two exponential pieces are convex in $Y=z^r$. Let $P_z(Y)$ be the concave polygon through $(1,b_0),(Y_t,H_k),(Y_e,1)$, constant after $Y_e$, omitting the middle point if it is below the endpoint chord. Then $p\le P_z(\E z^r)$ and
+\[
+a_z^{\mathrm{dir}}=\log_z P_z^{-1}(p).
+\]
+The inverse is linear in $p$ on each retained segment. If the middle point is omitted it is $1+(p-b_0)(Y_e-1)/(1-b_0)$. Otherwise it is $1+(p-b_0)(Y_t-1)/(H_k-b_0)$ below $H_k$, and $Y_t+(p-H_k)(Y_e-Y_t)/(1-H_k)$ above it. Set the floor to zero at or below chance. Use the larger available direct or recovery floor, denoted $a_z$. Both are positive above chance. The earlier comparison of mean-rank floors does not imply dominance over this refinement.
+
+\begin{samepage}
+Putting $\kappa_z=-\ln\alpha_z$, the same gate-balance argument gives
+\begin{equation}
+m_T\ge\left\lceil
+\frac{[D\kappa_z-\ln(2n/a_z)]_+}{\ln(1+1/a_z)}
+\right\rceil .
+\label{eq:noisy-moment-budget}
+\end{equation}
+The companion discrete injection ledger applies with its contraction parameter replaced by $\alpha_z$ and floor replaced by $a_z$. Take the strongest result over $z$ and the earlier mean-rank bounds. For a contiguous interval, the entering reserve must bound $\log_z\E z^r$; $2n$ is safe. The earlier reserve on $\E r$ alone is insufficient for this substitution.
+\end{samepage}
+
+At fixed positive score, both $b_0$ and $H_k$ decay exponentially. Choosing $\ln z=1/\sqrt{k}$ for large $k$ yields $a_z=2k-O_p(\sqrt{k})$ and $\alpha_z=q+O_q(k^{-1/2})$. The recovery bridge also reaches $a_z=2k-o(k)$, using its polynomial lower bound on $F_0(p)$. If $q\in(0,1)$ is fixed, $n\ge k$, $D\to\infty$, and $\ln(n/k)=o(D)$, the discrete ledger therefore implies
+\begin{equation}
+m_T\ge(2-o(1))\,k\,\frac{1-q}{q}\,D.
+\label{eq:noisy-moment-asymptotic}
+\end{equation}
+The previous chord gives leading coefficient $2p$ under the same conditions. The moment argument strengthens the fixed-score dependence while retaining the weak-noise order $k\gamma D$. It supplies a necessary rate along feasible families, without constructing a memory or determining its optimum physical cost.
+
+The analytic polygon can be sharpened by combining all available bounds at each integer pair $(s,c)$. For $k=12$, a rational certificate checks all 169 pairs with $0\le2s+c\le24$, using the direct, recovery and output-dimension caps and the established classical cap $\beta^{12}$ for $s=0$, where $\beta=(1+1/\sqrt2)/2$. At $z=27/25$, the concave polygon through $(1,1/4096),(z^{11},1/4),(z^{24},1)$, constant afterward, majorizes each branch cap. The classical bound follows from the Gram-matrix row-sum estimate for selected product-BB84 vectors.
+
+For the earlier example $k=12,p=0.4,n=120,q=0.99$, it gives $M_z\ge(4z^{11}+z^{24})/5$, $a_z\simeq14.84082963$ and $\alpha_z\simeq0.99072498$. Certified logarithm bounds make the individual-gate requirement at least $244$ for $D=2000$, compared with $171$ from mean rank. Every 700-round contiguous interval with moment reserve at most $240$ requires at least $58$ such gates, compared with $39$. The interval bound uses its own moment reserve, and both numbers are necessary conditions rather than physical feasibility or optimality claims.
 
 At chance, discarding the challenge and guessing needs zero processing. Full-register replacement gives
 \[
@@ -653,7 +717,7 @@ Physical protection & Any additional physical qubits used for error correction r
 No free state-loading oracle or quantum random-access memory is assumed. The ideal source is an explicit quantum input resource; its classical realization pays for the imported preparation protocol.
 
 \subsection{What supports the claims}
-The ideal result follows from the analytical chain in Sections~4--8, using the standard tensor-power norm theorem as its substantial mathematical input. Section~11 supplies the separate computational reduction under its cryptographic assumption. Finite matrix checks test the intermediate identities and normalization conventions against those analytical expressions. The noisy-processing checks also compare the explicit quantum-plus-classical factorization with the Pauli-algebra projection and verify the resulting endpoint probabilities. They do not test a physical device's noise or controller assumptions.
+The ideal result follows from the analytical chain in Sections~4--8, using the standard tensor-power norm theorem as its substantial mathematical input. Section~11 supplies the separate computational reduction under its cryptographic assumption. Finite matrix checks test the intermediate identities and normalization conventions against those analytical expressions. The noisy-processing checks also compare the explicit quantum-plus-classical factorization with the Pauli-algebra projection and verify the resulting endpoint probabilities. Independent moment checks enumerate all subspaces at widths one through three and certify the pivot, noise and gate inequalities; exact logarithm enclosures check the finite moment-budget comparison. They do not test a physical device's noise or controller assumptions.
 
 An accepted run is not a deterministic measurement of a device's qubit count. Soundness bounds every dimension-limited strategy in the ideal model; the compiled protocol covers the efficient adversaries in its imported assumptions. A low-memory device can occasionally pass. Claims based on repeated runs must account for their joint strategy and information across cuts rather than assuming independent trials without justification.
 
