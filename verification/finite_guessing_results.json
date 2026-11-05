@@ -1,0 +1,231 @@
+{
+  "dense_diagnostics": {
+    "largest_sampled_Q": 0.3612559416682828,
+    "maximum_instrument_completeness_error": 1.1102230246251565e-15,
+    "random_rank2_inputs": 40,
+    "scope": "diagnostics only; no sampled optimization certifies the upper bound",
+    "seed": 20261105,
+    "status": "passed"
+  },
+  "exact_swap_certificate": {
+    "W_sha256_int64_little_endian": "6b06b6ab986645c8a1a0cc734eb7d10c23233ae81e0fe917561c70bb2d448790",
+    "dimension": 64,
+    "identity": "W=A+B=(A^T A+B^T B)/4",
+    "integer_gram_identity": true,
+    "scope": "all states by the exact swap trace identity; no sampled eigenvalue claim"
+  },
+  "finite_scalar_certificate": {
+    "finite_scalar_certificate_exact": true,
+    "inherited_DFW_Renes_interval": [
+      "0.78643782776614",
+      "0.78643782776615"
+    ],
+    "pgm_upper_exact": "9/16",
+    "score_upper_exact": "(2+7*sqrt(2))/16",
+    "score_upper_interval": [
+      "0.74371843353822",
+      "0.74371843353823"
+    ],
+    "score_upper_is_not_claimed_attainable": true,
+    "store_and_breidbart_interval": [
+      "0.72855339059327",
+      "0.72855339059328"
+    ]
+  },
+  "hamming_ball_method_counterexample": {
+    "b": 32768,
+    "certificate": "exact rational atanh logarithm enclosures + type probability bounds",
+    "hamming_radius": 491520,
+    "integer_qubit_memory_rounding_also_certified": true,
+    "joint_type_counts": [
+      425984,
+      131072,
+      131072,
+      360448
+    ],
+    "k": 1048576,
+    "log_Q_lower": [
+      "-739.95232966821657",
+      "-739.95232966821656"
+    ],
+    "log_rank_fraction_interval": [
+      "-2063.19836560181814",
+      "-2049.33542103694536"
+    ],
+    "scope": "counterexample to scalar rank-PGM exponent2/5, not to guessing exponent1/5",
+    "strict_log_margin_for_Q_gt_u_power_2/5": [
+      "79.78183874656158",
+      "79.78183874656159"
+    ]
+  },
+  "limits": [
+    "The finite score upper bound is not proved optimal or attained.",
+    "The all-size guessing exponent remains1/6.",
+    "The Hamming-ball counterexample limits only scalar-PGM proof routes.",
+    "No tensorization against joint encoders or hardware-model verification is claimed."
+  ],
+  "moment_composition_certificate": {
+    "integer_pairs": [
+      {
+        "c": 0,
+        "cap": "1/8",
+        "polygon_value": "1/8",
+        "r": 0,
+        "s": 0,
+        "witness": "output_dimension"
+      },
+      {
+        "c": 1,
+        "cap": "1/4",
+        "polygon_value": "127/416",
+        "r": 1,
+        "s": 0,
+        "witness": "output_dimension"
+      },
+      {
+        "c": 2,
+        "cap": "1/2",
+        "polygon_value": "1/2",
+        "r": 2,
+        "s": 0,
+        "witness": "output_dimension"
+      },
+      {
+        "c": 0,
+        "cap": "1/4",
+        "polygon_value": "1/2",
+        "r": 2,
+        "s": 1,
+        "witness": "output_dimension"
+      },
+      {
+        "c": 3,
+        "cap": "311/500",
+        "polygon_value": "311/500",
+        "r": 3,
+        "s": 0,
+        "witness": "classical_beta3_lt_311/500"
+      },
+      {
+        "c": 1,
+        "cap": "1/2",
+        "polygon_value": "311/500",
+        "r": 3,
+        "s": 1,
+        "witness": "output_dimension"
+      },
+      {
+        "c": 4,
+        "cap": "311/500",
+        "polygon_value": "93/125",
+        "r": 4,
+        "s": 0,
+        "witness": "classical_beta3_lt_311/500"
+      },
+      {
+        "c": 2,
+        "cap": "93/125",
+        "polygon_value": "93/125",
+        "r": 4,
+        "s": 1,
+        "witness": "finite_C3_lt_93/125"
+      },
+      {
+        "c": 0,
+        "cap": "1/2",
+        "polygon_value": "93/125",
+        "r": 4,
+        "s": 2,
+        "witness": "output_dimension"
+      },
+      {
+        "c": 5,
+        "cap": "311/500",
+        "polygon_value": "1409/1625",
+        "r": 5,
+        "s": 0,
+        "witness": "classical_beta3_lt_311/500"
+      },
+      {
+        "c": 3,
+        "cap": "93/125",
+        "polygon_value": "1409/1625",
+        "r": 5,
+        "s": 1,
+        "witness": "finite_C3_lt_93/125"
+      },
+      {
+        "c": 1,
+        "cap": "173/200",
+        "polygon_value": "1409/1625",
+        "r": 5,
+        "s": 2,
+        "witness": "rank5_normalized_recovery_lt_173/200"
+      },
+      {
+        "c": 6,
+        "cap": "311/500",
+        "polygon_value": "1",
+        "r": 6,
+        "s": 0,
+        "witness": "classical_beta3_lt_311/500"
+      },
+      {
+        "c": 4,
+        "cap": "93/125",
+        "polygon_value": "1",
+        "r": 6,
+        "s": 1,
+        "witness": "finite_C3_lt_93/125"
+      },
+      {
+        "c": 2,
+        "cap": "1",
+        "polygon_value": "1",
+        "r": 6,
+        "s": 2,
+        "witness": "output_dimension"
+      },
+      {
+        "c": 0,
+        "cap": "1",
+        "polygon_value": "1",
+        "r": 6,
+        "s": 3,
+        "witness": "output_dimension"
+      }
+    ],
+    "knots": [
+      [
+        "1",
+        "1/8"
+      ],
+      [
+        "729/625",
+        "1/2"
+      ],
+      [
+        "19683/15625",
+        "311/500"
+      ],
+      [
+        "531441/390625",
+        "93/125"
+      ],
+      [
+        "387420489/244140625",
+        "1"
+      ]
+    ],
+    "score3/4_moment_floor_exact": "5335136199/3906250000",
+    "slopes": [
+      "1875/832",
+      "7625/5832",
+      "190625/157464",
+      "7812500/6908733"
+    ],
+    "strict_profile_improvement": true,
+    "z": "27/25"
+  },
+  "status": "passed"
+}

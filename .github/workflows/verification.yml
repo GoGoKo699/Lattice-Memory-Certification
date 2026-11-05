@@ -34,6 +34,7 @@ jobs:
           OPENBLAS_NUM_THREADS=1 python verification/verify.py
           OPENBLAS_NUM_THREADS=1 python verification/check_learning.py
           OPENBLAS_NUM_THREADS=1 python verification/verify_noisy_processing.py
+          OPENBLAS_NUM_THREADS=1 python verification/verify_finite_guessing.py
 
   report-texlive-2025:
     runs-on: ubuntu-24.04

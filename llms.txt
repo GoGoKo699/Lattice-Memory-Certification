@@ -11,6 +11,7 @@ Authoritative routes:
 - Story and dependencies: science/README.md
 - Exact models and statements G, C, L: science/model.md
 - Classical refinement, discrimination, PGM identity, normalized hypercontractivity, rank: science/guessing-bound.md
+- Rank-sensitive three-input/qubit-memory bound, exact 9/16 PGM certificate, flagged-twirl equivalence, finite moment composition, and collision-method obstruction: science/finite-guessing.md
 - Computational simulation, pass weighting, efficiency and LWE boundary: science/cryptographic-certification.md
 - Achieved strategy, logarithmic ideal-gap order, finite prior-bound comparison and resource accounting: science/lower-bounds-and-resources.md
 - Analytic gap figure and reproducible generator: verification/Graph/README.md, verification/Graph/generate_plots.py and verification/Graph/requirements.txt
@@ -21,6 +22,8 @@ Authoritative routes:
 - Reproduction scope and commands: verification/README.md, verification/verify.py and verification/check_learning.py
 
 Notation in the ideal theorem: n input qubits, d=2^n, m retained qubits, D the retained quantum dimension, t=n-m, r the pure-branch Schmidt rank, h the Hamming error allowance, and ell the erasure allowance. The noisy-processing application restates its own notation: k challenge qubits, n total noisy persistent qubits, D independent noise rounds and r binary Pauli-envelope dimension. Do not identify those distinct uses of n, D or r. Ideal guessing targets use delta; total compiled soundness uses epsilon, with preparation simulation error epsilon_RSP. The Pauli operators and Hadamard are written \mathsf{X}, \mathsf{Y}, \mathsf{Z}, \mathsf{H}. Normalized Schatten norms use subscript p,\mathrm{n}; ordinary matrix traces remain unnormalized.
+
+For three ideal inputs and one retained qubit the global finite bound is (2+7sqrt(2))/16, approximately 0.7437184335, versus achieved beta² approximately 0.7285533906 and verified normalized DFW/Renes bound approximately 0.7864378278. Arbitrary encoders, unrestricted classical records and basis-dependent POVMs are covered. The 9/16 averaged PGM constant is exact; the final guessing optimum is not determined. A flagged Pauli twirl proves equality of the optimized arbitrary-state and preparation formulations. The finite improvement survives its documented integer moment-profile composition but does not tensorize against joint encoders. The universal guessing exponent stays 1/6. A Hamming-ball example obstructs a rank-only PGM power greater than 1/3, and therefore only that collision-then-square-root proof route; it does not obstruct all stronger guessing arguments.
 
 Keep the ideal theorem unrestricted computationally. The compiled guarantee uses the imported pass-weighted simulation interface, nonuniform quantum-polynomial-time convention, sufficiently large security parameter, polynomial output length and inverse-polynomial soundness. At the storage cut, the union of every later-accessible quantum system is charged. Give refinement labels classically; apply the rank bound only on pure conditional branches. Distinguish exact-string, list, Hamming and pre/post-basis-erasure acceptance. Preparation work, physical protection and decoder workspace are separate resource dimensions. A pass supplies a false-acceptance guarantee under the model, not a deterministic count of qubits.
 

@@ -10,11 +10,13 @@ For a continuous explanation, read the [explanatory report (PDF)](report/Lattice
 
 Read the [bridge's opening experiment](WATROUS_BRIDGE.md#the-experiment), then use the [30-milestone map](MILESTONES.md). M01–M14 build the objects and assumptions, ending with the complete storage experiment. M15–M30 assemble the finite bound, its conditional cryptographic use, acceptance-rule limits and noisy-processing application. Each milestone gives an understanding target, dependencies, a conceptual connection and authoritative source pointers. The map depends on the science, not a particular reader's background or progress.
 
-For a direct specialist route, start with the [model](../science/model.md) and [proof](../science/guessing-bound.md). The [science guide](../science/README.md) connects those pages to the LWE reduction, lower-bound strategy, error and loss variants, and resource accounting. The learning pages explain the same contribution; they do not replace its exact statements.
+For a direct specialist route, start with the [model](../science/model.md) and [proof](../science/guessing-bound.md), then the [rank-sensitive three-input refinement](../science/finite-guessing.md). The latter proves a stronger certified finite bound and identifies why the collision-only route cannot improve the universal exponent. The [science guide](../science/README.md) connects those pages to the LWE reduction, lower-bound strategy, error and loss variants, and resource accounting. The learning pages explain the same contribution; they do not replace its exact statements.
 
 ## What the anchor supplies
 
 The relevant foundations are finite-dimensional operators and norms, quantum states and channels, measurements, reduced states, Schmidt decompositions, and state discrimination. Watrous's Theorem 3.10 supplies the Barnum–Knill inequality used in the proof. [Selected sections and page references](WATROUS_BRIDGE.md#anchor-sections) are provided rather than assigning the entire book.
+
+The rank-sensitive finite chapter adds a two-copy purity constraint and uses Renes's sharper finite-alphabet discrimination inequality. Its exact $`9/16`$ PGM bound gives $`P^*_{3,1}\leq(2+7\sqrt2)/16`$, while the all-size exponent remains $`1/6`$. The finite certificate, its moment-profile composition, and the Hamming-ball limitation of the collision-only method have separate proof scopes; no joint-encoder tensorization is assumed.
 
 The tensor-power hypercontractivity theorem and the LWE-based remote-preparation guarantee are separate research dependencies. The bridge states their roles and links their primary sources. Neither is presented as a theorem in Watrous, and neither creates a second educational anchor.
 

@@ -53,6 +53,20 @@ The [related-work calculation](../references/RELATED_WORK.md#dfw15-finite-compar
 
 The [verification script](../verification/verify.py) regenerates these numbers. Both columns are sufficient deficits obtained from the specified guessing bounds. Earlier rate-one security and this finite dimension-only comparison address different aspects of the storage tradeoff.
 
+### Three inputs with one retained qubit
+
+At $`n=3,m=1,D=2`$, a separate exact finite certificate improves the available upper bound:
+
+```math
+\frac{3+2\sqrt2}{8}
+\leq P^*_{3,1}
+\leq\frac{2+7\sqrt2}{16}.
+```
+
+The values are approximately $`0.7285533906`$ and $`0.7437184335`$. The lower value is the explicit store-and-Breidbart strategy. The upper value follows from a global two-copy purity certificate and Renes's finite-alphabet discrimination inequality, improving the verified normalized DFW/Renes value $`(1+2\sqrt7)/8\simeq0.7864378278`$. The [full account](finite-guessing.md) covers arbitrary encoders and classical records, proves equality of the optimized arbitrary-state and preparation formulations, and checks a finite moment-profile consequence. It does not determine the optimum or tensorize against joint encoders.
+
+The universal exponent remains $`1/6`$. Any universal guessing law $`P^*_{n,m}\leq2^{-c(n-m)}`$ must satisfy $`c\leq-\log_2\beta\simeq0.2284466968`$ by the achieved strategy. The [collision-method obstruction](finite-guessing.md#5-a-limitation-of-rank-sensitive-collision-methods) separately rules out a universal PGM rank exponent strictly above $`1/3`$, hence rules out improving $`1/6`$ through that collision-only route. It leaves stronger joint-discrimination arguments open.
+
 ## 4. Charged resources
 
 | Resource | Accounting |
