@@ -71,6 +71,8 @@ The dependence on $t$ is the central feature. To force ideal cheating probabilit
 
 A rank-sensitive finite refinement improves the three-input, one-retained-qubit case to $\pguess\le(2+7\sqrt2)/16\simeq0.743718$, with arbitrary joint encoders and unlimited classical records. A separate construction shows that the collision statistic used in the general proof has sharp exponent $1/3$ in the memory deficit. Thus this finite improvement does not improve the uniform guessing exponent $1/6$; a stronger general result needs information beyond that statistic and its square-root conversion.
 
+A direct-discrimination follow-up adds exact decoder certificates for two specified encoders and proves that a diagonal dual ansatz loses even the known decay scale on the asymptotic obstruction family. These are methodological results; neither the global three-input cap nor the uniform exponent improves.
+
 A second layer uses a computationally secure preparation protocol to let a verifier conduct the test using classical interaction. Under its precise assumptions, the false-acceptance bound becomes
 \begin{equation}\label{eq:compiled-front}
 P_{\mathrm{accept}}\leq\min\{1,\varepsilon_{\mathrm{RSP}}+2^{-t/6}\},
@@ -417,6 +419,66 @@ Since the remainder is $o(b_n^2/n)$, this excludes every exponent $a>1/3$. The i
 
 Consequently a proof consisting only of a universal rank-dependent collision bound and the square-root or finite-alphabet conversion cannot improve the uniform guessing exponent beyond $1/6$. The finite-alphabet correction is negligible here because $Q_n\gg2^{-n}$. This does not determine the true guessing exponent, prove tensorization of $C_3$, or exclude a stronger joint-discrimination argument. The store-and-Breidbart strategy still limits any true universal exponent to $-\log_2\beta\simeq0.228447$.
 
+\subsection{Direct decoding of specified obstruction encoders}
+A large PGM score does not imply that the optimal guessing score has the same exponent. To investigate this conversion directly, fix a set $S$ of product Breidbart vectors, with projector $P_S$ and rank $r=|S|$, and use $\rho=P_S/r$. The flagged-twirl construction above implements this state as an allowed encoder with retained quantum dimension $r$.
+
+Let $B$ be the real orthogonal matrix of single-qubit Hadamard eigenvectors and $U=B^{\otimes n}$. In Breidbart coordinates the computational-basis conditional states are
+\[
+\sigma_x=|v_x\rangle\langle v_x|,\qquad
+v_x=P_SU|x\rangle/\sqrt r,\qquad
+\sum_x\sigma_x=I_S/r.
+\]
+Each disclosed Hadamard-basis choice acts diagonally in these coordinates and commutes with $P_S$. Hence all product-BB84 basis ensembles are unitarily equivalent. The averaged score of this \emph{fixed encoder} equals the ordinary state-discrimination SDP
+\[
+p_S=\max_{M_x\ge0,\,\sum_xM_x=I_S}\sum_x\Tr(M_x\sigma_x)
+=\min_{Y\ge\sigma_x\ \forall x}\Tr Y.
+\]
+Strict dual feasibility gives equality. A feasible POVM and a feasible dual matrix certify lower and upper bounds on $p_S$; neither bounds optimization over arbitrary encoders.
+
+For radius-one Hamming balls, exact primal/dual certificates give
+\begin{center}
+\begin{tabular}{@{}cccll@{}}
+\toprule
+Inputs $n$ & Dimension $r$ & Stored $m$ & Certified fixed-encoder interval & Store-and-Breidbart\\
+\midrule
+3 & 4 & 2 & $[0.8010769969,\,0.801080996]$ & $0.853553390593\ldots$\\
+7 & 8 & 3 & $[0.4609687373,\,0.460976740]$ & $0.530790042945\ldots$\\
+\bottomrule
+\end{tabular}
+\end{center}
+These are not the three-input, one-qubit instance. Both specified encoders underperform store-and-Breidbart. The lower certificates are rational orthogonal projective measurements; the upper certificates are general rational symmetric dual matrices. Every one of the 8 or 128 constraints $Y-\sigma_x\ge0$ is checked by exact LDL algebra over $\mathbb Q(\sqrt2)$. Numerical optimization suggested candidate matrices, while exact feasibility supplies the certificates. Their limited significance is the separation of optimal decoding from PGM conversion for these particular encoders; they do not improve the global cap $C_3$ or the uniform exponent.
+
+\subsection{Why diagonal decoder duals lose the asymptotic scale}
+A natural simplification is to restrict $Y$ to be diagonal in the same Breidbart basis as $P_S$. The following argument proves that this restriction is inadequate even to recover the existing universal bound on the large-ball obstruction family.
+
+Let $S$ be the Hamming ball of radius $h\le n/2$. Permutation averaging preserves diagonal-dual feasibility and trace, so write its entry on a word of weight $w$ as $y_w/r$. All entries are positive. The rank-one Schur-complement condition $Y\ge\sigma_x$ becomes
+\[
+\sum_{s\in S}\frac{|U_{s,x}|^2}{y_{|s|}}\le1.
+\]
+The squared entries are binary-flip probabilities with crossover $1-\beta$. For an input of weight $t$, the output weight $W_t$ has mean $(1-\beta)n+(2\beta-1)t$ and variance $n/8$.
+
+Put $L=\lceil\sqrt n\rceil$ and choose
+\[
+t=\left\lfloor\frac{h-2L-(1-\beta)n}{2\beta-1}\right\rfloor.
+\]
+For the sequence below, $0\le t\le n$ and $h\ge3L+2$ eventually hold. The mean lies between $h-2L-(2\beta-1)$ and $h-2L$. Chebyshev therefore places probability at least $7/8$ in $h-3L-1\le W_t\le h$. Some weight $w_*$ there has mass at least $7/[8(3L+2)]$. The Schur inequality forces $y_{w_*}$ to be at least that mass. Using $r\le(n+1)\binom nh$ and comparing neighboring binomial coefficients gives, for every diagonal feasible dual,
+\[
+\Tr Y\ge\frac{7}{8(3L+2)(n+1)}
+\left(\frac{h-3L}{n-h+3L+1}\right)^{3L+1}.
+\]
+This is a lower bound on a \emph{restricted dual upper certificate}, not on physical guessing success.
+
+Now take $n$ through multiples of eight, $b=\lfloor n^{3/4}\rfloor$ and $h=n/2-b$. The displayed bound and the already established universal guessing theorem yield
+\[
+\begin{aligned}
+\min_{Y\text{ diagonal},\,Y\ge\sigma_x\ \forall x}\Tr Y
+&\ge\exp[-O(n^{1/4}+\ln n)],\\
+p_S&\le(r/2^n)^{1/6}
+=\exp[-n^{1/2}/3+O(\ln n)].
+\end{aligned}
+\]
+Thus the diagonal dual cannot even reproduce the known decay scale. Off-diagonal information is essential for a competitive decoder certificate along this route. Symmetry reductions retaining off-diagonal blocks remain possible. The actual asymptotic optimum of these encoders, a stronger universal exponent and joint-encoder tensorization remain unproved. An exact finite log certificate at $n=2^{24}$, $b=2^{18}$ bounds the diagonal dual below by $e^{-831}$, while the established universal theorem and the elementary binomial tail give $p_S\le e^{-4096/3}$. This large scalar witness illustrates the separation; no block of that size is simulated.
+
 \newsection{What the logarithmic overhead means}
 \label{sec:overhead}
 \subsection{Sufficient and necessary gaps}
@@ -691,7 +753,7 @@ where $\tau_\ell=2^{-\ell-1}$ for $\ell<k$ and $\tau_k=0$. The underlying spectr
 The actual branch score is at most $p_*$, and every branch satisfies $F_{\rm rec}\le\min\{1,2^{r-2k}\}$. These estimates reproduce \eqref{eq:noisy-floor} for every $k\ge8$ when applied branchwise \emph{before} averaging. Exact finite-rank checks also imply the weaker floor stated above for $1\le k\le7$. Thus these mean-rank floors and their gate or interval consequences already follow from the recovery route. The direct encoder factorization gives a short operational explanation; this comparison does not identify the optimal attainable score or exclude stronger bounds.
 
 \subsection{Keeping the actual noise distribution gives a stronger budget}
-The mean-rank comparison does not exhaust the specified noisy dynamics. For a fixed real $1<z\le2$, retain the exponential moment of the common full-output envelope:
+The mean-rank comparison does not exhaust the specified noisy dynamics. For a fixed real $1<z\le2$, write $M_z(t):=\E_b z^{r_{b,t}}$ for the exponential moment of the common full-output envelope:
 \begin{equation}
 X_z(t):=\log_z\E_b z^{r_{b,t}},\qquad
 \alpha_z:=\frac{\ln(1-q+qz^2)}{2\ln z}\in(0,1).
@@ -782,10 +844,27 @@ E_q(\rho):=\sup_{1<z\le2^{1/7}}(\ln z)
 \]
 For fixed $z$, choose $l=1+\lceil\ln(2n/k)/(-\ln\alpha_z)\rceil=o(D)$, leaving initial allowance at most $k$. The displayed limit follows from the finite formula, followed by the supremum over fixed $z$. Since $\alpha_z>q$ and $\alpha_z\to q$ as $z\downarrow1$, the exponent is positive exactly when $\rho<2(1-q)/q$. The right endpoint is allowed and the continuous left-endpoint value is zero. This is a necessary-rate decay statement, not an achievable processing capacity.
 
+The full generating-function transition gives a stronger exponent. Put
+\[
+\phi_j(\lambda)=\frac12\ln\bigl(1+q^j(e^{2\lambda}-1)\bigr),\qquad
+A(\lambda)=\min\{2\lambda,(\ln2+5\lambda)/6,\ln2\}.
+\]
+Then $p\le e^{-kA(\lambda)}M_{e^\lambda}$, and summing over the last $T=D-L+1$ backward post-noise cuts gives
+\[
+\frac{-\ln p}{k}\ge\left[A(\lambda)-
+\frac{2n\sum_{d=L}^D\phi_d(\lambda)+m_T\sum_{j=1}^T\phi_j(\lambda)}{kT}\right]_+.
+\]
+Each gate contributes at distinct positive noise ages, so this bound covers arbitrary prescribed schedules. Removing the initial width transient under the same growth assumptions proves
+\[
+\liminf\frac{-\ln p}{k}\ge\mathcal E_q(\rho):=
+\sup_{0\le\lambda\le\ln2}\left[A(\lambda)-\rho\sum_{j\ge1}\phi_j(\lambda)\right]_+.
+\]
+The convergent series admits explicit geometric tail bounds. This exponent strictly improves $E_q$ below the same critical rate $2(1-q)/q$. At zero normalized processing rate, $\mathcal E_q(0)=\ln2$, matching the exponent of uniform guessing. It does not identify an achievable positive processing capacity.
+
 \subsection{The coherent construction's matching regime}
 The companion also owns the constructive processing theorem. It compiles an inherited good Tanner-code decoder, run for a fixed number of parallel iterations, into the allowed Clifford+T circuit. Every local minimum, comparison, tie choice and update is a fixed Boolean function on a constant-size neighborhood. Hardwired incidence connections require no adaptive address machine. Reversible Boolean evaluation, controlled Pauli correction and inverse evaluation cost $O(N)$ prescribed T slots and $O(N)$ total scratch for a data block of length $N$. Scratch is reset before each epoch and never retains a protected record.
 
-The coherent circuit implements exactly $\sum_sP_{f(s)}\Pi_s\omega\Pi_sP_{f(s)}^\dagger$, also with an arbitrary reference. A constant-iteration residual contraction keeps both CSS components in a region whose combined representatives have weight below half the code distance. Current syndrome alone suffices. Independent depolarizing batches have correlated X/Z components on each site, so reliability uses their separate binomial tails and a union bound. Bounded multiplicative gaps in the available code lengths allow arbitrary payloads and error targets by padding within the free endpoints. These ingredients give, in a fixed family-dependent range $0<\gamma\le\gamma_*$,
+The coherent circuit implements exactly $\sum_sP_{f(s)}\Pi_s\omega\Pi_sP_{f(s)}^\dagger$, also with an arbitrary reference. A constant-iteration residual contraction keeps both CSS components in a region whose combined representatives have weight below half the code distance. Current syndrome alone suffices. Independent depolarizing batches have correlated X/Z components on each site, so reliability uses their separate binomial tails and a union bound. Bounded multiplicative gaps in the available code lengths allow arbitrary payloads and error targets by padding within the free endpoints. A fixed number of five-qubit concatenation levels on every outer data position reduces fresh errors into this correctable region. Inner decoding, outer correction and reencoding use fixed circuits, and old outer logical Paulis leave the inner syndrome unchanged. Fresh inner residual labels are independent across outer positions and may have correlated X/Z components. The level depends only on the Tanner family. The combined construction gives, throughout $0<\gamma\le1/20$,
 \[
 \begin{gathered}
 n=O\!\left(k+\ln\frac{J_+}{\epsilon}\right),\qquad m_T=O(nJ),\qquad J=O(\gamma D+1),\\
@@ -793,7 +872,7 @@ n=O\!\left(k+\ln\frac{J_+}{\epsilon}\right),\qquad m_T=O(nJ),\qquad J=O(\gamma D
 \qquad J_+=\max(1,J).
 \end{gathered}
 \]
-Here $n$ counts data, syndrome and all workspace. The fixed constants are potentially enormous and $\gamma_*$ can be much smaller than the earlier five-qubit construction's range. If $k=\Omega(\ln(J_+/\epsilon))$ and $\gamma D\to\infty$, this closes its polylogarithmic resource gap in order. It proves neither a numerical optimum nor a physical threshold with faulty gates or locality constraints. No preparation wrapper is automatically compiled into this processing theorem.
+Here $n$ counts data, syndrome and all workspace. The fixed constants are potentially enormous and the inner code increases them further. If $k=\Omega(\ln(J_+/\epsilon))$ and $\gamma D\to\infty$, this closes its polylogarithmic resource gap in order. It proves neither a numerical optimum nor a physical threshold with faulty gates or locality constraints. No preparation wrapper is automatically compiled into this processing theorem.
 
 At chance, discarding the challenge and guessing needs zero processing. Full-register replacement gives
 \[
@@ -822,7 +901,7 @@ Physical protection & Any additional physical qubits used for error correction r
 No free state-loading oracle or quantum random-access memory is assumed. The ideal source is an explicit quantum input resource; its classical realization pays for the imported preparation protocol.
 
 \subsection{What supports the claims}
-The ideal result follows from the analytical chain in Sections~4--8, using the standard tensor-power norm theorem as its substantial mathematical input. Section~11 supplies the separate computational reduction under its cryptographic assumption. Finite matrix checks test the intermediate identities and normalization conventions against those analytical expressions. The new three-input certificate uses an exact positive two-copy swap expression, Pauli-weight bounds and rational algebraic enclosures. Its rational moment polygon is checked at every permitted integer rank. The collision-route limitation follows from the explicit type construction and entropy expansion, rather than extrapolation of small instances.
+The ideal result follows from the analytical chain in Sections~4--8, using the standard tensor-power norm theorem as its substantial mathematical input. Section~11 supplies the separate computational reduction under its cryptographic assumption. Finite matrix checks test the intermediate identities and normalization conventions against those analytical expressions. The new three-input certificate uses an exact positive two-copy swap expression, Pauli-weight bounds and rational algebraic enclosures. Its rational moment polygon is checked at every permitted integer rank. The collision-route limitation follows from the explicit type construction and entropy expansion, rather than extrapolation of small instances. The direct-discrimination follow-up checks complete primal/dual matrices exactly for two fixed encoders and proves a separate diagonal-dual limitation analytically. Its finite optimal-decoder certificates are not upper bounds over arbitrary encoders.
 
 The noisy-processing checks compare the explicit quantum-plus-classical factorization with the Pauli-algebra projection and verify the resulting endpoint probabilities. Independent moment checks enumerate all subspaces at widths one through three and certify the pivot, noise and gate inequalities; exact logarithm enclosures check the finite moment-budget comparison. The companion checks additionally certify the finite inverse ledger and its one-variable exponent optimization. These checks do not test a physical device's noise or controller assumptions.
 

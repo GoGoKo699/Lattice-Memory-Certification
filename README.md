@@ -19,13 +19,15 @@ P^*_{3,1}\leq\frac{2+7\sqrt2}{16}
 
 with arbitrary joint encoders, basis-dependent POVMs and unrestricted classical records. Store-and-Breidbart achieves $`0.7285533906\ldots`$. The [finite proof](science/finite-guessing.md) also identifies a limitation of the collision-only route to a better uniform exponent. The universal exponent above remains $`1/6`$.
 
+The [direct-discrimination investigation](science/direct-discrimination.md) adds a separate analytic limitation: for a family of Hamming-ball encoders, dual bounds restricted to diagonal matrices cannot recover even the established universal decay rate. Exact primal/dual certificates also enclose optimal decoding for two specified encoders. They do not improve the global three-input bound or the uniform exponent.
+
 ## From a guessing score to processing
 
 [Measurement-Free Memory Cost](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost) supplies a dynamical application of the finite guessing theorem. A sampled noisy-storage tail factors through a Pauli algebra containing a bounded quantum system and classical information. Unconditional delayed-basis guessing success therefore enforces an expected-rank floor at every cut and gives necessary non-Clifford gate and contiguous-interval budgets in that device model.
 
-Read the [self-contained application and boundaries](science/noisy-processing.md); the companion owns the [complete transfer proof and recovery comparison](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/223dd0a1e70e6ec94cf0ce6431a1ae842d1c8ea6/science/guessing_processing.md). Its notation is $`k`$ challenge qubits, $`n`$ total noisy persistent qubits and $`D`$ noise rounds. The device receives only the quantum challenge; $`X`$ stays secret and only the basis string is revealed after all charged storage. The full-output terminal envelope has $`M=2n`$, and mathematical noise flags are not supplied to the device.
+Read the [self-contained application and boundaries](science/noisy-processing.md); the companion owns the [complete transfer proof and recovery comparison](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/947ddadf936a25e8fe181c45a3fe8a95a41d9196/science/guessing_processing.md). Its notation is $`k`$ challenge qubits, $`n`$ total noisy persistent qubits and $`D`$ noise rounds. The device receives only the quantum challenge; $`X`$ stays secret and only the basis string is revealed after all charged storage. The full-output terminal envelope has $`M=2n`$, and mathematical noise flags are not supplied to the device.
 
-This is a conditional processing witness under the specified noise, controller and gate assumptions. Existing recovery reductions imply the convenient mean-rank floors for every challenge length, including low scores. The companion's [exponential-moment theorem](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/223dd0a1e70e6ec94cf0ce6431a1ae842d1c8ea6/science/moment_processing.md) retains actual product-noise probabilities and gives a stronger gate and interval ledger in the same model. For a fixed positive score, its long-storage coefficient approaches that of a full logical payload as the challenge grows. The inference neither verifies those physical assumptions nor automatically extends this repository's LWE wrapper.
+This is a conditional processing witness under the specified noise, controller and gate assumptions. Existing recovery reductions imply the convenient mean-rank floors for every challenge length, including low scores. The companion's [exponential-moment theorem](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/947ddadf936a25e8fe181c45a3fe8a95a41d9196/science/moment_processing.md) retains actual product-noise probabilities and gives a stronger gate and interval ledger in the same model. For a fixed positive score, its long-storage coefficient approaches that of a full logical payload as the challenge grows. The inference neither verifies those physical assumptions nor automatically extends this repository's LWE wrapper.
 
 ## Explanatory report
 
@@ -38,6 +40,7 @@ Read the [complete explanatory report (PDF)](learning/report/Lattice_Memory_Cert
 | Finite storage bound | $`P_{\mathrm{guess}}\leq 2^{-(n-m)/6}`$, including arbitrary collective processing and unlimited classical records | [Model](science/model.md), [proof](science/guessing-bound.md) |
 | Three-input refinement | $`P^*_{3,1}\leq(2+7\sqrt2)/16`$, improving the verified normalized DFW/Renes value $`(1+2\sqrt7)/8`$ | [Rank-sensitive finite bound](science/finite-guessing.md) |
 | Collision-method limitation | No universal rank-sensitive PGM power strictly above $`1/3`$; this limits that proof route, while stronger joint-discrimination methods remain open | [Method obstruction](science/finite-guessing.md#5-a-limitation-of-rank-sensitive-collision-methods) |
+| Direct-decoder limitation | Diagonal duals lose the established exponent on explicit Hamming-ball encoders; exact finite SDPs concern specified encoders only | [Direct discrimination](science/direct-discrimination.md) |
 | Conditional LWE compilation | $`P_{\mathrm{accept}}\leq\min\{1,\varepsilon_{\mathrm{RSP}}+2^{-(n-m)/6}\}`$, for the efficient adversaries covered by the imported simulation theorem | [Certification](science/cryptographic-certification.md) |
 | Logarithmic ideal gap | A store-and-Breidbart-measure strategy achieves $`\beta^{n-m}`$, where $`\beta=(1+1/\sqrt2)/2`$, fixing the overhead order with unmatched constants | [Lower bounds and resources](science/lower-bounds-and-resources.md) |
 | List acceptance | Lists of size at most $`L`$ give $`P_{\mathrm{list}}\leq\min\{1,\sqrt L\,2^{-(n-m)/6}\}`$ | [Errors and losses](science/errors-and-losses.md) |
@@ -62,7 +65,7 @@ For $`t=n-m`$, the optimal ideal success $`P^*_{n,m}`$ lies between the achieved
 
 Start with the [science guide](science/README.md), then follow the [exact model](science/model.md), [complete finite-bound proof](science/guessing-bound.md), and [cryptographic reduction](science/cryptographic-certification.md). The [related-work account](references/RELATED_WORK.md) identifies inherited ingredients and compares a specific finite specialization of the earlier uncertainty bound. The [LLM reading map](llms.txt) points directly to the same authoritative files.
 
-The proof combines the established Barnum–Knill discrimination inequality and qubit hypercontractivity through a pure-branch rank estimate. The three-input refinement combines a two-copy purity constraint with Renes's sharper finite-alphabet discrimination inequality. Its PGM constant $`9/16`$ is tight; the optimum guessing probability and a better all-size exponent remain open. The related-work account credits the inherited tools and limits the prior comparison.
+The proof combines the established Barnum–Knill discrimination inequality and qubit hypercontractivity through a pure-branch rank estimate. The three-input refinement combines a two-copy purity constraint with Renes's sharper finite-alphabet discrimination inequality. Its PGM constant $`9/16`$ is tight; the optimum guessing probability and a better all-size exponent remain open. Direct fixed-encoder SDP certificates and the diagonal-dual obstruction identify an additional limitation, without upgrading numerical encoder searches to universal bounds. The related-work account credits the inherited tools and limits the prior comparison.
 
 ## Learning route
 
@@ -81,7 +84,7 @@ OPENBLAS_NUM_THREADS=1 .venv/bin/python verification/verify.py
 OPENBLAS_NUM_THREADS=1 .venv/bin/python verification/check_learning.py
 OPENBLAS_NUM_THREADS=1 .venv/bin/python verification/verify_noisy_processing.py
 OPENBLAS_NUM_THREADS=1 .venv/bin/python verification/verify_finite_guessing.py
-OPENBLAS_NUM_THREADS=1 .venv/bin/python verification/verify_finite_guessing.py
+OPENBLAS_NUM_THREADS=1 .venv/bin/python verification/verify_direct_discrimination.py
 ```
 
 The [verification guide](verification/README.md) documents the finite matrix checks and their [reference output](verification/expected_results.json). The [learning checks](verification/check_learning.py) cover milestone dependencies, local heading links and the worked example, with [reference output](verification/learning_results.json). The [noisy-processing checks](verification/verify_noisy_processing.py) test the quantum-plus-classical channel factorization and unconditional averaging, with [reference output](verification/noisy_processing_results.json). These finite checks complement the analytical proofs; they do not test a physical device's noise or controller assumptions. The [analytic figure](verification/Graph/README.md) has its own generator and pinned dependencies.
