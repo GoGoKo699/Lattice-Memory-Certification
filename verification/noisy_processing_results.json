@@ -1,8 +1,9 @@
 {
-  "assertions": 971,
+  "assertions": 1020,
   "authoritative_dynamical_checks": [
     "Measurement-Free-Memory-Cost/verification/verify_guessing_processing.py",
-    "Measurement-Free-Memory-Cost/verification/verify_moment_processing.py"
+    "Measurement-Free-Memory-Cost/verification/verify_moment_processing.py",
+    "Measurement-Free-Memory-Cost/verification/verify_reliability.py"
   ],
   "canonical_algebras": 6,
   "channel_cases": [
@@ -60,28 +61,49 @@
     "J_trace_preserving": 6,
     "Q_plus_C_CPTP_factorization": 96,
     "basis_endpoint_probability": 96,
+    "beta_lower_witness": 1,
     "branch_score_bound": 6,
     "classical_blocks": 256,
     "cut_averaged_actual_decoder": 96,
     "cut_averaged_channel_output": 96,
+    "dense_reliability_fixture_score": 1,
     "dense_unconditional_mixture_score": 4,
+    "exact_conditional_survival_product_step": 3,
+    "exact_survival_product": 1,
+    "four_input_exact_branch_majorant": 25,
+    "four_input_exact_inverse": 1,
+    "four_input_new_collision_witness_used": 1,
+    "four_input_pair_count": 1,
+    "four_input_polygon_exact_concavity": 1,
+    "four_input_rank_five_value": 1,
+    "four_input_stronger_than_rank_five": 1,
     "full_channel_matrix_units": 96,
     "full_output_log_moment_noise": 1,
     "full_output_rank_moment_from_channels": 1,
     "future_branch_weights_normalized": 1,
+    "independent_complete_slot_loss": 1,
     "mean_rank_reserve_counterexample": 1,
     "moment_replacement_weights_normalized": 1,
     "moment_retention_at_least_rank_retention": 1,
     "moment_retention_at_most_one": 1,
     "normalized_Q_plus_C_output": 96,
+    "old_rank_five_DFW_collision_cap": 1,
+    "old_rank_five_collision_comparison": 1,
+    "old_rank_five_hypercontractive_collision_cap": 1,
+    "old_rank_five_lifting_permits_score": 1,
+    "paired_hazard_conditional_Jensen": 3,
+    "paired_hazard_stronger_than_rank_only": 1,
     "positive_Q_plus_C_output": 96,
+    "product_Jensen_cumulative_rank_interface": 1,
     "replacement_binary_rank_from_channel": 4,
     "replacement_superoperator_rank": 4,
+    "score_derived_survival_floor": 1,
     "shared_moment_individual_T_count": 2,
     "shared_moment_noise_retention": 1,
     "shared_moment_polygon_inverse_score": 1,
     "shared_twelve_qubit_moment_floor": 1,
-    "shared_twelve_qubit_rank_floor": 1
+    "shared_twelve_qubit_rank_floor": 1,
+    "sqrt2_upper_exact_witness": 1
   },
   "exponential_moment_interface": {
     "scope": "Numerical interface checks; exact branch and logarithm certificates live in the companion verifier.",
@@ -147,6 +169,212 @@
       ]
     }
   },
+  "four_input_moment_refinement": {
+    "branch_witnesses": [
+      {
+        "c": 0,
+        "method": "input_independent_rank_zero",
+        "r": 0,
+        "s": 0,
+        "target": "1/16"
+      },
+      {
+        "c": 1,
+        "method": "output_dimension",
+        "r": 1,
+        "s": 0,
+        "target": "1601/8116"
+      },
+      {
+        "c": 2,
+        "method": "output_dimension",
+        "r": 2,
+        "s": 0,
+        "target": "11129/32464"
+      },
+      {
+        "c": 0,
+        "method": "output_dimension",
+        "r": 2,
+        "s": 1,
+        "target": "11129/32464"
+      },
+      {
+        "c": 3,
+        "method": "output_dimension",
+        "r": 3,
+        "s": 0,
+        "target": "1/2"
+      },
+      {
+        "c": 1,
+        "method": "output_dimension",
+        "r": 3,
+        "s": 1,
+        "target": "1/2"
+      },
+      {
+        "c": 4,
+        "method": "classical_dimension_lifting",
+        "r": 4,
+        "s": 0,
+        "target": "9561/16232"
+      },
+      {
+        "c": 2,
+        "method": "output_dimension",
+        "r": 4,
+        "s": 1,
+        "target": "9561/16232"
+      },
+      {
+        "c": 0,
+        "method": "output_dimension",
+        "r": 4,
+        "s": 2,
+        "target": "9561/16232"
+      },
+      {
+        "c": 5,
+        "method": "classical_dimension_lifting",
+        "r": 5,
+        "s": 0,
+        "target": "6951/10145"
+      },
+      {
+        "c": 3,
+        "method": "four_input_swap_collision_Renes",
+        "r": 5,
+        "s": 1,
+        "target": "6951/10145"
+      },
+      {
+        "c": 1,
+        "method": "output_dimension",
+        "r": 5,
+        "s": 2,
+        "target": "6951/10145"
+      },
+      {
+        "c": 6,
+        "method": "classical_dimension_lifting",
+        "r": 6,
+        "s": 0,
+        "target": "789/1000"
+      },
+      {
+        "c": 4,
+        "method": "normalized_DFW_Renes",
+        "r": 6,
+        "s": 1,
+        "target": "789/1000"
+      },
+      {
+        "c": 2,
+        "method": "normalized_DFW_Renes",
+        "r": 6,
+        "s": 2,
+        "target": "789/1000"
+      },
+      {
+        "c": 0,
+        "method": "output_dimension",
+        "r": 6,
+        "s": 3,
+        "target": "789/1000"
+      },
+      {
+        "c": 7,
+        "method": "classical_dimension_lifting",
+        "r": 7,
+        "s": 0,
+        "target": "46303/52000"
+      },
+      {
+        "c": 5,
+        "method": "normalized_DFW_Renes",
+        "r": 7,
+        "s": 1,
+        "target": "46303/52000"
+      },
+      {
+        "c": 3,
+        "method": "normalized_DFW_Renes",
+        "r": 7,
+        "s": 2,
+        "target": "46303/52000"
+      },
+      {
+        "c": 1,
+        "method": "normalized_DFW_Renes",
+        "r": 7,
+        "s": 3,
+        "target": "46303/52000"
+      },
+      {
+        "c": 8,
+        "method": "output_dimension",
+        "r": 8,
+        "s": 0,
+        "target": "1"
+      },
+      {
+        "c": 6,
+        "method": "output_dimension",
+        "r": 8,
+        "s": 1,
+        "target": "1"
+      },
+      {
+        "c": 4,
+        "method": "output_dimension",
+        "r": 8,
+        "s": 2,
+        "target": "1"
+      },
+      {
+        "c": 2,
+        "method": "output_dimension",
+        "r": 8,
+        "s": 3,
+        "target": "1"
+      },
+      {
+        "c": 0,
+        "method": "output_dimension",
+        "r": 8,
+        "s": 4,
+        "target": "1"
+      }
+    ],
+    "challenge_qubits": 4,
+    "comparison_scope": "Specified output dimension, classical dimension lifting, normalized DFW/Renes and hypercontractive collision/Renes outer caps; no physical attainability or exhaustive-prior claim.",
+    "exact_concavity_slopes": [
+      "109375/64928",
+      "564453125/638988912",
+      "257568359375/322333846848"
+    ],
+    "inverse_moment_exact": "4194230787/2822265625",
+    "inverse_moment_formula": "z^3+(200/289)*(z^6-z^3)",
+    "logarithmic_moment_floor_numerical": 5.14766922987666,
+    "moment_base": "27/25",
+    "pairs_checked": 25,
+    "polygon_rank_knots": [
+      0,
+      3,
+      6,
+      8
+    ],
+    "polygon_scores": [
+      "1/16",
+      "1/2",
+      "789/1000",
+      "1"
+    ],
+    "rank_five_polygon_value": "6951/10145",
+    "score": "7/10",
+    "strictly_greater_than_five_exact": true
+  },
   "limits": [
     "Finite channel identities do not replace the all-cut proof.",
     "Moment-interface arithmetic is numerical; exact certificates are in the companion verifier.",
@@ -159,30 +387,51 @@
     "J_trace_preserving": 2.220446049250313e-16,
     "Q_plus_C_CPTP_factorization": 1.1102230246251565e-16,
     "basis_endpoint_probability": 1.6653345369377348e-16,
+    "beta_lower_witness": 0.0,
     "classical_blocks": 0.0,
     "cut_averaged_actual_decoder": 2.220446049250313e-16,
     "cut_averaged_channel_output": 4.996038059103694e-16,
+    "dense_reliability_fixture_score": 2.220446049250313e-16,
     "dense_unconditional_mixture_score": 3.885780586188048e-16,
+    "exact_conditional_survival_product_step": 0.0,
+    "exact_survival_product": 0.0,
+    "four_input_exact_branch_majorant": 0.0,
+    "four_input_exact_inverse": 0.0,
+    "four_input_new_collision_witness_used": 0.0,
+    "four_input_pair_count": 0.0,
+    "four_input_polygon_exact_concavity": 0.0,
+    "four_input_rank_five_value": 0.0,
+    "four_input_stronger_than_rank_five": 0.0,
     "full_channel_matrix_units": 1.1102230246251565e-16,
     "full_output_log_moment_noise": 4.440892098500626e-16,
     "full_output_rank_moment_from_channels": 0.0,
     "future_branch_weights_normalized": 0.0,
+    "independent_complete_slot_loss": 0.0,
     "mean_rank_reserve_counterexample": 0.0,
     "moment_replacement_weights_normalized": 0.0,
     "normalized_Q_plus_C_output": 6.661388969533906e-16,
+    "old_rank_five_DFW_collision_cap": 0.0,
+    "old_rank_five_collision_comparison": 0.0,
+    "old_rank_five_hypercontractive_collision_cap": 0.0,
+    "old_rank_five_lifting_permits_score": 0.0,
+    "paired_hazard_stronger_than_rank_only": 0.0,
     "replacement_binary_rank_from_channel": 0.0,
     "replacement_superoperator_rank": 0.0,
     "shared_moment_individual_T_count": 0.0,
     "shared_moment_noise_retention": 8.716360966332104e-13,
     "shared_moment_polygon_inverse_score": 0.0,
     "shared_twelve_qubit_moment_floor": 6.039613253960852e-13,
-    "shared_twelve_qubit_rank_floor": 1.7763568394002505e-15
+    "shared_twelve_qubit_rank_floor": 1.7763568394002505e-15,
+    "sqrt2_upper_exact_witness": 0.0
   },
   "maximum_positive_inequality_violations": {
     "branch_score_bound": 0.0,
     "moment_retention_at_least_rank_retention": 0.0,
     "moment_retention_at_most_one": 0.0,
-    "positive_Q_plus_C_output": 1.5876676286813018e-16
+    "paired_hazard_conditional_Jensen": 6.938893903907228e-18,
+    "positive_Q_plus_C_output": 1.5876676286813018e-16,
+    "product_Jensen_cumulative_rank_interface": 0.0,
+    "score_derived_survival_floor": 0.0
   },
   "primitive_cut_averaging": {
     "actual_unconditional_score": 0.2558901295258501,
@@ -202,6 +451,41 @@
     ],
     "noise_rounds": 2,
     "primitive_cuts": 6
+  },
+  "reliability_survival_interface": {
+    "actual_survival": "11904/15625",
+    "actual_unconditional_score": "35721/62500",
+    "challenge_qubits": 2,
+    "conditional_rows": [
+      {
+        "alive_probability": "1",
+        "conditional_extinction": "1/25",
+        "conditional_mean_r_minus_s": "2",
+        "expected_r_minus_s": "2"
+      },
+      {
+        "alive_probability": "24/25",
+        "conditional_extinction": "7/75",
+        "conditional_mean_r_minus_s": "5/3",
+        "expected_r_minus_s": "8/5"
+      },
+      {
+        "alive_probability": "544/625",
+        "conditional_extinction": "53/425",
+        "conditional_mean_r_minus_s": "25/17",
+        "expected_r_minus_s": "32/25"
+      }
+    ],
+    "cumulative_r_minus_s": "122/25",
+    "exact_product": "11904/15625",
+    "full_two_qubit_paired_hazard": "1/25",
+    "noise_rounds": 3,
+    "noise_strength": "1/5",
+    "physical_qubits": 2,
+    "product_Jensen_lower_numerical": 3.472953875269748,
+    "rank_only_hazard": "1/625",
+    "scope": "Exact finite survival arithmetic and dense score fixture; general paired-pivot and interval proofs are in the companion.",
+    "score_survival_floor": "20096/46875"
   },
   "seed": 20261104,
   "shared_example": {

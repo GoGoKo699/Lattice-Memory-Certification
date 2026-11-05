@@ -230,6 +230,169 @@ def check_moment_interface(audit: verify.Audit) -> dict:
         'scope': 'Numerical interface checks; exact branch and logarithm certificates live in the companion verifier.'}
 
 
+
+def check_four_input_profile(audit: verify.Audit) -> dict:
+    """Exact rational branch certificates for the new k=4 moment polygon.
+
+    Each witness invokes one established branch inequality. Exhausting all
+    quantum-plus-classical pairs proves this finite majorant independently of
+    numerical optimization; it does not prove physical attainability.
+    """
+    def exact_equal(name, a, b):
+        audit.equal(name, int(a) if isinstance(a, bool) else a,
+                    int(b) if isinstance(b, bool) else b)
+
+    Q = Fraction
+    k, d, z = 4, 16, Q(27, 25)
+    points = [(Q(1), Q(1, 16)), (z**3, Q(1, 2)),
+              (z**6, Q(789, 1000)), (z**8, Q(1))]
+    slopes = [(b[1]-a[1])/(b[0]-a[0]) for a,b in zip(points, points[1:])]
+    exact_equal('four_input_polygon_exact_concavity',
+                all(a >= b > 0 for a,b in zip(slopes, slopes[1:])), True)
+    scale = 1 << 100
+    sqrt2_hi = Q(math.isqrt(2*scale*scale)+1, scale)
+    exact_equal('sqrt2_upper_exact_witness', sqrt2_hi**2 > 2, True)
+    beta_hi = (2+sqrt2_hi)/4
+
+    def polygon(x):
+        for a,b in zip(points,points[1:]):
+            if x <= b[0]:
+                return a[1]+(x-a[0])*(b[1]-a[1])/(b[0]-a[0])
+        return Q(1)
+
+    witnesses = []
+    for r in range(2*k+1):
+        target = polygon(z**r)
+        g_target = target**2+(1-target)**2/(d-1)
+        for quantum in range(r//2+1):
+            classical = r-2*quantum
+            dimension = min(Q(1),Q(2)**(quantum+classical-k))
+            lifting = min(Q(1),Q(2)**quantum*beta_hi**k)
+            fidelity = min(Q(1),Q(2)**(r-2*k),Q(2)**(quantum-k))
+            recovery = []
+            for ell in range(k+1):
+                tau = Q(1,2**(ell+1)) if ell<k else Q(0)
+                coeff = sum((Q(math.comb(k,j))*(1-2**j*tau)
+                             for j in range(ell+1)),Q(0))
+                recovery.append(tau+coeff*fidelity)
+            method = None
+            if r == 0 and target >= Q(1,d):
+                method = 'input_independent_rank_zero'
+            elif dimension <= target:
+                method = 'output_dimension'
+            elif lifting <= target:
+                method = 'classical_dimension_lifting'
+            elif min(recovery) <= g_target:
+                method = 'normalized_DFW_Renes'
+            elif g_target**3 >= Q(2)**(quantum-k):
+                method = 'hypercontractive_collision_Renes'
+            elif quantum == 1 and Q(27,64) <= g_target:
+                method = 'four_input_swap_collision_Renes'
+            exact_equal('four_input_exact_branch_majorant', method is not None, True)
+            witnesses.append({'r':r,'s':quantum,'c':classical,
+                              'target':str(target),'method':method})
+    exact_equal('four_input_pair_count',len(witnesses),25)
+    exact_equal('four_input_new_collision_witness_used',
+                any(w['method']=='four_input_swap_collision_Renes' for w in witnesses),True)
+    p = Q(7,10)
+    moment_floor = z**3 + Q(200,289)*(z**6-z**3)
+    exact_equal('four_input_exact_inverse',polygon(moment_floor)==p,True)
+    exact_equal('four_input_stronger_than_rank_five',moment_floor>z**5,True)
+    exact_equal('four_input_rank_five_value',polygon(z**5)==Q(6951,10145),True)
+    # At (s,c)=(1,3), dimension and lifting caps are at least 7/10,
+    # normalized DFW collision gives 9/16, and hypercontractivity gives 1/2.
+    # Their Renes inverse therefore still permits 7/10 in this specified
+    # outer profile; this is not a realizable physical encoder certificate.
+    g_p=p*p+(1-p)**2/Q(15)
+    old_recovery=[]
+    for ell in range(k+1):
+        tau=Q(1,2**(ell+1)) if ell<k else Q(0)
+        coeff=sum((Q(math.comb(k,j))*(1-2**j*tau)
+                   for j in range(ell+1)),Q(0))
+        old_recovery.append(tau+coeff/Q(8))
+    exact_equal('old_rank_five_DFW_collision_cap',min(old_recovery)==Q(9,16),True)
+    exact_equal('old_rank_five_hypercontractive_collision_cap',Q(1,2)**3==Q(1,8),True)
+    exact_equal('old_rank_five_collision_comparison',g_p==Q(62,125)<Q(1,2),True)
+    # beta > 4/5 implies 2 beta^4 > 7/10 by exact arithmetic.
+    exact_equal('beta_lower_witness',Q(6,5)**2<2,True)
+    exact_equal('old_rank_five_lifting_permits_score',2*Q(4,5)**4>p,True)
+    return {'challenge_qubits':k,'moment_base':str(z),
+            'polygon_rank_knots':[0,3,6,8],
+            'polygon_scores':['1/16','1/2','789/1000','1'],
+            'exact_concavity_slopes':[str(x) for x in slopes],
+            'pairs_checked':len(witnesses),'branch_witnesses':witnesses,
+            'rank_five_polygon_value':str(polygon(z**5)),
+            'score':str(p),'inverse_moment_exact':str(moment_floor),
+            'inverse_moment_formula':'z^3+(200/289)*(z^6-z^3)',
+            'logarithmic_moment_floor_numerical':math.log(float(moment_floor))/math.log(float(z)),
+            'strictly_greater_than_five_exact':True,
+            'comparison_scope':'Specified output dimension, classical dimension lifting, normalized DFW/Renes and hypercontractive collision/Renes outer caps; no physical attainability or exhaustive-prior claim.'}
+
+
+def check_reliability_interface(audit: verify.Audit) -> dict:
+    """Independent finite survival fixture for the paired-rank score transfer."""
+    def exact_equal(name, a, b):
+        audit.equal(name, int(a) if isinstance(a, bool) else a,
+                    int(b) if isinstance(b, bool) else b)
+
+    Q = Fraction
+    gamma,q,D,k = Q(1,5),Q(4,5),3,2
+    mask_weights = [gamma**mask.bit_count()*q**(2-mask.bit_count())
+                    for mask in range(4)]
+    distribution = {0:Q(1)}
+    rows=[]
+    cumulative_u=Q(0)
+    product=Q(1)
+    for _ in range(D):
+        alpha=sum((weight for erased,weight in distribution.items() if erased!=3),Q(0))
+        expected_u=sum((weight*(2-erased.bit_count()) for erased,weight in distribution.items()),Q(0))
+        hazard=sum((weight*gamma**(2-erased.bit_count())
+                    for erased,weight in distribution.items() if erased!=3),Q(0))/alpha
+        mean_u_alive=expected_u/alpha
+        audit.leq('paired_hazard_conditional_Jensen',
+                  float(gamma)**float(mean_u_alive),float(hazard))
+        following={mask:Q(0) for mask in range(4)}
+        for erased,weight in distribution.items():
+            for mask,probability in enumerate(mask_weights):
+                following[erased|mask]+=weight*probability
+        next_alpha=1-following[3]
+        exact_equal('exact_conditional_survival_product_step',
+                    next_alpha==alpha*(1-hazard),True)
+        product*=1-hazard
+        rows.append({'alive_probability':str(alpha),'expected_r_minus_s':str(expected_u),
+                     'conditional_extinction':str(hazard),
+                     'conditional_mean_r_minus_s':str(mean_u_alive)})
+        cumulative_u+=expected_u
+        distribution=following
+    survival=1-distribution[3]
+    exact_equal('exact_survival_product',survival==product,True)
+    exact_equal('independent_complete_slot_loss',survival==1-(1-q**D)**2,True)
+    bound=float(survival)*D/math.log(1/float(gamma))*math.log(1/(-math.expm1(math.log(float(survival))/D)))
+    audit.leq('product_Jensen_cumulative_rank_interface',bound,float(cumulative_u))
+
+    # Compute the score from density matrices and one common basis decoder.
+    score=0.0
+    for basis in verify.bases(k):
+        for x in range(2**k):
+            vector=basis[:,x];effect=np.outer(vector,vector.conj());rho=effect
+            for _ in range(D):rho=pauli_noise(rho,float(gamma))
+            score+=float(np.trace(effect@rho).real)/16
+    exact_score=((1+q**D)/2)**2
+    exact_equal('dense_reliability_fixture_score',score,float(exact_score))
+    b_p=(exact_score-Q(1,4))/Q(3,4)
+    audit.leq('score_derived_survival_floor',float(b_p),float(survival))
+    exact_equal('paired_hazard_stronger_than_rank_only',gamma**2>gamma**4,True)
+    return {'challenge_qubits':k,'physical_qubits':2,'noise_rounds':D,
+            'noise_strength':str(gamma),'conditional_rows':rows,
+            'actual_survival':str(survival),'exact_product':str(product),
+            'actual_unconditional_score':str(exact_score),
+            'score_survival_floor':str(b_p),'cumulative_r_minus_s':str(cumulative_u),
+            'product_Jensen_lower_numerical':bound,
+            'full_two_qubit_paired_hazard':str(gamma**2),
+            'rank_only_hazard':str(gamma**4),
+            'scope':'Exact finite survival arithmetic and dense score fixture; general paired-pivot and interval proofs are in the companion.'}
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--write', type=Path)
@@ -313,6 +476,8 @@ def main() -> None:
 
     cut_averaging = check_cut_averaging(audit, prefix, basis_matrices)
     moment_interface = check_moment_interface(audit)
+    four_input_profile = check_four_input_profile(audit)
+    reliability_interface = check_reliability_interface(audit)
 
     a = 24 * (Fraction(2, 5) - Fraction(1, 4096)) / (1 - Fraction(1, 4096))
     audit.equal('shared_twelve_qubit_rank_floor', float(a), 9.596483516483518)
@@ -322,6 +487,8 @@ def main() -> None:
         'unconditional_channel_mixtures': mixtures,
         'primitive_cut_averaging': cut_averaging,
         'exponential_moment_interface': moment_interface,
+        'four_input_moment_refinement': four_input_profile,
+        'reliability_survival_interface': reliability_interface,
         'shared_example': {'challenge_qubits': 12, 'score': '2/5',
                            'random_guess_baseline': '1/4096', 'rank_floor': str(a)},
         'assertions': sum(audit.counts.values()), 'check_counts': audit.counts,
@@ -329,7 +496,8 @@ def main() -> None:
         'maximum_positive_inequality_violations': audit.max_violation,
         'authoritative_dynamical_checks': [
             'Measurement-Free-Memory-Cost/verification/verify_guessing_processing.py',
-            'Measurement-Free-Memory-Cost/verification/verify_moment_processing.py'],
+            'Measurement-Free-Memory-Cost/verification/verify_moment_processing.py',
+            'Measurement-Free-Memory-Cost/verification/verify_reliability.py'],
         'limits': ['Finite channel identities do not replace the all-cut proof.',
                    'Moment-interface arithmetic is numerical; exact certificates are in the companion verifier.',
                    'No hardware noise or controller premise is verified.',
