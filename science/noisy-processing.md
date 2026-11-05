@@ -6,7 +6,7 @@ Unconditional whole-string BB84 guessing success implies a continuing processing
 
 ## Experiment and charged device model
 
-Here $`k\geq1`$ is the number of challenge qubits, $`n`$ is the total noisy persistent physical width, and $`D`$ counts full noise rounds. This notation is local to the noisy application: in the [ideal dimension theorem](model.md), $`n`$ counts challenge qubits and $`D`$ denotes a quantum dimension.
+Here $`k\geq1`$ is the number of challenge qubits, $`n`$ is the total noisy persistent physical width, and $`D`$ counts full noise rounds. The [ideal dimension theorem](model.md) uses the same challenge length $`k`$ and writes $`d_Q`$ for retained quantum dimension; $`n`$ and $`D`$ here are physical width and noise rounds.
 
 Choose independent uniform $`X,\Theta\in\{0,1\}^k`$. Give the device only $`|X\rangle_\Theta`$. Keep $`X`$ secret and disclose only $`\Theta`$, after all charged storage operations have ended. The score is
 

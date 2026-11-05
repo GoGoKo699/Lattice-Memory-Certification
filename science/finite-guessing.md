@@ -23,7 +23,7 @@ The same two-copy method also gives exact collision maxima for four and five inp
 \qquad\text{(F1a)}
 ```
 
-The collision maxima are attained; none of the three guessing upper bounds is claimed attainable. The notation in this chapter is $`k`$ challenge qubits, retained quantum dimension $`d_Q`$, and $`m=\log_2 d_Q`$ when that dimension is a power of two. These instances have $`d_Q=2,m=1`$. The general ideal theorem elsewhere uses $`n`$ for challenge qubits and $`D`$ for retained dimension. No noisy physical width or storage duration occurs in these bounds.
+The collision maxima are attained; none of the three guessing upper bounds is claimed attainable. The notation in this chapter is $`k`$ challenge qubits, retained quantum dimension $`d_Q`$, and $`m=\log_2 d_Q`$ when that dimension is a power of two. These instances have $`d_Q=2,m=1`$. The general ideal theorem uses these same symbols. No noisy physical width or storage duration occurs in these bounds.
 
 ## 1. Arbitrary states and the preparation experiment have the same optimum
 

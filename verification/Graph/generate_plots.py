@@ -144,7 +144,7 @@ def plot(data: dict, output: Path) -> None:
     ax.xaxis.set_major_locator(MultipleLocator(30))
     ax.yaxis.set_major_locator(FixedLocator(np.exp2(np.arange(-25, 1, 5))))
     ax.yaxis.set_major_formatter(FuncFormatter(power_label))
-    ax.set_xlabel(r"Missing-qubit gap $t=n-m$")
+    ax.set_xlabel(r"Missing-qubit gap $t=k-m$")
     ax.set_ylabel("Exact-string success probability")
     ax.set_title("(a) Bounds on guessing", loc="left", pad=5)
     ax.legend(loc="lower left", frameon=False, handlelength=1.9,

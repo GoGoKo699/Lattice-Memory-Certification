@@ -2,13 +2,13 @@
 
 **How many qubits must a prover retain to recover a hidden string after its measurement bases are revealed?**
 
-A receiver obtains $`n\geq1`$ independent uniform BB84 inputs before learning their preparation bases. It may process them jointly and retain unlimited classical records together with a quantum system of dimension at most $`D\geq1`$. For every such encoder, the best exact whole-string recovery probability obeys
+A receiver obtains $`k\geq1`$ independent uniform BB84 inputs before learning their preparation bases. It may process them jointly and retain unlimited classical records together with a quantum system of dimension at most $`d_Q\geq1`$. For every such encoder, the best exact whole-string recovery probability obeys
 
 ```math
-P_{\mathrm{guess}}\leq\min\left\{1,\left(\frac{D}{2^n}\right)^{1/6}\right\}.
+p_{\mathrm{guess}}\leq\min\left\{1,\left(\frac{d_Q}{2^k}\right)^{1/6}\right\}.
 ```
 
-With $`0\leq m\leq n`$ retained qubits, the exponent depends only on the missing-qubit gap $`t=n-m`$. The theorem is unconditional. Substitution into the existing LWE-based remote-state-preparation reduction of Hhan, Morimae, Okinaka and Yamakawa gives conditional classical verification with **logarithmic additive persistent-storage overhead**.
+With $`0\leq m\leq k`$ retained qubits, the exponent depends only on the missing-qubit gap $`t=k-m`$. The theorem is unconditional. Substitution into the existing LWE-based remote-state-preparation reduction of Hhan, Morimae, Okinaka and Yamakawa gives conditional classical verification with **logarithmic additive persistent-storage overhead**.
 
 For **three inputs and one retained qubit**, an additional rank-sensitive certificate gives
 
@@ -47,29 +47,29 @@ Read the [complete explanatory report (PDF)](learning/report/Lattice_Memory_Cert
 
 | Result | Statement and scope | Authoritative account |
 |---|---|---|
-| Finite storage bound | $`P_{\mathrm{guess}}\leq 2^{-(n-m)/6}`$, including arbitrary collective processing and unlimited classical records | [Model](science/model.md), [proof](science/guessing-bound.md) |
+| Finite storage bound | $`p_{\mathrm{guess}}\leq 2^{-(k-m)/6}`$, including arbitrary collective processing and unlimited classical records | [Model](science/model.md), [proof](science/guessing-bound.md) |
 | Small-challenge refinements | Exact PGM maxima $`9/16,27/64,81/256`$ for $`3,4,5`$ inputs and one retained qubit give stronger arbitrary-decoder guessing caps | [Rank-sensitive finite bounds](science/finite-guessing.md) |
 | Collision-method limitation | No universal rank-sensitive PGM power strictly above $`1/3`$; this limits that proof route, while stronger joint-discrimination methods remain open | [Method obstruction](science/finite-guessing.md#5-a-limitation-of-rank-sensitive-collision-methods) |
 | Direct-decoder limitation | Diagonal duals lose the established exponent on explicit Hamming-ball encoders; exact finite SDPs concern specified encoders only | [Direct discrimination](science/direct-discrimination.md) |
-| Conditional LWE compilation | $`P_{\mathrm{accept}}\leq\min\{1,\varepsilon_{\mathrm{RSP}}+2^{-(n-m)/6}\}`$, for the efficient adversaries covered by the imported simulation theorem | [Certification](science/cryptographic-certification.md) |
-| Logarithmic ideal gap | A store-and-Breidbart-measure strategy achieves $`\beta^{n-m}`$, where $`\beta=(1+1/\sqrt2)/2`$, fixing the overhead order with unmatched constants | [Lower bounds and resources](science/lower-bounds-and-resources.md) |
-| List acceptance | Lists of size at most $`L`$ give $`P_{\mathrm{list}}\leq\min\{1,\sqrt L\,2^{-(n-m)/6}\}`$ | [Errors and losses](science/errors-and-losses.md) |
+| Conditional LWE compilation | $`P_{\mathrm{accept}}\leq\min\{1,\eta_{\mathrm{prep}}+2^{-(k-m)/6}\}`$, for the efficient adversaries covered by the imported simulation theorem | [Certification](science/cryptographic-certification.md) |
+| Logarithmic ideal gap | A store-and-Breidbart-measure strategy achieves $`\beta^{k-m}`$, where $`\beta=(1+1/\sqrt2)/2`$, fixing the overhead order with unmatched constants | [Lower bounds and resources](science/lower-bounds-and-resources.md) |
+| List acceptance | Lists of size at most $`L`$ give $`P_{\mathrm{list}}\leq\min\{1,\sqrt L\,2^{-(k-m)/6}\}`$ | [Errors and losses](science/errors-and-losses.md) |
 | Error and erasure boundaries | Exact recovery, tolerated errors, and pre- versus post-basis erasures have different storage guarantees | [Errors and losses](science/errors-and-losses.md) |
 | Noisy-storage application | Whole-string guessing supplies rank/moment floors and an extinction-based reliability budget under the declared device model | [Noisy processing](science/noisy-processing.md) |
 
 Given preparation simulation error at most $`\varepsilon/2`$, a total false-acceptance target $`0\lt \varepsilon\lt 1`$ is met by
 
 ```math
-n=m+\left\lceil6\log_2(2/\varepsilon)\right\rceil
+k=m+\left\lceil6\log_2(2/\varepsilon)\right\rceil
 ```
 
-The imported construction supports this **inverse-polynomial** soundness regime with polynomially many rounds, using its nonuniform quantum-polynomial-time adversary convention for sufficiently large security parameter and polynomial output length. Efficient negligible soundness requires a corresponding preparation guarantee. Honest persistent storage is $`n`$ logical qubits; preparation, readout, communication and temporary workspace are counted separately.
+The imported construction supports this **inverse-polynomial** soundness regime with polynomially many rounds, using its nonuniform quantum-polynomial-time adversary convention for sufficiently large security parameter and polynomial output length. Efficient negligible soundness requires a corresponding preparation guarantee. Honest persistent storage is $`k`$ logical qubits; preparation, readout, communication and temporary workspace are counted separately.
 
-## Ideal exact-recovery scaling
+## Storage deficit and finite guessing
 
-![Analytic bounds on exact recovery and the required missing-qubit gap](verification/Graph/memory_deficit.png)
+![Universal, achievable and finite whole-string guessing bounds](verification/Graph/lattice_bounds.png)
 
-For $`t=n-m`$, the optimal ideal success $`P^*_{n,m}`$ lies between the achieved probability $`\beta^t`$ and the universal upper bound $`2^{-t/6}`$. At ideal target $`\delta=2^{-u}\in(0,1)`$, $`\lceil u/(-\log_2\beta)\rceil`$ missing qubits are necessary and $`\lceil6u\rceil`$ suffice whenever the input length supplies that gap. The constants remain unmatched. [Figure formulas and reproduction](verification/Graph/README.md).
+For $`t=k-m`$, the optimal ideal success $`P^*_{k,m}`$ lies between the achieved probability $`\beta^t`$ and the universal upper bound $`2^{-t/6}`$. The right panel shows the stronger finite upper bounds for $`k=3,4,5`$ with $`m=1`$. Their PGM constants are exact; the final guessing optimum remains open. The [figure guide](verification/Graph/README.md) gives the formulas, pinned Python reproduction and the additional integer-gap overview.
 
 ## Read the science
 

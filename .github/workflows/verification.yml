@@ -37,6 +37,26 @@ jobs:
           OPENBLAS_NUM_THREADS=1 python verification/verify_finite_guessing.py
           OPENBLAS_NUM_THREADS=1 python verification/verify_direct_discrimination.py
 
+  quantitative-figures:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out the source revision
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ env.SOURCE_REVISION }}
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Regenerate and check the quantitative figures
+        run: |
+          python -m pip install -r verification/Graph/requirements.txt
+          OPENBLAS_NUM_THREADS=1 python verification/Graph/generate_figures.py --output-dir /tmp/lattice-bounds-check
+          cmp /tmp/lattice-bounds-check/lattice_bounds.pdf verification/Graph/lattice_bounds.pdf
+          OPENBLAS_NUM_THREADS=1 python verification/Graph/generate_plots.py --output-dir /tmp/lattice-gap-check
+          OPENBLAS_NUM_THREADS=1 python verification/Graph/check_plots.py --output-dir /tmp/lattice-gap-check
+
   report-texlive-2025:
     runs-on: ubuntu-24.04
     steps:

@@ -6,7 +6,7 @@ The unconditional finite guessing bound becomes a conditional classical-verifier
 
 ## 1. Imported simulation interface
 
-The ideal source consists of independent uniform labels $`(X,\Theta)`$ held by the verifier and the quantum state $`|X\rangle_\Theta`$ supplied to a simulator. For every efficient malicious preparation prover, the imported interface supplies an efficient simulator acting on the **quantum BB84 input alone**. It produces a preparation flag and the system passed to subsequent processing. For every efficient continuation, real and simulated probabilities of the joint event “preparation passes and the continuation accepts” differ by at most $`\varepsilon_{\mathrm{RSP}}`$. The continuation includes the verifier's use of its hidden labels; neither label is supplied classically to the simulator before the cut.
+The ideal source consists of independent uniform labels $`(X,\Theta)`$ held by the verifier and the quantum state $`|X\rangle_\Theta`$ supplied to a simulator. For every efficient malicious preparation prover, the imported interface supplies an efficient simulator acting on the **quantum BB84 input alone**. It produces a preparation flag and the system passed to subsequent processing. For every efficient continuation, real and simulated probabilities of the joint event “preparation passes and the continuation accepts” differ by at most $`\eta_{\mathrm{prep}}`$. The continuation includes the verifier's use of its hidden labels; neither label is supplied classically to the simulator before the cut.
 
 Efficient adversaries, simulators and continuations follow the imported nonuniform quantum-polynomial-time convention. The cryptographic guarantees hold for sufficiently large security parameter $`\lambda`$ and polynomially bounded output length.
 
@@ -16,19 +16,19 @@ The honest-preparation property gives a joint state negligibly close in trace di
 
 ## 2. Protocol at general length
 
-Run that preparation with output length $`n`$. The verifier retains its flag, $`x`$, and $`\theta`$. The honest prover retains the $`n`$ prepared qubits through the waiting period. Only after the storage cut does the verifier send $`\theta`$. The prover measures in the indicated bases and returns $`\widehat x`$. Accept exactly when preparation passed and $`\widehat x=x`$.
+Run that preparation with output length $`k`$. The verifier retains its flag, $`x`$, and $`\theta`$. The honest prover retains the $`k`$ prepared qubits through the waiting period. Only after the storage cut does the verifier send $`\theta`$. The prover measures in the indicated bases and returns $`\widehat x`$. Accept exactly when preparation passed and $`\widehat x=x`$.
 
 The verifier can send a uniform dummy basis on failed preparation while always rejecting. Nothing in the soundness proof requires leaking the flag before the cut. A malicious prover may perform arbitrary efficient preprocessing and compression before the cut; its classical record is unrestricted in the ideal analysis and polynomially generated in the cryptographic implementation.
 
 ## 3. Proof of Theorem C
 
-Fix an efficient malicious prover, for $`0\leq m\leq n`$, including its encoder $`E`$ whose output registers define $`(C,Q)`$ at the storage cut. The quantum output register has dimension $`\dim Q\leq2^m`$. Choose the simulator supplied by the RSP interface.
+Fix an efficient malicious prover, for $`0\leq m\leq k`$, including its encoder $`E`$ whose output registers define $`(C,Q)`$ at the storage cut. The quantum output register has dimension $`\dim Q\leq2^m`$. Choose the simulator supplied by the RSP interface.
 
 Consider the efficient distinguishing continuation that runs $`E`$, reveals the verifier's basis as in the real protocol, runs the malicious decoder, and checks the returned string against $`x`$. The imported simulation guarantee gives
 
 ```math
 P_{\mathrm{real\ accept}}
-\leq\varepsilon_{\mathrm{RSP}}
+\leq\eta_{\mathrm{prep}}
  +P_{\mathrm{sim\ pass\ and\ correct}}.
 ```
 
@@ -39,14 +39,14 @@ Give arbitrary output guesses to failed simulated branches, if needed, to obtain
 ```math
 P_{\mathrm{sim\ pass\ and\ correct}}
 \leq P_{\mathrm{sim\ correct}}
-\leq2^{-(n-m)/6}
+\leq2^{-(k-m)/6}
 ```
 
 by Theorem G. Combining the inequalities gives Theorem C:
 
 ```math
 P_{\mathrm{accept}}
-\leq\min\{1,\varepsilon_{\mathrm{RSP}}+2^{-(n-m)/6}\}.
+\leq\min\{1,\eta_{\mathrm{prep}}+2^{-(k-m)/6}\}.
 ```
 
 No division by the preparation-pass probability occurs. The dimension restriction is an output-register bound on $`E`$, so it applies to both real and simulated inputs. A rank bound on a state observed only in the real experiment would be a weaker premise.
@@ -56,13 +56,13 @@ No division by the preparation-pass probability occurs. The dimension restrictio
 Let $`m(\lambda)\geq0`$ be integer valued, efficiently computable and polynomially bounded in the security parameter $`\lambda`$. Let $`p(\lambda)\geq1`$ be a polynomial target. Use an RSP with simulation error at most $`1/(2p(\lambda))`$ and choose
 
 ```math
-n(\lambda)=m(\lambda)
+k(\lambda)=m(\lambda)
  +\left\lceil6\log_2(2p(\lambda))\right\rceil.
 ```
 
 Under the imported LWE hypothesis, this yields a polynomial-round classical-verifier protocol with false-acceptance probability at most $`1/p(\lambda)`$ against the specified efficient $`m(\lambda)`$-qubit provers. Honest completeness is $`1-\mathrm{negl}(\lambda)`$ in the ideal honest-storage model. Unlike the asymptotic estimate in HMOY25 Theorem 4.3, this finite calculation does not require $`m(\lambda)=\omega(\log\lambda)`$.
 
-More generally, for target total soundness $`\varepsilon\in(0,1)`$ and preparation error at most $`\varepsilon/2`$, the algebraic choice $`n=m+\lceil6\log_2(2/\varepsilon)\rceil`$ suffices. The cited lemma supplies the required preparation efficiently in the inverse-polynomial regime. Efficient negligible-soundness compilation would require a corresponding preparation guarantee.
+More generally, for target total soundness $`\varepsilon\in(0,1)`$ and preparation error at most $`\varepsilon/2`$, the algebraic choice $`k=m+\lceil6\log_2(2/\varepsilon)\rceil`$ suffices. The cited lemma supplies the required preparation efficiently in the inverse-polynomial regime. Efficient negligible-soundness compilation would require a corresponding preparation guarantee.
 
 For example, ideal target $`\delta=2^{-20}`$ requires a sufficient storage gap of $`120`$ qubits. Total soundness $`\varepsilon=2^{-20}`$ with equal error allocation requires gap $`126`$ and RSP error at most $`2^{-21}`$. These are algebraic error-budget examples.
 
