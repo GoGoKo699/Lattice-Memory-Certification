@@ -12,7 +12,7 @@ For three independent BB84 inputs and one retained quantum qubit, a two-copy pur
 \qquad\text{(F1)}
 ```
 
-Here unrestricted classical records and arbitrary joint encoders and basis-dependent POVMs are allowed. The lower value is $`0.728553390593274\ldots`$. The upper value improves the normalized DFW/Renes specialization $`(1+2\sqrt7)/8=0.786437827766148\ldots`$. It does not determine the optimum or improve the all-size exponent $`1/6`$.
+Here unrestricted classical records and arbitrary joint encoders and basis-dependent POVMs are allowed. The lower value is $`0.728553390593273762\ldots`$. The upper value improves the normalized DFW/Renes specialization $`(1+2\sqrt7)/8=0.786437827766147647\ldots`$. It does not determine the optimum or improve the all-size exponent $`1/6`$.
 
 The same two-copy method also gives exact collision maxima for four and five inputs with one retained qubit, and hence the additional guessing bounds
 
@@ -229,9 +229,9 @@ Applying (F6c) and (F6d) proves (F1a) in the same arbitrary-encoder model. The a
 
 | Inputs $`k`$ | Exact maximal PGM score | Store-and-Breidbart guessing score | Arbitrary-decoding upper bound |
 |---|---|---|---|
-| 3 | $`9/16`$ | $`\beta^2=0.7285533906\ldots`$ | $`C_3=0.7437184335\ldots`$ |
-| 4 | $`27/64`$ | $`\beta^3=0.6218592168\ldots`$ | $`C_4=0.6429429882\ldots`$ |
-| 5 | $`81/256`$ | $`\beta^4=0.5307900429\ldots`$ | $`C_5=0.5568402560\ldots`$ |
+| 3 | $`9/16`$ | $`\beta^2=0.7285533905\ldots`$ | $`C_3=0.7437184335\ldots`$ |
+| 4 | $`27/64`$ | $`\beta^3=0.6218592167\ldots`$ | $`C_4=0.6429429881\ldots`$ |
+| 5 | $`81/256`$ | $`\beta^4=0.5307900429\ldots`$ | $`C_5=0.5568402559\ldots`$ |
 
 For four inputs the inherited hypercontractive collision cap is $`1/2`$; for five it is $`2^{-4/3}`$. These are stronger than the respective normalized DFW spectral caps $`9/16`$ and $`29/64`$, but weaker than the new collision maxima. Thus the new certificates also strictly improve the guessing upper bounds obtained from either inherited collision cap followed by Renes. No tensorization or all-size exponent improvement follows from these finite cases.
 

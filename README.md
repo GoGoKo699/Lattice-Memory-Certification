@@ -21,9 +21,9 @@ with arbitrary joint encoders, basis-dependent POVMs and unrestricted classical 
 
 | Inputs, one retained qubit | Achievable guessing score | Guessing upper bound | Exact maximal PGM score |
 |---:|---:|---:|---:|
-| 3 | $`\beta^2=0.7285533906\ldots`$ | $`(2+7\sqrt2)/16=0.7437184335\ldots`$ | $`9/16`$ |
-| 4 | $`\beta^3=0.6218592168\ldots`$ | $`(2+\sqrt{345})/32=0.6429429882\ldots`$ | $`27/64`$ |
-| 5 | $`\beta^4=0.5307900429\ldots`$ | $`(4+\sqrt{4526})/128=0.5568402560\ldots`$ | $`81/256`$ |
+| 3 | $`\beta^2=0.7285533905\ldots`$ | $`(2+7\sqrt2)/16=0.7437184335\ldots`$ | $`9/16`$ |
+| 4 | $`\beta^3=0.6218592167\ldots`$ | $`(2+\sqrt{345})/32=0.6429429881\ldots`$ | $`27/64`$ |
+| 5 | $`\beta^4=0.5307900429\ldots`$ | $`(4+\sqrt{4526})/128=0.5568402559\ldots`$ | $`81/256`$ |
 
 Here $`\beta=(1+1/\sqrt2)/2`$. The achievable strategy stores one input and measures the others in the Breidbart basis. Exact PGM optimality does not determine optimal guessing. The [finite proof](science/finite-guessing.md) gives rational certificates and a limitation of the collision-only route to a better uniform exponent. The universal exponent above remains $`1/6`$.
 
