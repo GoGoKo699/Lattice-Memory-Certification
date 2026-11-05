@@ -43,7 +43,7 @@ For the radius-one balls $`S=\{x:|x|\leq1\}`$, the [certificate file](../verific
 | Challenge $`k`$ | Dimension $`r`$ | Stored qubits $`m`$ | Certified $`p_S`$ interval | Store-and-Breidbart at the same dimension |
 |---|---:|---:|---|---:|
 | 3 | 4 | 2 | $`[0.8010769969,\ 0.801080996]`$ | $`0.853553390593\ldots`$ |
-| 7 | 8 | 3 | $`[0.4609687373,\ 0.460976740]`$ | $`0.530790042945\ldots`$ |
+| 7 | 8 | 3 | $`[0.4609687373,\ 0.460976740]`$ | $`0.530790042944955\ldots`$ |
 
 These instances differ from the three-input, **one-qubit** theorem. Both encoders perform worse than storing designated qubits and measuring the remainder in the Breidbart basis. Their actual optimal scores are also strictly smaller than their generic square-root PGM upper bounds.
 
