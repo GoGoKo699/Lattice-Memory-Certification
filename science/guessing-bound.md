@@ -155,6 +155,20 @@ Apply Lemma D to each basis, then Cauchy–Schwarz to the classical average:
 
 This holds for every pure conditional branch, hence also after averaging the refinement labels and discarding the extra information. It proves the arbitrary-state formulation and therefore the original preparation experiment. The proof covers any finite classical alphabet without an alphabet-dependent loss; countable records follow by summing conditional bounds. General classical records are handled by the same conditional-state integral in finite-dimensional quantum systems.
 
+## 7. A finite refinement and a limit of this proof route
+
+For $`n=3,D=2`$, the [rank-sensitive finite argument](finite-guessing.md) strengthens the bound by using two-copy purity constraints before discrimination. It gives
+
+```math
+\mathbb E_\Theta P_{\mathrm{pgm}}(\Theta)\leq9/16,
+\qquad
+P_{\mathrm{guess}}\leq\frac{2+7\sqrt2}{16}.
+```
+
+Both statements cover arbitrary encoders and unrestricted classical records through the same pure classical refinement used above. The first constant is exact; the final guessing bound need not be attained. The finite-alphabet Renes inequality replaces the square-root comparison in this instance. A flagged Pauli twirl identifies the optimized arbitrary-state and preparation formulations without increasing the quantum dimension.
+
+The same chapter proves that a uniform rank-sensitive collision inequality with power greater than $`1/3`$ is false, even for positive operators diagonal in a product Breidbart basis. Thus strengthening only the rank-dependent PGM estimate in this proof cannot improve the uniform guessing exponent beyond $`1/6`$. This is a limitation of the collision-only route; the best universal guessing exponent remains open, and no tensorization of the finite improvement is asserted.
+
 ## Checks and interpretation
 
 The full-memory endpoint $`D=d`$ permits success one. At zero quantum storage the bound gives $`2^{-n/6}`$, while the explicit Breidbart strategy achieves $`\beta^n`$. These values leave the exponent constants unmatched.

@@ -370,15 +370,15 @@ Dependencies name earlier understanding targets, not extra assignments. Primary 
 
 **Central question:** What is added beyond previously known storage rates approaching one?
 
-**Understanding target:** Explain the particular DFW dimension specialization, compare finite sufficient gaps, and keep the limited comparison separate from a general priority claim.
+**Understanding target:** Explain the particular DFW dimension specialization and compare finite sufficient gaps. Then derive why the three-input/qubit certificate uses the extra two-copy purity constraint, distinguish the exact $`9/16`$ PGM constant from the guessing bound $`(2+7\sqrt2)/16`$, and explain the collision-only obstruction to improving the uniform exponent. Keep finite improvement, a proof-route limitation and a general priority claim separate.
 
 **Dependencies:** M21, M22.
 
 **Story role:** Place the established theorem in its scientific context.
 
-**Conceptual connection:** A deficit-only finite statement and a near-unit asymptotic storage rate are related but different claims.
+**Conceptual connection:** A deficit-only finite statement, a near-unit asymptotic storage rate, and a certified small-instance improvement are different claims. A sharp intermediate collision exponent does not determine the optimal guessing exponent.
 
-**Source pointers:** Watrous §3.1 for the guessing task; [DFW comparison](../references/RELATED_WORK.md#dfw15-finite-comparison); [finite table](../science/lower-bounds-and-resources.md#3-finite-comparison-with-an-earlier-uncertainty-relation).
+**Source pointers:** Watrous §3.1 for the guessing task; [DFW comparison](../references/RELATED_WORK.md#dfw15-finite-comparison); [finite table](../science/lower-bounds-and-resources.md#3-finite-comparison-with-an-earlier-uncertainty-relation); [rank-sensitive certificate and method limitation](../science/finite-guessing.md).
 
 ### M24: Specify the preparation simulator
 
@@ -474,7 +474,7 @@ Dependencies name earlier understanding targets, not extra assignments. Primary 
 
 **Conceptual connection:** Existing recovery reductions imply both convenient mean-rank floors. Retaining the actual noise probabilities in a logarithmic moment then strengthens the dynamical ledger; its interval reserve must control that moment rather than only the mean. The transfer assumes independent noise and an honestly charged fixed controller model; a score does not test those premises or automatically compose with the LWE wrapper.
 
-**Source pointers:** Watrous §§2.2–2.3, 3.1.2 and 3.2; [noisy-processing application](../science/noisy-processing.md); [complete companion proof](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/main/science/guessing_processing.md); [moment theorem](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/4a2ee369e2c8765d1749d4f3d25103109b8289d3/science/moment_processing.md); [resources](../science/lower-bounds-and-resources.md#4-charged-resources).
+**Source pointers:** Watrous §§2.2–2.3, 3.1.2 and 3.2; [noisy-processing application](../science/noisy-processing.md); [complete companion proof](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/223dd0a1e70e6ec94cf0ce6431a1ae842d1c8ea6/science/guessing_processing.md); [moment theorem](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/223dd0a1e70e6ec94cf0ce6431a1ae842d1c8ea6/science/moment_processing.md); [resources](../science/lower-bounds-and-resources.md#4-charged-resources).
 
 ### M30: Synthesize the complete contribution
 
@@ -482,7 +482,7 @@ Dependencies name earlier understanding targets, not extra assignments. Primary 
 
 **Central question:** What is the full claim, and under exactly which assumptions does each part hold?
 
-**Understanding target:** Explain the ideal theorem, conditional LWE compilation, logarithmic-order lower witness, acceptance-rule limitations and noisy-processing application as one connected account with their distinct assumptions. Distinguish analytical proof, finite tests, cryptographic hardness and unverified device premises.
+**Understanding target:** Explain the ideal theorem, its certified three-input refinement, the collision-only method limitation, conditional LWE compilation, logarithmic-order lower witness, acceptance-rule limitations and noisy-processing application as one connected account with their distinct assumptions. Distinguish analytical proof, finite tests, cryptographic hardness and unverified device premises.
 
 **Dependencies:** M21, M22, M23, M24, M25, M26, M27, M28, M29.
 

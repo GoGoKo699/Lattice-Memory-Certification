@@ -60,7 +60,7 @@
     "Random POVMs are not a global search for the optimal joint decoder.",
     "Local link checks do not inspect hosted mathematical rendering."
   ],
-  "local_link_paths_checked": 151,
+  "local_link_paths_checked": 196,
   "maximum_identity_errors": {
     "average_pauli_identity": 1.6653345369377348e-15,
     "branch_probabilities": 2.220446049250313e-16,

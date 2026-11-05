@@ -29,7 +29,7 @@ The section and printed-page references below use that January 2018 author copy.
 | §§3.2–3.3, pp. 139–198 | Fidelity and channel distances | Compare guessing-based conclusions with recoverable Bell fidelity |
 | §§4.1.1 and 4.2.2 | Mixed-unitary channels, fixed points and spectra | Pauli conditional expectations and the companion's channel-rank bottleneck |
 
-These are selected locations, not a requirement to read every page in each interval. Chapter 6 can provide further entanglement context, but the Schmidt-rank step already has its needed foundation in §1.1.3. Watrous is also the single educational anchor of [Measurement-Free Memory Cost](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost); its [bridge](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/main/learning/WATROUS_BRIDGE.md) develops the channel and Pauli-envelope side. The project-specific cryptographic and noisy-processing models are supplied by their scientific accounts rather than attributed to the textbook.
+These are selected locations, not a requirement to read every page in each interval. Chapter 6 can provide further entanglement context, but the Schmidt-rank step already has its needed foundation in §1.1.3. Watrous is also the single educational anchor of [Measurement-Free Memory Cost](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost); its [bridge](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/223dd0a1e70e6ec94cf0ce6431a1ae842d1c8ea6/learning/WATROUS_BRIDGE.md) develops the channel and Pauli-envelope side. The project-specific cryptographic and noisy-processing models are supplied by their scientific accounts rather than attributed to the textbook.
 
 ## Notation and normalization
 
@@ -122,6 +122,21 @@ The rank estimate follows from $`\sum_{j=1}^r\lambda_j^{3/4}\leq r^{1/4}`$ for e
 
 **Finish and interpret.** Averaging the discrimination inequality and using $`\mathbb E\sqrt Z\leq\sqrt{\mathbb E Z}`$ gives $`P_{\mathrm{guess}}\leq\min\{1,(D/2^n)^{1/6}\}`$. With $`D\leq2^m`$, this gives $`2^{-(n-m)/6}`$. Averaging over the extra classical labels then returns the original experiment, including joint encoders and decoders. For target ideal guessing probability $`0\lt \delta\lt 1`$, a deficit $`n-m\geq\lceil6\log_2(1/\delta)\rceil`$ suffices whenever the input length permits that gap.
 
+## A rank-sensitive three-input step
+
+The [finite refinement](../science/finite-guessing.md) uses the same textbook foundations without changing the educational anchor. For three inputs and one retained qubit, normalize $`R=\sqrt\rho`$ by $`\mathrm{Tr}R^2=1`$. Its rank is at most two. A positive operator on two copies expresses linear-entropy subadditivity and bounds the sum of the one-qubit Pauli coefficients. Combining that constraint with the BB84 Pauli weights gives the exact global PGM cap $`9/16`$.
+
+Renes's finite-alphabet discrimination theorem, supplied as a separate research ingredient, converts this into
+
+```math
+P^*_{3,1}\leq\frac{2+7\sqrt2}{16}
+\simeq0.7437184335.
+```
+
+Storing one input and Breidbart-measuring the other two achieves $`\beta^2\simeq0.7285533906`$. That strategy saturates the PGM constant, but it does not saturate the displayed guessing bound. A flagged Pauli twirl shows that arbitrary-state strategies can be implemented by encoders for the original uniform preparation experiment, without increasing retained quantum dimension. These distinctions separate a global certificate from a numerical encoder search and from a tight guessing theorem.
+
+The same chapter constructs large Breidbart-diagonal Hamming-ball projectors showing that the rank power $`1/3`$ of the collision statistic is sharp. Therefore improving the uniform guessing exponent requires an ingredient beyond a stronger rank-only PGM power followed by the generic square-root comparison. The core exponent remains $`1/6`$; neither this method limitation nor the three-input result proves the optimal exponent or tensorization against arbitrary joint encoders.
+
 ## From ideal inputs to a classical verifier
 
 The ideal experiment assumes that the verifier can supply hidden BB84 states. A classical verifier cannot simply perform that preparation itself. The project instead imports an LWE-based remote-state-preparation protocol with a specific simulation guarantee; the complete assumptions and proof are in [classical certification](../science/cryptographic-certification.md).
@@ -147,7 +162,7 @@ The [milestone map](MILESTONES.md) integrates these distinctions into the scient
 
 ## From a storage cut to a processing witness
 
-The finite theorem also applies to the quantum-plus-classical output of a Pauli algebra. The [application](../science/noisy-processing.md) is self-contained about the new physical premises; the companion owns the [complete transfer and recovery comparison](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/main/science/guessing_processing.md).
+The finite theorem also applies to the quantum-plus-classical output of a Pauli algebra. The [application](../science/noisy-processing.md) is self-contained about the new physical premises; the companion owns the [complete transfer and recovery comparison](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/223dd0a1e70e6ec94cf0ce6431a1ae842d1c8ea6/science/guessing_processing.md).
 
 Use $`k`$ independent uniform BB84 challenge qubits. The device receives the quantum states alone. The hidden string $`X`$ is never revealed, and only the basis string $`\Theta`$ is disclosed after all charged storage has ended. Let $`n`$ count every noisy persistent data, syndrome, controller and resource qubit, and let $`D`$ count independent depolarizing rounds. The score $`p`$ is unconditional whole-string success.
 

@@ -69,6 +69,8 @@ These are bounds for exact recovery of the whole string, allowing joint processi
 
 The dependence on $t$ is the central feature. To force ideal cheating probability to at most a fixed $\delta\in(0,1)$, it suffices to supply $\lceil6\log_2(1/\delta)\rceil$ more qubits than the device can retain. This sufficient gap has no additional dependence on the stored block size. An explicit strategy shows that the logarithmic order cannot be improved within this ideal test, although the constants remain unmatched.
 
+A rank-sensitive finite refinement improves the three-input, one-retained-qubit case to $\pguess\le(2+7\sqrt2)/16\simeq0.743718$, with arbitrary joint encoders and unlimited classical records. A separate construction shows that the collision statistic used in the general proof has sharp exponent $1/3$ in the memory deficit. Thus this finite improvement does not improve the uniform guessing exponent $1/6$; a stronger general result needs information beyond that statistic and its square-root conversion.
+
 A second layer uses a computationally secure preparation protocol to let a verifier conduct the test using classical interaction. Under its precise assumptions, the false-acceptance bound becomes
 \begin{equation}\label{eq:compiled-front}
 P_{\mathrm{accept}}\leq\min\{1,\varepsilon_{\mathrm{RSP}}+2^{-t/6}\},
@@ -352,6 +354,68 @@ Thus $\E\pgm\leq(r/d)^{1/3}$. Finally, use \eqref{eq:discrimination} and Cauchy-
 \leq(r/d)^{1/6}\leq(D/d)^{1/6}.
 \end{equation}
 This holds on every refined pure branch. Averaging those branch bounds and removing the extra label returns the original mixed-state experiment. General classical records use the same conditional-state average; there is no alphabet-size penalty. Adding the trivial probability bound one proves \eqref{eq:main}, including non-power-of-two $D$.
+
+\subsection{A globally certified improvement for three inputs}
+For $n=3$ and $D=2$, every pure branch has positive $R=\sqrt\rho$ with $\rank R\le2$ and $\Tr R^2=1$. Put $t_0=(\Tr R)^2\le2$ and let $S_1$ be the sum of $(\Tr RP)^2$ over the nine weight-one Pauli words, including those containing $\YY$. Ordinary Pauli orthogonality gives $\sum_P(\Tr RP)^2=8$. The BB84 averaging map has multiplier at most $1/2$ on weight one and at most $1/4$ on all higher weights. Hence
+\begin{equation}
+Q:=\Tr[R\mathcal T^{\otimes3}(R)]
+\le\frac18\left[t_0+\frac12S_1+\frac14(8-t_0-S_1)\right]
+=\frac14+\frac{3t_0+S_1}{32}.
+\label{eq:finite-purity-relaxation}
+\end{equation}
+The additional rank-sensitive constraint is $S_1\le t_0+2$. Here is an exact two-copy proof. For a normalized bipartite state $\sigma_{UV}$, the swap operators $F_U,F_V$ commute and have eigenvalues $\pm1$. Thus $(I-F_U)(I-F_V)\ge0$, and its expectation in $\sigma_{UV}^{\otimes2}$ gives
+\[
+\Tr\sigma_U^2+\Tr\sigma_V^2\le1+\Tr\sigma_{UV}^2.
+\]
+Applying this first to $AB|C$ and then to $A|B$ yields $\sum_{i=1}^3\Tr\sigma_i^2\le2+\Tr\sigma^2$. For $\sigma=R/\Tr R$, the Bloch identity therefore gives
+\[
+S_1=t_0\left(2\sum_i\Tr\sigma_i^2-3\right)\le t_0+2.
+\]
+Substitution in \eqref{eq:finite-purity-relaxation} proves $Q\le5/16+t_0/8\le9/16$. This is a global outer certificate for all positive rank-two $R$, not a search over a selected encoder family. It is tight as a PGM bound: $R=(I/\sqrt2)\otimes\ket b\bra b\otimes\ket b\bra b$ attains $Q=9/16$ for a pure real qubit state $\ket b$.
+
+The established finite-alphabet discrimination inequality sharpens the square-root conversion for eight outcomes:
+\[
+\pgm(\theta)\ge p_\theta^2+\frac{(1-p_\theta)^2}{7},
+\qquad p_\theta=\popt(\theta).
+\]
+It permits nonuniform probabilities and arbitrary POVMs. Convexity permits averaging over the bases, so $p^2+(1-p)^2/7\le9/16$ for $p=\E p_\Theta\ge1/8$. Solving on this interval and averaging the pure-branch refinement gives
+\begin{keybox}
+\[
+\frac{3+2\sqrt2}{8}\le P^*_{3,1}\le
+C_3:=\frac{2+7\sqrt2}{16}=0.743718433538229\ldots.
+\]
+The left side is the store-and-Breidbart strategy, $0.728553390593274\ldots$. The prior normalized spectral reduction followed by the same discrimination inequality gives only $(1+2\sqrt7)/8=0.786437827766148\ldots$.
+\end{keybox}
+The finite improvement does not determine the optimum. It strengthens the collision constraint with a two-copy purity relation while retaining the existing arbitrary encoder and decoder scope.
+
+\subsection{The arbitrary-state formulation is attainable}
+The proof's premeasurement state formulation allows arbitrary states on $AQ$, while source replacement for the preparation experiment initially fixes the $A$ marginal to $I/2^n$. Their optimized scores are nevertheless equal when classical records are unrestricted. Given a pure strategy $\psi_{AQ}$, attach a classical label to the Pauli twirl
+\[
+\Omega_{AQC}=4^{-n}\sum_a(P_a\otimes I)\psi_{AQ}(P_a^\dagger\otimes I)
+\otimes\ket a\bra a.
+\]
+Its $A$ marginal is $I/2^n$, so it is the normalized state of a CPTP encoder acting on half a Bell pair. Explicitly that encoder is $\mathcal E(B)=2^n\Tr_A[(B^T\otimes I)\Omega]$. Each Pauli maps a product BB84 basis to itself up to outcome relabeling. Knowing $a$ and the disclosed basis lets the decoder undo that relabeling and reproduce the original score. There are only $4^n$ classical labels and the quantum dimension is unchanged. Real BB84 source replacement gives the converse inclusion. This proves equivalence of the optima, not attainability of the upper bound $C_3$.
+
+\subsection{Why a better uniform collision exponent is impossible}
+The finite result does not tensorize against joint encoders. There is also a precise obstruction to improving the general rank-only collision step. For any fixed finite $C$ and $a>1/3$, the proposed universal inequality
+\[
+\Tr[R\mathcal T^{\otimes n}(R)]\le C(\rank R/2^n)^a
+\]
+is false, even for positive $R$ diagonal in a product Breidbart basis.
+
+Let $n$ run through multiples of eight, put $b_n=\lfloor n^{3/4}\rfloor$, and let $S_n$ be the binary Hamming ball of radius $n/2-b_n$. In that product basis take $R_n=P_{S_n}/\sqrt{r_n}$, with $r_n=|S_n|$ and $u_n=r_n/2^n$. On the diagonal algebra, $\mathcal T$ is exactly the binary channel with crossover probability $1/4$. For uniform $U$ and its independently flipped version $V$,
+\[
+Q_n=\frac{\Pr(U,V\in S_n)}{\Pr(U\in S_n)},\qquad
+\ln u_n=-2b_n^2/n+O(b_n^4/n^3+\ln n).
+\]
+For the joint event use the single joint type with counts $3n/8+b_n,n/8,n/8,3n/8-b_n$ for $00,01,10,11$. Both marginals lie in $S_n$. Relative to probabilities $(3/8,1/8,1/8,3/8)$, its relative entropy is $(8/3)b_n^2/n^2+O(b_n^4/n^4)$. The elementary multinomial type lower bound then gives
+\[
+\ln Q_n\ge-\frac23b_n^2/n-O(b_n^4/n^3+\ln n),
+\qquad Q_n\ge u_n^{1/3+o(1)}.
+\]
+Since the remainder is $o(b_n^2/n)$, this excludes every exponent $a>1/3$. The inherited hypercontractive estimate $Q_n\le u_n^{1/3}$ gives the matching collision exponent. Rounding to $m_n=\lceil\log_2r_n\rceil$ changes the deficit by less than one.
+
+Consequently a proof consisting only of a universal rank-dependent collision bound and the square-root or finite-alphabet conversion cannot improve the uniform guessing exponent beyond $1/6$. The finite-alphabet correction is negligible here because $Q_n\gg2^{-n}$. This does not determine the true guessing exponent, prove tensorization of $C_3$, or exclude a stronger joint-discrimination argument. The store-and-Breidbart strategy still limits any true universal exponent to $-\log_2\beta\simeq0.228447$.
 
 \newsection{What the logarithmic overhead means}
 \label{sec:overhead}
@@ -688,7 +752,48 @@ The previous chord gives leading coefficient $2p$ under the same conditions. The
 
 The analytic polygon can be sharpened by combining all available bounds at each integer pair $(s,c)$. For $k=12$, a rational certificate checks all 169 pairs with $0\le2s+c\le24$, using the direct, recovery and output-dimension caps and the established classical cap $\beta^{12}$ for $s=0$, where $\beta=(1+1/\sqrt2)/2$. At $z=27/25$, the concave polygon through $(1,1/4096),(z^{11},1/4),(z^{24},1)$, constant afterward, majorizes each branch cap. The classical bound follows from the Gram-matrix row-sum estimate for selected product-BB84 vectors.
 
+The three-input bound also survives this composition. For $k=3,s=1$, the branch cap is $C_3$ regardless of the allowed classical dimension. At $r=4,s=1,c=2$ it is smaller than the previous normalized recovery cap. For $z=27/25$, a rational concave majorant of the improved integer profile has knots
+\[
+(1,1/8),\quad(z^2,1/2),\quad(z^3,311/500),\quad
+(z^4,93/125),\quad(z^6,1).
+\]
+Exact rational slope and cap checks certify this polygon. Thus $\E z^r\le z^4$ forces $p\le93/125=0.744$. At score $p=3/4$, the moment floor is at least $\log_z[z^4+3(z^6-z^4)/128]>4$. This is a finite interface improvement; it changes neither the $k=12$ example nor the general exponent.
+
 For the earlier example $k=12,p=0.4,n=120,q=0.99$, it gives $M_z\ge(4z^{11}+z^{24})/5$, $a_z\simeq14.84082963$ and $\alpha_z\simeq0.99072498$. Certified logarithm bounds make the individual-gate requirement at least $244$ for $D=2000$, compared with $171$ from mean rank. Every 700-round contiguous interval with moment reserve at most $240$ requires at least $58$ such gates, compared with $39$. The interval bound uses its own moment reserve, and both numbers are necessary conditions rather than physical feasibility or optimality claims.
+
+\subsection{A finite and asymptotic decay guarantee}
+The companion processing analysis owns the ledger and its inversion. The shared consequence is independently stated here. For $1<z\le2^{1/7}$ put $\alpha=\alpha_z$, $M=2n$, and, for $D\ge1$, define
+\[
+U_z=\min\left\{M\alpha,\;
+\min_{1\le l\le D}\frac{\alpha(m_T+M\alpha^{l-1})}{1+(D-l)(1-\alpha)}\right\}.
+\]
+The direct profile gives $X_z\ge[2k+\log_zp]_+$. The scalar injection inequalities rearrange to upper-bound that floor by every expression defining $U_z$, yielding
+\[
+p\le\min\{1,z^{U_z-2k}\},\qquad
+-\ln p\ge(\ln z)[2k-U_z]_+.
+\]
+For $D=0$ use $U_z=M$; for $p=0$ use $-\ln0=+\infty$. The initial-width term is retained, and any proved nondecreasing concave profile gives the stronger finite form $p\le P_z(z^{U_z})$. At $k=12,n=120,q=0.99,z=27/25,D=2000,m_T=200$, the certified profile gives $p\le0.310300082242$; the simple exponential bound gives $p\le0.418535080865$.
+
+Fix $q\in(0,1)$ and finite $\rho\ge0$. Along any family with $k,D\to\infty$, $n\ge k$, $\ln(n/k)=o(D)$ and $\limsup m_T/(kD)\le\rho$,
+\[
+\liminf\frac{-\ln p}{k}\ge
+E_q(\rho):=\sup_{1<z\le2^{1/7}}(\ln z)
+\left[2-\rho\frac{\alpha_z}{1-\alpha_z}\right]_+.
+\]
+For fixed $z$, choose $l=1+\lceil\ln(2n/k)/(-\ln\alpha_z)\rceil=o(D)$, leaving initial allowance at most $k$. The displayed limit follows from the finite formula, followed by the supremum over fixed $z$. Since $\alpha_z>q$ and $\alpha_z\to q$ as $z\downarrow1$, the exponent is positive exactly when $\rho<2(1-q)/q$. The right endpoint is allowed and the continuous left-endpoint value is zero. This is a necessary-rate decay statement, not an achievable processing capacity.
+
+\subsection{The coherent construction's matching regime}
+The companion also owns the constructive processing theorem. It compiles an inherited good Tanner-code decoder, run for a fixed number of parallel iterations, into the allowed Clifford+T circuit. Every local minimum, comparison, tie choice and update is a fixed Boolean function on a constant-size neighborhood. Hardwired incidence connections require no adaptive address machine. Reversible Boolean evaluation, controlled Pauli correction and inverse evaluation cost $O(N)$ prescribed T slots and $O(N)$ total scratch for a data block of length $N$. Scratch is reset before each epoch and never retains a protected record.
+
+The coherent circuit implements exactly $\sum_sP_{f(s)}\Pi_s\omega\Pi_sP_{f(s)}^\dagger$, also with an arbitrary reference. A constant-iteration residual contraction keeps both CSS components in a region whose combined representatives have weight below half the code distance. Current syndrome alone suffices. Independent depolarizing batches have correlated X/Z components on each site, so reliability uses their separate binomial tails and a union bound. Bounded multiplicative gaps in the available code lengths allow arbitrary payloads and error targets by padding within the free endpoints. These ingredients give, in a fixed family-dependent range $0<\gamma\le\gamma_*$,
+\[
+\begin{gathered}
+n=O\!\left(k+\ln\frac{J_+}{\epsilon}\right),\qquad m_T=O(nJ),\qquad J=O(\gamma D+1),\\
+\tfrac12\lVert\Lambda-\mathrm{id}\rVert_\diamond\le\epsilon,
+\qquad J_+=\max(1,J).
+\end{gathered}
+\]
+Here $n$ counts data, syndrome and all workspace. The fixed constants are potentially enormous and $\gamma_*$ can be much smaller than the earlier five-qubit construction's range. If $k=\Omega(\ln(J_+/\epsilon))$ and $\gamma D\to\infty$, this closes its polylogarithmic resource gap in order. It proves neither a numerical optimum nor a physical threshold with faulty gates or locality constraints. No preparation wrapper is automatically compiled into this processing theorem.
 
 At chance, discarding the challenge and guessing needs zero processing. Full-register replacement gives
 \[
@@ -717,7 +822,9 @@ Physical protection & Any additional physical qubits used for error correction r
 No free state-loading oracle or quantum random-access memory is assumed. The ideal source is an explicit quantum input resource; its classical realization pays for the imported preparation protocol.
 
 \subsection{What supports the claims}
-The ideal result follows from the analytical chain in Sections~4--8, using the standard tensor-power norm theorem as its substantial mathematical input. Section~11 supplies the separate computational reduction under its cryptographic assumption. Finite matrix checks test the intermediate identities and normalization conventions against those analytical expressions. The noisy-processing checks also compare the explicit quantum-plus-classical factorization with the Pauli-algebra projection and verify the resulting endpoint probabilities. Independent moment checks enumerate all subspaces at widths one through three and certify the pivot, noise and gate inequalities; exact logarithm enclosures check the finite moment-budget comparison. They do not test a physical device's noise or controller assumptions.
+The ideal result follows from the analytical chain in Sections~4--8, using the standard tensor-power norm theorem as its substantial mathematical input. Section~11 supplies the separate computational reduction under its cryptographic assumption. Finite matrix checks test the intermediate identities and normalization conventions against those analytical expressions. The new three-input certificate uses an exact positive two-copy swap expression, Pauli-weight bounds and rational algebraic enclosures. Its rational moment polygon is checked at every permitted integer rank. The collision-route limitation follows from the explicit type construction and entropy expansion, rather than extrapolation of small instances.
+
+The noisy-processing checks compare the explicit quantum-plus-classical factorization with the Pauli-algebra projection and verify the resulting endpoint probabilities. Independent moment checks enumerate all subspaces at widths one through three and certify the pivot, noise and gate inequalities; exact logarithm enclosures check the finite moment-budget comparison. The companion checks additionally certify the finite inverse ledger and its one-variable exponent optimization. These checks do not test a physical device's noise or controller assumptions.
 
 An accepted run is not a deterministic measurement of a device's qubit count. Soundness bounds every dimension-limited strategy in the ideal model; the compiled protocol covers the efficient adversaries in its imported assumptions. A low-memory device can occasionally pass. Claims based on repeated runs must account for their joint strategy and information across cuts rather than assuming independent trials without justification.
 
