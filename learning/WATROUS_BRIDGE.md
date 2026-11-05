@@ -198,3 +198,12 @@ The interval reserve now bounds $`X_z`$, not only the mean rank. The full-output
 
 This application assumes a fixed circuit of the permitted primitives, input-independent replacement resets, and noisy counted persistent controller records. Their processing must still be charged correctly; counting record bits does not make arbitrary feedback free. A guessing score does not verify the model's noise or controller assumptions. At random-guessing success $`p=2^{-k}`$, discarding the challenge is a zero-processing strategy. The LWE compilation above is a separate result: no processing guarantee is automatically attached to it.
 
+
+
+### Survival, reliability and the cost of a long storage period
+
+The [extinction-based application](../science/noisy-processing.md#survival-of-the-envelope-gives-a-reliability-dependent-budget) combines the same channel foundation with a classical survival argument. A zero Pauli envelope means that every pulled-back output operator is scalar, so the sampled CPTP channel has forgotten the input. A basis-dependent final measurement can then guess a uniformly hidden string only with chance probability $`2^{-k}`$. An unconditional score $`p>2^{-k}`$ limits the probability of this event to $`\delta_p=(1-p)/(1-2^{-k})`$.
+
+A rank-$`r`$ envelope has at most $`r`$ physical pivot qubits whose simultaneous replacement kills it. Their independent replacement probability is at least $`\gamma^r`$. With zero kept absorbing, first extinction can happen only once. This limits the sum of its conditional hazards over the $`D`$ noise layers. Jensen's inequality then forces the cumulative expected rank to grow at least as $`D\ln D`$ for fixed nonchance score and noise strength. Rank contraction at noise layers must be paid by continuing T/T-dagger rank growth, after the finite terminal allowance $`2n`$.
+
+This is the role of the extra reliability logarithm: a constant one-cut rank floor does not control the accumulated chance of complete forgetting across a long run. The resulting processing bound applies even for a fixed small challenge when total noisy width grows only logarithmically with duration. The textbook supplies channel, adjoint and measurement foundations; the rank-dependent survival and charged-processing argument is supplied by the companion scientific account, with its complete-erasure/spacetime antecedent separately credited. The ideal $`1/6`$ exponent and finite three-input cap are unchanged.

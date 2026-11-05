@@ -327,6 +327,88 @@ This retains the initial width and is valid for every fixed gate schedule. Under
 
 The infinite sum converges geometrically. This exponent is positive exactly below $`2(1-q)/q`$ and strictly improves $`E_q`$ throughout that subcritical range. In particular $`\mathcal E_q(0)=\ln2`$, the chance-level exponent, instead of $`E_q(0)=2\ln2/7`$. Finite sums with rigorous tail bounds provide certified optimization. The companion's [complete proof and certificates](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/947ddadf936a25e8fe181c45a3fe8a95a41d9196/science/guessing_decay.md) own this refinement. Its critical rate remains a necessary threshold; physical achievability is not established.
 
+## Survival of the envelope gives a reliability-dependent budget
+
+A fixed nonchance score also constrains how often the sampled channel may lose **all** input dependence. This gives a different bound from the mean-rank and exponential-moment floors above. The companion owns the [complete extinction and processing proof](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/d38f687640583febb8d56a895b85ee48a0122b47/science/reliability_processing.md); the score-based consequence is stated and derived here.
+
+Keep the same full physical output before basis-dependent readout, the same independent identity/replacement noise coupling, and the same counted fixed Clifford+T/reset circuit. For $`D\ge1`$ and an unconditional score $`2^{-k}<p<1`$, define
+
+```math
+\delta_p=\frac{1-p}{1-2^{-k}},\qquad
+b_p=1-\delta_p=\frac{p-2^{-k}}{1-2^{-k}}.
+```
+
+Both numbers lie strictly between zero and one. Then
+
+```math
+m_T\ge\left\lceil
+\left[
+\frac{\gamma D b_p}{\ln(1/\gamma)}
+\left[\ln\frac{D b_p}{\delta_p}\right]_+
+-2n
+\right]_+\right\rceil.
+\qquad\text{(R1)}
+```
+
+This necessary condition may be combined with every earlier valid ledger. It retains a finite initial-width allowance, rather than assuming the width can be held fixed indefinitely. At $`p=1`$, any positive number of noise rounds and finite width are incompatible with the model: complete replacement of every physical slot has positive probability and leaves only chance success. At or below chance, this argument imposes no positive processing requirement.
+
+### Why the same physical score controls extinction
+
+Choose the envelope updates so that the zero space is absorbing. Clifford operations and resets already have this property. At a T/T-dagger slot, keep $`V`$ unchanged when all labels commute with its Pauli axis; otherwise use $`V+\langle w\rangle`$. In particular, a zero envelope stays zero, while every slot still increases rank by at most one. Merely adding the gate axis at every slot would introduce an artificial resurrection and would not justify this argument.
+
+An incoming rank-$`r`$ space has $`r`$ binary coordinate pivots whose restriction is injective. They occupy at most $`r`$ physical qubits. If all those qubits are replaced in the next noise layer, the surviving subspace is zero. Conditional on the sampled suffix, the current noise choices are independent, so the conditional extinction probability is at least $`\gamma^r`$. These choices are mathematical variables, not flags supplied to the controller.
+
+A branch with zero envelope represents a CPTP tail whose full output is independent of the input. No basis-dependent endpoint readout can then correlate its guess with the uniformly hidden $`X`$. Its exact-string score is at most $`2^{-k}`$; aborts can only reduce it. If $`e`$ is the probability of eventual extinction, unconditional averaging gives
+
+```math
+p\le 2^{-k}e+(1-e),\qquad e\le\delta_p.
+\qquad\text{(R2)}
+```
+
+Let $`r_j`$ be the envelope rank immediately before the $`j`$th backward noise layer, and let $`S_j`$ indicate that it is nonzero. First extinction at different noise layers is disjoint; a reset that extinguishes the envelope only consumes more of the same probability budget. Therefore
+
+```math
+\sum_{j=1}^{D}\mathbb E[S_j\gamma^{r_j}]\le\delta_p,
+\qquad
+A:=\sum_{j=1}^{D}\Pr[S_j=1]\ge D b_p.
+\qquad\text{(R3)}
+```
+
+Apply Jensen's inequality to $`e^{-r\ln(1/\gamma)}`$ with the alive cut-time weights of total mass $`A`$. Since $`r_j=0`$ when $`S_j=0`$, this yields
+
+```math
+\sum_{j=1}^{D}\mathbb E[r_j]
+\ge \frac{A}{\ln(1/\gamma)}\left[\ln\frac{A}{\delta_p}\right]_+
+\ge \frac{D b_p}{\ln(1/\gamma)}
+\left[\ln\frac{D b_p}{\delta_p}\right]_+.
+\qquad\text{(R4)}
+```
+
+For the final inequality use nonnegativity when $`D b_p\le\delta_p`$; otherwise $`A\ln(A/\delta_p)`$ is increasing for $`A\ge D b_p>\delta_p`$. The expected-rank decrease at noise layer $`j`$ is at least $`\gamma\mathbb E[r_j]`$. Free primitives do not increase rank and all T/T-dagger increases sum to at most $`m_T`$. Telescoping from terminal rank $`2n`$ gives
+
+```math
+m_T\ge\gamma\sum_{j=1}^{D}\mathbb E[r_j]-2n.
+\qquad\text{(R5)}
+```
+
+Equations (R4) and (R5) prove (R1). No independent controller record, postselection or branch-dependent physical gate choice is introduced.
+
+The same global score gives a bound inside every contiguous interval with $`D_I\ge1`$ noise layers. Let $`M_I`$ be a proved bound on the expected rank of the actual globally propagated suffix envelope entering that interval in backward order. Then
+
+```math
+m_{T,I}\ge\left\lceil\left[
+\frac{\gamma D_I b_p}{\ln(1/\gamma)}
+\left[\ln\frac{D_I b_p}{\delta_p}\right]_+-M_I
+\right]_+\right\rceil.
+\qquad\text{(R6)}
+```
+
+Always $`M_I=2n`$ is safe. Do not restart a newly chosen envelope at the interval boundary. Global extinction still bounds the zero probability at every cut, and first-extinction events within this interval have total probability at most $`\delta_p`$. Thus the same hazard/Jensen argument uses $`D_I`$ layers, while its cumulative-rank balance subtracts $`M_I`$. Gates on interval boundaries are assigned once to the selected primitive cuts. When $`D_I=0`$, this theorem adds only a nonnegative count.
+
+For fixed $`k`$, fixed $`\gamma>0`$ and fixed $`p>2^{-k}`$, widths $`n=O(\ln D)`$ therefore require $`m_T=\Omega(D\ln D)`$ as $`D\to\infty`$. This strengthens the continuing-processing inference for small challenges. In the companion's construction range $`0<\gamma\le1/20`$, its reference-stable Tanner construction has the same processing order at that width for a fixed error target. This is a fixed-noise order statement; the factor $`1/\ln(1/\gamma)`$ prevents a claim of uniform weak-noise sharpness.
+
+The use of first extinction and Jensen is a rank-dependent adaptation of the established complete-erasure/spacetime argument of [Bharti, Haug and Tanggara](https://arxiv.org/abs/2608.26272). The additional step tracks the backward Pauli-envelope rank rather than all live physical qubits and converts its cumulative contraction into the specifically charged T count while Clifford/reset processing remains free. It is not the first reliability logarithm in a quantum-memory resource law.
+
 ## A matching-order coherent construction in the companion model
 
 The companion [Tanner construction](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/947ddadf936a25e8fe181c45a3fe8a95a41d9196/science/tanner_memory.md) compiles an inherited constant-iteration current-syndrome decoder into a fixed coherent circuit. Syndrome and scratch registers remain in the counted noisy pool and are reset before each ideal recovery; nonlinear decisions are implemented and charged. A fixed-level five-qubit inner code extends its physical-noise range to $`0\lt\gamma\le1/20`$. With this inner code it proves
@@ -341,7 +423,7 @@ m_T=O(nJ),\qquad J=O(\gamma D+1).
 \qquad J_+=\max\{1,J\}.
 ```
 
-Here $`n`$ includes the Tanner data block and all controller/workspace qubits. The endpoint decoder is free, fixed and reference-safe. Independent spatial depolarization gives separate marginal tails for $`X`$ and $`Z`$ components; a union bound handles their correlation. When $`k=\Omega(\ln(J_+/\epsilon))`$ and duration is long enough for the converse width allowance, the construction has $`n=O(k)`$ and $`m_T=O(k\gamma D)`$. The inner concatenation level depends only on the fixed Tanner family, so its width and prescribed gate overhead remain constant in $`k,D,\epsilon,\gamma`$ throughout that range. Existing outer residual Paulis leave the inner syndrome unchanged; fresh logical errors remain independent across inner blocks, while their X/Z components may be correlated. Its constants may be extremely large and grow further with the inner code. It changes no quantum-memory guessing exponent and supplies no cryptographic preparation compilation or hardware gate-time theorem.
+Here $`n`$ includes the Tanner data block and all controller/workspace qubits. The endpoint decoder is free, fixed and reference-safe. Independent spatial depolarization gives separate marginal tails for $`X`$ and $`Z`$ components; a union bound handles their correlation. When $`k=\Omega(\ln(J_+/\epsilon))`$ and duration is long enough for the earlier converse width allowance, the construction has $`n=O(k)`$ and $`m_T=O(k\gamma D)`$. The extinction-based fidelity converse in the companion extends the fixed-noise matching order to every payload scaling: for fixed $`0<\gamma\le1/20`$, errors $`0<\epsilon\le\epsilon_0<1/2`$ and a width allowance $`n\le C[k+\ln(D/\epsilon)]`$, sufficiently long storage requires $`\Omega_\gamma(D[k+\ln(D/\epsilon)])`$ T slots. A sufficiently large constant width factor permits the Tanner construction to achieve the same order. This statement restricts the width class; it does not optimize over arbitrarily large memories. The inner concatenation level depends only on the fixed Tanner family, so its width and prescribed gate overhead remain constant in $`k,D,\epsilon,\gamma`$ throughout that range. Existing outer residual Paulis leave the inner syndrome unchanged; fresh logical errors remain independent across inner blocks, while their X/Z components may be correlated. Its constants may be extremely large and grow further with the inner code. It changes no quantum-memory guessing exponent and supplies no cryptographic preparation compilation or hardware gate-time theorem.
 
 ## Boundaries and ownership
 

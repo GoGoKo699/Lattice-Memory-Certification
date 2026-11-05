@@ -29,6 +29,8 @@ Read the [self-contained application and boundaries](science/noisy-processing.md
 
 This is a conditional processing witness under the specified noise, controller and gate assumptions. Existing recovery reductions imply the convenient mean-rank floors for every challenge length, including low scores. The companion's [exponential-moment theorem](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/947ddadf936a25e8fe181c45a3fe8a95a41d9196/science/moment_processing.md) retains actual product-noise probabilities and gives a stronger gate and interval ledger in the same model. For a fixed positive score, its long-storage coefficient approaches that of a full logical payload as the challenge grows. The inference neither verifies those physical assumptions nor automatically extends this repository's LWE wrapper.
 
+The [extinction-based reliability bound](science/noisy-processing.md#survival-of-the-envelope-gives-a-reliability-dependent-budget) supplies a further consequence: at fixed challenge size, nonchance score and noise strength, a width of order $`\ln D`$ requires $`\Omega(D\ln D)`$ continuing T/T-dagger gates. It controls complete loss of input dependence rather than only a rank moment. The physical premises and finite width allowance remain explicit.
+
 ## Explanatory report
 
 Read the [complete explanatory report (PDF)](learning/report/Lattice_Memory_Certification_Report.pdf) for a self-contained explanation of the experiment, finite proof, conditional classical verification, and physical limitations.
@@ -45,7 +47,7 @@ Read the [complete explanatory report (PDF)](learning/report/Lattice_Memory_Cert
 | Logarithmic ideal gap | A store-and-Breidbart-measure strategy achieves $`\beta^{n-m}`$, where $`\beta=(1+1/\sqrt2)/2`$, fixing the overhead order with unmatched constants | [Lower bounds and resources](science/lower-bounds-and-resources.md) |
 | List acceptance | Lists of size at most $`L`$ give $`P_{\mathrm{list}}\leq\min\{1,\sqrt L\,2^{-(n-m)/6}\}`$ | [Errors and losses](science/errors-and-losses.md) |
 | Error and erasure boundaries | Exact recovery, tolerated errors, and pre- versus post-basis erasures have different storage guarantees | [Errors and losses](science/errors-and-losses.md) |
-| Noisy-storage application | Whole-string guessing supplies rank and exponential-moment floors for conditional gate and interval budgets | [Noisy processing](science/noisy-processing.md) |
+| Noisy-storage application | Whole-string guessing supplies rank/moment floors and an extinction-based reliability budget under the declared device model | [Noisy processing](science/noisy-processing.md) |
 
 Given preparation simulation error at most $`\varepsilon/2`$, a total false-acceptance target $`0\lt \varepsilon\lt 1`$ is met by
 

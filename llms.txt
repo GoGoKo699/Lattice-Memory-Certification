@@ -18,7 +18,7 @@ Authoritative routes:
 - Analytic gap figure and reproducible generator: verification/Graph/README.md, verification/Graph/generate_plots.py and verification/Graph/requirements.txt
 - Lists, tolerated errors, erasure timing and honest-noise limitations: science/errors-and-losses.md
 - Noisy-storage application, independent model premises, score-to-rank transfer,
-  exponential-moment strengthening, and companion proof routes: science/noisy-processing.md
+  exponential-moment strengthening, extinction-based reliability, and companion proof routes: science/noisy-processing.md
 - Attribution and finite prior-bound comparison: references/RELATED_WORK.md and references/references.bib
 - Reproduction scope and commands: verification/README.md, verification/verify.py and verification/check_learning.py
 
@@ -56,3 +56,17 @@ Do not generalize either result to optimal physical gate cost. The score does
 not verify noise/controller premises and does not automatically compose with
 the conditional LWE wrapper.
 
+
+The extinction-based reliability consequence is in science/noisy-processing.md.
+For chance<p<1 define delta_p=(1-p)/(1-2^-k), b_p=1-delta_p. The finite
+T-count bound is ceil([gamma D b_p/ln(1/gamma) * [ln(D b_p/delta_p)]_+ -2n]_+).
+Its proof needs explicitly absorbing envelope updates, independent current
+noise relative to the sampled suffix, a pivot-qubit extinction hazard, disjoint
+first-extinction events, weighted Jensen and the cumulative-rank ledger.
+At fixed k, gamma and nonchance p, n=O(ln D) forces m_T=Omega(D ln D).
+This does not improve the ideal guessing exponent or finite encoder optimum.
+The companion owns the full proof; complete-erasure/Jensen spacetime reasoning
+is credited to its prior source. Do not call the fixed-noise order uniform
+weak-noise optimality or infer a physical model certificate from the score.
+
+For an interval use its D_I and m_T,I and a proved entering expected-rank bound M_I, keeping the globally propagated suffix envelope; do not restart an independent envelope. The same formula subtracts M_I, with2n always safe. The companion fidelity converse combines payload and reliability to match Theta_gamma(D[k+ln(D/epsilon)]) processing under width n<=C[k+ln(D/epsilon)] at fixedgamma and sufficiently long duration; the constructor needs a sufficiently large fixed width factor.
