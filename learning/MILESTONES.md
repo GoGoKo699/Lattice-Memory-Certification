@@ -474,7 +474,7 @@ Dependencies name earlier understanding targets, not extra assignments. Primary 
 
 **Conceptual connection:** Existing recovery reductions imply both convenient mean-rank floors. Retaining the actual noise probabilities in a logarithmic moment then strengthens the dynamical ledger; its interval reserve must control that moment rather than only the mean. The transfer assumes independent noise and an honestly charged fixed controller model; a score does not test those premises or automatically compose with the LWE wrapper.
 
-**Source pointers:** Watrous §§2.2–2.3, 3.1.2 and 3.2; [noisy-processing application](../science/noisy-processing.md); [complete companion proof](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/main/science/guessing_processing.md); [moment theorem](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/223dd0a1e70e6ec94cf0ce6431a1ae842d1c8ea6/science/moment_processing.md); [resources](../science/lower-bounds-and-resources.md#4-charged-resources).
+**Source pointers:** Watrous §§2.2–2.3, 3.1.2 and 3.2; [noisy-processing application](../science/noisy-processing.md); [complete companion proof](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/223dd0a1e70e6ec94cf0ce6431a1ae842d1c8ea6/science/guessing_processing.md); [moment theorem](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/223dd0a1e70e6ec94cf0ce6431a1ae842d1c8ea6/science/moment_processing.md); [resources](../science/lower-bounds-and-resources.md#4-charged-resources).
 
 ### M30: Synthesize the complete contribution
 

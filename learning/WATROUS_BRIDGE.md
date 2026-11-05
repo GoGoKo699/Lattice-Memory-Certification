@@ -29,7 +29,7 @@ The section and printed-page references below use that January 2018 author copy.
 | §§3.2–3.3, pp. 139–198 | Fidelity and channel distances | Compare guessing-based conclusions with recoverable Bell fidelity |
 | §§4.1.1 and 4.2.2 | Mixed-unitary channels, fixed points and spectra | Pauli conditional expectations and the companion's channel-rank bottleneck |
 
-These are selected locations, not a requirement to read every page in each interval. Chapter 6 can provide further entanglement context, but the Schmidt-rank step already has its needed foundation in §1.1.3. Watrous is also the single educational anchor of [Measurement-Free Memory Cost](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost); its [bridge](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/main/learning/WATROUS_BRIDGE.md) develops the channel and Pauli-envelope side. The project-specific cryptographic and noisy-processing models are supplied by their scientific accounts rather than attributed to the textbook.
+These are selected locations, not a requirement to read every page in each interval. Chapter 6 can provide further entanglement context, but the Schmidt-rank step already has its needed foundation in §1.1.3. Watrous is also the single educational anchor of [Measurement-Free Memory Cost](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost); its [bridge](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/223dd0a1e70e6ec94cf0ce6431a1ae842d1c8ea6/learning/WATROUS_BRIDGE.md) develops the channel and Pauli-envelope side. The project-specific cryptographic and noisy-processing models are supplied by their scientific accounts rather than attributed to the textbook.
 
 ## Notation and normalization
 
@@ -162,7 +162,7 @@ The [milestone map](MILESTONES.md) integrates these distinctions into the scient
 
 ## From a storage cut to a processing witness
 
-The finite theorem also applies to the quantum-plus-classical output of a Pauli algebra. The [application](../science/noisy-processing.md) is self-contained about the new physical premises; the companion owns the [complete transfer and recovery comparison](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/main/science/guessing_processing.md).
+The finite theorem also applies to the quantum-plus-classical output of a Pauli algebra. The [application](../science/noisy-processing.md) is self-contained about the new physical premises; the companion owns the [complete transfer and recovery comparison](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/223dd0a1e70e6ec94cf0ce6431a1ae842d1c8ea6/science/guessing_processing.md).
 
 Use $`k`$ independent uniform BB84 challenge qubits. The device receives the quantum states alone. The hidden string $`X`$ is never revealed, and only the basis string $`\Theta`$ is disclosed after all charged storage has ended. Let $`n`$ count every noisy persistent data, syndrome, controller and resource qubit, and let $`D`$ count independent depolarizing rounds. The score $`p`$ is unconditional whole-string success.
 

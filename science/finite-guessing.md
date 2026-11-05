@@ -32,7 +32,7 @@ Conversely, take any such pure state $`\psi_{AQ}`$ and a decoder. For every $`k`
 Its $`A`$ marginal is $`I/2^k`$, so it is the normalized Choi state of a CPTP channel from the supplied input to $`QC`$. Explicitly, with the computational transpose,
 
 ```math
-\mathcal E(B)=2^k\operatorname{Tr}_A[(B^T\otimes I)\Omega].
+\mathcal E(B)=2^k\mathrm{Tr}_A[(B^T\otimes I)\Omega].
 ```
 
 Measuring one half of a Bell state in a real BB84 basis prepares the original uniform BB84 input on the other half. Each Pauli maps a vector of a given product BB84 basis to another vector in that same basis, up to a phase. After learning $`a,\Theta`$, the decoder relabels the outcome by the corresponding bit flips and uses its original POVM. This preserves the score. The flag is classical and has only $`4^k`$ values; the quantum output dimension is unchanged.
@@ -41,22 +41,22 @@ Every arbitrary-state pure strategy therefore has a permitted preparation-experi
 
 ## 2. Exact three-qubit collision certificate
 
-Consider one normalized pure conditional state on $`AQ`$, with $`\dim Q\leq2`$. Put $`\rho=\operatorname{Tr}_Q\psi`$ and $`R=\sqrt\rho`$. Then
+Consider one normalized pure conditional state on $`AQ`$, with $`\dim Q\leq2`$. Put $`\rho=\mathrm{Tr}_Q\psi`$ and $`R=\sqrt\rho`$. Then
 
 ```math
-R\geq0,\qquad \operatorname{rank}R\leq2,\qquad
-\operatorname{Tr}R^2=1,\qquad t_0:=(\operatorname{Tr}R)^2\leq2.
+R\geq0,\qquad \mathrm{rank}R\leq2,\qquad
+\mathrm{Tr}R^2=1,\qquad t_0:=(\mathrm{Tr}R)^2\leq2.
 ```
 
 The existing pure-state identity gives the basis-averaged pretty-good guessing probability
 
 ```math
-Q=\operatorname{Tr}[R\mathcal T^{\otimes3}(R)],\qquad
+Q=\mathrm{Tr}[R\mathcal T^{\otimes3}(R)],\qquad
 \mathcal T=(\Delta_X+\Delta_Z)/2.
 \qquad\text{(F3)}
 ```
 
-For each three-qubit Pauli word $`P`$, write $`t_P=(\operatorname{Tr}RP)^2\geq0`$. Ordinary, unnormalized Pauli orthogonality gives $`\sum_Pt_P=8`$. The multiplier of $`\mathcal T`$ on $`I,X,Y,Z`$ is respectively $`1,1/2,0,1/2`$. Let $`S_1`$ sum $`t_P`$ over the nine words of weight one, including $`Y`$ words. Each nonidentity word of weight at least two has multiplier at most $`1/4`$. Consequently
+For each three-qubit Pauli word $`P`$, write $`t_P=(\mathrm{Tr}RP)^2\geq0`$. Ordinary, unnormalized Pauli orthogonality gives $`\sum_Pt_P=8`$. The multiplier of $`\mathcal T`$ on $`I,X,Y,Z`$ is respectively $`1,1/2,0,1/2`$. Let $`S_1`$ sum $`t_P`$ over the nine words of weight one, including $`Y`$ words. Each nonidentity word of weight at least two has multiplier at most $`1/4`$. Consequently
 
 ```math
 Q\leq\frac18\left[t_0+\frac12S_1+
@@ -67,11 +67,11 @@ Q\leq\frac18\left[t_0+\frac12S_1+
 
 This relaxation intentionally assigns a positive weight to single-site $`Y`$ terms even though their actual multiplier is zero.
 
-To constrain $`S_1`$, normalize $`\sigma=R/\operatorname{Tr}R`$. Linear-entropy subadditivity on three systems gives
+To constrain $`S_1`$, normalize $`\sigma=R/\mathrm{Tr}R`$. Linear-entropy subadditivity on three systems gives
 
 ```math
-\sum_{i=1}^3\operatorname{Tr}\sigma_i^2
-\leq2+\operatorname{Tr}\sigma^2.
+\sum_{i=1}^3\mathrm{Tr}\sigma_i^2
+\leq2+\mathrm{Tr}\sigma^2.
 \qquad\text{(F5)}
 ```
 
@@ -81,17 +81,17 @@ A self-contained two-copy certificate proves this inequality. For disjoint syste
 (I-F_U)(I-F_V)\geq0.
 ```
 
-Its expectation in $`\sigma_{UV}^{\otimes2}`$ is $`1-\operatorname{Tr}\sigma_U^2-\operatorname{Tr}\sigma_V^2+\operatorname{Tr}\sigma_{UV}^2`$. Apply it first to $`AB|C`$ and then to $`A|B`$. Equivalently, the resulting operator is the sum
+Its expectation in $`\sigma_{UV}^{\otimes2}`$ is $`1-\mathrm{Tr}\sigma_U^2-\mathrm{Tr}\sigma_V^2+\mathrm{Tr}\sigma_{UV}^2`$. Apply it first to $`AB|C`$ and then to $`A|B`$. Equivalently, the resulting operator is the sum
 
 ```math
 2I+F_{ABC}-F_A-F_B-F_C
 =(I-F_{AB})(I-F_C)+(I-F_A)(I-F_B)\geq0.
 ```
 
-The one-qubit Bloch identity and $`\operatorname{Tr}\sigma^2=1/t_0`$ now imply
+The one-qubit Bloch identity and $`\mathrm{Tr}\sigma^2=1/t_0`$ now imply
 
 ```math
-S_1=t_0\left(2\sum_i\operatorname{Tr}\sigma_i^2-3\right)
+S_1=t_0\left(2\sum_i\mathrm{Tr}\sigma_i^2-3\right)
 \leq t_0+2.
 ```
 
@@ -121,7 +121,7 @@ p^2+\frac{(1-p)^2}{7}\leq\frac9{16}.
 
 Solving the quadratic on $`[1/8,1]`$ gives $`p\leq C_3`$. Every classical pure branch has the same cap; averaging proves (F1) with unrestricted classical records, arbitrary encoders, and arbitrary basis-dependent POVMs. No nonconvex numerical optimization is used as an upper-bound certificate.
 
-For comparison, the inherited normalized DFW spectral constraints with $`\operatorname{Tr}R\leq\sqrt2`$ yield only $`Q\leq5/8`$. Combining that value with the same Renes inequality gives $`(1+2\sqrt7)/8`$. The improvement comes from the additional two-copy purity constraint, not from changing the normalization or the discrimination theorem.
+For comparison, the inherited normalized DFW spectral constraints with $`\mathrm{Tr}R\leq\sqrt2`$ yield only $`Q\leq5/8`$. Combining that value with the same Renes inequality gives $`(1+2\sqrt7)/8`$. The improvement comes from the additional two-copy purity constraint, not from changing the normalization or the discrimination theorem.
 
 ## 4. Survival through the noisy moment interface
 
@@ -148,7 +148,7 @@ This is an improvement of a finite profile and its concave composition. It suppl
 The finite certificate does not extend to a better uniform exponent by simply proving a stronger rank-sensitive PGM inequality. In fact, for any $`a\gt1/3`$ and any fixed finite $`C`$, the universal bound
 
 ```math
-Q\leq C\left(\frac{\operatorname{rank}R}{2^k}\right)^a
+Q\leq C\left(\frac{\mathrm{rank}R}{2^k}\right)^a
 ```
 
 is false, even for positive normalized $`R`$ diagonal in a product Breidbart basis.

@@ -30,7 +30,7 @@ Keep the ideal theorem unrestricted computationally. The compiled guarantee uses
 The sister relationship has distinct ownership. This repository owns the finite
 guessing theorem and its self-contained operational application. The full
 Pauli-factorization, all-cut floor and gate/interval ledger are in
-https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/main/science/guessing_processing.md.
+https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/223dd0a1e70e6ec94cf0ce6431a1ae842d1c8ea6/science/guessing_processing.md.
 Both learning routes use one common anchor: Watrous (2018), with different
 project-specific bridges and exactly 30 milestones each.
 

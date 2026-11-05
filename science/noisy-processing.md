@@ -271,7 +271,7 @@ The convenient score-only mean-rank floor has leading coefficient $`2p`$ in the 
 
 ## Explicit quantitative decay
 
-Retain the companion notation $`k`$ challenge qubits, $`n`$ total noisy width, $`D`$ rounds, $`q=1-\gamma`$, and prescribed gate count $`m_T`$. For $`1\lt z\le2^{1/7}`$, put $`\alpha=\alpha_z`$ as above and $`M=2n`$. The [companion finite inversion](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/main/science/guessing_decay.md) gives, for $`D\ge1`$,
+Retain the companion notation $`k`$ challenge qubits, $`n`$ total noisy width, $`D`$ rounds, $`q=1-\gamma`$, and prescribed gate count $`m_T`$. For $`1\lt z\le2^{1/7}`$, put $`\alpha=\alpha_z`$ as above and $`M=2n`$. The [companion finite inversion](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/223dd0a1e70e6ec94cf0ce6431a1ae842d1c8ea6/science/guessing_decay.md) gives, for $`D\ge1`$,
 
 ```math
 U_z=\min\left\{M\alpha,\;\min_{1\le\ell\le D}
@@ -294,12 +294,15 @@ This exponent is positive exactly when $`0\le\rho\lt2(1-q)/q`$. The proof fixes 
 
 ## A matching-order coherent construction in the companion model
 
-The companion [Tanner construction](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/main/science/tanner_memory.md) compiles an inherited constant-iteration current-syndrome decoder into a fixed coherent circuit. Syndrome and scratch registers remain in the counted noisy pool and are reset before each ideal recovery; nonlinear decisions are implemented and charged. For a sufficiently small fixed code-dependent noise range it proves
+The companion [Tanner construction](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/223dd0a1e70e6ec94cf0ce6431a1ae842d1c8ea6/science/tanner_memory.md) compiles an inherited constant-iteration current-syndrome decoder into a fixed coherent circuit. Syndrome and scratch registers remain in the counted noisy pool and are reset before each ideal recovery; nonlinear decisions are implemented and charged. For a sufficiently small fixed code-dependent noise range it proves
 
 ```math
 n=O\!\left(k+\ln\frac{J_+}{\epsilon}\right),\qquad
-m_T=O(nJ),\qquad J=O(\gamma D+1),
-\qquad \frac12\|\Lambda-\mathrm{id}\|_\diamond\le\epsilon,
+m_T=O(nJ),\qquad J=O(\gamma D+1).
+```
+
+```math
+\frac12\|\Lambda-\mathrm{id}\|_\diamond\le\epsilon,
 \qquad J_+=\max\{1,J\}.
 ```
 
