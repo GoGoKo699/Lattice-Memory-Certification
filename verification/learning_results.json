@@ -15,10 +15,10 @@
     "narrative": 16
   },
   "navigation_and_math_source": {
-    "display_math_blocks": 142,
-    "heading_fragments": 67,
-    "inline_math_expressions": 969,
-    "local_links": 217,
+    "display_math_blocks": 161,
+    "heading_fragments": 69,
+    "inline_math_expressions": 1076,
+    "local_links": 223,
     "markdown_files": 17
   },
   "status": "passed",

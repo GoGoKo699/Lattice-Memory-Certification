@@ -370,7 +370,7 @@ Dependencies name earlier understanding targets, not extra assignments. Primary 
 
 **Central question:** What is added beyond previously known storage rates approaching one?
 
-**Understanding target:** Explain the particular DFW dimension specialization and compare finite sufficient gaps. Then derive why the three-input/qubit certificate uses the extra two-copy purity constraint, distinguish the exact $`9/16`$ PGM constant from the guessing bound $`(2+7\sqrt2)/16`$, and explain the collision-only obstruction to improving the uniform exponent. Then formulate the primal/dual decoder SDP for a fixed Breidbart-diagonal encoder, explain exact finite certificate scope, and derive why diagonal duals fail on the large Hamming-ball family. Keep a global finite bound, fixed-encoder certificate, proof-route limitation and general priority claim separate.
+**Understanding target:** Explain the particular DFW dimension specialization and compare finite sufficient gaps. Then derive the three-, four- and five-input one-qubit certificates from two-copy purity and shadow constraints, distinguish their exact PGM constants $`9/16,27/64,81/256`$ from the corresponding guessing upper bounds, and explain the collision-only obstruction to improving the uniform exponent. Then formulate the primal/dual decoder SDP for a fixed Breidbart-diagonal encoder, explain exact finite certificate scope, and derive why diagonal duals fail on the large Hamming-ball family. Keep a global finite bound, fixed-encoder certificate, proof-route limitation and general priority claim separate.
 
 **Dependencies:** M21, M22.
 
@@ -474,7 +474,7 @@ Dependencies name earlier understanding targets, not extra assignments. Primary 
 
 **Conceptual connection:** Existing recovery reductions imply both convenient mean-rank floors. Retaining the actual noise probabilities in a logarithmic moment strengthens the dynamical ledger; its interval reserve must control that moment rather than only the mean. Absorbing extinction and cumulative-rank balance give a separate reliability-dependent law even at fixed small challenge size, including every contiguous interval when the global suffix envelope is retained. The transfer assumes independent noise and an honestly charged fixed controller model; a score does not test those premises or automatically compose with the LWE wrapper.
 
-**Source pointers:** Watrous §§2.2–2.3, 3.1.2 and 3.2; [noisy-processing application](../science/noisy-processing.md); [complete companion proof](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/67dd0de6beedab35e45c23cc7d07b57481d4b717/science/guessing_processing.md); [moment theorem](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/67dd0de6beedab35e45c23cc7d07b57481d4b717/science/moment_processing.md); [extinction-based reliability](../science/noisy-processing.md#survival-of-the-envelope-gives-a-reliability-dependent-budget); [resources](../science/lower-bounds-and-resources.md#4-charged-resources).
+**Source pointers:** Watrous §§2.2–2.3, 3.1.2 and 3.2; [noisy-processing application](../science/noisy-processing.md); [complete companion proof](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/4b5ae9a75658bc44106b07fbb6deb2330e806df8/science/guessing_processing.md); [moment theorem](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/4b5ae9a75658bc44106b07fbb6deb2330e806df8/science/moment_processing.md); [extinction-based reliability](../science/noisy-processing.md#survival-of-the-envelope-gives-a-reliability-dependent-budget); [resources](../science/lower-bounds-and-resources.md#4-charged-resources).
 
 ### M30: Synthesize the complete contribution
 
@@ -482,7 +482,7 @@ Dependencies name earlier understanding targets, not extra assignments. Primary 
 
 **Central question:** What is the full claim, and under exactly which assumptions does each part hold?
 
-**Understanding target:** Explain the ideal theorem, its certified three-input refinement, the collision-only and diagonal-dual method limitations, conditional LWE compilation, logarithmic-order lower witness, acceptance-rule limitations and noisy-processing application as one connected account with their distinct assumptions. Distinguish analytical proof, finite tests, cryptographic hardness and unverified device premises.
+**Understanding target:** Explain the ideal theorem, its certified three-, four- and five-input refinement, the collision-only and diagonal-dual method limitations, conditional LWE compilation, logarithmic-order lower witness, acceptance-rule limitations and noisy-processing application as one connected account with their distinct assumptions. Distinguish analytical proof, finite tests, cryptographic hardness and unverified device premises.
 
 **Dependencies:** M21, M22, M23, M24, M25, M26, M27, M28, M29.
 

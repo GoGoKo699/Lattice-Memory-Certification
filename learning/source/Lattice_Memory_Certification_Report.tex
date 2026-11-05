@@ -69,9 +69,9 @@ These are bounds for exact recovery of the whole string, allowing joint processi
 
 The dependence on $t$ is the central feature. To force ideal cheating probability to at most a fixed $\delta\in(0,1)$, it suffices to supply $\lceil6\log_2(1/\delta)\rceil$ more qubits than the device can retain. This sufficient gap has no additional dependence on the stored block size. An explicit strategy shows that the logarithmic order cannot be improved within this ideal test, although the constants remain unmatched.
 
-A rank-sensitive finite refinement improves the three-input, one-retained-qubit case to $\pguess\le(2+7\sqrt2)/16\simeq0.743718$, with arbitrary joint encoders and unlimited classical records. A separate construction shows that the collision statistic used in the general proof has sharp exponent $1/3$ in the memory deficit. Thus this finite improvement does not improve the uniform guessing exponent $1/6$; a stronger general result needs information beyond that statistic and its square-root conversion.
+Rank-sensitive finite refinements give one-retained-qubit guessing caps $C_3\simeq0.743718$, $C_4\simeq0.642943$ and $C_5\simeq0.556840$ for three, four and five inputs, with arbitrary joint encoders and unlimited classical records. Their averaged PGM optima are exactly $9/16$, $27/64$ and $81/256$. A separate construction shows that the collision statistic used in the general proof has sharp exponent $1/3$ in the memory deficit. Thus this finite improvement does not improve the uniform guessing exponent $1/6$; a stronger general result needs information beyond that statistic and its square-root conversion.
 
-A direct-discrimination follow-up adds exact decoder certificates for two specified encoders and proves that a diagonal dual ansatz loses even the known decay scale on the asymptotic obstruction family. These are methodological results; neither the global three-input cap nor the uniform exponent improves.
+A direct-discrimination follow-up adds exact decoder certificates for two specified encoders and proves that a diagonal dual ansatz loses even the known decay scale on the asymptotic obstruction family. These are methodological results; these specified-encoder certificates improve neither the global caps nor the uniform exponent.
 
 A second layer uses a computationally secure preparation protocol to let a verifier conduct the test using classical interaction. Under its precise assumptions, the false-acceptance bound becomes
 \begin{equation}\label{eq:compiled-front}
@@ -390,13 +390,58 @@ The left side is the store-and-Breidbart strategy, $0.728553390593274\ldots$. Th
 \end{keybox}
 The finite improvement does not determine the optimum. It strengthens the collision constraint with a two-copy purity relation while retaining the existing arbitrary encoder and decoder scope.
 
+\subsection{Exact collision bounds for four and five inputs}
+The same global optimization can be solved exactly at $n=4,5$ with one retained qubit. For positive $R$ of rank at most two and $\Tr R^2=1$, define the full Pauli-weight sums
+\[
+A_j=\sum_{\operatorname{wt}(P)=j}(\Tr RP)^2,\qquad
+A_0=(\Tr R)^2\le2,\qquad \sum_{j=0}^nA_j=2^n.
+\]
+The BB84 average kills words containing $\YY$ and gives multiplier $2^{-j}$ to the other weight-$j$ words. Therefore
+\[
+Q\le T_n:=2^{-n}\sum_{j=0}^n2^{-j}A_j.
+\]
+The underlying positivity constraints are established shadow inequalities: see Rains, \href{https://arxiv.org/abs/quant-ph/9611001}{\emph{Quantum shadow enumerators}}, Corollary~7 and Theorem~8. Their parallel-SWAP interpretation is also developed by Shi, Guo, Zhang and Zhao, \href{https://arxiv.org/abs/2406.18280}{arXiv:2406.18280}. The additional step here is their explicit sharp rank-two BB84 evaluation and finite-alphabet guessing conversion.
+
+On two copies, let $E_h$ project onto the direct sum of sectors with exactly $h$ antisymmetric local swap pairs. These projectors are positive and $R\otimes R\ge0$, so their trace pairings are nonnegative. Expanding the local swaps in Paulis gives, at $n=4$,
+\begin{align*}
+H_4&:=27A_0-9A_1-A_2+3A_3+3A_4\\
+&=128\Tr[(R\otimes R)E_2]\ge0,\\
+T_4&=\frac7{32}+\frac{13A_0}{128}-\frac{H_4}{512}-\frac{A_4}{256}
+\le\frac{27}{64}.
+\end{align*}
+At $n=5$, the required identities are
+\begin{align*}
+H_{5,2}&:=135A_0-27A_1-9A_2+5A_3+7A_4+5A_5\\
+&=512\Tr[(R\otimes R)E_2]\ge0,\\
+H_{5,5}&:=A_0-A_1+A_2-A_3+A_4-A_5\\
+&=1024\Tr[(R\otimes R)E_5]\ge0,\\
+T_5&=\frac{21}{128}+\frac{39A_0}{512}
+-\frac{3H_{5,2}+5H_{5,5}}{8192}-\frac{3A_5}{1024}
+\le\frac{81}{256}.
+\end{align*}
+Each upper bound is attained by
+$R=(I/\sqrt2)\otimes(\ket b\bra b)^{\otimes(n-1)}$
+for any pure real qubit state $\ket b$. Thus the maximal averaged PGM values are exactly $27/64$ and $81/256$.
+
+For $2^n$ outcomes the finite-alphabet discrimination inequality gives
+$p^2+(1-p)^2/(2^n-1)\le Q$. Solving it and comparing with the store-and-Breidbart lower bounds gives
+\begin{center}
+\begin{tabular}{@{}cccc@{}}\toprule
+Inputs & Store-and-Breidbart & Exact maximum PGM & Guessing upper bound\\\midrule
+$3$ & $\beta^2$ & $9/16$ & $C_3=(2+7\sqrt2)/16$\\
+$4$ & $\beta^3$ & $27/64$ & $C_4=(2+\sqrt{345})/32$\\
+$5$ & $\beta^4$ & $81/256$ & $C_5=(4+\sqrt{4526})/128$\\\bottomrule
+\end{tabular}
+\end{center}
+Here $\beta=(1+1/\sqrt2)/2$, $C_4=0.642942988156460\ldots$ and $C_5=0.556840255986068\ldots$. These are exact collision optima and certified guessing upper bounds. They do not prove that the guessing upper bounds are attainable, tensorize against joint encoders, or improve the uniform exponent.
+
 \subsection{The arbitrary-state formulation is attainable}
 The proof's premeasurement state formulation allows arbitrary states on $AQ$, while source replacement for the preparation experiment initially fixes the $A$ marginal to $I/2^n$. Their optimized scores are nevertheless equal when classical records are unrestricted. Given a pure strategy $\psi_{AQ}$, attach a classical label to the Pauli twirl
 \[
 \Omega_{AQC}=4^{-n}\sum_a(P_a\otimes I)\psi_{AQ}(P_a^\dagger\otimes I)
 \otimes\ket a\bra a.
 \]
-Its $A$ marginal is $I/2^n$, so it is the normalized state of a CPTP encoder acting on half a Bell pair. Explicitly that encoder is $\mathcal E(B)=2^n\Tr_A[(B^T\otimes I)\Omega]$. Each Pauli maps a product BB84 basis to itself up to outcome relabeling. Knowing $a$ and the disclosed basis lets the decoder undo that relabeling and reproduce the original score. There are only $4^n$ classical labels and the quantum dimension is unchanged. Real BB84 source replacement gives the converse inclusion. This proves equivalence of the optima, not attainability of the upper bound $C_3$.
+Its $A$ marginal is $I/2^n$, so it is the normalized state of a CPTP encoder acting on half a Bell pair. Explicitly that encoder is $\mathcal E(B)=2^n\Tr_A[(B^T\otimes I)\Omega]$. Each Pauli maps a product BB84 basis to itself up to outcome relabeling. Knowing $a$ and the disclosed basis lets the decoder undo that relabeling and reproduce the original score. There are only $4^n$ classical labels and the quantum dimension is unchanged. Real BB84 source replacement gives the converse inclusion. This proves equivalence of the optima, not attainability of the upper bounds $C_3,C_4,C_5$.
 
 \subsection{Why a better uniform collision exponent is impossible}
 The finite result does not tensorize against joint encoders. There is also a precise obstruction to improving the general rank-only collision step. For any fixed finite $C$ and $a>1/3$, the proposed universal inequality
@@ -821,6 +866,17 @@ The three-input bound also survives this composition. For $k=3,s=1$, the branch 
 \]
 Exact rational slope and cap checks certify this polygon. Thus $\E z^r\le z^4$ forces $p\le93/125=0.744$. At score $p=3/4$, the moment floor is at least $\log_z[z^4+3(z^6-z^4)/128]>4$. This is a finite interface improvement; it changes neither the $k=12$ example nor the general exponent.
 
+The four-input refinement also survives averaging. At $k=4$ and $z=27/25$, combine $C_4$ on $s=1$ branches with the output-dimension, classical dimension-lifting, normalized recovery and hypercontractive collision bounds. A certified concave polygon has knots
+\[
+(1,1/16),\qquad(z^3,1/2),\qquad(z^6,789/1000),\qquad(z^8,1),
+\]
+and equals one afterward. All 25 integer pairs $(s,c)$ with $0\le2s+c\le8$ and the decreasing slopes are checked exactly. Its value at $z^5$ is $6951/10145<7/10$, so score $p=7/10$ implies
+\[
+X_z\ge\log_z\!\left[z^3+\frac{200}{289}(z^6-z^3)\right]
+=5.1476692298\ldots>5.
+\]
+The specified prior caps permit $7/10$ at rank five with $(s,c)=(1,3)$, since their smallest collision cap is $1/2$ and $g_{16}(7/10)=62/125<1/2$. This strict improvement compares proved outer profiles, without claiming that the previous profile is attainable or the new majorant optimal.
+
 For the earlier example $k=12,p=0.4,n=120,q=0.99$, it gives $M_z\ge(4z^{11}+z^{24})/5$, $a_z\simeq14.84082963$ and $\alpha_z\simeq0.99072498$. Certified logarithm bounds make the individual-gate requirement at least $244$ for $D=2000$, compared with $171$ from mean rank. Every 700-round contiguous interval with moment reserve at most $240$ requires at least $58$ such gates, compared with $39$. The interval bound uses its own moment reserve, and both numbers are necessary conditions rather than physical feasibility or optimality claims.
 
 \subsection{A finite and asymptotic decay guarantee}
@@ -904,16 +960,43 @@ Combine this with nonnegativity. The function $x[\ln(x/\delta_p)]_+$ is nondecre
 \]
 Each noise layer loses at least $\gamma\E r_j$ expected rank, free processing cannot add rank, and all T/T-dagger increases sum to at most $m_T$. Telescoping from rank $2n$ therefore gives $m_T\ge\gamma\sum_j\E r_j-2n$, proving \eqref{eq:noisy-reliability}.
 
-For a contiguous interval with $D_I\ge1$ noise layers, $m_{T,I}$ prescribed slots and an entering expected-rank bound $M_I$, the same argument gives
+A sharper finite theorem keeps the symplectic information and the exact survival product. Let $a=a_k(p)$ be the all-cut rank floor: use $a_p$ in \eqref{eq:noisy-floor} for $k\ge8$. For $1\le k\le7$, with $H=2^{-k/6}$ and $t_0=5k/6$, the inverse of the concave polygon through $(0,2^{-k}),(t_0,H),(2k,1)$ gives
 \[
-m_{T,I}\ge\left\lceil\left[
-\frac{\gamma D_I b_p}{\ln(1/\gamma)}
-\left[\ln\frac{D_I b_p}{\delta_p}\right]_+-M_I
-\right]_+\right\rceil.
+a_k(p)=\begin{cases}
+t_0(p-2^{-k})/(H-2^{-k}),&2^{-k}<p\le H,\\
+t_0+(2k-t_0)(p-H)/(1-H),&H\le p<1.
+\end{cases}
 \]
-Use the actual globally propagated suffix envelope, with $M_I=2n$ always safe. Global extinction bounds its zero probability at every cut, and first-extinction events within the interval have total probability at most $\delta_p$. Repeating the hazard and rank balance only over those layers proves the formula. Do not restart an independent envelope, and assign boundary gates once to the chosen primitive cuts.
+Define
+\[
+a_s(p)=k\left[\frac{p-2^{-k/6}}{1-2^{-k/6}}\right]_+,\qquad
+L_\gamma(D,b)=\frac{b}{\ln(1/\gamma)}\ln\frac1{1-b^{1/D}}.
+\]
+Then
+\begin{equation}
+\boxed{m_T\ge\left\lceil\left[
+\gamma D\max\{a,a_s(p)+L_\gamma(D,b_p)\}+a-2n
+\right]_+\right\rceil.}
+\label{eq:noisy-reliability-sharp}
+\end{equation}
+The quantum-factor floor is derived from the BB84 branch bound, independently of any Bell-fidelity premise. Indeed its secant gives
+$\min\{1,2^{(s-k)/6}\}\le2^{-k/6}+(1-2^{-k/6})s/k$, so averaging implies $\E s\ge a_s(p)$. This extra floor vanishes when $p\le2^{-k/6}$.
 
-For fixed $k$, fixed $\gamma>0$ and fixed nonchance score, $n=O(\ln D)$ now forces $m_T=\Omega(D\ln D)$. Thus a constant rank floor at a single cut misses a reliability cost accumulated over a long storage period. In the companion construction range $0<\gamma\le1/20$, this order matches its reference-stable Tanner construction at logarithmic width and fixed error target. The comparison fixes noise strength; the coefficient $1/\ln(1/\gamma)$ does not give uniform weak-noise sharpness. The ideal guessing exponent and finite three-input upper cap remain unchanged.
+For the sharper hazard, a rank-$r$ Pauli space of symplectic rank $2s$ has an injective coordinate set on at most $r-s$ physical sites. Choose a nondegenerate $2s$-dimensional subspace with generator matrix $H$. In the Cauchy--Binet expansion of $\det(H\Omega H^T)=1$ over $\mathbb F_2$, coordinate subsets not invariant under swapping each local $X,Z$ pair cancel in pairs. A remaining nonzero minor supplies $s$ complete pairs. Extend them to $r$ independent columns with at most $r-2s$ more sites. Erasing these sites annihilates the envelope, with conditional probability at least $\gamma^{r-s}$.
+
+Let $t_j=\E[r_j-s_j\mid r_j>0]$. Conditioning on survival and applying Jensen to the fresh layer gives conditional survival probability at most $1-\gamma^{t_j}$. Operations between layers cannot resurrect zero. Thus
+\[
+b_p\le\prod_{j=1}^D(1-\gamma^{t_j}).
+\]
+The decreasing convex function $-\ln(1-e^{-\lambda t})$, with $\lambda=\ln(1/\gamma)$, gives
+$\sum_jt_j\ge D\lambda^{-1}\ln[1/(1-b_p^{1/D})]$.
+Each incoming survival probability is at least $b_p$, hence
+$\sum_j\E(r_j-s_j)\ge D L_\gamma(D,b_p)$.
+Add the independently proved floor $\E s_j\ge a_s(p)$, compare with $\E r_j\ge a$, and retain the exiting rank $\E r_{\rm end}\ge a$ in the telescope. This proves \eqref{eq:noisy-reliability-sharp}.
+
+For a contiguous interval, replace $D,m_T,2n$ by $D_I,m_{T,I},M_I$ in the sharpened formula, retaining the same global score-derived floors and the actual propagated suffix envelope. The universal entering bound $M_I=2n$ is safe. The suffix is independent of fresh interval noise; successive hazards need not be independent. Assign boundary gates once to the chosen primitive cuts.
+
+For fixed $k$, fixed $\gamma>0$ and fixed nonchance score, $n=O(\ln D)$ now forces $m_T=\Omega(D\ln D)$. Thus a constant rank floor at a single cut misses a reliability cost accumulated over a long storage period. In the companion construction range $0<\gamma\le1/20$, this order matches its reference-stable Tanner construction at logarithmic width and fixed error target. The comparison fixes noise strength; the coefficient $1/\ln(1/\gamma)$ does not give uniform weak-noise sharpness. The ideal guessing exponent and finite-input upper caps remain unchanged.
 
 At $p=1$, positive noise duration and finite physical width are impossible: complete replacement of the whole register has positive probability and leaves only chance success. At or below chance, the discard-and-guess strategy remains consistent with zero processing. Nothing in this inference tests the assumed noise or controller restrictions or compiles the separate preparation protocol into the charged circuit.
 
@@ -929,6 +1012,16 @@ n=O\!\left(k+\ln\frac{J_+}{\epsilon}\right),\qquad m_T=O(nJ),\qquad J=O(\gamma D
 \end{gathered}
 \]
 Here $n$ counts data, syndrome and all workspace. The fixed constants are potentially enormous and the inner code increases them further. If $k=\Omega(\ln(J_+/\epsilon))$ and $\gamma D\to\infty$, the earlier payload converse already matches this processing order. The extinction-based fidelity converse extends fixed-noise matching to every payload scaling. For fixed $0<\gamma\le1/20$, fixed $\epsilon_0<1/2$, any $0<\epsilon\le\epsilon_0$ and widths $n\le C[k+\ln(D/\epsilon)]$, sufficiently large $D$ requires $m_T=\Omega_\gamma(D[k+\ln(D/\epsilon)])$. Combining the two lower bounds uses their shared cumulative rank, whose payload floor supplies the $k$ term and whose survival requirement supplies the reliability logarithm. A sufficiently large constant width factor permits this construction and gives the matching upper order. This is an optimum-order statement in the specified width class, not over arbitrarily large memories. It proves neither a numerical optimum nor a physical threshold with faulty gates or locality constraints. No preparation wrapper is automatically compiled into this processing theorem.
+
+The same comparison determines the minimum width itself. For fixed $0<\gamma\le1/20$ and $0<\epsilon\le\epsilon_0<1/2$, the minimum permitted width for Bell infidelity or half-diamond error at most $\epsilon$ is
+\[
+n_{\min}=\Theta_{\gamma,\epsilon_0}\bigl(k+\ln(D/\epsilon)\bigr),\qquad k,D\ge1.
+\]
+The payload lower bound $n\ge k$ follows from the Schmidt-number cap $F_{\rm e}\le2^{n-k}$. With $b=1-\epsilon/(1-4^{-k})$, complete-register replacement gives the exact additional lower bound
+\[
+n\ge\left\lceil\frac{\ln[1/(1-b^{1/D})]}{\ln(1/\gamma)}\right\rceil.
+\]
+Since $b\ge1-4\epsilon_0/3>0$, this is uniformly logarithmic in $D/\epsilon$, up to fixed additive constants absorbed by the payload bound. The reference-stable Tanner construction supplies the matching upper order. Thus the processing order above holds within a sufficiently large fixed factor of minimum width; an arbitrary smaller factor need not fit the construction. For $D=0$, minimum width is exactly $k$ in this error range. These are transmission-fidelity statements, rather than minimum-width claims for every nonchance guessing score.
 
 At chance, discarding the challenge and guessing needs zero processing. Full-register replacement gives
 \[
@@ -957,9 +1050,9 @@ Physical protection & Any additional physical qubits used for error correction r
 No free state-loading oracle or quantum random-access memory is assumed. The ideal source is an explicit quantum input resource; its classical realization pays for the imported preparation protocol.
 
 \subsection{What supports the claims}
-The ideal result follows from the analytical chain in Sections~4--8, using the standard tensor-power norm theorem as its substantial mathematical input. Section~11 supplies the separate computational reduction under its cryptographic assumption. Finite matrix checks test the intermediate identities and normalization conventions against those analytical expressions. The new three-input certificate uses an exact positive two-copy swap expression, Pauli-weight bounds and rational algebraic enclosures. Its rational moment polygon is checked at every permitted integer rank. The collision-route limitation follows from the explicit type construction and entropy expansion, rather than extrapolation of small instances. The direct-discrimination follow-up checks complete primal/dual matrices exactly for two fixed encoders and proves a separate diagonal-dual limitation analytically. Its finite optimal-decoder certificates are not upper bounds over arbitrary encoders.
+The ideal result follows from the analytical chain in Sections~4--8, using the standard tensor-power norm theorem as its substantial mathematical input. Section~11 supplies the separate computational reduction under its cryptographic assumption. Finite matrix checks test the intermediate identities and normalization conventions against those analytical expressions. The three-, four- and five-input collision certificates use inherited positive two-copy shadow expressions, Pauli-weight bounds and exact algebra. The four- and five-input optima and their finite-alphabet conversions are certified separately. The three- and four-input moment polygons are checked at every permitted integer rank. The collision-route limitation follows from the explicit type construction and entropy expansion, rather than extrapolation of small instances. The direct-discrimination follow-up checks complete primal/dual matrices exactly for two fixed encoders and proves a separate diagonal-dual limitation analytically. Its finite optimal-decoder certificates are not upper bounds over arbitrary encoders.
 
-The noisy-processing checks compare the explicit quantum-plus-classical factorization with the Pauli-algebra projection and verify the resulting endpoint probabilities. Independent moment checks enumerate all subspaces at widths one through three and certify the pivot, noise and gate inequalities; exact logarithm enclosures check the finite moment-budget comparison. The companion checks additionally certify the finite inverse ledger and its one-variable exponent optimization. The extinction theorem separately combines an analytical pivot-qubit hazard, disjoint first-extinction events, Jensen and cumulative-rank balance; finite subspace and schedule checks supplement those written arguments. These checks do not test a physical device's noise or controller assumptions.
+The noisy-processing checks compare the explicit quantum-plus-classical factorization with the Pauli-algebra projection and verify the resulting endpoint probabilities. Independent moment checks enumerate all subspaces at widths one through three and certify the pivot, noise and gate inequalities; exact logarithm enclosures check the finite moment-budget comparison. The companion checks additionally certify the finite inverse ledger and its one-variable exponent optimization. The extinction theorem combines a paired symplectic-pivot hazard, a conditional survival product, the score-specific quantum-factor floor and cumulative-rank balance with the exiting rank retained; finite subspace, schedule and exact numerical checks supplement the written arguments. These checks do not test a physical device's noise or controller assumptions.
 
 An accepted run is not a deterministic measurement of a device's qubit count. Soundness bounds every dimension-limited strategy in the ideal model; the compiled protocol covers the efficient adversaries in its imported assumptions. A low-memory device can occasionally pass. Claims based on repeated runs must account for their joint strategy and information across cuts rather than assuming independent trials without justification.
 

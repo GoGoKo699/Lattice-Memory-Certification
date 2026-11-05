@@ -11,7 +11,7 @@ Authoritative routes:
 - Story and dependencies: science/README.md
 - Exact models and statements G, C, L: science/model.md
 - Classical refinement, discrimination, PGM identity, normalized hypercontractivity, rank: science/guessing-bound.md
-- Rank-sensitive three-input/qubit-memory bound, exact 9/16 PGM certificate, flagged-twirl equivalence, finite moment composition, and collision-method obstruction: science/finite-guessing.md
+- Rank-sensitive three-/four-/five-input qubit-memory bounds, exact PGM certificates 9/16, 27/64, 81/256, flagged-twirl equivalence, finite moment composition, and collision-method obstruction: science/finite-guessing.md
 - Direct-discrimination SDPs for specified Breidbart-diagonal encoders, exact primal/dual finite certificates, and the analytic diagonal-dual limitation: science/direct-discrimination.md
 - Computational simulation, pass weighting, efficiency and LWE boundary: science/cryptographic-certification.md
 - Achieved strategy, logarithmic ideal-gap order, finite prior-bound comparison and resource accounting: science/lower-bounds-and-resources.md
@@ -33,7 +33,7 @@ Keep the ideal theorem unrestricted computationally. The compiled guarantee uses
 The sister relationship has distinct ownership. This repository owns the finite
 guessing theorem and its self-contained operational application. The full
 Pauli-factorization, all-cut floor and gate/interval ledger are in
-https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/67dd0de6beedab35e45c23cc7d07b57481d4b717/science/guessing_processing.md.
+https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/4b5ae9a75658bc44106b07fbb6deb2330e806df8/science/guessing_processing.md.
 Both learning routes use one common anchor: Watrous (2018), with different
 project-specific bridges and exactly 30 milestones each.
 
@@ -70,3 +70,5 @@ is credited to its prior source. Do not call the fixed-noise order uniform
 weak-noise optimality or infer a physical model certificate from the score.
 
 For an interval use its D_I and m_T,I and a proved entering expected-rank bound M_I, keeping the globally propagated suffix envelope; do not restart an independent envelope. The same formula subtracts M_I, with2n always safe. The companion fidelity converse combines payload and reliability to match Theta_gamma(D[k+ln(D/epsilon)]) processing under width n<=C[k+ln(D/epsilon)] at fixedgamma and sufficiently long duration; the constructor needs a sufficiently large fixed width factor.
+
+The four-/five-input one-qubit guessing caps are (2+sqrt(345))/32 and (4+sqrt(4526))/128. Local-swap-sector positivity gives tight PGM optima 27/64 and 81/256; guessing optima remain open. The four-input cap survives the documented noisy rank-moment envelope composition. The strengthened reliability converse uses paired physical pivots, the exact survival product, separate BB84 coherent-block floors and the exiting-rank requirement; see the application for its precise formula.

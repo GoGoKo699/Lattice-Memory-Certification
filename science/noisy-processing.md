@@ -1,6 +1,6 @@
 # Delayed-basis guessing and continuing noisy-memory processing
 
-[Science guide](README.md) · [Finite guessing theorem](guessing-bound.md) · [Authoritative dynamical proof](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/67dd0de6beedab35e45c23cc7d07b57481d4b717/science/guessing_processing.md)
+[Science guide](README.md) · [Finite guessing theorem](guessing-bound.md) · [Authoritative dynamical proof](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/4b5ae9a75658bc44106b07fbb6deb2330e806df8/science/guessing_processing.md)
 
 Unconditional whole-string BB84 guessing success implies a continuing processing budget in a specified noisy-memory model. The finite guessing theorem supplies an information bottleneck; the Pauli-envelope contraction and processing ledger belong to [Measurement-Free-Memory-Cost](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost). This chapter states their composition and its operational limits. The prior recovery route implies both convenient mean-rank floors stated below. A further exponential-moment estimate retains the actual noise probabilities and strengthens the dynamical inference in the same model.
 
@@ -105,7 +105,7 @@ t_0+(2k-t_0)(p-H)/(1-H),&H\leq p\leq1.
 \qquad\text{(N3)}
 ```
 
-These floors are positive for every score above random guessing, including scores at or below one half. The averaging concerns expected rank; it does not require every noise branch to retain that rank. The curves are necessary upper bounds, not claims of optimal attainable guessing. The [companion proof](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/67dd0de6beedab35e45c23cc7d07b57481d4b717/science/guessing_processing.md) supplies the envelope coupling, chord argument and finite checks.
+These floors are positive for every score above random guessing, including scores at or below one half. The averaging concerns expected rank; it does not require every noise branch to retain that rank. The curves are necessary upper bounds, not claims of optimal attainable guessing. The [companion proof](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/4b5ae9a75658bc44106b07fbb6deb2330e806df8/science/guessing_processing.md) supplies the envelope coupling, chord argument and finite checks.
 
 ## Gate budget and every contiguous interval
 
@@ -171,7 +171,7 @@ A_\ell&=\sum_{j=0}^{\ell}\binom kj(1-2^j\tau_\ell),
 \end{aligned}
 ```
 
-Indeed, DFW's normalized spectral weights satisfy $`w_v\geq0`$, $`\sum_vw_v=1`$ and $`w_v\leq F_{\mathrm{pg}}`$. The BB84 spectrum has coefficient $`2^{-j}`$ on $`2^j\binom kj`$ Pauli labels of weight $`j`$, and zero on labels containing $`Y`$. Subtracting $`\tau_\ell\sum_vw_v`$, discarding nonpositive terms and bounding the remaining weights by $`F_{\mathrm{pg}}`$ yields the displayed coefficient $`A_\ell\leq S_\ell`$. The [companion comparison](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/67dd0de6beedab35e45c23cc7d07b57481d4b717/science/guessing_processing.md) gives the source equations and complete derivation.
+Indeed, DFW's normalized spectral weights satisfy $`w_v\geq0`$, $`\sum_vw_v=1`$ and $`w_v\leq F_{\mathrm{pg}}`$. The BB84 spectrum has coefficient $`2^{-j}`$ on $`2^j\binom kj`$ Pauli labels of weight $`j`$, and zero on labels containing $`Y`$. Subtracting $`\tau_\ell\sum_vw_v`$, discarding nonpositive terms and bounding the remaining weights by $`F_{\mathrm{pg}}`$ yields the displayed coefficient $`A_\ell\leq S_\ell`$. The [companion comparison](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/4b5ae9a75658bc44106b07fbb6deb2330e806df8/science/guessing_processing.md) gives the source equations and complete derivation.
 
 Since $`F_{\mathrm{rec}}\geq F_{\mathrm{pg}}`$, this implies
 
@@ -187,7 +187,7 @@ For each noise branch, every recovered logical CPTP channel factors through $`\m
 
 ## Exponential moments strengthen the dynamical inference
 
-The mean-rank floors above replace the sampled ranks by an arbitrary mixture with the same expectation. The actual product-noise process contains more information. The [companion theorem](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/67dd0de6beedab35e45c23cc7d07b57481d4b717/science/moment_processing.md) retains, for a fixed $`z\gt 1`$,
+The mean-rank floors above replace the sampled ranks by an arbitrary mixture with the same expectation. The actual product-noise process contains more information. The [companion theorem](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/4b5ae9a75658bc44106b07fbb6deb2330e806df8/science/moment_processing.md) retains, for a fixed $`z\gt 1`$,
 
 ```math
 X_{z,t}=\log_z\mathbb E_b[z^{r_{b,t}}],
@@ -259,7 +259,37 @@ A certified finite illustration uses $`k=12`$, $`p=2/5`$, $`n=120`$, $`q=99/100`
 \qquad a_z\simeq14.84083.
 ```
 
-For $`D=2000`$, the individual-T bound requires at least **244** gates, compared with 171 from the convenient mean-rank ledger. A 700-round interval with entering potential bounded by $`2n=240`$ requires at least **58**, compared with 39. These are verified necessary counts, without a claim that the parameter choices are physically attainable or that the chosen moment polygon is globally optimal. The companion proof and its [canonical verifier](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/67dd0de6beedab35e45c23cc7d07b57481d4b717/verification/verify_moment_processing.py) give the exact rational certificates and logarithmic enclosures.
+For $`D=2000`$, the individual-T bound requires at least **244** gates, compared with 171 from the convenient mean-rank ledger. A 700-round interval with entering potential bounded by $`2n=240`$ requires at least **58**, compared with 39. These are verified necessary counts, without a claim that the parameter choices are physically attainable or that the chosen moment polygon is globally optimal. The companion proof and its [canonical verifier](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/4b5ae9a75658bc44106b07fbb6deb2330e806df8/verification/verify_moment_processing.py) give the exact rational certificates and logarithmic enclosures.
+
+### Four-input refinement survives moment averaging
+
+The [four-input collision certificate](finite-guessing.md) improves an actual finite noisy-memory profile. Take $`k=4`$ and $`z=27/25`$. Retain the output-dimension and classical dimension-lifting caps, the normalized DFW/Renes cap, and the inherited hypercontractive collision cap followed by Renes. Add the new bound $`C_4=(2+\sqrt{345})/32`$ when the envelope has one quantum qubit, allowing arbitrary accompanying classical records.
+
+A concave upper polygon for the resulting integer-rank profile has rational knots
+
+```math
+(1,1/16),\qquad (z^3,1/2),\qquad
+(z^6,789/1000),\qquad(z^8,1),
+\qquad\text{(N8)}
+```
+
+and is constant at one thereafter. The [interface verifier](../verification/verify_noisy_processing.py) checks decreasing slopes and all 25 quantum-plus-classical pairs with $`0\le2s+c\le8`$ using exact rational witnesses. It uses $`C_4`$ through the rational collision bound $`27/64`$, so no numerical square root certifies a branch inequality.
+
+Write this polygon as $`P`$. Then $`p\le P(\mathbb E z^r)`$ at every primitive cut. In particular,
+
+```math
+P(z^5)=\frac{6951}{10145}=0.6851651059\ldots\lt\frac7{10}.
+```
+
+An unconditional score $`p=7/10`$ therefore requires
+
+```math
+X_z\ge\log_z\left[z^3+\frac{200}{289}(z^6-z^3)\right]
+=5.1476692298\ldots\gt5.
+\qquad\text{(N9)}
+```
+
+The specified prior caps still permit score $`7/10`$ at rank five, with $`(s,c)=(1,3)`$: their smallest collision cap is $`1/2`$, whereas $`g_{16}(7/10)=62/125\lt1/2`$. Thus the new moment floor is strictly stronger after branch maximization and concavification. This compares proved outer profiles; it does not claim that the old rank-five score is physically attainable, that (N8) is the optimal majorant, or that all possible prior refinements are dominated. The new floor can be inserted into the existing individual-gate and interval ledgers without changing their proof.
 
 For fixed $`p\ge p_0\gt 0`$ and fixed $`q\in(0,1)`$, the direct profile gives $`a_z=2k-o(k)`$ for a suitable sequence $`z\downarrow1`$, while $`\alpha_z=q+o(1)`$. The complementary recovery route gives the same leading conclusion. Along $`n\ge k`$, $`k\to\infty`$, $`D\to\infty`$ and $`\ln(n/k)=o(D)`$, the discrete ledger implies
 
@@ -271,7 +301,7 @@ The convenient score-only mean-rank floor has leading coefficient $`2p`$ in the 
 
 ## Explicit quantitative decay
 
-Retain the companion notation $`k`$ challenge qubits, $`n`$ total noisy width, $`D`$ rounds, $`q=1-\gamma`$, and prescribed gate count $`m_T`$. For $`1\lt z\le2^{1/7}`$, put $`\alpha=\alpha_z`$ as above and $`M=2n`$. The [companion finite inversion](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/67dd0de6beedab35e45c23cc7d07b57481d4b717/science/guessing_decay.md) gives, for $`D\ge1`$,
+Retain the companion notation $`k`$ challenge qubits, $`n`$ total noisy width, $`D`$ rounds, $`q=1-\gamma`$, and prescribed gate count $`m_T`$. For $`1\lt z\le2^{1/7}`$, put $`\alpha=\alpha_z`$ as above and $`M=2n`$. The [companion finite inversion](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/4b5ae9a75658bc44106b07fbb6deb2330e806df8/science/guessing_decay.md) gives, for $`D\ge1`$,
 
 ```math
 U_z=\min\left\{M\alpha,\;\min_{1\le\ell\le D}
@@ -325,11 +355,11 @@ This retains the initial width and is valid for every fixed gate schedule. Under
 \left[A(\lambda)-\rho\sum_{j\ge1}\phi_j(\lambda)\right]_+.
 ```
 
-The infinite sum converges geometrically. This exponent is positive exactly below $`2(1-q)/q`$ and strictly improves $`E_q`$ throughout that subcritical range. In particular $`\mathcal E_q(0)=\ln2`$, the chance-level exponent, instead of $`E_q(0)=2\ln2/7`$. Finite sums with rigorous tail bounds provide certified optimization. The companion's [complete proof and certificates](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/67dd0de6beedab35e45c23cc7d07b57481d4b717/science/guessing_decay.md) own this refinement. Its critical rate remains a necessary threshold; physical achievability is not established.
+The infinite sum converges geometrically. This exponent is positive exactly below $`2(1-q)/q`$ and strictly improves $`E_q`$ throughout that subcritical range. In particular $`\mathcal E_q(0)=\ln2`$, the chance-level exponent, instead of $`E_q(0)=2\ln2/7`$. Finite sums with rigorous tail bounds provide certified optimization. The companion's [complete proof and certificates](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/4b5ae9a75658bc44106b07fbb6deb2330e806df8/science/guessing_decay.md) own this refinement. Its critical rate remains a necessary threshold; physical achievability is not established.
 
 ## Survival of the envelope gives a reliability-dependent budget
 
-A fixed nonchance score also constrains how often the sampled channel may lose **all** input dependence. This gives a different bound from the mean-rank and exponential-moment floors above. The companion owns the [complete extinction and processing proof](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/67dd0de6beedab35e45c23cc7d07b57481d4b717/science/reliability_processing.md); the score-based consequence is stated and derived here.
+A fixed nonchance score also constrains how often the sampled channel may lose **all** input dependence. This gives a different bound from the mean-rank and exponential-moment floors above. The companion owns the [complete extinction and processing proof](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/4b5ae9a75658bc44106b07fbb6deb2330e806df8/science/reliability_processing.md); the score-based consequence is stated and derived here.
 
 Keep the same full physical output before basis-dependent readout, the same independent identity/replacement noise coupling, and the same counted fixed Clifford+T/reset circuit. For $`D\ge1`$ and an unconditional score $`2^{-k}\lt p\lt1`$, define
 
@@ -405,13 +435,50 @@ m_{T,I}\ge\left\lceil\left[
 
 Always $`M_I=2n`$ is safe. Do not restart a newly chosen envelope at the interval boundary. Global extinction still bounds the zero probability at every cut, and first-extinction events within this interval have total probability at most $`\delta_p`$. Thus the same hazard/Jensen argument uses $`D_I`$ layers, while its cumulative-rank balance subtracts $`M_I`$. Gates on interval boundaries are assigned once to the selected primitive cuts. When $`D_I=0`$, this theorem adds only a nonnegative count.
 
+### Paired pivots, survival products and the exiting rank
+
+The companion's sharper finite bound retains additional structure of the same envelope. If its binary rank is $`r`$ and its symplectic rank is $`2s`$, an injective physical restriction exists on at most $`r-s`$ qubits. The conditional extinction probability is therefore at least $`\gamma^{r-s}`$. This paired-pivot statement concerns the embedding into physical coordinates; it does not assume that physical depolarization acts on the canonical quantum-plus-classical factors.
+
+Put $`\lambda=\ln(1/\gamma)`$ and, for $`0\lt b\lt1`$, define
+
+```math
+\mathcal L_\gamma(D,b)=\frac b\lambda
+\ln\frac1{1-b^{1/D}}.
+```
+
+Let $`a=a_k(p)`$ be the all-cut expected-rank floor in (N2) or (N3). The direct branch cap $`p_{b,t}\le\min\{1,2^{(s-k)/6}\}`$ supplies its own quantum-factor floor
+
+```math
+a_s(p)=k\left[\frac{p-2^{-k/6}}{1-2^{-k/6}}\right]_+.
+\qquad\text{(R7)}
+```
+
+This follows by bounding the capped exponential by its secant between $`s=0`$ and $`s=k`$, then averaging actual branch scores. It is derived from guessing and does not import the Bell-fidelity floor.
+
+For completeness, let $`\alpha_j`$ be survival before backward noise layer $`j`$ and $`t_j=\mathbb E[r_j-s_j\mid r_j>0]`$. Conditional Jensen and the paired hazard give $`\alpha_{j+1}\le\alpha_j(1-\gamma^{t_j})`$. The exiting survival is at least $`b_p`$, so $`b_p\le\prod_j(1-\gamma^{t_j})`$. Convexity of $`-\ln(1-e^{-\lambda t})`$ and $`\alpha_j\ge b_p`$ imply
+
+```math
+\sum_j\mathbb E[r_j-s_j]\ge D\mathcal L_\gamma(D,b_p).
+```
+
+The same global score also gives $`\mathbb E s_j\ge a_s(p)`$ and $`\mathbb E r_j\ge a`$. Finally, keep the exiting rank in the telescope: $`m_T\ge\gamma\sum_j\mathbb E r_j+\mathbb E r_{\rm end}-2n`$, with $`\mathbb E r_{\rm end}\ge a`$. The strengthened finite conclusion is
+
+```math
+m_T\ge\left\lceil\left[
+\gamma D\max\{a,\ a_s(p)+\mathcal L_\gamma(D,b_p)\}
++a-2n\right]_+\right\rceil.
+\qquad\text{(R8)}
+```
+
+For every contiguous interval, replace $`D,m_T,2n`$ by $`D_I,m_{T,I},M_I`$, retaining the actual global suffix and the same score-derived floors. The exact-product term is valid for every strictly above-chance score; $`a_s(p)`$ vanishes when $`p\le2^{-k/6}`$. The [authoritative proof](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/4b5ae9a75658bc44106b07fbb6deb2330e806df8/science/reliability_processing.md) establishes the paired-pivot lemma and full interval argument. No independence of successive hazards, protected record or physical access to noise flags is introduced. Formula (R8) strengthens (R1), while the fixed-noise asymptotic order remains unchanged.
+
 For fixed $`k`$, fixed $`\gamma>0`$ and fixed $`p>2^{-k}`$, widths $`n=O(\ln D)`$ therefore require $`m_T=\Omega(D\ln D)`$ as $`D\to\infty`$. This strengthens the continuing-processing inference for small challenges. In the companion's construction range $`0<\gamma\le1/20`$, its reference-stable Tanner construction has the same processing order at that width for a fixed error target. This is a fixed-noise order statement; the factor $`1/\ln(1/\gamma)`$ prevents a claim of uniform weak-noise sharpness.
 
 The use of first extinction and Jensen is a rank-dependent adaptation of the established complete-erasure/spacetime argument of [Bharti, Haug and Tanggara](https://arxiv.org/abs/2608.26272). The additional step tracks the backward Pauli-envelope rank rather than all live physical qubits and converts its cumulative contraction into the specifically charged T count while Clifford/reset processing remains free. It is not the first reliability logarithm in a quantum-memory resource law.
 
 ## A matching-order coherent construction in the companion model
 
-The companion [Tanner construction](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/67dd0de6beedab35e45c23cc7d07b57481d4b717/science/tanner_memory.md) compiles an inherited constant-iteration current-syndrome decoder into a fixed coherent circuit. Syndrome and scratch registers remain in the counted noisy pool and are reset before each ideal recovery; nonlinear decisions are implemented and charged. A fixed-level five-qubit inner code extends its physical-noise range to $`0\lt\gamma\le1/20`$. With this inner code it proves
+The companion [Tanner construction](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/4b5ae9a75658bc44106b07fbb6deb2330e806df8/science/tanner_memory.md) compiles an inherited constant-iteration current-syndrome decoder into a fixed coherent circuit. Syndrome and scratch registers remain in the counted noisy pool and are reset before each ideal recovery; nonlinear decisions are implemented and charged. A fixed-level five-qubit inner code extends its physical-noise range to $`0\lt\gamma\le1/20`$. With this inner code it proves
 
 ```math
 n=O\!\left(k+\ln\frac{J_+}{\epsilon}\right),\qquad
@@ -437,4 +504,4 @@ A complete replacement of all $`n`$ registers in any round destroys all input de
 
 The guessing score does not verify the noise strength or independence, counted-controller restrictions, fixed primitive schedule or absence of side channels. Those remain model premises. It supplies no automatic LWE or remote-preparation compilation: such a reduction would have to preserve the joint state, chronology, controller model and charged resources separately. Statistical estimation of the unconditional score is also separate from the inference made here.
 
-Lattice owns the [finite guessing theorem](guessing-bound.md). Measurement-Free owns the envelope contraction, gate ledger and [full dynamical composition proof](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/67dd0de6beedab35e45c23cc7d07b57481d4b717/science/guessing_processing.md). The CPTP compatibility and score-based composition form their shared corollary; the recovery reductions remain attributed to the prior sources. The sister relationship does not merge the projects or alter their distinct ideal and noisy models.
+Lattice owns the [finite guessing theorem](guessing-bound.md). Measurement-Free owns the envelope contraction, gate ledger and [full dynamical composition proof](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/4b5ae9a75658bc44106b07fbb6deb2330e806df8/science/guessing_processing.md). The CPTP compatibility and score-based composition form their shared corollary; the recovery reductions remain attributed to the prior sources. The sister relationship does not merge the projects or alter their distinct ideal and noisy models.

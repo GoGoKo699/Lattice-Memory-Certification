@@ -32,6 +32,99 @@
       "0.72855339059328"
     ]
   },
+  "four_five_input_swap_sector_certificates": {
+    "4": {
+      "attaining_product_weight_sums": [
+        2,
+        6,
+        6,
+        2,
+        0
+      ],
+      "coefficient_identity_exact": true,
+      "collision_maximum_attained": true,
+      "collision_maximum_exact": "27/64",
+      "inherited_normalized_DFW_collision_exact": "9/16",
+      "positive_sector_polynomials": {
+        "2": {
+          "A_coefficients": [
+            27,
+            -9,
+            -1,
+            3,
+            3
+          ],
+          "multiple_of_sector_expectation": 128
+        }
+      },
+      "projector_joint_eigenspaces_checked": 16,
+      "retained_quantum_dimension": 2,
+      "score_upper_exact": "(2+sqrt(345))/32",
+      "score_upper_interval": [
+        "0.64294298815645",
+        "0.64294298815646"
+      ],
+      "score_upper_is_not_claimed_attainable": true,
+      "store_and_breidbart_interval": [
+        "0.62185921676911",
+        "0.62185921676912"
+      ],
+      "strict_improvement_over_hypercontractive_and_spectral_caps": true,
+      "swap_sector_expansion_exact": true
+    },
+    "5": {
+      "attaining_product_weight_sums": [
+        2,
+        8,
+        12,
+        8,
+        2,
+        0
+      ],
+      "coefficient_identity_exact": true,
+      "collision_maximum_attained": true,
+      "collision_maximum_exact": "81/256",
+      "inherited_normalized_DFW_collision_exact": "29/64",
+      "positive_sector_polynomials": {
+        "2": {
+          "A_coefficients": [
+            135,
+            -27,
+            -9,
+            5,
+            7,
+            5
+          ],
+          "multiple_of_sector_expectation": 512
+        },
+        "5": {
+          "A_coefficients": [
+            1,
+            -1,
+            1,
+            -1,
+            1,
+            -1
+          ],
+          "multiple_of_sector_expectation": 1024
+        }
+      },
+      "projector_joint_eigenspaces_checked": 32,
+      "retained_quantum_dimension": 2,
+      "score_upper_exact": "(4+sqrt(4526))/128",
+      "score_upper_interval": [
+        "0.55684025598606",
+        "0.55684025598607"
+      ],
+      "score_upper_is_not_claimed_attainable": true,
+      "store_and_breidbart_interval": [
+        "0.53079004294495",
+        "0.53079004294496"
+      ],
+      "strict_improvement_over_hypercontractive_and_spectral_caps": true,
+      "swap_sector_expansion_exact": true
+    }
+  },
   "hamming_ball_method_counterexample": {
     "b": 32768,
     "certificate": "exact rational atanh logarithm enclosures + type probability bounds",
@@ -59,7 +152,8 @@
     ]
   },
   "limits": [
-    "The finite score upper bound is not proved optimal or attained.",
+    "The three finite guessing upper bounds are not proved optimal or attained.",
+    "The collision maxima at three, four and five inputs with one retained qubit are attained.",
     "The all-size guessing exponent remains1/6.",
     "The Hamming-ball counterexample limits only scalar-PGM proof routes.",
     "No tensorization against joint encoders or hardware-model verification is claimed."
@@ -227,5 +321,26 @@
     "strict_profile_improvement": true,
     "z": "27/25"
   },
-  "status": "passed"
+  "status": "passed",
+  "swap_sector_matrix_diagnostics": {
+    "cases": {
+      "4": {
+        "largest_sampled_Q": 0.4218749999999999,
+        "matching_product_Q": 0.4218749999999999,
+        "matching_product_input": true,
+        "maximum_swap_trace_identity_error": 6.661338147750939e-16,
+        "random_rank2_inputs": 6
+      },
+      "5": {
+        "largest_sampled_Q": 0.31640625,
+        "matching_product_Q": 0.31640625,
+        "matching_product_input": true,
+        "maximum_swap_trace_identity_error": 7.771561172376096e-16,
+        "random_rank2_inputs": 6
+      }
+    },
+    "scope": "matrix diagnostics only; exact upper bounds come from the rational certificates",
+    "seed": 20261106,
+    "status": "passed"
+  }
 }
