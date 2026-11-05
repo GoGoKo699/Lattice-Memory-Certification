@@ -753,7 +753,7 @@ where $\tau_\ell=2^{-\ell-1}$ for $\ell<k$ and $\tau_k=0$. The underlying spectr
 The actual branch score is at most $p_*$, and every branch satisfies $F_{\rm rec}\le\min\{1,2^{r-2k}\}$. These estimates reproduce \eqref{eq:noisy-floor} for every $k\ge8$ when applied branchwise \emph{before} averaging. Exact finite-rank checks also imply the weaker floor stated above for $1\le k\le7$. Thus these mean-rank floors and their gate or interval consequences already follow from the recovery route. The direct encoder factorization gives a short operational explanation; this comparison does not identify the optimal attainable score or exclude stronger bounds.
 
 \subsection{Keeping the actual noise distribution gives a stronger budget}
-The mean-rank comparison does not exhaust the specified noisy dynamics. For a fixed real $1<z\le2$, retain the exponential moment of the common full-output envelope:
+The mean-rank comparison does not exhaust the specified noisy dynamics. For a fixed real $1<z\le2$, write $M_z(t):=\E_b z^{r_{b,t}}$ for the exponential moment of the common full-output envelope:
 \begin{equation}
 X_z(t):=\log_z\E_b z^{r_{b,t}},\qquad
 \alpha_z:=\frac{\ln(1-q+qz^2)}{2\ln z}\in(0,1).
