@@ -2,7 +2,7 @@
 
 A classical record can retain measurement outcomes but cannot, by itself, preserve all the information needed to answer incompatible quantum measurements selected later. This project quantifies that limitation when a prover can also retain a limited quantum system.
 
-The central question is finite: when $`n`$ hidden BB84 inputs leave at most $`m`$ retained qubits, how strongly does the deficit $`t=n-m`$ suppress recovery of the **entire** hidden string? For $`0\leq m\leq n`$, the upper bound is $`2^{-t/6}`$, allowing collective encoding and decoding and unrestricted classical records. The stronger premeasurement formulation applies to arbitrary states, so it also supports conditioning on a pre-basis erasure declaration.
+The central question is finite: when $`k`$ hidden BB84 inputs leave at most $`m`$ retained qubits, how strongly does the deficit $`t=k-m`$ suppress recovery of the **entire** hidden string? For $`0\leq m\leq k`$, the upper bound is $`2^{-t/6}`$, allowing collective encoding and decoding and unrestricted classical records. The stronger premeasurement formulation applies to arbitrary states, so it also supports conditioning on a pre-basis erasure declaration.
 
 ## Connected reading route
 
@@ -19,9 +19,9 @@ The [related-work comparison](../references/RELATED_WORK.md) identifies inherite
 
 ## Notation and error targets
 
-The input dimension is $`d=2^n`$ and the retained quantum dimension satisfies $`D\leq2^m`$. The pure-branch Schmidt rank is $`r\leq\min(D,d)`$; the Hamming error allowance is $`h`$. The operators $`\mathsf X,\mathsf Y,\mathsf Z`$ are the Paulis and $`\mathsf H`$ is the Hadamard. Normalized Schatten norms carry $`\mathrm{n}`$ in their subscript; all other matrix traces are ordinary unnormalized traces.
+The input dimension is $`d=2^k`$ and the retained quantum dimension satisfies $`d_Q\leq2^m`$. The pure-branch Schmidt rank is $`r\leq\min(d_Q,d)`$; the Hamming error allowance is $`h`$. The operators $`\mathsf X,\mathsf Y,\mathsf Z`$ are the Paulis and $`\mathsf H`$ is the Hadamard. Normalized Schatten norms carry $`\mathrm{n}`$ in their subscript; all other matrix traces are ordinary unnormalized traces.
 
-An ideal exact-string target is $`\delta`$. The compiled protocol has total soundness target $`\varepsilon`$ and preparation simulation error $`\varepsilon_{\mathrm{RSP}}`$. Allocating at most $`\varepsilon/2`$ to each contribution gives the additive storage choice in the certification account. Its efficient guarantee uses the imported nonuniform quantum-polynomial-time convention, sufficiently large security parameter, polynomial output length and inverse-polynomial soundness.
+An ideal exact-string target is $`\delta`$. The compiled protocol has total soundness target $`\varepsilon`$ and preparation simulation error $`\eta_{\mathrm{prep}}`$. Allocating at most $`\varepsilon/2`$ to each contribution gives the additive storage choice in the certification account. Its efficient guarantee uses the imported nonuniform quantum-polynomial-time convention, sufficiently large security parameter, polynomial output length and inverse-polynomial soundness.
 
 The noisy-device application declares its own resource notation: $`k`$ challenge qubits, $`n`$ total noisy persistent qubits, $`D`$ depolarizing rounds, and unconditional exact-string score $`p`$. Every persistent controller record is counted and noisy, and the fixed interior primitives retain their stated charges. It uses one full-output Pauli envelope before the basis-dependent free readout. These additional premises are not conclusions of the ideal guessing experiment.
 

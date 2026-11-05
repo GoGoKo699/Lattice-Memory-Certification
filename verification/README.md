@@ -83,3 +83,8 @@ These are fixed-encoder decoder certificates, not a global encoder relaxation. N
 ## Reliability-sensitive noisy processing
 
 The [new score/interval consequence](../science/noisy-processing.md) uses a zero full-output envelope, whose branch has input-independent output before basis-dependent readout and success at most chance, including aborts. Its finite conditional processing bound covers every challenge size and strictly above-chance score. The companion owns the absorbing-envelope proof and exact small-space/schedule verifier in `verification/verify_reliability.py`; the full scientific source pin is supplied by the application page. Existing interface checks continue to verify the CPTP factorization and actual branch-score averaging. Finite checks do not verify a physical noise/controller model, establish the asymptotic theorem from examples, or improve the ideal arbitrary-encoder guessing theorem.
+
+
+## Storage-gap and finite-guessing figure
+
+[Graph/generate_figures.py](Graph/generate_figures.py) directly reproduces the [storage-gap and finite-bound PDF](Graph/lattice_bounds.pdf), its PNG and numerical data, using [pinned dependencies](Graph/requirements.txt). It independently checks the displayed finite-alphabet roots at 80-digit precision and the product PGM constants before checking the exact reference PDF identity. The [figure guide](Graph/README.md) gives a separate-output rebuild command and distinguishes this comparison from the older integer-gap overview. These are finite value and asset checks, not proofs of the universal bound or of the unknown optimal guessing probability.

@@ -16,10 +16,10 @@ The convention is the normalized Schatten norm
 
 ```math
 \lVert A\rVert_{p,\mathrm{n}}
-=\left(2^{-n}\mathrm{Tr}|A|^p\right)^{1/p}
+=\left(2^{-k}\mathrm{Tr}|A|^p\right)^{1/p}
 ```
 
-for an operator on $`n`$ qubits and $`p\geq1`$. The roman $`\mathrm{n}`$ marks normalization; traces outside these norms are ordinary traces. Applying the theorem to $`\sqrt\rho`$ at $`p=3/2`$ and $`q=2`$ preserves the dimension factor needed for the storage-deficit estimate.
+for an operator on $`k`$ qubits and $`p\geq1`$. The roman $`\mathrm{n}`$ marks normalization; traces outside these norms are ordinary traces. Applying the theorem to $`\sqrt\rho`$ at $`p=3/2`$ and $`q=2`$ preserves the dimension factor needed for the storage-deficit estimate.
 
 Montanaro attributes the qubit theorem to A. Montanaro and T. J. Osborne, *Quantum boolean functions*, Chicago Journal of Theoretical Computer Science, 2010, no. 1, [arXiv:0810.2435v5](https://arxiv.org/abs/0810.2435v5). The local argument combines this imported theorem with classical pure-state refinement, its Schmidt-rank bound and the BB84 quadratic-form comparison.
 
@@ -27,33 +27,33 @@ Montanaro attributes the qubit theorem to A. Montanaro and T. J. Osborne, *Quant
 
 F. Dupuis, O. Fawzi and S. Wehner, *Entanglement sampling and applications*, IEEE Transactions on Information Theory **61**, 1093–1112 (2015), [arXiv:1305.1316](https://arxiv.org/abs/1305.1316). The inspected full-text PDF contains Theorem 10 and Corollary 11 on printed pages 17–19. Their high-order uncertainty relation already allows bounded quantum storage rates approaching one. Rate-one feasibility is therefore not a new claim of this project.
 
-For retained dimension $`D\leq2^m`$, the dimension-only substitution $`H_{\min}(A\mid CQ)\geq-\log_2D\geq-m`$ in Corollary 11 gives
+For retained dimension $`d_Q\leq2^m`$, the dimension-only substitution $`H_{\min}(A\mid CQ)\geq-\log_2d_Q\geq-m`$ in Corollary 11 gives
 
 ```math
 H_{\min}(X\mid CQ\Theta)
-\geq\frac{n\gamma(-m/n)-1}{2}.
+\geq\frac{k\gamma(-m/k)-1}{2}.
 ```
 
-For the arguments used here, $`\gamma(u)`$ is the inverse of $`g(a)=h_2(a)+a-1`$ on $`0\leq a\leq1/2`$, with $`h_2`$ binary entropy. Set $`t=n-m`$. Then
+For the arguments used here, $`\gamma(u)`$ is the inverse of $`g(a)=h_2(a)+a-1`$ on $`0\leq a\leq1/2`$, with $`h_2`$ binary entropy. Set $`t=k-m`$. Then
 
 ```math
-h_2\big(\gamma(-1+t/n)\big)+\gamma(-1+t/n)=t/n.
+h_2\big(\gamma(-1+t/k)\big)+\gamma(-1+t/k)=t/k.
 ```
 
 To make the displayed entropy bound at least $`\log_2(1/\delta)`$ for an ideal exact-string target $`0\lt \delta\lt 1`$, set
 
 ```math
-a_*=\frac{1+2\log_2(1/\delta)}{n}.
+a_*=\frac{1+2\log_2(1/\delta)}{k}.
 ```
 
 When $`a_*\leq1/2`$ and the resulting gap is feasible, the sufficient integer gap from that displayed bound is
 
 ```math
 t_{\mathrm{DFW}}=
-\left\lceil n\big(h_2(a_*)+a_*\big)\right\rceil.
+\left\lceil k\big(h_2(a_*)+a_*\big)\right\rceil.
 ```
 
-At fixed $`\delta`$, this particular sufficient gap grows logarithmically with $`n`$, whereas the present sufficient gap $`\lceil6\log_2(1/\delta)\rceil`$ is independent of block length. The [finite comparison table](../science/lower-bounds-and-resources.md) evaluates the two formulas, and the [analytic figure](../verification/Graph/README.md) displays the achieved strategy and present universal bound. The comparison fixes the dimension-only specialization and unsmoothed exact-string target; additional state information, smoothing and other cryptographic error notions lead to different comparisons.
+At fixed $`\delta`$, this particular sufficient gap grows logarithmically with $`k`$, whereas the present sufficient gap $`\lceil6\log_2(1/\delta)\rceil`$ is independent of block length. The [finite comparison table](../science/lower-bounds-and-resources.md) evaluates the two formulas, and the [analytic figure](../verification/Graph/README.md) displays the achieved strategy and present universal bound. The comparison fixes the dimension-only specialization and unsmoothed exact-string target; additional state information, smoothing and other cryptographic error notions lead to different comparisons.
 
 ## Rank-sensitive small-challenge refinements
 
@@ -63,7 +63,7 @@ A two-copy linear-entropy constraint strengthens the PGM value to the tight $`9/
 
 For four and five inputs with one retained qubit, positive local-swap sectors give exact maximal averaged PGM scores $`27/64`$ and $`81/256`$. The same Renes conversion yields guessing caps $`(2+\sqrt{345})/32`$ and $`(4+\sqrt{4526})/128`$. Hypercontractivity followed by that conversion gives approximately $`0.702934`$ and $`0.626376`$, compared with the improved $`0.642943`$ and $`0.556840`$. The certificates attain their PGM bounds on a stored qubit and real product pure factors; they do not establish optimal guessing or tensorization. The four-input cap also improves a specified finite noisy-envelope profile.
 
-Local-swap positivity and its weight-enumerator interpretation are established machinery. E. M. Rains, *Quantum shadow enumerators*, [quant-ph/9611001v2](https://arxiv.org/html/quant-ph/9611001v2), Corollary 7 and Theorem 8, prove positivity and the enumerator transform for arbitrary positive operators. F. Shi, K. Guo, X. Zhang and Q. Zhao, *Exploring Quantum Weight Enumerators From the n-Qubit Parallelized SWAP Test*, [arXiv:2406.18280v2](https://arxiv.org/html/2406.18280v2), Proposition 6 and Theorem 8, identify the local-SWAP outcome probabilities. D. Miller et al., *Experimental measurement and a physical interpretation of quantum shadow enumerators*, [arXiv:2408.16914v2](https://arxiv.org/pdf/2408.16914v2), Theorem 3, give the related two-copy Bell-sampling interpretation.
+Local-swap positivity and its weight-enumerator interpretation are established machinery. E. M. Rains, *Quantum shadow enumerators*, [quant-ph/9611001v2](https://arxiv.org/html/quant-ph/9611001v2), Corollary 7 and Theorem 8, prove positivity and the enumerator transform for arbitrary positive operators. F. Shi, K. Guo, X. Zhang and Q. Zhao, *Exploring Quantum Weight Enumerators From the k-Qubit Parallelized SWAP Test*, [arXiv:2406.18280v2](https://arxiv.org/html/2406.18280v2), Proposition 6 and Theorem 8, identify the local-SWAP outcome probabilities. d_Q. Miller et al., *Experimental measurement and a physical interpretation of quantum shadow enumerators*, [arXiv:2408.16914v2](https://arxiv.org/pdf/2408.16914v2), Theorem 3, give the related two-copy Bell-sampling interpretation.
 
 In Rains's unnormalized convention, $`A_j=A_j(R,R)`$ and $`S_{k-h}(R,R)=2^k\mathrm{Tr}[(R\otimes R)E_h]`$. Thus the [finite proof](../science/finite-guessing.md) uses $`H_4=8S_2`$, $`H_{52}=16S_3`$ and $`H_{55}=32S_0`$. Its additions are the explicit sharp BB84 rank-two evaluations and their operational consequences, not a new general positivity, shadow transform or discrimination theorem. The bounded comparison did not identify these numerical BB84 evaluations in the cited sources; it does not establish exhaustive publication priority.
 
@@ -115,7 +115,7 @@ J. Zhang, *Formulations and Constructions of Remote State Preparation with Verif
 The finite ideal bound replaces the storage estimate inside their existing simulation reduction. For total soundness target $`0\lt \varepsilon\lt 1`$ and preparation simulation error at most $`\varepsilon/2`$, the sufficient storage is
 
 ```math
-n=m+\left\lceil6\log_2(2/\varepsilon)\right\rceil.
+k=m+\left\lceil6\log_2(2/\varepsilon)\right\rceil.
 ```
 
 The [reduction](../science/cryptographic-certification.md) preserves pass weighting and the output-register dimension at the storage cut. Remote preparation, the wrapper and the hardness assumption remain inherited. The efficient guarantee uses the imported nonuniform quantum-polynomial-time convention and holds for sufficiently large security parameter, polynomial output length and inverse-polynomial simulation error. The algebraic storage formula alone supplies no stronger preparation guarantee.

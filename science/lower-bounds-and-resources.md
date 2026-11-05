@@ -4,7 +4,7 @@
 
 ## 1. Explicit store-and-measure witness
 
-For integer $`0\leq m\leq n`$, store any $`m`$ of the input qubits untouched. Measure each of the remaining $`t=n-m`$ qubits in the eigenbasis of
+For integer $`0\leq m\leq k`$, store any $`m`$ of the input qubits untouched. Measure each of the remaining $`t=k-m`$ qubits in the eigenbasis of
 
 ```math
 B=(\mathsf X+\mathsf Z)/\sqrt2.
@@ -26,13 +26,13 @@ This is the standard Breidbart measurement. Measuring in one fixed BB84 basis in
 
 ## 2. Optimal logarithmic order
 
-Let $`P^*_{n,m}`$ denote the optimum over all encoders and decoders in the ideal storage model. Theorem G and the explicit strategy give
+Let $`P^*_{k,m}`$ denote the optimum over all encoders and decoders in the ideal storage model. Theorem G and the explicit strategy give
 
 ```math
-\beta^t\leq P^*_{n,m}\leq2^{-t/6}.
+\beta^t\leq P^*_{k,m}\leq2^{-t/6}.
 ```
 
-For target ideal exact-string success $`0<\delta<1`$, requiring $`P^*_{n,m}\leq\delta`$ forces
+For target ideal exact-string success $`0<\delta<1`$, requiring $`P^*_{k,m}\leq\delta`$ forces
 
 ```math
 t\geq\frac{\log_2(1/\delta)}{-\log_2\beta}
@@ -43,9 +43,9 @@ Round the necessary threshold upward for an integer deficit. Theorem G guarantee
 
 ## 3. Finite comparison with an earlier uncertainty relation
 
-The [related-work calculation](../references/RELATED_WORK.md#dfw15-finite-comparison) specializes Dupuis–Fawzi–Wehner Corollary 11 to the same memory dimension. For a fixed total $`n`$, ideal target $`\delta=2^{-20}`$ gives the following sufficient gaps:
+The [related-work calculation](../references/RELATED_WORK.md#dfw15-finite-comparison) specializes Dupuis–Fawzi–Wehner Corollary 11 to the same memory dimension. For a fixed total $`k`$, ideal target $`\delta=2^{-20}`$ gives the following sufficient gaps:
 
-| Total input qubits $`n`$ | This theorem | DFW Corollary 11, dimension-only specialization |
+| Total input qubits $`k`$ | This theorem | DFW Corollary 11, dimension-only specialization |
 |---:|---:|---:|
 | 1,024 | 120 | 290 |
 | 10,000 | 120 | 426 |
@@ -55,7 +55,7 @@ The [verification script](../verification/verify.py) regenerates these numbers. 
 
 ### Three inputs with one retained qubit
 
-At $`n=3,m=1,D=2`$, a separate exact finite certificate improves the available upper bound:
+At $`k=3,m=1,d_Q=2`$, a separate exact finite certificate improves the available upper bound:
 
 ```math
 \frac{3+2\sqrt2}{8}
@@ -65,13 +65,13 @@ At $`n=3,m=1,D=2`$, a separate exact finite certificate improves the available u
 
 The values are approximately $`0.7285533906`$ and $`0.7437184335`$. The lower value is the explicit store-and-Breidbart strategy. The upper value follows from a global two-copy purity certificate and Renes's finite-alphabet discrimination inequality, improving the verified normalized DFW/Renes value $`(1+2\sqrt7)/8\simeq0.7864378278`$. The [full account](finite-guessing.md) covers arbitrary encoders and classical records, proves equality of the optimized arbitrary-state and preparation formulations, and checks a finite moment-profile consequence. It does not determine the optimum or tensorize against joint encoders.
 
-The universal exponent remains $`1/6`$. Any universal guessing law $`P^*_{n,m}\leq2^{-c(n-m)}`$ must satisfy $`c\leq-\log_2\beta\simeq0.2284466968`$ by the achieved strategy. The [collision-method obstruction](finite-guessing.md#5-a-limitation-of-rank-sensitive-collision-methods) separately rules out a universal PGM rank exponent strictly above $`1/3`$, hence rules out improving $`1/6`$ through that collision-only route. It leaves stronger joint-discrimination arguments open.
+The universal exponent remains $`1/6`$. Any universal guessing law $`P^*_{k,m}\leq2^{-c(k-m)}`$ must satisfy $`c\leq-\log_2\beta\simeq0.2284466968`$ by the achieved strategy. The [collision-method obstruction](finite-guessing.md#5-a-limitation-of-rank-sensitive-collision-methods) separately rules out a universal PGM rank exponent strictly above $`1/3`$, hence rules out improving $`1/6`$ through that collision-only route. It leaves stronger joint-discrimination arguments open.
 
 ## 4. Charged resources
 
 | Resource | Accounting |
 |---|---|
-| Honest persistent quantum storage | $`n`$ ideal logical qubits in the exact-string protocol |
+| Honest persistent quantum storage | $`k`$ ideal logical qubits in the exact-string protocol |
 | Adversarial persistent quantum storage | Dimension at most $`2^m`$ for the union of all later-accessible quantum systems |
 | Classical records | No imposed bound in Theorem G; efficiently generated in the compiled protocol |
 | Preparation work and ancillas | Supplied by the imported RSP construction; polynomial in its supported regime, with total costs unoptimized |
@@ -82,4 +82,4 @@ The universal exponent remains $`1/6`$. Any universal guessing law $`P^*_{n,m}\l
 
 In the ideal theorem the BB84 input is an explicitly supplied quantum resource. The compiled protocol obtains the input through the imported computationally secure classical interaction, with its preparation work and communication costs retained.
 
-An implementation may encode the $`n`$ logical qubits into more physical qubits for protection. Every physical system that survives the cut and remains accessible during decoding contributes to the quantum storage. The certified resource is persistent storage at that cut; total implementation cost and quantum-channel capacity are separate quantities.
+An implementation may encode the $`k`$ logical qubits into more physical qubits for protection. Every physical system that survives the cut and remains accessible during decoding contributes to the quantum storage. The certified resource is persistent storage at that cut; total implementation cost and quantum-channel capacity are separate quantities.

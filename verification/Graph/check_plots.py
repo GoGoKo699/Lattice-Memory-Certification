@@ -18,7 +18,7 @@ import numpy as np
 
 
 HERE = Path(__file__).resolve().parent
-PACKAGED_PDF_SHA256 = "0fcb5932b7363c0f602c146b7a88f962272ba3eb2d616805aba39389c45f80ad"
+PACKAGED_PDF_SHA256 = "6c59611929f0cbfe40c4e301b314a8c87d4e3f05dc0adb763a71295be3445aad"
 
 
 def require(condition: bool, message: str) -> None:
@@ -122,6 +122,9 @@ def main() -> None:
     versions = {"numpy": np.__version__, "matplotlib": matplotlib.__version__}
     pins = dict(line.strip().split("==") for line in (HERE / "requirements.txt").read_text().splitlines()
                 if line.strip() and not line.startswith("#"))
+    # This overview uses NumPy and Matplotlib. The shared environment also pins
+    # mpmath for the separate finite-bound comparison generator.
+    pins = {name: pins[name] for name in versions}
     require(versions == data["environment"] == pins, "plotting environment/version mismatch")
     examples, elementary_counts = canonical_examples()
     counts = check_values(data, examples)

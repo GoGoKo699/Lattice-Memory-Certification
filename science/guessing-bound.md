@@ -2,7 +2,7 @@
 
 [Model](model.md) · [Science guide](README.md)
 
-All traces in intermediate matrix expressions are ordinary, unnormalized traces. The explicitly defined Schatten norms in the hypercontractivity step are normalized. This distinction produces the factor $`2^{-n/3}`$ before the final square root.
+All traces in intermediate matrix expressions are ordinary, unnormalized traces. The explicitly defined Schatten norms in the hypercontractivity step are normalized. This distinction produces the factor $`2^{-k/3}`$ before the final square root.
 
 ## 1. Classical refinement without extra quantum memory
 
@@ -15,7 +15,7 @@ In the stronger premeasurement model, first condition on $`C=c`$. Decompose the 
 Give $`j`$ to the decoder as additional **classical** information. This can only increase its success probability and does not enlarge $`Q`$. The independent, uniform basis choice remains independent of $`(c,j)`$. It is therefore enough to bound every normalized pure branch $`|\psi\rangle_{AQ}`$, whose Schmidt rank $`r`$ satisfies
 
 ```math
-r\leq\min(D,d),\qquad d=2^n.
+r\leq\min(d_Q,d),\qquad d=2^k.
 ```
 
 The refinement supplies a classical extension while keeping the same quantum register. The rank bound applies to each pure branch: an arbitrary mixed state can have $`\rho_A=I/d`$ even when $`Q`$ is one-dimensional. A quantum purification would introduce an additional system whose surviving dimension must be charged.
@@ -94,7 +94,7 @@ Let $`\Delta_Z`$ and $`\Delta_X`$ denote dephasing in the two single-qubit BB84 
 
 ```math
 \mathbb E_\Theta P_{\mathrm{pgm}}(\Theta)
-=\mathrm{Tr}\big[R\,\mathcal T^{\otimes n}(R)\big].
+=\mathrm{Tr}\big[R\,\mathcal T^{\otimes k}(R)\big].
 ```
 
 On the Pauli basis $`(I,\mathsf X,\mathsf Y,\mathsf Z)`$, the eigenvalues of $`\mathcal T`$ are $`(1,1/2,0,1/2)`$. Let $`\mathcal D_\eta(A)=\eta A+(1-\eta)\mathrm{Tr}(A)I/2`$ be the qubit depolarizing map. Its Pauli eigenvalues are $`(1,\eta,\eta,\eta)`$.
@@ -102,16 +102,16 @@ On the Pauli basis $`(I,\mathsf X,\mathsf Y,\mathsf Z)`$, the eigenvalues of $`\
 Expand the Hermitian $`R`$ in orthogonal Pauli words. In the quadratic form, every real coefficient is squared. Each word's $`\mathcal T`$ weight is at most its $`\mathcal D_{1/2}`$ weight, so
 
 ```math
-\mathrm{Tr}\big[R\,\mathcal T^{\otimes n}(R)\big]
-\leq\mathrm{Tr}\big[R\,\mathcal D_{1/2}^{\otimes n}(R)\big]
-=\mathrm{Tr}\left[\big(\mathcal D_{1/\sqrt2}^{\otimes n}(R)\big)^2\right].
+\mathrm{Tr}\big[R\,\mathcal T^{\otimes k}(R)\big]
+\leq\mathrm{Tr}\big[R\,\mathcal D_{1/2}^{\otimes k}(R)\big]
+=\mathrm{Tr}\left[\big(\mathcal D_{1/\sqrt2}^{\otimes k}(R)\big)^2\right].
 ```
 
 The last equality uses self-adjointness of depolarization and composition of its parameters. The inequality compares Pauli quadratic forms.
 
 ## 5. Imported theorem HC and the rank estimate
 
-For an operator on $`n`$ qubits define the normalized Schatten norm
+For an operator on $`k`$ qubits define the normalized Schatten norm
 
 ```math
 \|A\|_{p,\mathrm n}=
@@ -121,7 +121,7 @@ For an operator on $`n`$ qubits define the normalized Schatten norm
 Qubit hypercontractivity states that for Hermitian $`A`$, $`1\leq p\leq2\leq q`$, and $`0\leq\eta\leq\sqrt{(p-1)/(q-1)}`$,
 
 ```math
-\|\mathcal D_\eta^{\otimes n}(A)\|_{q,\mathrm n}
+\|\mathcal D_\eta^{\otimes k}(A)\|_{q,\mathrm n}
 \leq\|A\|_{p,\mathrm n}.
 ```
 
@@ -149,7 +149,7 @@ Apply Lemma D to each basis, then Cauchy–Schwarz to the classical average:
 \mathbb E_\Theta P_{\mathrm{opt}}(\Theta)
 &\leq\mathbb E_\Theta\sqrt{P_{\mathrm{pgm}}(\Theta)}\\
 &\leq\sqrt{\mathbb E_\Theta P_{\mathrm{pgm}}(\Theta)}\\
-&\leq(r/d)^{1/6}\leq(D/d)^{1/6}.
+&\leq(r/d)^{1/6}\leq(d_Q/d)^{1/6}.
 \end{aligned}
 ```
 
@@ -157,12 +157,12 @@ This holds for every pure conditional branch, hence also after averaging the ref
 
 ## 7. A finite refinement and a limit of this proof route
 
-For $`n=3,D=2`$, the [rank-sensitive finite argument](finite-guessing.md) strengthens the bound by using two-copy purity constraints before discrimination. It gives
+For $`k=3,d_Q=2`$, the [rank-sensitive finite argument](finite-guessing.md) strengthens the bound by using two-copy purity constraints before discrimination. It gives
 
 ```math
 \mathbb E_\Theta P_{\mathrm{pgm}}(\Theta)\leq9/16,
 \qquad
-P_{\mathrm{guess}}\leq\frac{2+7\sqrt2}{16}.
+p_{\mathrm{guess}}\leq\frac{2+7\sqrt2}{16}.
 ```
 
 Both statements cover arbitrary encoders and unrestricted classical records through the same pure classical refinement used above. The first constant is exact; the final guessing bound need not be attained. The finite-alphabet Renes inequality replaces the square-root comparison in this instance. A flagged Pauli twirl identifies the optimized arbitrary-state and preparation formulations without increasing the quantum dimension.
@@ -171,6 +171,6 @@ The same chapter proves that a uniform rank-sensitive collision inequality with 
 
 ## Checks and interpretation
 
-The full-memory endpoint $`D=d`$ permits success one. At zero quantum storage the bound gives $`2^{-n/6}`$, while the explicit Breidbart strategy achieves $`\beta^n`$. These values leave the exponent constants unmatched.
+The full-memory endpoint $`d_Q=d`$ permits success one. At zero quantum storage the bound gives $`2^{-k/6}`$, while the explicit Breidbart strategy achieves $`\beta^k`$. These values leave the exponent constants unmatched.
 
 The [finite verification](../verification/README.md) directly compares the Schmidt/PGM and Pauli identities, evaluates the norm inequality on finite examples, checks normalized quantum instruments, and reproduces lower-bound strategies. These checks test transcription and normalization against the analytic formulas; the general norm inequality remains the imported theorem above.

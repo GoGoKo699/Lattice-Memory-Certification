@@ -35,9 +35,9 @@ These are selected locations, not a requirement to read every page in each inter
 
 Watrous generally writes vectors as $`u`$ and adjoints as $`u^*`$. Here the same vector is written $`|u\rangle`$, its adjoint is $`\langle u|`$, and $`uu^*`$ becomes $`|u\rangle\langle u|`$. The book's measurement function $`\mu(x)`$ is our POVM effect $`M_x`$. An ensemble element $`\eta(x)`$ corresponds to our subnormalized positive operator $`\sigma_x`$; its trace includes the probability of label $`x`$.
 
-Our symbols $`n`$ and $`m`$ count input and retained qubits, with $`0\leq m\leq n`$. The dimensions are $`d=2^n`$ and $`D\leq2^m`$. The symbol $`r`$ in the proof counts nonzero Schmidt coefficients of a **pure conditional state**, while $`h`$ counts tolerated Hamming errors. The rank satisfies $`r\leq\min(D,d)`$. The verifier's hidden bit string is $`X`$, the later-revealed basis string is $`\Theta`$, the unrestricted classical record is $`C`$, and the quantum memory is $`Q`$.
+Our symbols $`k`$ and $`m`$ count input and retained qubits, with $`0\leq m\leq k`$. The dimensions are $`d=2^k`$ and $`d_Q\leq2^m`$. The symbol $`r`$ in the proof counts nonzero Schmidt coefficients of a **pure conditional state**, while $`h`$ counts tolerated Hamming errors. The rank satisfies $`r\leq\min(d_Q,d)`$. The verifier's hidden bit string is $`X`$, the later-revealed basis string is $`\Theta`$, the unrestricted classical record is $`C`$, and the quantum memory is $`Q`$.
 
-The Pauli operators are $`\mathsf X,\mathsf Y,\mathsf Z`$, and the Hadamard operator is $`\mathsf H`$, so $`|x\rangle_\theta=\mathsf H^\theta|x\rangle`$ for one input qubit. These operator symbols are distinct from the hidden string $`X`$. We use $`\delta`$ for an ideal guessing-probability target, $`\varepsilon`$ for total false acceptance in the compiled protocol, and $`\varepsilon_{\mathrm{RSP}}`$ for the preparation simulation error.
+The Pauli operators are $`\mathsf X,\mathsf Y,\mathsf Z`$, and the Hadamard operator is $`\mathsf H`$, so $`|x\rangle_\theta=\mathsf H^\theta|x\rangle`$ for one input qubit. These operator symbols are distinct from the hidden string $`X`$. We use $`\delta`$ for an ideal guessing-probability target, $`\varepsilon`$ for total false acceptance in the compiled protocol, and $`\eta_{\mathrm{prep}}`$ for the preparation simulation error.
 
 Watrous's Schatten norms are unnormalized. The imported hypercontractivity theorem instead uses
 
@@ -51,13 +51,13 @@ Here $`d`$ is the dimension of the space on which $`A`$ acts. The ordinary trace
 
 When a positive operator has a zero eigenvalue, its negative powers in the proof act only on its support. This is the same support convention underlying the textbook's Moore–Penrose-inverse definition of the pretty-good measurement. Missing POVM support may be completed arbitrarily because it has zero ensemble probability.
 
-For classical $`X`$, the project uses $`H_{\min}(X\mid C Q\Theta)=-\log_2P_{\mathrm{guess}}`$. This is an operational guessing definition, not the von Neumann entropy of a register. No general smooth-entropy formalism is needed for the finite proof.
+For classical $`X`$, the project uses $`H_{\min}(X\mid C Q\Theta)=-\log_2p_{\mathrm{guess}}`$. This is an operational guessing definition, not the von Neumann entropy of a register. No general smooth-entropy formalism is needed for the finite proof.
 
-The [noisy-processing application](../science/noisy-processing.md) uses $`k`$ for challenge length, $`n`$ for total noisy physical width, $`D`$ for noise rounds and $`r`$ for binary Pauli-envelope dimension. Those meanings differ from the ideal theorem's input count $`n`$, retained dimension $`D`$ and pure-branch Schmidt rank $`r`$. The application restates its convention before using the theorem; neither $`2n`$ physical label directions nor $`2^r`$ algebra dimension is automatically a count of surviving quantum qubits.
+The [noisy-processing application](../science/noisy-processing.md) keeps the same challenge length $`k`$, while $`n`$ is total noisy physical width, $`D`$ counts noise rounds and $`r`$ is binary Pauli-envelope dimension. The ideal theorem uses $`d_Q`$ for retained quantum dimension and $`r`$ for pure-branch Schmidt rank. The application states these physical resources explicitly; neither $`2n`$ physical label directions nor $`2^r`$ algebra dimension is automatically a count of surviving quantum qubits.
 
 ## A complete two-qubit example
 
-Take $`n=2`$ and permit one retained qubit, so $`m=1`$, $`d=4`$, and $`D=2`$. The source supplies $`|x_1\rangle_{\theta_1}|x_2\rangle_{\theta_2}`$ with all four label bits independent and uniform. The device stores the first qubit unchanged. Before learning either basis, it measures the second in the Breidbart basis, the eigenbasis of $`(\mathsf X+\mathsf Z)/\sqrt2`$, and records the outcome $`c\in\{0,1\}`$ classically.
+Take $`k=2`$ and permit one retained qubit, so $`m=1`$, $`d=4`$, and $`d_Q=2`$. The source supplies $`|x_1\rangle_{\theta_1}|x_2\rangle_{\theta_2}`$ with all four label bits independent and uniform. The device stores the first qubit unchanged. Before learning either basis, it measures the second in the Breidbart basis, the eigenbasis of $`(\mathsf X+\mathsf Z)/\sqrt2`$, and records the outcome $`c\in\{0,1\}`$ classically.
 
 The positive-eigenvalue vector is
 
@@ -104,11 +104,11 @@ The first inequality is the Barnum–Knill step and the second follows from the 
 
 The [full proof](../science/guessing-bound.md) remains authoritative. Its logical bridge has five parts.
 
-**Classical refinement.** Condition on the available classical record and decompose the remaining mixed state into pure states. Giving the decomposition label to the decoder is extra classical information, not an extra quantum purification. Every resulting pure state on $`AQ`$ has Schmidt rank at most $`D`$. This does not assert that an arbitrary mixed marginal $`\rho_A`$ has rank at most $`D`$.
+**Classical refinement.** Condition on the available classical record and decompose the remaining mixed state into pure states. Giving the decomposition label to the decoder is extra classical information, not an extra quantum purification. Every resulting pure state on $`AQ`$ has Schmidt rank at most $`d_Q`$. This does not assert that an arbitrary mixed marginal $`\rho_A`$ has rank at most $`d_Q`$.
 
 **Discrimination.** For each basis, Watrous's Theorem 3.10 gives $`P_{\mathrm{opt}}^2\leq P_{\mathrm{pgm}}`$. The project includes the needed Cauchy–Schwarz argument as Lemma D. Substituting a Schmidt decomposition yields $`P_{\mathrm{pgm}}(\theta)=\sum_x\langle x_\theta|\sqrt\rho|x_\theta\rangle^2`$.
 
-**Averaging the hidden bases.** Averaging this expression produces $`\mathrm{Tr}[R\mathcal T^{\otimes n}(R)]`$, with $`\mathcal T=(\Delta_Z+\Delta_X)/2`$. Here $`\Delta_Z`$ and $`\Delta_X`$ dephase in the computational and Hadamard bases. On $`(I,\mathsf X,\mathsf Y,\mathsf Z)`$, the map has weights $`(1,1/2,0,1/2)`$, bounded by those of depolarization with parameter $`1/2`$. The comparison is between quadratic forms.
+**Averaging the hidden bases.** Averaging this expression produces $`\mathrm{Tr}[R\mathcal T^{\otimes k}(R)]`$, with $`\mathcal T=(\Delta_Z+\Delta_X)/2`$. Here $`\Delta_Z`$ and $`\Delta_X`$ dephase in the computational and Hadamard bases. On $`(I,\mathsf X,\mathsf Y,\mathsf Z)`$, the map has weights $`(1,1/2,0,1/2)`$, bounded by those of depolarization with parameter $`1/2`$. The comparison is between quadratic forms.
 
 **Imported hypercontractivity.** The required tensor-power inequality is [Montanaro's Theorem 13](../references/RELATED_WORK.md#m12-hypercontractivity), with the Montanaro–Osborne attribution recorded there. For normalized Schatten norms, its $`p=3/2`$, $`q=2`$, $`\eta=1/\sqrt2`$ case and a rank estimate give
 
@@ -120,7 +120,7 @@ The [full proof](../science/guessing-bound.md) remains authoritative. Its logica
 
 The rank estimate follows from $`\sum_{j=1}^r\lambda_j^{3/4}\leq r^{1/4}`$ for eigenvalues that sum to one. This is where limited quantum storage constrains the averaged experiment.
 
-**Finish and interpret.** Averaging the discrimination inequality and using $`\mathbb E\sqrt Z\leq\sqrt{\mathbb E Z}`$ gives $`P_{\mathrm{guess}}\leq\min\{1,(D/2^n)^{1/6}\}`$. With $`D\leq2^m`$, this gives $`2^{-(n-m)/6}`$. Averaging over the extra classical labels then returns the original experiment, including joint encoders and decoders. For target ideal guessing probability $`0\lt \delta\lt 1`$, a deficit $`n-m\geq\lceil6\log_2(1/\delta)\rceil`$ suffices whenever the input length permits that gap.
+**Finish and interpret.** Averaging the discrimination inequality and using $`\mathbb E\sqrt Z\leq\sqrt{\mathbb E Z}`$ gives $`p_{\mathrm{guess}}\leq\min\{1,(d_Q/2^k)^{1/6}\}`$. With $`d_Q\leq2^m`$, this gives $`2^{-(k-m)/6}`$. Averaging over the extra classical labels then returns the original experiment, including joint encoders and decoders. For target ideal guessing probability $`0\lt \delta\lt 1`$, a deficit $`k-m\geq\lceil6\log_2(1/\delta)\rceil`$ suffices whenever the input length permits that gap.
 
 ## A rank-sensitive three-input step
 
@@ -160,12 +160,12 @@ The imported interface covers nonuniform quantum-polynomial-time provers and con
 
 ```math
 P_{\mathrm{accept}}
-\leq\min\{1,\varepsilon_{\mathrm{RSP}}+2^{-(n-m)/6}\}.
+\leq\min\{1,\eta_{\mathrm{prep}}+2^{-(k-m)/6}\}.
 ```
 
 There is no conditioning on a rare pass and no division by its probability. Preparation may require more workspace before the cut; all quantum information accessible across the cut is charged. This distinction is essential to preserving the physical meaning of the claim.
 
-For target total false-acceptance probability $`0\lt \varepsilon\lt 1`$, choose $`\varepsilon_{\mathrm{RSP}}\leq\varepsilon/2`$ and ideal guessing target $`\delta=\varepsilon/2`$. This allocation gives $`n=m+\lceil6\log_2(2/\varepsilon)\rceil`$. The imported construction supplies polynomially many rounds and inverse-polynomial soundness. Efficient negligible-soundness compilation requires a corresponding preparation guarantee. The ideal converse remains unconditional even though its classical-verifier implementation is computational.
+For target total false-acceptance probability $`0\lt \varepsilon\lt 1`$, choose $`\eta_{\mathrm{prep}}\leq\varepsilon/2`$ and ideal guessing target $`\delta=\varepsilon/2`$. This allocation gives $`k=m+\lceil6\log_2(2/\varepsilon)\rceil`$. The imported construction supplies polynomially many rounds and inverse-polynomial soundness. Efficient negligible-soundness compilation requires a corresponding preparation guarantee. The ideal converse remains unconditional even though its classical-verifier implementation is computational.
 
 ## Scope and resources
 

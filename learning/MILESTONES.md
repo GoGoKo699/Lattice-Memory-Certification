@@ -54,7 +54,7 @@ Dependencies name earlier understanding targets, not extra assignments. Primary 
 
 **Story role:** Extend individual states to compound systems.
 
-**Conceptual connection:** A physical storage restriction becomes the dimension parameter $`D`$, while classical record size is separate.
+**Conceptual connection:** A physical storage restriction becomes the dimension parameter $`d_Q`$, while classical record size is separate.
 
 **Source pointers:** Watrous §§1.1.1 and 2.1.1–2.1.2; [normalization and notation](WATROUS_BRIDGE.md#notation-and-normalization); [resource accounting](../science/lower-bounds-and-resources.md#4-charged-resources).
 
@@ -112,7 +112,7 @@ Dependencies name earlier understanding targets, not extra assignments. Primary 
 
 **Central question:** When does a small memory force a low-rank marginal?
 
-**Understanding target:** Use the Schmidt decomposition for a pure bipartite state and explain why its marginal rank is the Schmidt rank $`r\leq D`$; give the mixed-state limitation.
+**Understanding target:** Use the Schmidt decomposition for a pure bipartite state and explain why its marginal rank is the Schmidt rank $`r\leq d_Q`$; give the mixed-state limitation.
 
 **Dependencies:** M03, M06.
 
@@ -336,7 +336,7 @@ Dependencies name earlier understanding targets, not extra assignments. Primary 
 
 **Phase:** Narrative/innovation.
 
-**Central question:** Why does the final result depend on $`n-m`$?
+**Central question:** Why does the final result depend on $`k-m`$?
 
 **Understanding target:** Combine discrimination, averaging and rank, recover the bound for mixed classical branches, and identify the trivial full-memory endpoint.
 
@@ -344,7 +344,7 @@ Dependencies name earlier understanding targets, not extra assignments. Primary 
 
 **Story role:** Synthesize the complete ideal converse.
 
-**Conceptual connection:** The ratio $`D/d`$ becomes the memory deficit in the exponent without an asymptotic remainder.
+**Conceptual connection:** The ratio $`d_Q/d`$ becomes the memory deficit in the exponent without an asymptotic remainder.
 
 **Source pointers:** Watrous §§1.2.1–1.2.2 and 3.1.2; [finish Theorem G](../science/guessing-bound.md#6-finish-theorem-g); [statement](../science/model.md#theorem-g-finite-dimensional-guessing).
 
@@ -354,7 +354,7 @@ Dependencies name earlier understanding targets, not extra assignments. Primary 
 
 **Central question:** What prevents the additive overhead from having a better asymptotic order?
 
-**Understanding target:** Explain storing $`m`$ qubits and Breidbart-measuring the rest, derive the achieved complete-string probability $`\beta^{n-m}`$, and distinguish optimal order from an optimal constant.
+**Understanding target:** Explain storing $`m`$ qubits and Breidbart-measuring the rest, derive the achieved complete-string probability $`\beta^{k-m}`$, and distinguish optimal order from an optimal constant.
 
 **Dependencies:** M01, M09, M14, M21.
 
@@ -418,7 +418,7 @@ Dependencies name earlier understanding targets, not extra assignments. Primary 
 
 **Central question:** Which parameter choices give an efficient classical-verifier protocol?
 
-**Understanding target:** Allocate total false-acceptance budget $`\varepsilon`$ between preparation error $`\varepsilon_{\mathrm{RSP}}\leq\varepsilon/2`$ and ideal guessing target $`\delta=\varepsilon/2`$, derive $`n=m+\lceil6\log_2(2/\varepsilon)\rceil`$, and retain the inverse-polynomial versus negligible distinction.
+**Understanding target:** Allocate total false-acceptance budget $`\varepsilon`$ between preparation error $`\eta_{\mathrm{prep}}\leq\varepsilon/2`$ and ideal guessing target $`\delta=\varepsilon/2`$, derive $`k=m+\lceil6\log_2(2/\varepsilon)\rceil`$, and retain the inverse-polynomial versus negligible distinction.
 
 **Dependencies:** M22, M25.
 
@@ -450,7 +450,7 @@ Dependencies name earlier understanding targets, not extra assignments. Primary 
 
 **Central question:** Which departures from exact recovery preserve the claimed memory guarantee?
 
-**Understanding target:** Relate Hamming tolerance $`h`$ to the list size $`V(n,h)=\sum_{j=0}^h\binom nj`$, explain the certain-success counterexample, distinguish pre-basis from post-basis erasures, and track honest noise separately.
+**Understanding target:** Relate Hamming tolerance $`h`$ to the list size $`V(k,h)=\sum_{j=0}^h\binom{k}{j}`$, explain the certain-success counterexample, distinguish pre-basis from post-basis erasures, and track honest noise separately.
 
 **Dependencies:** M08, M22, M26, M27.
 
