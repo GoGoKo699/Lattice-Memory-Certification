@@ -187,7 +187,7 @@ For each noise branch, every recovered logical CPTP channel factors through $`\m
 
 ## Exponential moments strengthen the dynamical inference
 
-The mean-rank floors above replace the sampled ranks by an arbitrary mixture with the same expectation. The actual product-noise process contains more information. The [companion theorem](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/8915a7afc3b891bda5e60438ec5182acf4181310/science/moment_processing.md) retains, for a fixed $`z>1`$,
+The mean-rank floors above replace the sampled ranks by an arbitrary mixture with the same expectation. The actual product-noise process contains more information. The [companion theorem](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/4a2ee369e2c8765d1749d4f3d25103109b8289d3/science/moment_processing.md) retains, for a fixed $`z\gt 1`$,
 
 ```math
 X_{z,t}=\log_z\mathbb E_b[z^{r_{b,t}}],
@@ -205,7 +205,7 @@ Independent noise and Jensen's inequality imply $`X_z'\le\alpha_zX_z`$. A T/T-da
 
 ### Direct score floor
 
-For $`1<z\le2^{1/7}`$, the two exponential pieces of $`h_k(r)`$ above are convex functions of $`Y=z^r`$. Put $`b=2^{-k}`$, $`H=2^{-k/6}`$, and let $`P_z`$ be the least concave polygon above the three knots
+For $`1\lt z\le2^{1/7}`$, the two exponential pieces of $`h_k(r)`$ above are convex functions of $`Y=z^r`$. Put $`b=2^{-k}`$, $`H=2^{-k/6}`$, and let $`P_z`$ be the least concave polygon above the three knots
 
 ```math
 (1,b),\qquad (z^{5k/6},H),\qquad(z^{2k},1),
@@ -222,7 +222,7 @@ at every primitive cut. The inverse is the increasing piecewise-linear inverse o
 
 ### Complementary recovery floor
 
-For $`1<z\le2`$, let $`F_0\ge4^{-k}`$ be a certified lower bound on optimum squared Bell recovery fidelity of the averaged full channel. For $`p\ge2^{-k}`$, the preceding recovery inequalities supply such a value, for example
+For $`1\lt z\le2`$, let $`F_0\ge4^{-k}`$ be a certified lower bound on optimum squared Bell recovery fidelity of the averaged full channel. For $`p\ge2^{-k}`$, the preceding recovery inequalities supply such a value, for example
 
 ```math
 F_0=\max\left\{4^{-k},\frac{p}{2^k},
@@ -259,9 +259,9 @@ A certified finite illustration uses $`k=12`$, $`p=2/5`$, $`n=120`$, $`q=99/100`
 \qquad a_z\simeq14.84083.
 ```
 
-For $`D=2000`$, the individual-T bound requires at least **244** gates, compared with 171 from the convenient mean-rank ledger. A 700-round interval with entering potential bounded by $`2n=240`$ requires at least **58**, compared with 39. These are verified necessary counts, without a claim that the parameter choices are physically attainable or that the chosen moment polygon is globally optimal. The companion proof and its [canonical verifier](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/8915a7afc3b891bda5e60438ec5182acf4181310/verification/verify_moment_processing.py) give the exact rational certificates and logarithmic enclosures.
+For $`D=2000`$, the individual-T bound requires at least **244** gates, compared with 171 from the convenient mean-rank ledger. A 700-round interval with entering potential bounded by $`2n=240`$ requires at least **58**, compared with 39. These are verified necessary counts, without a claim that the parameter choices are physically attainable or that the chosen moment polygon is globally optimal. The companion proof and its [canonical verifier](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/4a2ee369e2c8765d1749d4f3d25103109b8289d3/verification/verify_moment_processing.py) give the exact rational certificates and logarithmic enclosures.
 
-For fixed $`p\ge p_0>0`$ and fixed $`q\in(0,1)`$, the direct profile gives $`a_z=2k-o(k)`$ for a suitable sequence $`z\downarrow1`$, while $`\alpha_z=q+o(1)`$. The complementary recovery route gives the same leading conclusion. Along $`n\ge k`$, $`k\to\infty`$, $`D\to\infty`$ and $`\ln(n/k)=o(D)`$, the discrete ledger implies
+For fixed $`p\ge p_0\gt 0`$ and fixed $`q\in(0,1)`$, the direct profile gives $`a_z=2k-o(k)`$ for a suitable sequence $`z\downarrow1`$, while $`\alpha_z=q+o(1)`$. The complementary recovery route gives the same leading conclusion. Along $`n\ge k`$, $`k\to\infty`$, $`D\to\infty`$ and $`\ln(n/k)=o(D)`$, the discrete ledger implies
 
 ```math
 m_T\ge(2-o(1))\,kD\,\frac{1-q}{q}.
