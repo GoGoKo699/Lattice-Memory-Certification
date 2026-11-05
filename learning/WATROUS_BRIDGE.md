@@ -29,7 +29,7 @@ The section and printed-page references below use that January 2018 author copy.
 | §§3.2–3.3, pp. 139–198 | Fidelity and channel distances | Compare guessing-based conclusions with recoverable Bell fidelity |
 | §§4.1.1 and 4.2.2 | Mixed-unitary channels, fixed points and spectra | Pauli conditional expectations and the companion's channel-rank bottleneck |
 
-These are selected locations, not a requirement to read every page in each interval. Chapter 6 can provide further entanglement context, but the Schmidt-rank step already has its needed foundation in §1.1.3. Watrous is also the single educational anchor of [Measurement-Free Memory Cost](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost); its [bridge](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/223dd0a1e70e6ec94cf0ce6431a1ae842d1c8ea6/learning/WATROUS_BRIDGE.md) develops the channel and Pauli-envelope side. The project-specific cryptographic and noisy-processing models are supplied by their scientific accounts rather than attributed to the textbook.
+These are selected locations, not a requirement to read every page in each interval. Chapter 6 can provide further entanglement context, but the Schmidt-rank step already has its needed foundation in §1.1.3. Watrous is also the single educational anchor of [Measurement-Free Memory Cost](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost); its [bridge](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/947ddadf936a25e8fe181c45a3fe8a95a41d9196/learning/WATROUS_BRIDGE.md) develops the channel and Pauli-envelope side. The project-specific cryptographic and noisy-processing models are supplied by their scientific accounts rather than attributed to the textbook.
 
 ## Notation and normalization
 
@@ -137,6 +137,19 @@ Storing one input and Breidbart-measuring the other two achieves $`\beta^2\simeq
 
 The same chapter constructs large Breidbart-diagonal Hamming-ball projectors showing that the rank power $`1/3`$ of the collision statistic is sharp. Therefore improving the uniform guessing exponent requires an ingredient beyond a stronger rank-only PGM power followed by the generic square-root comparison. The core exponent remains $`1/6`$; neither this method limitation nor the three-input result proves the optimal exponent or tensorization against arbitrary joint encoders.
 
+## A direct decoder certificate and a failed dual ansatz
+
+The [direct-discrimination chapter](../science/direct-discrimination.md) applies the same finite-dimensional discrimination foundation without changing the Watrous anchor. For one fixed encoder, write $`\sigma_x`$ for its unnormalized conditional quantum states in a fixed basis. The decoder SDP and dual are
+
+```math
+\max_{E_x\ge0,\,\sum_xE_x=I}\sum_x\mathrm{Tr}(E_x\sigma_x)
+=\min_{Y\ge\sigma_x\;\text{for all }x}\mathrm{Tr}Y.
+```
+
+A feasible POVM gives a lower certificate and a feasible dual gives an upper certificate. This certifies the decoder for the specified encoder; it does not bound all encoders. Breidbart-diagonal projector encoders make all product-BB84 basis ensembles unitarily equivalent, so one certified discrimination problem suffices for each such encoder. Two exact finite certificates underperform the known store-and-Breidbart strategy.
+
+The all-size limitation is more consequential than those isolated values. On the large Hamming-ball family, restricting $`Y`$ to the Breidbart-diagonal algebra yields a bound that decays much slower than the already proved universal score bound. The dual restriction therefore discards essential information: off-diagonal terms matter even when the encoder projector is diagonal. This is a precise failed route. The uniform exponent stays $`1/6`$ and the globally certified three-input upper bound stays $`(2+7\sqrt2)/16`$.
+
 ## From ideal inputs to a classical verifier
 
 The ideal experiment assumes that the verifier can supply hidden BB84 states. A classical verifier cannot simply perform that preparation itself. The project instead imports an LWE-based remote-state-preparation protocol with a specific simulation guarantee; the complete assumptions and proof are in [classical certification](../science/cryptographic-certification.md).
@@ -162,7 +175,7 @@ The [milestone map](MILESTONES.md) integrates these distinctions into the scient
 
 ## From a storage cut to a processing witness
 
-The finite theorem also applies to the quantum-plus-classical output of a Pauli algebra. The [application](../science/noisy-processing.md) is self-contained about the new physical premises; the companion owns the [complete transfer and recovery comparison](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/223dd0a1e70e6ec94cf0ce6431a1ae842d1c8ea6/science/guessing_processing.md).
+The finite theorem also applies to the quantum-plus-classical output of a Pauli algebra. The [application](../science/noisy-processing.md) is self-contained about the new physical premises; the companion owns the [complete transfer and recovery comparison](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/947ddadf936a25e8fe181c45a3fe8a95a41d9196/science/guessing_processing.md).
 
 Use $`k`$ independent uniform BB84 challenge qubits. The device receives the quantum states alone. The hidden string $`X`$ is never revealed, and only the basis string $`\Theta`$ is disclosed after all charged storage has ended. Let $`n`$ count every noisy persistent data, syndrome, controller and resource qubit, and let $`D`$ count independent depolarizing rounds. The score $`p`$ is unconditional whole-string success.
 

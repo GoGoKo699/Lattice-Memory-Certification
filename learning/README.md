@@ -18,6 +18,8 @@ The relevant foundations are finite-dimensional operators and norms, quantum sta
 
 The rank-sensitive finite chapter adds a two-copy purity constraint and uses Renes's sharper finite-alphabet discrimination inequality. Its exact $`9/16`$ PGM bound gives $`P^*_{3,1}\leq(2+7\sqrt2)/16`$, while the all-size exponent remains $`1/6`$. The finite certificate, its moment-profile composition, and the Hamming-ball limitation of the collision-only method have separate proof scopes; no joint-encoder tensorization is assumed.
 
+The [direct-discrimination study](../science/direct-discrimination.md) adds exact fixed-encoder decoder certificates and an analytic diagonal-dual limitation. Its finite values improve neither the global three-input bound nor the uniform exponent.
+
 The tensor-power hypercontractivity theorem and the LWE-based remote-preparation guarantee are separate research dependencies. The bridge states their roles and links their primary sources. Neither is presented as a theorem in Watrous, and neither creates a second educational anchor.
 
 For the [connection to Measurement-Free Memory Cost](../science/noisy-processing.md), use the [bridge's temporal-cut explanation](WATROUS_BRIDGE.md#from-a-storage-cut-to-a-processing-witness). Both projects use Watrous (2018) as their single educational anchor, with different source-to-project routes. The companion owns the full Pauli-factorization and processing-ledger derivation, including the exponential-moment estimate that retains actual noise probabilities; this repository supplies the finite guessing theorem and the operational interpretation.
