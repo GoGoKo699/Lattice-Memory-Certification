@@ -861,6 +861,62 @@ Each gate contributes at distinct positive noise ages, so this bound covers arbi
 \]
 The convergent series admits explicit geometric tail bounds. This exponent strictly improves $E_q$ below the same critical rate $2(1-q)/q$. At zero normalized processing rate, $\mathcal E_q(0)=\ln2$, matching the exponent of uniform guessing. It does not identify an achievable positive processing capacity.
 
+\subsection{A reliability logarithm from complete envelope extinction}
+A fixed above-chance score also limits the accumulated probability that the noisy memory loses \emph{all} input dependence. This supplies a continuing-processing bound even when the challenge length stays small. Keep the same independent replacement-noise coupling and full-output envelope. For $D\ge1$ and $2^{-k}<p<1$, put
+\[
+\delta_p=\frac{1-p}{1-2^{-k}},\qquad
+b_p=1-\delta_p=\frac{p-2^{-k}}{1-2^{-k}}.
+\]
+The resulting necessary count is
+\begin{equation}
+m_T\ge\left\lceil\left[
+\frac{\gamma D b_p}{\ln(1/\gamma)}
+\left[\ln\frac{D b_p}{\delta_p}\right]_+-2n
+\right]_+\right\rceil.
+\label{eq:noisy-reliability}
+\end{equation}
+The finite subtraction is the terminal width reserve. This bound can be combined with the earlier rank and moment budgets; it does not assert that each finite relaxation dominates all the others.
+
+For the proof, choose the backward envelope updates so that zero remains zero. Clifford gates and resets already have this property. At a T/T-dagger gate, retain $V$ if all its labels commute with the gate's Pauli axis $w$, and otherwise use $V+\langle w\rangle$. This preserves the support condition and rank-growth charge at most one. Always adding the axis, even to the zero space, would create an artificial resurrection and would not support the argument.
+
+Let $r_j$ be the rank immediately before the $j$th backward noise layer, and let $S_j$ indicate $r_j>0$. A rank-$r_j$ binary space has $r_j$ pivot coordinates that determine every vector. These coordinates occupy at most $r_j$ physical qubits. Replacement of all these qubits annihilates the surviving space, because the corresponding restriction is injective. Current noise is independent of the sampled suffix that determines $V$, so this event has conditional probability at least $\gamma^{r_j}$. The flags remain proof variables, unavailable to the physical circuit.
+
+A zero envelope gives a tail-adjoint range consisting only of scalar operators. The full physical output is therefore independent of the supplied input. Subsequent readout may depend on the disclosed basis, but it cannot correlate its guess with the uniformly hidden string. Such a branch scores at most $2^{-k}$, including any aborts as failures. If $e$ is the eventual extinction probability, unconditional averaging gives
+\[
+p\le(1-e)+2^{-k}e,\qquad e\le\delta_p.
+\]
+Because zero is absorbing, first extinction at different noise layers gives disjoint events. Any extinctions caused by resets consume additional probability and cannot invalidate the upper budget. Consequently,
+\[
+\sum_{j=1}^D\E[S_j\gamma^{r_j}]\le\delta_p,
+\qquad A:=\sum_{j=1}^D\Pr(S_j=1)\ge D b_p.
+\]
+Apply Jensen to $e^{-r\ln(1/\gamma)}$ with the alive cut-time weights normalized by their total mass $A$. Since $r_j=0$ when $S_j=0$,
+\[
+\delta_p\ge A\exp\!\left[-\frac{\ln(1/\gamma)}{A}
+\sum_{j=1}^D\E r_j\right].
+\]
+Combine this with nonnegativity. The function $x[\ln(x/\delta_p)]_+$ is nondecreasing for positive $x$, so
+\[
+\sum_{j=1}^D\E r_j\ge
+\frac{A}{\ln(1/\gamma)}\left[\ln\frac{A}{\delta_p}\right]_+
+\ge\frac{D b_p}{\ln(1/\gamma)}
+\left[\ln\frac{D b_p}{\delta_p}\right]_+.
+\]
+Each noise layer loses at least $\gamma\E r_j$ expected rank, free processing cannot add rank, and all T/T-dagger increases sum to at most $m_T$. Telescoping from rank $2n$ therefore gives $m_T\ge\gamma\sum_j\E r_j-2n$, proving \eqref{eq:noisy-reliability}.
+
+For a contiguous interval with $D_I\ge1$ noise layers, $m_{T,I}$ prescribed slots and an entering expected-rank bound $M_I$, the same argument gives
+\[
+m_{T,I}\ge\left\lceil\left[
+\frac{\gamma D_I b_p}{\ln(1/\gamma)}
+\left[\ln\frac{D_I b_p}{\delta_p}\right]_+-M_I
+\right]_+\right\rceil.
+\]
+Use the actual globally propagated suffix envelope, with $M_I=2n$ always safe. Global extinction bounds its zero probability at every cut, and first-extinction events within the interval have total probability at most $\delta_p$. Repeating the hazard and rank balance only over those layers proves the formula. Do not restart an independent envelope, and assign boundary gates once to the chosen primitive cuts.
+
+For fixed $k$, fixed $\gamma>0$ and fixed nonchance score, $n=O(\ln D)$ now forces $m_T=\Omega(D\ln D)$. Thus a constant rank floor at a single cut misses a reliability cost accumulated over a long storage period. In the companion construction range $0<\gamma\le1/20$, this order matches its reference-stable Tanner construction at logarithmic width and fixed error target. The comparison fixes noise strength; the coefficient $1/\ln(1/\gamma)$ does not give uniform weak-noise sharpness. The ideal guessing exponent and finite three-input upper cap remain unchanged.
+
+At $p=1$, positive noise duration and finite physical width are impossible: complete replacement of the whole register has positive probability and leaves only chance success. At or below chance, the discard-and-guess strategy remains consistent with zero processing. Nothing in this inference tests the assumed noise or controller restrictions or compiles the separate preparation protocol into the charged circuit.
+
 \subsection{The coherent construction's matching regime}
 The companion also owns the constructive processing theorem. It compiles an inherited good Tanner-code decoder, run for a fixed number of parallel iterations, into the allowed Clifford+T circuit. Every local minimum, comparison, tie choice and update is a fixed Boolean function on a constant-size neighborhood. Hardwired incidence connections require no adaptive address machine. Reversible Boolean evaluation, controlled Pauli correction and inverse evaluation cost $O(N)$ prescribed T slots and $O(N)$ total scratch for a data block of length $N$. Scratch is reset before each epoch and never retains a protected record.
 
@@ -872,7 +928,7 @@ n=O\!\left(k+\ln\frac{J_+}{\epsilon}\right),\qquad m_T=O(nJ),\qquad J=O(\gamma D
 \qquad J_+=\max(1,J).
 \end{gathered}
 \]
-Here $n$ counts data, syndrome and all workspace. The fixed constants are potentially enormous and the inner code increases them further. If $k=\Omega(\ln(J_+/\epsilon))$ and $\gamma D\to\infty$, this closes its polylogarithmic resource gap in order. It proves neither a numerical optimum nor a physical threshold with faulty gates or locality constraints. No preparation wrapper is automatically compiled into this processing theorem.
+Here $n$ counts data, syndrome and all workspace. The fixed constants are potentially enormous and the inner code increases them further. If $k=\Omega(\ln(J_+/\epsilon))$ and $\gamma D\to\infty$, the earlier payload converse already matches this processing order. The extinction-based fidelity converse extends fixed-noise matching to every payload scaling. For fixed $0<\gamma\le1/20$, fixed $\epsilon_0<1/2$, any $0<\epsilon\le\epsilon_0$ and widths $n\le C[k+\ln(D/\epsilon)]$, sufficiently large $D$ requires $m_T=\Omega_\gamma(D[k+\ln(D/\epsilon)])$. Combining the two lower bounds uses their shared cumulative rank, whose payload floor supplies the $k$ term and whose survival requirement supplies the reliability logarithm. A sufficiently large constant width factor permits this construction and gives the matching upper order. This is an optimum-order statement in the specified width class, not over arbitrarily large memories. It proves neither a numerical optimum nor a physical threshold with faulty gates or locality constraints. No preparation wrapper is automatically compiled into this processing theorem.
 
 At chance, discarding the challenge and guessing needs zero processing. Full-register replacement gives
 \[
@@ -903,7 +959,7 @@ No free state-loading oracle or quantum random-access memory is assumed. The ide
 \subsection{What supports the claims}
 The ideal result follows from the analytical chain in Sections~4--8, using the standard tensor-power norm theorem as its substantial mathematical input. Section~11 supplies the separate computational reduction under its cryptographic assumption. Finite matrix checks test the intermediate identities and normalization conventions against those analytical expressions. The new three-input certificate uses an exact positive two-copy swap expression, Pauli-weight bounds and rational algebraic enclosures. Its rational moment polygon is checked at every permitted integer rank. The collision-route limitation follows from the explicit type construction and entropy expansion, rather than extrapolation of small instances. The direct-discrimination follow-up checks complete primal/dual matrices exactly for two fixed encoders and proves a separate diagonal-dual limitation analytically. Its finite optimal-decoder certificates are not upper bounds over arbitrary encoders.
 
-The noisy-processing checks compare the explicit quantum-plus-classical factorization with the Pauli-algebra projection and verify the resulting endpoint probabilities. Independent moment checks enumerate all subspaces at widths one through three and certify the pivot, noise and gate inequalities; exact logarithm enclosures check the finite moment-budget comparison. The companion checks additionally certify the finite inverse ledger and its one-variable exponent optimization. These checks do not test a physical device's noise or controller assumptions.
+The noisy-processing checks compare the explicit quantum-plus-classical factorization with the Pauli-algebra projection and verify the resulting endpoint probabilities. Independent moment checks enumerate all subspaces at widths one through three and certify the pivot, noise and gate inequalities; exact logarithm enclosures check the finite moment-budget comparison. The companion checks additionally certify the finite inverse ledger and its one-variable exponent optimization. The extinction theorem separately combines an analytical pivot-qubit hazard, disjoint first-extinction events, Jensen and cumulative-rank balance; finite subspace and schedule checks supplement those written arguments. These checks do not test a physical device's noise or controller assumptions.
 
 An accepted run is not a deterministic measurement of a device's qubit count. Soundness bounds every dimension-limited strategy in the ideal model; the compiled protocol covers the efficient adversaries in its imported assumptions. A low-memory device can occasionally pass. Claims based on repeated runs must account for their joint strategy and information across cuts rather than assuming independent trials without justification.
 

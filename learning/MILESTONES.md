@@ -466,15 +466,15 @@ Dependencies name earlier understanding targets, not extra assignments. Primary 
 
 **Central question:** What additional device assumptions let a guessing score constrain continuing processing?
 
-**Understanding target:** Translate the ideal theorem into the quantum-plus-classical factor of a sampled Pauli algebra, preserve the full-output terminal reserve, and average branchwise bounds to obtain an expected-rank floor at every cut. Then explain how the actual noise probabilities contract an exponential rank moment and how a fixed recovery supplies its all-cut floor. Separate challenge length, total noisy persistent width, noise rounds, endpoint decoding and charged controller processing.
+**Understanding target:** Translate the ideal theorem into the quantum-plus-classical factor of a sampled Pauli algebra, preserve the full-output terminal reserve, and average branchwise bounds to obtain an expected-rank floor at every cut. Then explain how the actual noise probabilities contract an exponential rank moment, how a fixed recovery supplies its all-cut floor, and how a nonchance score limits the accumulated probability of complete envelope extinction. Separate challenge length, total noisy persistent width, noise rounds, endpoint decoding and charged controller processing.
 
 **Dependencies:** M05, M06, M14, M21, M23, M26, M28.
 
 **Story role:** Connect the finite guessing theorem to a dynamical application before final synthesis.
 
-**Conceptual connection:** Existing recovery reductions imply both convenient mean-rank floors. Retaining the actual noise probabilities in a logarithmic moment then strengthens the dynamical ledger; its interval reserve must control that moment rather than only the mean. The transfer assumes independent noise and an honestly charged fixed controller model; a score does not test those premises or automatically compose with the LWE wrapper.
+**Conceptual connection:** Existing recovery reductions imply both convenient mean-rank floors. Retaining the actual noise probabilities in a logarithmic moment strengthens the dynamical ledger; its interval reserve must control that moment rather than only the mean. Absorbing extinction and cumulative-rank balance give a separate reliability-dependent law even at fixed small challenge size, including every contiguous interval when the global suffix envelope is retained. The transfer assumes independent noise and an honestly charged fixed controller model; a score does not test those premises or automatically compose with the LWE wrapper.
 
-**Source pointers:** Watrous §§2.2–2.3, 3.1.2 and 3.2; [noisy-processing application](../science/noisy-processing.md); [complete companion proof](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/947ddadf936a25e8fe181c45a3fe8a95a41d9196/science/guessing_processing.md); [moment theorem](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/947ddadf936a25e8fe181c45a3fe8a95a41d9196/science/moment_processing.md); [resources](../science/lower-bounds-and-resources.md#4-charged-resources).
+**Source pointers:** Watrous §§2.2–2.3, 3.1.2 and 3.2; [noisy-processing application](../science/noisy-processing.md); [complete companion proof](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/67dd0de6beedab35e45c23cc7d07b57481d4b717/science/guessing_processing.md); [moment theorem](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/67dd0de6beedab35e45c23cc7d07b57481d4b717/science/moment_processing.md); [extinction-based reliability](../science/noisy-processing.md#survival-of-the-envelope-gives-a-reliability-dependent-budget); [resources](../science/lower-bounds-and-resources.md#4-charged-resources).
 
 ### M30: Synthesize the complete contribution
 

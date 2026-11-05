@@ -15,11 +15,11 @@
     "narrative": 16
   },
   "navigation_and_math_source": {
-    "display_math_blocks": 118,
-    "heading_fragments": 62,
-    "inline_math_expressions": 813,
-    "local_links": 196,
-    "markdown_files": 16
+    "display_math_blocks": 142,
+    "heading_fragments": 67,
+    "inline_math_expressions": 969,
+    "local_links": 217,
+    "markdown_files": 17
   },
   "status": "passed",
   "worked_example": {
