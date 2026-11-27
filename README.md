@@ -39,6 +39,14 @@ This is a conditional processing witness under the specified noise, controller a
 
 The [extinction-based reliability bound](science/noisy-processing.md#survival-of-the-envelope-gives-a-reliability-dependent-budget) supplies a further consequence: at fixed challenge size, nonchance score and noise strength, a width of order $`\ln D`$ requires $`\Omega(D\ln D)`$ continuing T/T-dagger gates. It controls complete loss of input dependence rather than only a rank moment. The physical premises and finite width allowance remain explicit.
 
+## Run the delayed-basis memory test
+
+1. **Prepare the challenge.** The verifier samples independent uniform data and basis bits. For each position, initialize a qubit to zero, apply X when the data bit is one, then apply Hadamard for the X basis. Send only the qubits. Keep the data string secret and withhold the basis string until the storage cut.
+2. **Store and read.** The honest prover retains all challenge qubits through the wait. After the cut the verifier sends only the basis string. Apply Hadamard on the X-basis positions, measure all qubits in the computational basis and return the ordered outcome string. The verifier accepts exactly when it equals the hidden data string.
+3. **Compare with restricted storage.** The [store-and-measure witness](science/lower-bounds-and-resources.md#1-explicit-store-and-measure-witness) keeps the allowed number of qubits and measures the rest before the cut in the Breidbart basis, using a known rotation followed by computational-basis readout. After disclosure it reads the stored qubits and combines both records. Its whole-string success is the product of the per-bit successes on the measured positions. The upper bound permits arbitrary joint preprocessing and basis-dependent decoding.
+
+For a classical verifier, the [inherited LWE preparation](science/cryptographic-certification.md#2-protocol-at-general-length) replaces the ideal source. Acceptance then requires both preparation success and the correct full string. The bound is on this joint event. Count every quantum system accessible after the cut, including remote registers. [Resource accounting](science/lower-bounds-and-resources.md#4-charged-resources) separates persistent storage from preparation, communication and temporary work. The [two-qubit example](learning/WATROUS_BRIDGE.md#a-complete-two-qubit-example) follows the ideal test.
+
 ## Explanatory report
 
 Read the [complete explanatory report (PDF)](learning/report/Lattice_Memory_Certification_Report.pdf) for a self-contained explanation of the experiment, finite proof, conditional classical verification, and physical limitations.
