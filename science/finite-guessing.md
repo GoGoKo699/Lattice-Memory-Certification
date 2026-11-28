@@ -353,7 +353,7 @@ Choose their phases for positive overlaps. The distance $`\|u\otimes v-U\otimes 
 
 ```math
 \langle U\otimes V|O|U\otimes V\rangle
-=\sum_{i<j}a_i a_j-a_1a_2a_3.
+=\sum_{i\lt j}a_i a_j-a_1a_2a_3.
 ```
 
 It bounds every pair product from above and is at most $`15\zeta`$. Also $`|\langle U,V\rangle|\leq\|U-u\|+\|V-v\|\leq2\sqrt{2\zeta}`$ by orthogonality of $`u,v`$. Thus $`\prod_i(1-a_i)\leq8\zeta<1/8`$, so some $`a_i`$ is at least $`1/2`$ and the other two are at most $`30\zeta`$.
