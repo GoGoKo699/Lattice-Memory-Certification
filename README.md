@@ -10,24 +10,24 @@ p_{\mathrm{guess}}\leq\min\left\{1,\left(\frac{d_Q}{2^k}\right)^{1/6}\right\}.
 
 With $`0\leq m\leq k`$ retained qubits, the exponent depends only on the missing-qubit gap $`t=k-m`$. The theorem is unconditional. Substitution into the existing LWE-based remote-state-preparation reduction of Hhan, Morimae, Okinaka and Yamakawa gives conditional classical verification with **logarithmic additive persistent-storage overhead**.
 
-For **three inputs and one retained qubit**, an additional rank-sensitive certificate gives
+For **three inputs and one retained qubit**, the rank-sensitive certificate and its stability refinement give
 
 ```math
-P^*_{3,1}\leq\frac{2+7\sqrt2}{16}
-=0.7437184335\ldots,
+P^*_{3,1}\leq \frac{2+7\sqrt2}{16}-3\cdot10^{-8}
+=0.7437184035\ldots,
 ```
 
-with arbitrary joint encoders, basis-dependent POVMs and unrestricted classical records. The same two-copy method gives exact maximal averaged PGM scores for three, four and five inputs, and the following whole-string guessing bounds:
+with arbitrary joint encoders, basis-dependent POVMs and unrestricted classical records. The two-copy method gives exact maximal averaged pretty-good measurement (PGM) scores for three, four and five inputs:
 
 | Inputs, one retained qubit | Achievable guessing score | Guessing upper bound | Exact maximal PGM score |
 |---:|---:|---:|---:|
-| 3 | $`\beta^2=0.7285533906\ldots`$ | $`(2+7\sqrt2)/16=0.7437184335\ldots`$ | $`9/16`$ |
-| 4 | $`\beta^3=0.6218592168\ldots`$ | $`(2+\sqrt{345})/32=0.6429429882\ldots`$ | $`27/64`$ |
-| 5 | $`\beta^4=0.5307900429\ldots`$ | $`(4+\sqrt{4526})/128=0.5568402560\ldots`$ | $`81/256`$ |
+| 3 | $`\beta^2=0.7285533905\ldots`$ | $`(2+7\sqrt2)/16-3\cdot10^{-8}`$ | $`9/16`$ |
+| 4 | $`\beta^3=0.6218592167\ldots`$ | $`(2+\sqrt{345})/32=0.6429429881\ldots`$ | $`27/64`$ |
+| 5 | $`\beta^4=0.5307900429\ldots`$ | $`(4+\sqrt{4526})/128=0.5568402559\ldots`$ | $`81/256`$ |
 
-Here $`\beta=(1+1/\sqrt2)/2`$. The achievable strategy stores one input and measures the others in the Breidbart basis. Exact PGM optimality does not determine optimal guessing. The [finite proof](science/finite-guessing.md) gives rational certificates and a limitation of the collision-only route to a better uniform exponent. The universal exponent above remains $`1/6`$.
+Here $`\beta=(1+1/\sqrt2)/2`$. Storing one input and measuring the others in the Breidbart basis is optimal among pure branches with a Breidbart-diagonal marginal, as proved in the [finite guessing chapter](science/finite-guessing.md#7-exact-breidbart-diagonal-optimum-with-one-retained-qubit). The unrestricted guessing optimum and a better uniform exponent remain open.
 
-The [direct-discrimination investigation](science/direct-discrimination.md) adds a separate analytic limitation: for a family of Hamming-ball encoders, dual bounds restricted to diagonal matrices cannot recover even the established universal decay rate. Exact primal/dual certificates also enclose optimal decoding for two specified encoders. They do not improve the global three-input bound or the uniform exponent.
+The [direct-discrimination investigation](science/direct-discrimination.md) proves that for a family of Hamming-ball encoders, dual bounds restricted to diagonal matrices miss the established universal decay rate. Exact primal/dual certificates also enclose optimal decoding for two specified encoders.
 
 ## From a guessing score to processing
 
@@ -35,7 +35,7 @@ The [direct-discrimination investigation](science/direct-discrimination.md) adds
 
 Read the [self-contained application and boundaries](science/noisy-processing.md); the companion owns the [complete transfer proof and recovery comparison](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/4b5ae9a75658bc44106b07fbb6deb2330e806df8/science/guessing_processing.md). Its notation is $`k`$ challenge qubits, $`n`$ total noisy persistent qubits and $`D`$ noise rounds. The device receives only the quantum challenge; $`X`$ stays secret and only the basis string is revealed after all charged storage. The full-output terminal envelope has $`M=2n`$, and mathematical noise flags are not supplied to the device.
 
-This is a conditional processing witness under the specified noise, controller and gate assumptions. Existing recovery reductions imply the convenient mean-rank floors for every challenge length, including low scores. The companion's [exponential-moment theorem](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/4b5ae9a75658bc44106b07fbb6deb2330e806df8/science/moment_processing.md) retains actual product-noise probabilities and gives a stronger gate and interval ledger in the same model. For a fixed positive score, its long-storage coefficient approaches that of a full logical payload as the challenge grows. The inference neither verifies those physical assumptions nor automatically extends this repository's LWE wrapper.
+This is a conditional processing witness under the specified noise, controller and gate assumptions. Existing recovery reductions imply the convenient mean-rank floors for every challenge length, including low scores. The companion's [exponential-moment theorem](https://github.com/GoGoKo699/Measurement-Free-Memory-Cost/blob/4b5ae9a75658bc44106b07fbb6deb2330e806df8/science/moment_processing.md) retains actual product-noise probabilities and gives a stronger gate and interval ledger in the same model. For a fixed positive score, its long-storage coefficient approaches that of a full logical payload as the challenge grows. The [extensions](science/noisy-processing.md#extensions-of-the-score-to-gate-inference) cover correlated replacement under a conditional erasure premise and an LWE verifier under a counted-memory interface and an efficient continuation.
 
 The [extinction-based reliability bound](science/noisy-processing.md#survival-of-the-envelope-gives-a-reliability-dependent-budget) supplies a further consequence: at fixed challenge size, nonchance score and noise strength, a width of order $`\ln D`$ requires $`\Omega(D\ln D)`$ continuing T/T-dagger gates. It controls complete loss of input dependence rather than only a rank moment. The physical premises and finite width allowance remain explicit.
 
@@ -47,16 +47,12 @@ The [extinction-based reliability bound](science/noisy-processing.md#survival-of
 
 For a classical verifier, the [inherited LWE preparation](science/cryptographic-certification.md#2-protocol-at-general-length) replaces the ideal source. Acceptance then requires both preparation success and the correct full string. The bound is on this joint event. Count every quantum system accessible after the cut, including remote registers. [Resource accounting](science/lower-bounds-and-resources.md#4-charged-resources) separates persistent storage from preparation, communication and temporary work. The [two-qubit example](learning/WATROUS_BRIDGE.md#a-complete-two-qubit-example) follows the ideal test.
 
-## Explanatory report
-
-Read the [complete explanatory report (PDF)](learning/report/Lattice_Memory_Certification_Report.pdf) for a self-contained explanation of the experiment, finite proof, conditional classical verification, and physical limitations.
-
 ## Principal results
 
 | Result | Statement and scope | Authoritative account |
 |---|---|---|
 | Finite storage bound | $`p_{\mathrm{guess}}\leq 2^{-(k-m)/6}`$, including arbitrary collective processing and unlimited classical records | [Model](science/model.md), [proof](science/guessing-bound.md) |
-| Small-challenge refinements | Exact PGM maxima $`9/16,27/64,81/256`$ for $`3,4,5`$ inputs and one retained qubit give stronger arbitrary-decoder guessing caps | [Rank-sensitive finite bounds](science/finite-guessing.md) |
+| Small-challenge refinements | Exact PGM maxima $`9/16,27/64,81/256`$ for $`3,4,5`$ inputs and one retained qubit. Stability sharpens the three-input cap. | [Rank-sensitive finite bounds](science/finite-guessing.md) |
 | Collision-method limitation | No universal rank-sensitive PGM power strictly above $`1/3`$; this limits that proof route, while stronger joint-discrimination methods remain open | [Method obstruction](science/finite-guessing.md#5-a-limitation-of-rank-sensitive-collision-methods) |
 | Direct-decoder limitation | Diagonal duals lose the established exponent on explicit Hamming-ball encoders; exact finite SDPs concern specified encoders only | [Direct discrimination](science/direct-discrimination.md) |
 | Conditional LWE compilation | $`P_{\mathrm{accept}}\leq\min\{1,\eta_{\mathrm{prep}}+2^{-(k-m)/6}\}`$, for the efficient adversaries covered by the imported simulation theorem | [Certification](science/cryptographic-certification.md) |
@@ -77,7 +73,7 @@ The imported construction supports this **inverse-polynomial** soundness regime 
 
 ![Universal, achievable and finite whole-string guessing bounds](verification/Graph/lattice_bounds.png)
 
-For $`t=k-m`$, the optimal ideal success $`P^*_{k,m}`$ lies between the achieved probability $`\beta^t`$ and the universal upper bound $`2^{-t/6}`$. The right panel shows the stronger finite upper bounds for $`k=3,4,5`$ with $`m=1`$. Their PGM constants are exact; the final guessing optimum remains open. The [figure guide](verification/Graph/README.md) gives the formulas, pinned Python reproduction and the additional integer-gap overview.
+For $`t=k-m`$, the optimal ideal success $`P^*_{k,m}`$ lies between the achieved probability $`\beta^t`$ and the universal upper bound $`2^{-t/6}`$. The right panel shows the finite bounds directly obtained from PGM conversion for $`k=3,4,5`$ with $`m=1`$. Its three-input marker is $`C_3=(2+7\sqrt2)/16`$, before the [stability refinement](science/finite-guessing.md#8-strictness-of-the-three-input-guessing-cap). The [figure guide](verification/Graph/README.md) gives the formulas, pinned Python reproduction and the additional integer-gap overview.
 
 ## Read the science
 

@@ -3,17 +3,15 @@
 Question: bound complete-string BB84 recovery when arbitrary collective encoding retains a quantum register of bounded dimension and unlimited classical information; compile the result conditionally through existing LWE-based remote preparation.
 
 Authoritative routes:
-- Continuous explanatory account: learning/report/Lattice_Memory_Certification_Report.pdf
-- Report source and rebuild instructions: learning/source/Lattice_Memory_Certification_Report.tex and verification/REPORT_BUILD.md
 - Learning entrypoint: learning/README.md
 - Exactly 30 project-defined milestones (14 background, 16 narrative): learning/MILESTONES.md
 - Single educational anchor, selected Watrous sections, notation and worked example: learning/WATROUS_BRIDGE.md
 - Story and dependencies: science/README.md
 - Exact models and statements G, C, L: science/model.md
 - Classical refinement, discrimination, PGM identity, normalized hypercontractivity, rank: science/guessing-bound.md
-- Rank-sensitive three-/four-/five-input qubit-memory bounds, exact PGM certificates 9/16, 27/64, 81/256, flagged-twirl equivalence, finite moment composition, and collision-method obstruction: science/finite-guessing.md
+- Rank-sensitive three-/four-/five-input qubit-memory bounds, exact PGM certificates 9/16, 27/64, 81/256, flagged-twirl equivalence, finite moment composition, collision-method obstruction, Breidbart-diagonal optimum, and stability of the three-input cap: science/finite-guessing.md
 - Direct-discrimination SDPs for specified Breidbart-diagonal encoders, exact primal/dual finite certificates, and the analytic diagonal-dual limitation: science/direct-discrimination.md
-- Computational simulation, pass weighting, efficiency and LWE boundary: science/cryptographic-certification.md
+- Computational simulation, pass weighting, efficiency, LWE boundary and counted-memory processing composition: science/cryptographic-certification.md
 - Achieved strategy, logarithmic ideal-gap order, finite prior-bound comparison and resource accounting: science/lower-bounds-and-resources.md
 - Storage-gap/finite-guessing figure, integer-gap overview and reproducible generators: verification/Graph/README.md, verification/Graph/generate_figures.py, verification/Graph/generate_plots.py and verification/Graph/requirements.txt
 - Lists, tolerated errors, erasure timing and honest-noise limitations: science/errors-and-losses.md
@@ -24,7 +22,7 @@ Authoritative routes:
 
 Notation in the ideal theorem: k input qubits, d=2^k, m retained qubits, d_Q the retained quantum dimension, t=k-m, r the pure-branch Schmidt rank, h the Hamming error allowance, and ell the erasure allowance. The noisy-processing application restates its own notation: k challenge qubits, n total noisy persistent qubits, D independent noise rounds and r binary Pauli-envelope dimension. The same k counts the challenge in both settings; physical n and D are distinct from ideal d_Q. The rank r has its explicitly stated local meaning. Ideal guessing targets use delta; total compiled soundness uses epsilon, with preparation simulation error eta_prep. The Pauli operators and Hadamard are written \mathsf{X}, \mathsf{Y}, \mathsf{Z}, \mathsf{H}. Normalized Schatten norms use subscript p,\mathrm{n}; ordinary matrix traces remain unnormalized.
 
-For three ideal inputs and one retained qubit the global finite bound is (2+7sqrt(2))/16, approximately 0.7437184335, versus achieved beta² approximately 0.7285533906 and verified normalized DFW/Renes bound approximately 0.7864378278. Arbitrary encoders, unrestricted classical records and basis-dependent POVMs are covered. The 9/16 averaged PGM constant is exact; the final guessing optimum is not determined. A flagged Pauli twirl proves equality of the optimized arbitrary-state and preparation formulations. The finite improvement survives its documented integer moment-profile composition but does not tensorize against joint encoders. The universal guessing exponent stays 1/6. A Hamming-ball example obstructs a rank-only PGM power greater than 1/3, and therefore only that collision-then-square-root proof route; it does not obstruct all stronger guessing arguments.
+For three ideal inputs and one retained qubit the global finite bound is (2+7sqrt(2))/16 - 3e-8, approximately 0.7437184035, versus achieved beta² approximately 0.7285533906 and verified normalized DFW/Renes bound approximately 0.7864378278. The figure and worked moment profile use the original PGM conversion bound (2+7sqrt(2))/16. For one retained qubit and any k, store-and-Breidbart is optimal among pure branches with a product-Breidbart-diagonal verifier marginal. Arbitrary encoders, unrestricted classical records and basis-dependent POVMs are covered. The 9/16 averaged PGM constant is exact; the final guessing optimum is not determined. A flagged Pauli twirl proves equality of the optimized arbitrary-state and preparation formulations. The finite improvement survives its documented integer moment-profile composition but does not tensorize against joint encoders. The universal guessing exponent stays 1/6. A Hamming-ball example obstructs a rank-only PGM power greater than 1/3, and therefore only that collision-then-square-root proof route; it does not obstruct all stronger guessing arguments.
 
 The direct-discrimination investigation certifies optimal decoders only for its explicitly fixed encoders: Hamming radius1 at(n3,r4) and(n7,r8). These are not the original(n3,m1) target and do not improve the global finite cap. Both certified encoder scores are below store-and-Breidbart. General primal/dual decoder matrices are checked exactly in Q(sqrt2), including every PSD constraint; see verification/verify_direct_discrimination.py and verification/direct_discrimination_results.json. A separate asymptotic theorem proves diagonal duals inadequate on large Hamming-ball encoders: their optimum is at least exp[-O(b/sqrt(n)+ln(n))], whereas the actual score is at most exp[-b^2/(3n)+O(b^4/n^3+ln(n))] for b=floor(n^(3/4)). This limits that dual ansatz; it is not a new global guessing bound or a tensorization theorem.
 
@@ -52,9 +50,12 @@ consequence from those floors alone. The exponential-moment extension retains
 actual product-noise probabilities and strengthens the dynamical ledger using
 direct score and fixed-recovery floors. Its interval reserve bounds
 log_z E[z^r], not merely E[r]; use 2n unless a smaller moment bound is proved.
-Do not generalize either result to optimal physical gate cost. The score does
-not verify noise/controller premises and does not automatically compose with
-the conditional LWE wrapper.
+The score's processing interpretation assumes the declared physical model. A
+correlated-replacement variant needs a per-slot lower bound on the replacement
+probability given later flags. An LWE-based verifier composes with the score
+ledger through a fixed counted-memory interface and an efficient continuation.
+Use the unconditional joint real score minus the total preparation-comparison
+error, clipped at zero, as the ideal score floor.
 
 
 The extinction-based reliability consequence is in science/noisy-processing.md.

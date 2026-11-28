@@ -27,6 +27,11 @@
       "0.74371843353823"
     ],
     "score_upper_is_not_claimed_attainable": true,
+    "stability_gap_exact": "3/100000000",
+    "stability_score_upper_interval": [
+      "0.74371840353822",
+      "0.74371840353823"
+    ],
     "store_and_breidbart_interval": [
       "0.72855339059327",
       "0.72855339059328"

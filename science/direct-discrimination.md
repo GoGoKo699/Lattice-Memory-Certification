@@ -2,7 +2,7 @@
 
 [Finite theorem](finite-guessing.md) · [Guessing theorem](guessing-bound.md) · [Verification](../verification/README.md)
 
-The collision obstruction leaves a specific question: do its encoders also have unusually large **optimal** guessing probability? This bounded investigation separates that question from their pretty-good measurement (PGM) score. It gives exact fixed-encoder certificates and proves that restricting the decoder dual to diagonal matrices loses the relevant asymptotic scale. It does not improve the universal exponent $`1/6`$ or the three-input, one-qubit cap $`(2+7\sqrt2)/16`$.
+The collision obstruction leaves a specific question: do its encoders also have unusually large **optimal** guessing probability? This investigation gives exact fixed-encoder certificates and proves that restricting the decoder dual to diagonal matrices loses the relevant asymptotic scale. The [finite-guessing chapter](finite-guessing.md#7-exact-breidbart-diagonal-optimum-with-one-retained-qubit) separately optimizes over all Breidbart-diagonal branches with one retained qubit and sharpens the unrestricted three-input cap.
 
 Here $`k`$ is challenge length, $`r`$ is retained quantum dimension, and $`m=\log_2r`$ when $`r`$ is a power of two. These are ideal memory parameters, not noisy physical width or storage duration.
 
@@ -43,7 +43,7 @@ For the radius-one balls $`S=\{x:|x|\leq1\}`$, the [certificate file](../verific
 | Challenge $`k`$ | Dimension $`r`$ | Stored qubits $`m`$ | Certified $`p_S`$ interval | Store-and-Breidbart at the same dimension |
 |---|---:|---:|---|---:|
 | 3 | 4 | 2 | $`[0.8010769969,\ 0.801080996]`$ | $`0.853553390593\ldots`$ |
-| 7 | 8 | 3 | $`[0.4609687373,\ 0.460976740]`$ | $`0.530790042945\ldots`$ |
+| 7 | 8 | 3 | $`[0.4609687373,\ 0.460976740]`$ | $`0.530790042944955\ldots`$ |
 
 These instances differ from the three-input, **one-qubit** theorem. Both encoders perform worse than storing designated qubits and measuring the remainder in the Breidbart basis. Their actual optimal scores are also strictly smaller than their generic square-root PGM upper bounds.
 

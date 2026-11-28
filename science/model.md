@@ -16,6 +16,8 @@ Before receiving $`\Theta`$, the prover applies any quantum instrument to the fu
 
 The prover receives only the quantum challenge. The verifier keeps $`X`$ secret and discloses only the basis string. Success is averaged unconditionally; a run is not selected by its processing outcome or by successful decoding.
 
+An accepted run carries a probability guarantee under a specified dimension hypothesis. It does not determine the retained qubit count. Confidence statements across repeated trials need a sampling argument that handles information and strategies shared across trials, or a justification for treating the trials as independent.
+
 The encoder and decoder may act jointly across all positions, with unrestricted computational power in the ideal theorem. All quantum systems that persist across the cut and are later accessible to the prover are part of $`Q`$, including remote systems and initially shared references. Fresh uncorrelated decoding ancillas are allowed and are absorbed into the POVM. An environment returned during decoding must be counted in $`Q`$.
 
 For a fixed encoder, $`p_{\mathrm{guess}}(X\mid CQ\Theta)`$ denotes the supremum of averaged success over its allowed decoders. The average includes the random bits, bases, and processing outcomes. The bound holds separately for every encoder, and therefore also after optimizing over encoders. All logarithms are base two.

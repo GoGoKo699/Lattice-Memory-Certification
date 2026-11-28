@@ -133,7 +133,7 @@ P^*_{3,1}\leq\frac{2+7\sqrt2}{16}
 \simeq0.7437184335.
 ```
 
-Storing one input and Breidbart-measuring the other two achieves $`\beta^2\simeq0.7285533906`$. That strategy saturates the PGM constant, but it does not saturate the displayed guessing bound. A flagged Pauli twirl shows that arbitrary-state strategies can be implemented by encoders for the original uniform preparation experiment, without increasing retained quantum dimension. These distinctions separate a global certificate from a numerical encoder search and from a tight guessing theorem.
+Storing one input and Breidbart-measuring the other two achieves $`\beta^2\simeq0.7285533906`$. That strategy saturates the PGM constant, but it does not saturate the displayed guessing bound. A flagged Pauli twirl shows that arbitrary-state strategies can be implemented by encoders for the original uniform preparation experiment, without increasing retained quantum dimension. The [stability argument](../science/finite-guessing.md#8-strictness-of-the-three-input-guessing-cap) shows that approaching the PGM maximum forces a branch close to a product on two sites, which sharpens the displayed cap by $`3\cdot10^{-8}`$.
 
 The same chapter constructs large Breidbart-diagonal Hamming-ball projectors showing that the rank power $`1/3`$ of the collision statistic is sharp. Therefore improving the uniform guessing exponent requires an ingredient beyond a stronger rank-only PGM power followed by the generic square-root comparison. The core exponent remains $`1/6`$; neither this method limitation nor the three-input result proves the optimal exponent or tensorization against arbitrary joint encoders.
 
@@ -148,7 +148,7 @@ The [direct-discrimination chapter](../science/direct-discrimination.md) applies
 
 A feasible POVM gives a lower certificate and a feasible dual gives an upper certificate. This certifies the decoder for the specified encoder; it does not bound all encoders. Breidbart-diagonal projector encoders make all product-BB84 basis ensembles unitarily equivalent, so one certified discrimination problem suffices for each such encoder. Two exact finite certificates underperform the known store-and-Breidbart strategy.
 
-The all-size limitation is more consequential than those isolated values. On the large Hamming-ball family, restricting $`Y`$ to the Breidbart-diagonal algebra yields a bound that decays much slower than the already proved universal score bound. The dual restriction therefore discards essential information: off-diagonal terms matter even when the encoder projector is diagonal. This is a precise failed route. The uniform exponent stays $`1/6`$ and the globally certified three-input upper bound stays $`(2+7\sqrt2)/16`$.
+The all-size limitation is more consequential than those isolated values. On the large Hamming-ball family, restricting $`Y`$ to the Breidbart-diagonal algebra yields a bound that decays much slower than the already proved universal score bound. The dual restriction therefore discards essential information: off-diagonal terms matter even when the encoder projector is diagonal. This is a precise failed route. The decoder investigation leaves the optimal uniform exponent open. With one retained qubit, the [restricted optimum](../science/finite-guessing.md#7-exact-breidbart-diagonal-optimum-with-one-retained-qubit) proves that a better strategy must have coherence between Breidbart vectors in a pure branch.
 
 ## From ideal inputs to a classical verifier
 
@@ -196,7 +196,7 @@ The [moment extension](../science/noisy-processing.md#exponential-moments-streng
 
 The interval reserve now bounds $`X_z`$, not only the mean rank. The full-output bound $`2n`$ is always safe. Neither this refinement nor the previous rank floor supplies physical flags or changes the storage model.
 
-This application assumes a fixed circuit of the permitted primitives, input-independent replacement resets, and noisy counted persistent controller records. Their processing must still be charged correctly; counting record bits does not make arbitrary feedback free. A guessing score does not verify the model's noise or controller assumptions. At random-guessing success $`p=2^{-k}`$, discarding the challenge is a zero-processing strategy. The LWE compilation above is a separate result: no processing guarantee is automatically attached to it.
+This application assumes a fixed circuit of the permitted primitives, input-independent replacement resets, and noisy counted persistent controller records. Their processing must still be charged correctly; counting record bits does not make arbitrary feedback free. A guessing score does not verify the model's noise or controller assumptions. At random-guessing success $`p=2^{-k}`$, discarding the challenge is a zero-processing strategy. The [classical-verifier composition](../science/cryptographic-certification.md#classical-verifier-composition-for-processing) requires a fixed counted-memory interface and an efficient continuation. The [correlated-replacement variant](../science/noisy-processing.md#extensions-of-the-score-to-gate-inference) retains the mean-rank ledger when each slot has a replacement-probability floor conditional on the later flags.
 
 
 

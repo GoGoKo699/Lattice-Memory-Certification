@@ -165,7 +165,7 @@ For $`k=3,d_Q=2`$, the [rank-sensitive finite argument](finite-guessing.md) stre
 p_{\mathrm{guess}}\leq\frac{2+7\sqrt2}{16}.
 ```
 
-Both statements cover arbitrary encoders and unrestricted classical records through the same pure classical refinement used above. The first constant is exact; the final guessing bound need not be attained. The finite-alphabet Renes inequality replaces the square-root comparison in this instance. A flagged Pauli twirl identifies the optimized arbitrary-state and preparation formulations without increasing the quantum dimension.
+Both statements cover arbitrary encoders and unrestricted classical records through the same pure classical refinement used above. The first constant is exact; the final guessing bound need not be attained. The finite-alphabet Renes inequality replaces the square-root comparison in this instance. A flagged Pauli twirl identifies the optimized arbitrary-state and preparation formulations without increasing the quantum dimension. The [stability refinement](finite-guessing.md#8-strictness-of-the-three-input-guessing-cap) subtracts $`3\cdot10^{-8}`$ from the displayed guessing bound.
 
 The same chapter proves that a uniform rank-sensitive collision inequality with power greater than $`1/3`$ is false, even for positive operators diagonal in a product Breidbart basis. Thus strengthening only the rank-dependent PGM estimate in this proof cannot improve the uniform guessing exponent beyond $`1/6`$. This is a limitation of the collision-only route; the best universal guessing exponent remains open, and no tensorization of the finite improvement is asserted.
 

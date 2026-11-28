@@ -12,7 +12,9 @@ For three independent BB84 inputs and one retained quantum qubit, a two-copy pur
 \qquad\text{(F1)}
 ```
 
-Here unrestricted classical records and arbitrary joint encoders and basis-dependent POVMs are allowed. The lower value is $`0.728553390593274\ldots`$. The upper value improves the normalized DFW/Renes specialization $`(1+2\sqrt7)/8=0.786437827766148\ldots`$. It does not determine the optimum or improve the all-size exponent $`1/6`$.
+Here unrestricted classical records and arbitrary joint encoders and basis-dependent POVMs are allowed. The lower value is $`0.728553390593273762\ldots`$. The upper value improves the normalized DFW/Renes specialization $`(1+2\sqrt7)/8=0.786437827766147647\ldots`$. It does not determine the optimum or improve the all-size exponent $`1/6`$.
+
+A [stability argument](#8-strictness-of-the-three-input-guessing-cap) improves the arbitrary-decoder upper bound to $`C_3-3\cdot10^{-8}`$. The [exact optimum for Breidbart-diagonal branches](#7-exact-breidbart-diagonal-optimum-with-one-retained-qubit) is the achieved value $`\beta^{k-1}`$ for every $`k\geq1`$ with one retained qubit.
 
 The same two-copy method also gives exact collision maxima for four and five inputs with one retained qubit, and hence the additional guessing bounds
 
@@ -229,9 +231,9 @@ Applying (F6c) and (F6d) proves (F1a) in the same arbitrary-encoder model. The a
 
 | Inputs $`k`$ | Exact maximal PGM score | Store-and-Breidbart guessing score | Arbitrary-decoding upper bound |
 |---|---|---|---|
-| 3 | $`9/16`$ | $`\beta^2=0.7285533906\ldots`$ | $`C_3=0.7437184335\ldots`$ |
-| 4 | $`27/64`$ | $`\beta^3=0.6218592168\ldots`$ | $`C_4=0.6429429882\ldots`$ |
-| 5 | $`81/256`$ | $`\beta^4=0.5307900429\ldots`$ | $`C_5=0.5568402560\ldots`$ |
+| 3 | $`9/16`$ | $`\beta^2=0.7285533905\ldots`$ | $`C_3-3\cdot10^{-8}=0.7437184035\ldots`$ |
+| 4 | $`27/64`$ | $`\beta^3=0.6218592167\ldots`$ | $`C_4=0.6429429881\ldots`$ |
+| 5 | $`81/256`$ | $`\beta^4=0.5307900429\ldots`$ | $`C_5=0.5568402559\ldots`$ |
 
 For four inputs the inherited hypercontractive collision cap is $`1/2`$; for five it is $`2^{-4/3}`$. These are stronger than the respective normalized DFW spectral caps $`9/16`$ and $`29/64`$, but weaker than the new collision maxima. Thus the new certificates also strictly improve the guessing upper bounds obtained from either inherited collision cap followed by Renes. No tensorization or all-size exponent improvement follows from these finite cases.
 
@@ -313,3 +315,60 @@ The pure-state PGM identity and hypercontractive estimate are inherited from the
 The prior audit inspected those primary sources and the Tomamichel–Fehr–Kaniewski–Wehner monogamy bound. The last is a two-recipient problem; a dimension-lifting application gives no stronger cap here. The internal Quantum Interface Cost comparison concerns local binary measurement statistics, rather than recovering the whole string. BB84 Basis Information concerns joint success of two separated recipients. Neither supplies a stronger theorem for the present single-recipient task. This is a scoped comparison, not an exhaustive publication-priority claim.
 
 The uniform exponent remains $`1/6`$ in the proved theorem, with store-and-Breidbart imposing the necessary ceiling $`-\log_2\beta=0.2284466968\ldots`$ on any proposed universal exponent. The exact guessing values $`P^*_{k,1}`$ for $`k=3,4,5`$, a better universal joint-discrimination inequality, and tensorization of finite improvements remain open. No sharper Hamming/list theorem is claimed. The existing obstruction at error tolerance $`h\geq k-m`$ remains unchanged.
+
+## 7. Exact Breidbart-diagonal optimum with one retained qubit
+
+Consider a pure conditional state on $`AQ`$ with $`\dim Q\leq2`$ and a verifier marginal diagonal in the product Breidbart basis. This defines the restricted class branch by branch. A local Hadamard is diagonal in the Breidbart basis, so changing any basis conjugates the conditional ensemble on $`Q`$ by a unitary diagonal in its Schmidt basis. It suffices to optimize the decoder for the computational-basis ensemble.
+
+With two Schmidt strings $`a,b`$ at Hamming distance $`h\geq1`$, let $`\Lambda`$ be the diagonal matrix of Schmidt probabilities, and let $`u_x`$ be the two overlap amplitudes of computational basis vector $`x`$. Its subnormalized conditional state is $`\sqrt\Lambda u_xu_x^\dagger\sqrt\Lambda`$. The [discrimination dual](direct-discrimination.md#1-all-basis-choices-reduce-to-one-discrimination-problem) has the feasible point $`Y=L\Lambda`$ with $`L=\max_x\|u_x\|^2`$, since $`u_xu_x^\dagger\preceq LI`$. Its trace is $`L`$.
+
+Squared overlaps factor into powers of $`\beta=(1+1/\sqrt2)/2`$ and $`1-\beta`$. A maximizing $`x`$ matches all shared positions of $`a,b`$. On their $`h`$ differing positions the sum is convex as a function of the number of differences from $`a`$, so a maximum is at an endpoint. Consequently
+
+```math
+L=\beta^{k-h}\bigl(\beta^h+(1-\beta)^h\bigr)\leq\beta^{k-1}.
+```
+
+The last step uses $`(1-\beta)^h\leq (1-\beta)\beta^{h-1}`$, strict for $`h>1`$. Rank-one diagonal support gives at most $`\beta^k`$. Storing one physical input and measuring the others in the Breidbart basis gives admissible diagonal branches and achieves $`\beta^{k-1}`$. Classical averaging preserves the bound. Thus any strategy that improves on store-and-Breidbart has at least one pure conditional branch with coherence between distinct product Breidbart vectors.
+
+## 8. Strictness of the three-input guessing cap
+
+For three inputs and one retained qubit, let $`p`$ be the optimal basis-averaged guessing score on one pure branch. Write $`Q_{\rm pgm}`$ for its averaged PGM score, $`\Delta=9/16-Q_{\rm pgm}`$, and retain $`R,\sigma,t_0`$ from Section 2. With $`F_i`$ the single-site swap between the two copies, define
+
+```math
+O=2I+F_{123}-F_1-F_2-F_3,\qquad
+g=\mathrm{Tr}[(\sigma\otimes\sigma)O].
+```
+
+The possible joint swap signs give eigenvalues zero and four for $`O`$. Retaining the deficit in (F5) gives $`S_1=t_0+2-2t_0g`$. Substitution into (F4) gives
+
+```math
+\Delta\geq(2-t_0)/8+t_0g/16.
+```
+
+**Near the PGM maximum.** Suppose $`\Delta<5\cdot10^{-8}`$. Then $`t_0\geq2-8\Delta`$ and the rank is two. The smaller eigenvalue of $`\sigma`$ on its support is $`\lambda_{\min}=(1-\sqrt{2/t_0-1})/2>0.49`$. Set $`\zeta=g/\lambda_{\min}^2\leq34\Delta`$. For orthonormal Schmidt vectors $`u,v`$ of $`A`$, each product of two support eigenvectors has $`O`$ expectation at most $`\zeta`$. This follows by bounding $`\sigma\otimes\sigma`$ below by $`\lambda_{\min}^2`$ times the joint support projector and using positivity of $`O`$.
+
+For the vectors $`u\otimes u`$ and $`v\otimes v`$, the same expectation is the sum of the three single-qubit linear entropies. For each qubit its smaller marginal eigenvalue is at most its linear entropy. Use the top eigenvector on each qubit and sum the probabilities of failing the three commuting local projections. This gives product vectors $`U,V`$ with squared overlaps with $`u,v`$ at least $`1-\zeta`$.
+
+Choose their phases for positive overlaps. The distance $`\|u\otimes v-U\otimes V\|`$ is at most $`\sqrt{2\zeta}`$, so $`\|\sqrt O(U\otimes V)\|\leq(1+2\sqrt2)\sqrt\zeta`$. Set $`a_i=1-|\langle U_i,V_i\rangle|^2`$. The product-vector swap expectation is
+
+```math
+\langle U\otimes V|O|U\otimes V\rangle
+=\sum_{i<j}a_i a_j-a_1a_2a_3.
+```
+
+It bounds every pair product from above and is at most $`15\zeta`$. Also $`|\langle U,V\rangle|\leq\|U-u\|+\|V-v\|\leq2\sqrt{2\zeta}`$ by orthogonality of $`u,v`$. Thus $`\prod_i(1-a_i)\leq8\zeta<1/8`$, so some $`a_i`$ is at least $`1/2`$ and the other two are at most $`30\zeta`$.
+
+Project the original state onto the fixed $`U`$ factors on those two sites. The discarded probability for $`u`$ is at most $`\zeta`$. For $`v`$, the discarded norm on each site is at most $`\sqrt{2\zeta}+\sqrt{30\zeta}\leq7\sqrt\zeta`$, so the total discarded probability is at most $`98\zeta`$. The same bound holds on the full state because the memory Schmidt labels are orthogonal. Its normalized projection has optimal guessing probability at most $`\beta^2`$. The outcomes on the two fixed sites are independent of the rest for every basis, and for each site the maximum average BB84 guess probability is $`\beta`$. The original and projected states have trace distance at most $`\sqrt{98\zeta}`$, which bounds the change for any guessing procedure. Hence
+
+```math
+p\leq\beta^2+\sqrt{3332\Delta}<0.742.
+```
+
+**Away from the PGM maximum.** For $`\Delta\geq5\cdot10^{-8}`$, Section 3 gives $`f(p)\leq9/16-\Delta`$ for $`f(p)=p^2+(1-p)^2/7`$. Since $`f(C_3)=9/16`$, $`f'(C_3)=\sqrt2`$ and $`f`$ is convex, its tangent gives $`p\leq C_3-\Delta/\sqrt2`$. Both cases bound every pure branch by $`C_3-3\cdot10^{-8}`$, so classical averaging yields
+
+```math
+\beta^2\leq P^*_{3,1}\leq C_3-3\cdot10^{-8}.
+\qquad\text{(F10)}
+```
+
+The gap quantifies why jointly approaching the collision maximum and saturating the Renes inequality is impossible. The exact PGM maximum is still $`9/16`$, and the optimum arbitrary-decoder score is open.

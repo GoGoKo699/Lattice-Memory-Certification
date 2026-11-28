@@ -16,7 +16,7 @@ OPENBLAS_NUM_THREADS=1 .venv/bin/python verification/verify_finite_guessing.py
 OPENBLAS_NUM_THREADS=1 .venv/bin/python verification/verify_direct_discrimination.py
 ```
 
-To save a new report without replacing the committed reference:
+To save a fresh verification result without replacing the committed reference:
 
 ```bash
 OPENBLAS_NUM_THREADS=1 .venv/bin/python verification/verify.py --write /tmp/lattice-memory-results.json
@@ -60,18 +60,14 @@ Run `python verification/check_learning.py --write /tmp/lattice-learning-results
 
 The [plot guide](Graph/README.md) gives the pinned plotting environment and commands to regenerate the two-panel memory-deficit figure, its PNG preview, and the plotted data. Regenerate the figure, then run `python verification/Graph/check_plots.py` in that environment to compare the plotted formulas with the numerical suite and check the stored assets. The probability target $`\delta`$ in the figure is the ideal guessing target; the total certification target $`\varepsilon`$ also includes preparation error.
 
-## Explanatory report reproduction
-
-The [report build guide](REPORT_BUILD.md) gives the source path, a clean build command, and the engine and inspection boundaries. The stored PDF is distinct from the fresh output and matching log produced by that command.
-
 ## Mathematical display review boundary
 
-Balanced math delimiters, local heading checks and finite calculations do not establish correct display on GitHub. Actual-host review compares commit-pinned equations with their source and inspects wide and narrow layouts, including tables. It is a separate presentation check from the analytical proof, local link tests, and PDF build. The `hosted_rendering` field in the learning script reports only what that script itself checks.
+Balanced math delimiters, local heading checks and finite calculations do not establish correct display on GitHub. Actual-host review compares commit-pinned equations with their source and inspects wide and narrow layouts, including tables. It is a separate presentation check from the analytical proof, local link tests, and figure reproduction. The `hosted_rendering` field in the learning script reports only what that script itself checks.
 
 
 ## Certified small-challenge refinements and route obstruction
 
-Run `OPENBLAS_NUM_THREADS=1 python verification/verify_finite_guessing.py`. Its exact certificates check the positive two-copy swap inequality, the three-/four-/five-input rank-two collision and guessing constants, positive local-swap-sector identities, exact product attainment, the rational moment-profile majorants and an elementary Hamming-ball type certificate. Numerical matrix fixtures test the channel identities separately. The [finite proof](../science/finite-guessing.md) covers arbitrary encoders and basis-dependent POVMs analytically; numerical optimization is not an upper-bound certificate. The all-size guessing exponent remains1/6. The obstruction limits stronger rank-sensitive collision power laws, not every possible discrimination proof.
+Run `OPENBLAS_NUM_THREADS=1 python verification/verify_finite_guessing.py`. Its exact certificates check the positive two-copy swap inequality, the three-/four-/five-input rank-two collision and guessing constants, positive local-swap-sector identities, exact product attainment, the rational moment-profile majorants and an elementary Hamming-ball type certificate. The scalar checker also verifies the thresholds and constants in the strictness proof. Numerical matrix fixtures test the channel identities separately. The [finite proof](../science/finite-guessing.md) covers arbitrary encoders and basis-dependent POVMs analytically; numerical optimization is not an upper-bound certificate. The all-size guessing exponent remains1/6. The obstruction limits stronger rank-sensitive collision power laws, not every possible discrimination proof.
 
 ## Exact direct-decoder certificates and their scope
 
