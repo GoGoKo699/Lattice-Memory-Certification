@@ -60,10 +60,10 @@ At $`k=3,m=1,d_Q=2`$, a separate exact finite certificate improves the available
 ```math
 \frac{3+2\sqrt2}{8}
 \leq P^*_{3,1}
-\leq\frac{2+7\sqrt2}{16}.
+\leq\frac{2+7\sqrt2}{16}-3\cdot10^{-8}.
 ```
 
-The values are approximately $`0.7285533906`$ and $`0.7437184335`$. The lower value is the explicit store-and-Breidbart strategy. The upper value follows from a global two-copy purity certificate and Renes's finite-alphabet discrimination inequality, improving the verified normalized DFW/Renes value $`(1+2\sqrt7)/8\simeq0.7864378278`$. The [full account](finite-guessing.md) covers arbitrary encoders and classical records, proves equality of the optimized arbitrary-state and preparation formulations, and checks a finite moment-profile consequence. It does not determine the optimum or tensorize against joint encoders.
+The values are approximately $`0.7285533906`$ and $`0.7437184035`$. The lower value is the explicit store-and-Breidbart strategy, which is optimal among Breidbart-diagonal pure branches. The upper value follows from stability near the global two-copy purity certificate and Renes's finite-alphabet discrimination inequality, improving the verified normalized DFW/Renes value $`(1+2\sqrt7)/8\simeq0.7864378278`$. The [full account](finite-guessing.md) covers arbitrary encoders and classical records, proves equality of the optimized arbitrary-state and preparation formulations, and checks a finite moment-profile consequence. It does not determine the optimum or tensorize against joint encoders.
 
 The universal exponent remains $`1/6`$. Any universal guessing law $`P^*_{k,m}\leq2^{-c(k-m)}`$ must satisfy $`c\leq-\log_2\beta\simeq0.2284466968`$ by the achieved strategy. The [collision-method obstruction](finite-guessing.md#5-a-limitation-of-rank-sensitive-collision-methods) separately rules out a universal PGM rank exponent strictly above $`1/3`$, hence rules out improving $`1/6`$ through that collision-only route. It leaves stronger joint-discrimination arguments open.
 

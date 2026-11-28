@@ -3,8 +3,9 @@
 
 The universal statements are proved in science/finite-guessing.md. This checker
 verifies rational Gram and swap-sector identities, attained collision maxima
-at three, four and five inputs, radical enclosures, every finite algebra pair
-in the moment example, and one exact Hamming-ball method counterexample.
+at three, four and five inputs, radical enclosures, stability constants,
+every finite algebra pair in the moment example, and one exact Hamming-ball
+method counterexample.
 No see-saw or sampled strategy is an upper-bound certificate.
 """
 from __future__ import annotations
@@ -102,6 +103,8 @@ def swap_certificate() -> dict:
     require(np.array_equal(target, first+second), 'swap sum identity')
     for gram in (first, second):
         require(np.array_equal(gram.T @ gram, 4*gram), 'rational Gram PSD identity')
+    require(np.any(target) and np.array_equal(target @ target, 4*target),
+            'swap operator norm is four')
     return {
         'dimension': 64,
         'identity': 'W=A+B=(A^T A+B^T B)/4',
@@ -129,10 +132,28 @@ def finite_scalar_certificate() -> dict:
     require(F(5,16)+F(2,8) == F(9,16), 'rank2 collision cap')
     require(classical[1] < F(311,500), 'classical rational cap')
     require(rank5[1] < F(173,200), 'rank5 rational cap')
+
+    delta_cut = F(5, 10**8)
+    stability_gap = F(3, 10**8)
+    t0_floor = 2-8*delta_cut
+    lambda_floor = F(49, 100)
+    require(2/t0_floor-1 < (1-2*lambda_floor)**2, 'stability eigenvalue threshold')
+    require(16 < 34*t0_floor*lambda_floor**2, 'stability zeta bound')
+    require(8*34*delta_cut < F(1, 8), 'one local overlap loss is at least half')
+    require(9+4*s2[1] < 15, 'product-vector swap expectation constant')
+    require(s2[1]+sqrt_bounds(30)[1] < 7, 'discarded local norm constant')
+    near_cap = F(371, 500)
+    require(beta2[1] < near_cap and (near_cap-beta2[1])**2 > 3332*delta_cut,
+            'near-maximum guessing cap')
+    require(near_cap < new[0]-stability_gap and stability_gap*s2[1] < delta_cut,
+            'strict three-input gap in both cases')
+    strict_upper = tuple(bound-stability_gap for bound in new)
     return {
         'pgm_upper_exact': '9/16',
         'score_upper_exact': '(2+7*sqrt(2))/16',
         'score_upper_interval': decimal_interval(new),
+        'stability_gap_exact': str(stability_gap),
+        'stability_score_upper_interval': decimal_interval(strict_upper),
         'store_and_breidbart_interval': decimal_interval(beta2),
         'inherited_DFW_Renes_interval': decimal_interval(old),
         'score_upper_is_not_claimed_attainable': True,

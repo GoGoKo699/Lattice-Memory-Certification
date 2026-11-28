@@ -4,6 +4,8 @@
 
 The [PDF](lattice_bounds.pdf) and [PNG](lattice_bounds.png) show two complementary comparisons. The left panel brackets ideal whole-string guessing between the achieved Breidbart strategy and the universal upper bound as the storage deficit $`t=k-m`$ grows. The right panel shows the achieved, universal and stronger finite upper bounds for three, four and five inputs with one retained qubit. The intervals do not identify the unknown guessing optimum.
 
+The finite markers are the values obtained directly from PGM conversion. For three inputs the plotted cap is $`C_3=(2+7\sqrt2)/16`$. The [separate stability refinement](../../science/finite-guessing.md#8-strictness-of-the-three-input-guessing-cap) improves it by $`3\cdot10^{-8}`$.
+
 Generate both formats and the numerical data from the repository root:
 
 ```bash
